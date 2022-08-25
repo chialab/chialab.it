@@ -127,6 +127,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             $this->addPlugin('Bake');
 
             $this->addPlugin('Design', ['routes' => false]);
+            $this->addPlugin('OpenSource', ['routes' => false]);
         } catch (MissingPluginException $e) {
             // Do not halt if the plugin is missing
         }
