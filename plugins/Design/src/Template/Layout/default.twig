@@ -27,7 +27,7 @@
         <div class="column align-center" id="container">
             {{ Flash.render()|raw }}
 
-            {# {{ _view.element('topbar')|raw }} #}
+            {{ _view.element('topbar')|raw }}
 
             <div class="viewport grid" id="viewport">
                 {{ _view.fetch('content')|raw }}
