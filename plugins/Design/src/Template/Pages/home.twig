@@ -1,3 +1,13 @@
 {{ _view.element('claim')|raw }}
 
-Home
+{% for folder in folders %}
+<div class="w-full column section">
+    <h2 class="m-0 mono regular f-1 bb-1 py-2 w-full">{{ folder.title|raw }} /</h2>
+    <div class="w-full grid">
+        {% for item in folder.children %}
+            {{ _view.element('card', { object: item })|raw }}
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+

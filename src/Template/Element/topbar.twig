@@ -1,5 +1,8 @@
 <cl-topbar>
     {% for child in menu.children %}
-        <a>{{ child.title|raw }}</a>
+        <a href="{{ Url.build({
+            _name: 'pages:objects',
+            _entity: child,
+        }) }}">{{ child.title|raw }}</a>
     {% endfor %}
 </cl-topbar>

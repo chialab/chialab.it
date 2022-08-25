@@ -19,7 +19,7 @@ class PagesController extends AppController
     public function home(): void
     {
         $publication = $this->Publication->getPublication();
-        $folders = $this->Menu->load($publication->id, null, null, 2);
+        $folders = $this->Menu->load($publication->id, ['include' => 'poster'], null, 2)->children;
 
         $this->set(compact('folders'));
     }

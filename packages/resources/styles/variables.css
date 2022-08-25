@@ -1,3 +1,5 @@
+@import '@chialab/cells/lib/presets/website.css';
+
 :root {
     --color-surface: #ffffff;
     --color-primary: #343434;
@@ -20,4 +22,6 @@
     --font-serif: 'freight-text-pro', serif;
     --font-sans: 'freight-sans-pro', sans-serif;
     --font-mono: 'DiisMonospace', monospace;
+
+    --weight-bold: 600;
 }

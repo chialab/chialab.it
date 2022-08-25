@@ -1,0 +1,16 @@
+<a class="card w-4 column gap-0" title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
+    _name: 'pages:objects',
+    _entity: object,
+}) }}">
+    {% if Poster.exists(object) %}
+        <div class="card__cover w-full h-2">
+            <img alt="" src="{{ Poster.url(object) }}" />
+        </div>
+    {% endif %}
+    <div class="card__details serif w-4 py-1 column gap-xs">
+        <h3 class="f-5 m-0 regular italic card__title">{{ object.title|raw }}</h3>
+        <div class="f-2 clamp-4 body card__description">
+            {{ Text.renderDescription(object.description)|raw }}
+        </div>
+    </div>
+</a>

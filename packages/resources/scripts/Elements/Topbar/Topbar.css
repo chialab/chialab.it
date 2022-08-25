@@ -1,5 +1,30 @@
+@import '../../../styles/variables.css';
+
 cl-topbar {
     display: flex;
+    justify-content: center;
     width: 100%;
-    border: solid 1px blue;
+}
+
+cl-topbar nav a {
+    position: relative;
+    margin: 0 var(--margin);
+    color: inherit;
+    font-family: var(--font-mono);
+    font-weight: var(--weight-light);
+    text-transform: lowercase;
+    text-decoration: none;
+}
+
+cl-topbar nav a:hover {
+    text-decoration: underline;
+}
+
+cl-topbar nav a + a::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--margin));
+    display: block;
+    height: 100%;
+    border-left: solid 1px currentcolor;
 }
