@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ I18n.getLang() | default('it') }}">
+    <head>
+        {{ Html.charset()|raw }}
+        <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+        <meta name="apple-mobile-web-app-capable" content="no" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="msapplication-tap-highlight" content="no"/>
+        <meta name="theme-color" content="#ef7d00" />
+        <meta name="developer" content="ChiaLab | design company | www.chialab.it" />
+        <title>{{ object.title|raw|striptags }}{% if object.title %} | {% endif %}{{ publication.title }}</title>
+        <meta name="description" content="{{ object.description|default(publication.description)|raw|striptags}}" />
+
+        {{ Html.meta('icon', "#{_view.plugin}.favicon.png", { type:'image/png' } )|raw }}
+
+        {{ Rna.devServer(_view.plugin)|raw }}
+        {{ Rna.css("#{_view.plugin}.index", { block: true })|raw }}
+        {{ Rna.script("#{_view.plugin}.index", { block: true })|raw }}
+
+        {{ _view.fetch('meta')|raw }}
+        {{ _view.element('meta-dc')|raw }}
+        {{ _view.element('meta-og')|raw }}
+
+        {{ _view.fetch('css')|raw }}
+    </head>
+    <body class="bg-surface">
+        <div class="column align-center" id="container">
+            {{ Flash.render()|raw }}
+
+            {# {{ _view.element('topbar')|raw }} #}
+
+            <div class="viewport grid" id="viewport">
+                {{ _view.fetch('content')|raw }}
+                {# {{ _view.element('footer')|raw }} #}
+            </div>
+
+            {# {{ _view.element('staging-bar')|raw }} #}
+        </div>
+
+        {{ _view.fetch('script')|raw }}
+        {# {{ _view.element('tracking-cookies')|raw }} #}
+    </body>
+</html>

@@ -14,13 +14,20 @@
  */
 namespace App;
 
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
 use Cake\Core\Configure;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Chialab\FrontendKit\Middleware\ExceptionWrapperMiddleware;
+use Chialab\FrontendKit\Middleware\LocaleMiddleware;
 use Chialab\FrontendKit\Middleware\StatusMiddleware;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Application setup class.
@@ -28,7 +35,7 @@ use Chialab\FrontendKit\Middleware\StatusMiddleware;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface
 {
     /**
      * {@inheritDoc}
@@ -56,24 +63,35 @@ class Application extends BaseApplication
         $this->addPlugin('BEdita/AWS');
         $this->addPlugin('BEdita/I18n');
         $this->addPlugin('Chialab/FrontendKit');
+        $this->addPlugin('Chialab/Rna');
+
+        if (Configure::read('Status.level') === 'on' && Configure::read('FrontendPlugin') !== 'BEdita/API') {
+            Configure::write('Publish.checkDate', true);
+        }
 
         if (Configure::check('FrontendPlugin')) {
-            $this->addPlugin(Configure::read('FrontendPlugin'));
+            $this->addPlugin(Configure::read('FrontendPlugin'), ['bootstrap' => true, 'routes' => true]);
+        }
+        if (Configure::read('StagingSite')) {
+            $this->addPlugin('Authentication');
         }
     }
 
     /**
      * Setup the middleware queue your application will use.
      *
-     * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
+     * @param \Cake\Http\MiddlewareQueue $middleware The middleware queue to setup.
      * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
      */
-    public function middleware($middlewareQueue)
+    public function middleware($middleware)
     {
-        return $middlewareQueue
+        $middleware = $middleware
             // Catch any exceptions in the lower layers,
             // and make an error page/response
             ->add(new ErrorHandlerMiddleware(null, Configure::read('Error')))
+
+            // Handle some common exceptions
+            ->add(new ExceptionWrapperMiddleware())
 
             // Handle plugin/theme assets like CakePHP normally does.
             ->add(new AssetMiddleware([
@@ -88,7 +106,16 @@ class Application extends BaseApplication
             // creating the middleware instance specify the cache config name by
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
-            ->add(new RoutingMiddleware($this));
+            ->add(new RoutingMiddleware($this))
+
+            ->add(new LocaleMiddleware());
+
+        if (Configure::read('StagingSite')) {
+            // Add authentication middleware only on staging sites.
+            $middleware = $middleware->add(new AuthenticationMiddleware($this));
+        }
+
+        return $middleware;
     }
 
     /**
@@ -98,6 +125,8 @@ class Application extends BaseApplication
     {
         try {
             $this->addPlugin('Bake');
+
+            $this->addPlugin('Design', ['routes' => false]);
         } catch (MissingPluginException $e) {
             // Do not halt if the plugin is missing
         }
@@ -105,5 +134,38 @@ class Application extends BaseApplication
         $this->addPlugin('Migrations');
 
         // Load more plugins here
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAuthenticationService(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $service = new AuthenticationService();
+        $service->setConfig([
+            'unauthenticatedRedirect' => '/login',
+            'queryParam' => 'redirect',
+        ]);
+
+        // Load identifiers
+        $service->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                'username' => 'username',
+                'password' => 'password_hash',
+            ],
+        ]);
+
+        // Load the authenticators, you want session first
+        $service->loadAuthenticator('Authentication.Session');
+        $service->loadAuthenticator('BEdita/AWS.Alb');
+        $service->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                'username' => 'username',
+                'password' => 'password',
+            ],
+            'loginUrl' => '/login',
+        ]);
+
+        return $service;
     }
 }

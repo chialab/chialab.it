@@ -2,7 +2,8 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
+    "jsxImportSource": "@chialab/dna",
     "strict": true,
     "strictPropertyInitialization": false,
     "moduleResolution": "node",
@@ -13,10 +14,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "resources/**/*",
-    "plugins/*/resources/**/*"
-  ],
   "exclude": [
     "node_modules"
   ]
