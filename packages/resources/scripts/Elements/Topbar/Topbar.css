@@ -1,9 +1,18 @@
 @import '../../../styles/variables.css';
 
 cl-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
     justify-content: center;
     width: 100%;
+    background: var(--color-surface);
+    transition: box-shadow 250ms ease-out;
+}
+
+cl-topbar[\:fixed] {
+    box-shadow: var(--shadow-3);
 }
 
 cl-topbar nav a {

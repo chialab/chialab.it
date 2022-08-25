@@ -1,6 +1,9 @@
+@import './variables.css';
+
 .card .card__cover {
     display: flex;
     overflow: hidden;
+    aspect-ratio: 16 / 9;
 }
 
 .card .card__cover img {

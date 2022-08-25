@@ -1,0 +1,49 @@
+@media (min-width: 768px) and (max-width: 1023px) {
+    :root {
+        --viewport: 100vw;
+        --columns: 8;
+
+        font-size: 16px;
+    }
+
+    .w-2,
+    .w-3 {
+        --w-span: 2;
+    }
+
+    .w-4,
+    .w-5 {
+        --w-span: 4;
+    }
+
+    .w-6,
+    .w-7 {
+        --w-span: 6;
+    }
+
+    .w-8,
+    .w-9,
+    .w-10,
+    .w-11,
+    .w-12 {
+        --w-span: 8;
+    }
+
+    .clamp-3,
+    .clamp-4,
+    .clamp-5 {
+        --line-clamp: 2;
+    }
+
+    .left-sidebar {
+        order: 2;
+    }
+
+    .right-sidebar {
+        order: 3;
+    }
+
+    .side-info {
+        display: none;
+    }
+}

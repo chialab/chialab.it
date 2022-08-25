@@ -1,6 +1,6 @@
-<cl-topbar>
+<cl-topbar url="{{ Url.build({ _name: 'pages:home' })|escape('html_attr')|raw }}" tooltip="{{ __('Back to home') }}">
     {% for child in menu.children %}
-        <a href="{{ Url.build({
+        <a class="link--underline" href="{{ Url.build({
             _name: 'pages:objects',
             _entity: child,
         }) }}">{{ child.title|raw }}</a>

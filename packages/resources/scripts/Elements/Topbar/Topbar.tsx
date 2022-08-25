@@ -1,14 +1,37 @@
-import { customElement, Component } from '@chialab/dna';
+import { window, customElement, Component, property, state, listen } from '@chialab/dna';
+import { __ } from '@chialab/dna-theming';
 
 @customElement('cl-topbar')
 export class Topbar extends Component {
+    @property({
+        type: String,
+    }) url: string = '/';
+
+    @property({
+        type: String,
+    }) title: string = 'chialab';
+
+    @property({
+        type: String,
+    }) tooltip: string = 'Back to home';
+
+    @state({
+        type: Boolean,
+        attribute: ':fixed',
+    }) fixed: boolean = false;
+
     render() {
-        return <div class="viewport column gap-xs py-2">
-            <span class="mono bold f-2">chialab</span>
+        return <div class="viewport column gap-xs py-3">
+            <a href={this.url} title={this.tooltip} class="mono bold f-2">{this.title}</a>
             <nav class="row gap-0 align-center">
                 <span class="f-2 mr-1 mono bold text-accent" aria-hidden="true">ẞ</span>
                 <slot></slot>
             </nav>
         </div>;
+    }
+
+    @listen('scroll', window)
+    protected onWindowScroll() {
+        this.fixed = window.scrollY > 0;
     }
 }

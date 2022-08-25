@@ -50,11 +50,6 @@
     font-display: swap;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
 .claim {
     margin: 0;
     font-family: var(--font-serif);
