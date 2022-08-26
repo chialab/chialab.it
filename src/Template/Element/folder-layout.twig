@@ -1,0 +1,7 @@
+{% if folder.extra.layout == 'masonry' %}
+    {{ _view.element('folder-masonry', { children: folder.children })|raw }}
+{% elseif folder.extra.layout == 'list' %}
+    {{ _view.element('folder-list', { children: folder.children })|raw }}
+{% else %}
+    {{ _view.element('folder-grid', { children: folder.children, columns: 4 })|raw }}
+{% endif %}

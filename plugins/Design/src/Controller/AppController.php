@@ -52,6 +52,9 @@ class AppController extends BaseController
         $this->loadComponent('Chialab/FrontendKit.Menu', [
             'menuLoader' => [
                 'objectTypesConfig' => [
+                    'objects' => [
+                        'include' => 'poster',
+                    ],
                     'documents' => [
                         'include' => 'poster,has_customers',
                     ],

@@ -40,5 +40,5 @@ cl-topbar nav a + a::before {
     left: calc(-1 * var(--margin));
     display: block;
     height: 100%;
-    border-left: solid 1px currentcolor;
+    border-left: solid 1px var(--color-text);
 }

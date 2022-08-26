@@ -33,6 +33,7 @@ class AppView extends BaseAppView
         parent::initialize();
 
         $this->loadHelper('Text');
+        $this->loadHelper('Color');
 
         if (Configure::check('FrontendPlugin')) {
             $this->setTheme(Configure::read('FrontendPlugin'));

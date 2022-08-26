@@ -1,6 +1,8 @@
 @import '@chialab/cells/lib/presets/website.css';
 
 :root {
+    --gutter: calc(var(--spacing, 0.25rem) * 4);
+
     --color-surface: #ffffff;
     --color-primary: #343434;
     --color-accent: #ef7d00;

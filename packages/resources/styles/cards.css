@@ -17,6 +17,22 @@
     line-height: 1.125;
 }
 
+.card .card__details {
+    flex: none;
+}
+
+.card[style*='--r:'] {
+    --aa-brightness: ((var(--r, 255) * 299) + (var(--g, 255) * 587) + (var(--b, 255) * 114)) / 1000;
+    --aa-color: calc((var(--aa-brightness) - 128) * -1000);
+
+    color: rgb(var(--aa-color), var(--aa-color), var(--aa-color));
+    background-color: rgb(var(--r, 255), var(--g, 255), var(--b, 255));
+}
+
+.card[style*='--r:'] .card__details {
+    text-rendering: optimizelegibility;
+}
+
 a.card:hover .card__cover img {
     transform: scale(1.05);
 }

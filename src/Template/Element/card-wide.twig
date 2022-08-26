@@ -1,0 +1,25 @@
+{% set rgb = Color.hexToRgb(object.extra.color|default('#e5e5e5')) %}
+
+<a class="card explode-x pr-0" title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
+    _name: 'pages:objects',
+    _entity: object,
+}) }}" style="--r: {{ rgb.r }}; --g: {{ rgb.g }}; --b: {{ rgb.b }};">
+    <div class="w-full row no-wrap gap-5">
+        <div class="w-4 py-3 card__details serif w-4 column gap-xs">
+            {% if object.has_customers %}
+                <span class="mono f-s text-accent bold">{{ object.has_customers|first.title|raw }}</span>
+            {% endif %}
+            <h3 class="f-5 m-0 regular italic card__title">{{ object.title|raw }}</h3>
+            {% if object.description is not empty %}
+                <div class="f-3 clamp-4 body card__description">
+                    {{ Text.renderDescription(object.description)|raw }}
+                </div>
+            {% endif %}
+        </div>
+        {% if Poster.exists(object) %}
+            <div class="fill h-3 card__cover">
+                <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
+            </div>
+        {% endif %}
+    </div>
+</a>
