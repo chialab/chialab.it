@@ -3,6 +3,6 @@
         <a class="link--underline" href="{{ Url.build({
             _name: 'pages:objects',
             _entity: child,
-        }) }}">{{ child.title|raw }}</a>
+        }) }}" {% if ancestors is not empty and ancestors.0.uname == child.uname %}aria-current="page"{% endif %}>{{ child.title|raw }}</a>
     {% endfor %}
 </cl-topbar>

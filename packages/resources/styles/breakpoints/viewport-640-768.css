@@ -1,4 +1,8 @@
 @media (min-width: 640px) and (max-width: 767px) {
+    :root {
+        --viewport: var(--window-size, 100vw);
+    }
+
     .w-3,
     .w-4,
     .w-5,
@@ -9,7 +13,7 @@
     .w-10,
     .w-11,
     .w-12 {
-        --w-span: 6;
+        --w-span: 8;
     }
 
     .claim {

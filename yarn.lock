@@ -938,6 +938,16 @@
   dependencies:
     "@chialab/estransform" "^0.17.0"
 
+"@chialab/dna-masonry@^3.12.2":
+  version "3.12.2"
+  resolved "https://registry.npmjs.org/@chialab/dna-masonry/-/dna-masonry-3.12.2.tgz#851be8f4e9ce4c6821dd87b83e0872ef51e8a274"
+  integrity sha512-0IXvG0YFLVZyAjm5F/Sn+vU/aTanl9dgb0Q6mZG+Yh/AiqnYUNNUKscR4bQIJBTCoeuCS/SbV97Rus8YZ59gpg==
+  dependencies:
+    "@chialab/dna" "^3.4.0"
+    "@chialab/dna-theming" "^3.12.2"
+    resize-observer-polyfill "^1.5.1"
+    tslib "^2.0.3"
+
 "@chialab/dna-theming@^3.12.2":
   version "3.12.2"
   resolved "https://registry.npmjs.org/@chialab/dna-theming/-/dna-theming-3.12.2.tgz#ff0b5f9acc60089b2237b4d716664e49e994cd26"
@@ -951,9 +961,9 @@
     resize-observer-polyfill "^1.5.1"
 
 "@chialab/dna@^3.20.2", "@chialab/dna@^3.4.0":
-  version "3.20.5"
-  resolved "https://registry.npmjs.org/@chialab/dna/-/dna-3.20.5.tgz#301c5e61645269a6a1ec3b4503f8db0a5c02f938"
-  integrity sha512-X3mXv0VOUVkcm2xathHfmwXfJs1Jy7GT74+h7GWqKGTlVKIa9MhIbhNKPOcqjQTePsuD5o//KV1ZTaSa92xjTQ==
+  version "3.20.6"
+  resolved "https://registry.npmjs.org/@chialab/dna/-/dna-3.20.6.tgz#995d6cd46976681d5b0c4f55083abee0e9a4c448"
+  integrity sha512-ZMQ6XIXr5AkPp1PWFq/ijOWlcthm5+x5fJLV/5VRxFppCu9MjBLBg7fpKoJWWRVYuxGknS4dSJiwaZkCTweOSg==
   dependencies:
     "@types/jsdom" "^16.0.0"
 
@@ -1155,9 +1165,9 @@
     stylelint-order "^5.0.0"
 
 "@chialab/wds-plugin-hmr-dna@^0.17.0":
-  version "0.17.1"
-  resolved "https://registry.npmjs.org/@chialab/wds-plugin-hmr-dna/-/wds-plugin-hmr-dna-0.17.1.tgz#62f2d1e91219e259ecea70db21465a2cac843060"
-  integrity sha512-U8HVh/t0D9ElMOIfO6uVyPJiotdx8i+5c1e5KvGLw61eZgDbev/DoEY9JDH0Q+GBTDf9i9+vJ6WTd7C0MmIxUQ==
+  version "0.17.2"
+  resolved "https://registry.npmjs.org/@chialab/wds-plugin-hmr-dna/-/wds-plugin-hmr-dna-0.17.2.tgz#a5e315f11647bc971735085afff37b6959dbbb22"
+  integrity sha512-Jvm89XXZadcJZ88IPmjmzmHOjHOOkTKxo2QxhLygmrZvqeB7oLnOKHowOssMBkfNEUqUUQ/X6NjLiJCIpE3YuA==
   dependencies:
     "@chialab/es-dev-server" "^0.17.0"
     "@chialab/estransform" "^0.17.1"
@@ -1180,9 +1190,9 @@
     "@web/dev-server-core" "^0.3.8"
 
 "@chialab/wds-plugin-rna@^0.17.1":
-  version "0.17.1"
-  resolved "https://registry.npmjs.org/@chialab/wds-plugin-rna/-/wds-plugin-rna-0.17.1.tgz#d51f26aa03823342c2a28f45d4a086e9ad756f86"
-  integrity sha512-Iv5Xd9YKTs+DGZIhRZD/xzneAhsm8IWX+BCSzO8Yna2idRikIxRpKQQ7AMjh2vobKaG6TqbxgpvmgrF+Bp8+kg==
+  version "0.17.2"
+  resolved "https://registry.npmjs.org/@chialab/wds-plugin-rna/-/wds-plugin-rna-0.17.2.tgz#8e641753c2a61fae8bb64fdd653dd04d13edf706"
+  integrity sha512-HxtB/Ox1kbzvZnO0B0aiWgh2YTj/k2jjASC96uvI1te7Ukr7K7UYs1+4cp0OQDWIAIiNKxo0q1nW4CtDv/IQcA==
   dependencies:
     "@chialab/es-dev-server" "^0.17.0"
     "@chialab/esbuild-plugin-meta-url" "^0.17.0"
@@ -4268,6 +4278,11 @@ tslib@^1.8.1:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
+tslib@^2.0.3:
+  version "2.4.0"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
+  integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
+
 tsscmp@1.0.6:
   version "1.0.6"
   resolved "https://registry.npmjs.org/tsscmp/-/tsscmp-1.0.6.tgz#85b99583ac3589ec4bfef825b5000aa911d605eb"
@@ -4316,9 +4331,9 @@ type-is@^1.6.16:
     mime-types "~2.1.24"
 
 typescript@^4.5.5:
-  version "4.7.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
-  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
+  version "4.8.2"
+  resolved "https://registry.npmjs.org/typescript/-/typescript-4.8.2.tgz#e3b33d5ccfb5914e4eeab6699cf208adee3fd790"
+  integrity sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"

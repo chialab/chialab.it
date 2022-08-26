@@ -1,5 +1,4 @@
 import { window, customElement, Component, property, state, listen } from '@chialab/dna';
-import { __ } from '@chialab/dna-theming';
 
 @customElement('cl-topbar')
 export class Topbar extends Component {

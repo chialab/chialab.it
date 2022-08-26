@@ -1,21 +1,18 @@
-<a class="card column gap-0 {{ class|default('') }}" title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
-    _name: 'pages:objects',
-    _entity: object,
-}) }}">
+<div class="card bt-1 w-4 column gap-0 bg-neutral" title="{{ object.title|striptags|escape('html_attr')|raw }}">
     {% if Poster.exists(object) %}
-        <div class="card__cover ratio--16-9">
+        <div class="card__cover">
             <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
         </div>
     {% endif %}
-    <div class="card__details serif w-4 py-1 column gap-xs">
+    <div class="card__details sans w-4 p-2 column gap-xs">
         {% if object.has_customers %}
             <span class="mono f-s text-accent bold">{{ object.has_customers|first.title|raw }}</span>
         {% endif %}
-        <h3 class="f-5 m-0 regular italic card__title">{{ object.title|raw }}</h3>
+        <h3 class="f-5 m-0 regular card__title">{{ object.title|raw }}</h3>
         {% if object.description is not empty %}
             <div class="f-2 clamp-4 body card__description">
                 {{ Text.renderDescription(object.description)|raw }}
             </div>
         {% endif %}
     </div>
-</a>
+</div>

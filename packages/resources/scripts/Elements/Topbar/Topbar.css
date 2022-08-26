@@ -25,6 +25,11 @@ cl-topbar nav a {
     text-decoration: none;
 }
 
+cl-topbar nav a[aria-current='page'] {
+    color: var(--color-accent);
+    font-weight: var(--weight-bold);
+}
+
 cl-topbar nav a:hover {
     text-decoration: underline;
 }

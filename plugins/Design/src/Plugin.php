@@ -18,7 +18,6 @@ class Plugin extends BasePlugin
     {
         parent::bootstrap($app);
 
-        Configure::write('ObjectsLoader', []);
         Configure::write('Publication', [
             'publication' => 'chialab-design-company',
         ]);

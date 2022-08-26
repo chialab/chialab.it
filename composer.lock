@@ -297,16 +297,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.234.2",
+            "version": "3.234.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4e0edc577543d4c009c1a1b5d70d34f58b9f2e25"
+                "reference": "21ee9e4181c1e676b43018bd3743dd4c9f8bafc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4e0edc577543d4c009c1a1b5d70d34f58b9f2e25",
-                "reference": "4e0edc577543d4c009c1a1b5d70d34f58b9f2e25",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/21ee9e4181c1e676b43018bd3743dd4c9f8bafc2",
+                "reference": "21ee9e4181c1e676b43018bd3743dd4c9f8bafc2",
                 "shasum": ""
             },
             "require": {
@@ -383,9 +383,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.3"
             },
-            "time": "2022-08-24T18:19:29+00:00"
+            "time": "2022-08-25T18:30:13+00:00"
         },
         {
             "name": "bedita/api",
@@ -946,16 +946,16 @@
         },
         {
             "name": "chialab/frontend-kit",
-            "version": "v2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chialab/bedita-frontend-kit.git",
-                "reference": "878eaadee2f01401870b0371a16dcb45c0529076"
+                "reference": "b5adca04c6c9fb600a88b22b88a2538d4dcfc9db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chialab/bedita-frontend-kit/zipball/878eaadee2f01401870b0371a16dcb45c0529076",
-                "reference": "878eaadee2f01401870b0371a16dcb45c0529076",
+                "url": "https://api.github.com/repos/chialab/bedita-frontend-kit/zipball/b5adca04c6c9fb600a88b22b88a2538d4dcfc9db",
+                "reference": "b5adca04c6c9fb600a88b22b88a2538d4dcfc9db",
                 "shasum": ""
             },
             "require": {
@@ -985,9 +985,9 @@
             "description": "BEdita 4 plugin to help with development of websites.",
             "support": {
                 "issues": "https://github.com/chialab/bedita-frontend-kit/issues",
-                "source": "https://github.com/chialab/bedita-frontend-kit/tree/v2.2.1"
+                "source": "https://github.com/chialab/bedita-frontend-kit/tree/v2.2.2"
             },
-            "time": "2022-06-16T14:30:06+00:00"
+            "time": "2022-08-26T09:10:43+00:00"
         },
         {
             "name": "chialab/rna-cakephp",

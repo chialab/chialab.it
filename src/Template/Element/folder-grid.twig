@@ -1,0 +1,5 @@
+<div class="w-full grid">
+    {% for item in children %}
+        {{ _view.element('card', { object: item, class: 'w-' ~ columns|default(4) })|raw }}
+    {% endfor %}
+</div>

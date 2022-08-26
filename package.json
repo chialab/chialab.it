@@ -20,6 +20,7 @@
   "dependencies": {
     "@chialab/cells": "^1.2.0",
     "@chialab/dna": "^3.20.2",
+    "@chialab/dna-masonry": "^3.12.2",
     "@chialab/dna-theming": "^3.12.2"
   },
   "devDependencies": {

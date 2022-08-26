@@ -1,4 +1,8 @@
 @media (max-width: 639px) {
+    :root {
+        --viewport: var(--window-size, 100vw);
+    }
+
     .w-3,
     .w-4,
     .w-5,

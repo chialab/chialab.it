@@ -49,7 +49,18 @@ class AppController extends BaseController
         $this->loadComponent('Chialab/FrontendKit.Categories');
         $this->loadComponent('Chialab/FrontendKit.Tags');
         $this->loadComponent('Chialab/FrontendKit.Objects', Configure::read('ObjectsLoader', []));
-        $this->loadComponent('Chialab/FrontendKit.Menu');
+        $this->loadComponent('Chialab/FrontendKit.Menu', [
+            'menuLoader' => [
+                'objectTypesConfig' => [
+                    'documents' => [
+                        'include' => 'poster,has_customers',
+                    ],
+                ],
+                'autoHydrateAssociations' => [
+                    'children' => 4,
+                ],
+            ],
+        ]);
         $this->loadComponent('Chialab/FrontendKit.Publication', Configure::read('Publication', []));
 
         $isStaging = Configure::read('StagingSite');

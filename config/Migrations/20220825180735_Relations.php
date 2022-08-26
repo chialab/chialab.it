@@ -13,18 +13,11 @@ class Relations extends AbstractMigration
                 'inverse_label' => 'Poster of',
                 'description' => 'Image is a poster',
                 'left' => [
-                    'events',
-                    'folders',
-                    'documents',
-                    'links',
-                    'publications',
-                    'galleries',
-                    'locations',
-                    'news',
-                    'profiles',
+                    'objects',
                 ],
                 'right' => [
                     'images',
+                    'videos',
                 ],
             ],
             [
@@ -62,6 +55,15 @@ class Relations extends AbstractMigration
                     'documents',
                 ],
                 'right' => ['locations'],
+            ],
+            [
+                'name' => 'has_customers',
+                'label' => 'Has customers',
+                'inverse_name' => 'customer_of',
+                'inverse_label' => 'Customer of',
+                'description' => 'Customer of a work',
+                'left' => ['documents'],
+                'right' => ['profiles'],
             ],
         ],
     ];

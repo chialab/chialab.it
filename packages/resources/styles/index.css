@@ -1,12 +1,32 @@
+@import '@chialab/dna-masonry';
 @import '../scripts/Elements/Topbar/Topbar.css';
+@import './cards.css';
 @import './borders.css';
 @import './colors.css';
 @import './typography.css';
 @import './links.css';
-@import './cards.css';
 @import './variables.css';
 @import './breakpoints/viewport-640.css';
 @import './breakpoints/viewport-640-768.css';
 @import './breakpoints/viewport-768-1024.css';
 @import './breakpoints/viewport-1024-1280.css';
 @import './breakpoints/viewport-1280-1440.css';
+
+body {
+    overflow: auto;
+}
+
+.cover {
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.ratio--16-9 {
+    aspect-ratio: 16 / 9;
+}
+
+.masonry {
+    grid-template-columns: masonry;
+    grid-template-rows: masonry;
+}
