@@ -1,7 +1,6 @@
 @media (min-width: 640px) and (max-width: 767px) {
     :root {
-        --viewport: var(--window-size, 100vw);
-        --gutter: calc(var(--spacing, 0.25rem) * 2);
+        --gutter: var(--spacing, 0.25rem);
     }
 
     .w-3,
@@ -14,7 +13,7 @@
     .w-10,
     .w-11,
     .w-12 {
-        --w-span: 8;
+        --w-span: 6;
     }
 
     .claim {

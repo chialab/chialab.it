@@ -1,6 +1,5 @@
 @media (min-width: 1024px) and (max-width: 1279px) {
     :root {
-        --viewport: var(--window-size, 100vw);
         --gutter: calc(var(--spacing, 0.25rem) * 4);
     }
 }

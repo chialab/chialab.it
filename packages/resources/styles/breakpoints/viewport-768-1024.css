@@ -1,6 +1,5 @@
 @media (min-width: 768px) and (max-width: 1023px) {
     :root {
-        --viewport: var(--window-size, 100vw);
         --gutter: calc(var(--spacing, 0.25rem) * 2);
         --columns: 8;
 

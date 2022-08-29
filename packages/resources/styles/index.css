@@ -16,17 +16,21 @@ body {
     overflow: auto;
 }
 
-.cover {
-    display: block;
-    object-fit: cover;
-    object-position: center;
+.list--comma {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.list--comma li {
+    display: inline;
+}
+
+.list--comma li:not(:last-of-type)::after {
+    content: ', ';
 }
 
 .ratio--16-9 {
     aspect-ratio: 16 / 9;
-}
-
-.masonry {
-    grid-template-columns: masonry;
-    grid-template-rows: masonry;
 }
