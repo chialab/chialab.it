@@ -10,6 +10,57 @@ class BasicTypes extends AbstractMigration
                 'name' => 'galleries',
                 'singular' => 'gallery',
                 'description' => 'Gallery model',
+                'associations' => ['Categories', 'Tags'],
+            ],
+        ],
+    ];
+
+    protected $update = [
+        'object_types' => [
+            [
+                'name' => 'documents',
+                'associations' => ['Categories', 'Tags'],
+            ],
+            [
+                'name' => 'events',
+                'associations' => ['DateRanges', 'Categories', 'Tags'],
+            ],
+            [
+                'name' => 'locations',
+                'associations' => ['Categories', 'Tags'],
+            ],
+            [
+                'name' => 'news_item',
+                'associations' => ['Categories', 'Tags'],
+            ],
+            [
+                'name' => 'profiles',
+                'associations' => ['Categories', 'Tags'],
+            ],
+        ],
+    ];
+
+    protected $revert = [
+        'object_types' => [
+            [
+                'name' => 'documents',
+                'associations' => [],
+            ],
+            [
+                'name' => 'events',
+                'associations' => [],
+            ],
+            [
+                'name' => 'locations',
+                'associations' => [],
+            ],
+            [
+                'name' => 'news',
+                'associations' => [],
+            ],
+            [
+                'name' => 'profiles',
+                'associations' => [],
             ],
         ],
     ];
