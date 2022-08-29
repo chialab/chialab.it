@@ -1,14 +1,53 @@
 {{ _view.element('claim')|raw }}
 
 {% for folder in folders %}
-<div class="w-full column section">
-    <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ folder.title|raw }} /</h2>
+    {% if folder.children is not empty %}
+        <div class="w-full column section">
+            <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ folder.title|raw }} /</h2>
 
-    {{ _view.element('folder-layout', { folder: folder })|raw }}
+            {{ _view.element('folder-layout', { folder: folder, columns: 6 })|raw }}
 
-    <div class="w-full row end">
-        <a class="link--section" href="{{ Url.build({ _name: 'pages:objects', _entity: folder }) }}">{{ __('open {0}', folder.title)|raw }}</a>
-    </div>
-</div>
+            <div class="w-full row end">
+                <a class="link--section" href="{{ Url.build({ _name: 'pages:objects', _entity: folder }) }}">{{ __('open {0}', folder.title)|raw }}</a>
+            </div>
+        </div>
+    {% endif %}
 {% endfor %}
 
+{% if publication.has_featured_clients is not empty %}
+    <div class="w-full column section">
+        <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Clients')|raw }} /</h2>
+
+        <div class="w-full row align-center">
+            {% for client in publication.has_featured_clients|filter((client) => client.poster is not empty) %}
+                {% if Poster.exists(client, { variant: 1 }) %}
+                    <img class="w-2" alt="{{ __('{0} logo', client.title)|escape('html_attr')|raw }}" src="{{ Poster.url(client, { variant: 1 }) }}" draggable="false" />
+                {% else %}
+                    <img class="bw w-2" alt="{{ __('{0} logo', client.title)|escape('html_attr')|raw }}" src="{{ Poster.url(client) }}" draggable="false" />
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% if publication.see_also is not empty %}
+    <div class="w-full column section">
+        <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Connections')|raw }} /</h2>
+
+        <div class="w-full grid">
+            {% for item in publication.see_also %}
+                <a class="w-6 h-3" style="background-size: cover; background-position: center; background-image: url('{{ Poster.url(item)|escape('html_attr') }}')" href="{{ Url.build({
+                    _name: 'pages:objects',
+                    _entity: item,
+                }) }}" title="{{ item.title|escape('html_attr')|raw }}" target="_blank">
+                    <div class="w-4 bg-accent p-2 sans">
+                        <span class="f-5">{{ item.title|raw }}</span>
+                        {% if item.description is not empty %}
+                            <div class="f-3">{{ Text.renderDescription(item.description)|raw }}</div>
+                        {% endif %}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

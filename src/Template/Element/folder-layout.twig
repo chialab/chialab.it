@@ -3,5 +3,5 @@
 {% elseif folder.extra.layout == 'list' %}
     {{ _view.element('folder-list', { children: folder.children })|raw }}
 {% else %}
-    {{ _view.element('folder-grid', { children: folder.children, columns: 4 })|raw }}
+    {{ _view.element('folder-grid', { children: folder.children, columns: columns|default(4) })|raw }}
 {% endif %}

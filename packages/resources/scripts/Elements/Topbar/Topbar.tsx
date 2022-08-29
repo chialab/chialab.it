@@ -22,10 +22,16 @@ export class Topbar extends Component {
     render() {
         return <div class="viewport column gap-xs py-3">
             <a href={this.url} title={this.tooltip} class="mono bold f-2">{this.title}</a>
-            <nav class="row gap-0 align-center">
-                <span class="f-2 mr-1 mono bold text-accent" aria-hidden="true">ẞ</span>
-                <slot></slot>
-            </nav>
+            <div class="row topbar__links">
+                <nav class="row gap-0 align-center">
+                    <span class="f-2 mr-1 mono bold text-accent" aria-hidden="true">ẞ</span>
+                    <slot></slot>
+                </nav>
+                <div class="row gap-0 align-center">
+                    <span class="f-2 mr-1 mono" aria-hidden="true">ß</span>
+                    <slot name="locale"></slot>
+                </div>
+            </div>
         </div>;
     }
 

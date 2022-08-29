@@ -48,23 +48,17 @@ class AppController extends BaseController
         $this->loadComponent('Chialab/FrontendKit.Filters');
         $this->loadComponent('Chialab/FrontendKit.Categories');
         $this->loadComponent('Chialab/FrontendKit.Tags');
-        $this->loadComponent('Chialab/FrontendKit.Objects', Configure::read('ObjectsLoader', []));
-        $this->loadComponent('Chialab/FrontendKit.Menu', [
-            'menuLoader' => [
+        $this->loadComponent('Chialab/FrontendKit.Objects');
+        $this->loadComponent('Chialab/FrontendKit.Menu');
+        $this->loadComponent('Chialab/FrontendKit.Publication', [
+            'publication' => 'chialab-design-company-publication',
+            'publicationLoader' => [
                 'objectTypesConfig' => [
-                    'objects' => [
-                        'include' => 'poster',
-                    ],
-                    'documents' => [
-                        'include' => 'poster,has_customers',
-                    ],
-                ],
-                'autoHydrateAssociations' => [
-                    'children' => 4,
+                    'profiles' => ['include' => 'poster|1'],
+                    'publications' => ['include' => 'poster|1'],
                 ],
             ],
         ]);
-        $this->loadComponent('Chialab/FrontendKit.Publication', Configure::read('Publication', []));
 
         $isStaging = Configure::read('StagingSite');
         $this->set('isStaging', $isStaging);
@@ -80,8 +74,8 @@ class AppController extends BaseController
     {
         parent::beforeRender($event);
 
-        $publication = $this->Publication->getPublication();
-        $menu = $this->Menu->load($publication->id);
+        $root = $this->Publication->getRoot();
+        $menu = $this->Menu->load($root->id);
         $analytics = Configure::read('Analytics', '');
 
         $this->set(compact('menu', 'analytics'));

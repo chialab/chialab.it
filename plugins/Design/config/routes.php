@@ -31,6 +31,12 @@ Router::plugin(
             );
 
             $routes->connect(
+                '/link/{uname}',
+                ['controller' => 'Pages', 'action' => 'link', '_filters' => ['type' => 'publications']],
+                ['_name' => 'pages:links', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class]
+            );
+
+            $routes->connect(
                 '/objects/{uname}',
                 ['controller' => 'Pages', 'action' => 'object'],
                 ['_name' => 'pages:objects', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class]

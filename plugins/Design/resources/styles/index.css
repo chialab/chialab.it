@@ -1,1 +1,5 @@
 @import 'resources/styles/index.css';
+
+.bw {
+    filter: grayscale(1);
+}

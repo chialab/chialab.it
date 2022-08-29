@@ -18,12 +18,6 @@ class Plugin extends BasePlugin
     {
         parent::bootstrap($app);
 
-        Configure::write('Publication', [
-            'publication' => 'chialab-design-company',
-        ]);
-        Configure::write('Menu', [
-            'folders' => [],
-        ]);
         // Configure::write('Analytics', [
         //     'ga_code' => '',
         //     'matomo_code' => '',

@@ -5,4 +5,7 @@
             _entity: child,
         }) }}" {% if ancestors|first|default(object).uname == child.uname %}aria-current="page"{% endif %}>{{ child.title|raw }}</a>
     {% endfor %}
+    {% for _locale in locales %}
+        <a class="link--underline" href="{{ Url.build({ locale: _locale, _entity: object }) }}" lang="{{ _locale }}" hreflang="{{ _locale }}" {% if _locale == locale %}data-current-locale{% endif %} slot="locale">{{ _locale|raw }}</a>
+    {% endfor %}
 </cl-topbar>
