@@ -1,7 +1,7 @@
 {{ _view.element('claim')|raw }}
 
 {% for folder in folders %}
-    {% if folder.children is not empty %}
+    {% if folder.type == 'folders' and folder.children is not empty %}
         <div class="w-full column section">
             <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ folder.title|raw }} /</h2>
 

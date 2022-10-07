@@ -4,6 +4,7 @@ namespace Design\Controller;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
+use Chialab\FrontendKit\Model\TreeLoader;
 use Design\Controller\AppController;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
 
@@ -25,12 +26,16 @@ class PagesController extends AppController
 
         $loader = new ObjectsLoader([
             'objects' => ['include' => 'poster'],
-            'documents' => ['include' => 'poster,has_clients'],
+            'documents' => ['include' => 'poster,has_clients,see_also,attach'],
+            'news' => ['include' => 'poster,see_also,attach'],
             'folders' => ['include' => 'children'],
+        ], [
+            'children' => 3,
+            'see_also' => 3,
+            'attach' => 3,
         ]);
-        $folders = $loader->loadRelatedObjects($root->id, 'folders', 'children', null, null, [
-            'children' => 4,
-        ]);
+        $treeLoader = new TreeLoader($loader);
+        $folders = $treeLoader->loadMenu($root->id)->children;
 
         $this->set(compact('folders'));
     }

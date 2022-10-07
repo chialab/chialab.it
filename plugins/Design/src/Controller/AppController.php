@@ -48,7 +48,12 @@ class AppController extends BaseController
         $this->loadComponent('Chialab/FrontendKit.Filters');
         $this->loadComponent('Chialab/FrontendKit.Categories');
         $this->loadComponent('Chialab/FrontendKit.Tags');
-        $this->loadComponent('Chialab/FrontendKit.Objects');
+        $this->loadComponent('Chialab/FrontendKit.Objects', [
+            'objectTypesConfig' => [
+                'objects' => ['include' => 'poster'],
+                'documents' => ['include' => 'poster,has_clients'],
+            ],
+        ]);
         $this->loadComponent('Chialab/FrontendKit.Menu');
         $this->loadComponent('Chialab/FrontendKit.Publication', [
             'publication' => 'chialab-design-company-publication',
@@ -76,9 +81,10 @@ class AppController extends BaseController
 
         $root = $this->Publication->getRoot();
         $menu = $this->Menu->load($root->id);
+        $footer = $this->Menu->load('chialab-design-component-footer')->children;
         $analytics = Configure::read('Analytics', '');
 
-        $this->set(compact('menu', 'analytics'));
+        $this->set(compact('menu', 'footer', 'analytics'));
 
         return null;
     }

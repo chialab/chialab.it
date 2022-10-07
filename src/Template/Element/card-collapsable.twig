@@ -1,18 +1,41 @@
-<div class="card bt-1 w-4 column gap-0 bg-neutral" title="{{ object.title|striptags|escape('html_attr')|raw }}">
+<cl-card-details class="card bt-1 w-4 column gap-0 bg-neutral" title="{{ object.title|striptags|escape('html_attr')|raw }}">
     {% if Poster.exists(object) %}
-        <div class="card__cover">
+        <div class="card__cover" slot="cover">
             <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
         </div>
     {% endif %}
-    <div class="card__details sans w-full p-2 column gap-xs">
+    <div class="card__details sans w-full column gap-xs" slot="details">
         {% if object.has_clients %}
-            <span class="mono f-s text-accent bold">{{ object.has_clients|first.title|raw }}</span>
+            <span class="mono f-s text-accent bold card__title">{{ object.has_clients|first.title|raw }}</span>
         {% endif %}
         <h3 class="f-5 m-0 regular card__title">{{ object.title|raw }}</h3>
-        {% if object.description is not empty %}
-            <div class="f-2 clamp-4 body card__description">
-                {{ Text.renderDescription(object.description)|raw }}
+            <div class="card__description column">
+                {% if object.description is not empty %}
+                    <div class="w-full f-3 body">
+                        {{ Text.renderDescription(object.description)|raw }}
+                    </div>
+                {% endif %}
+
+                {% if object.attach is not empty %}
+                    <div class="w-full row">
+                        {% for item in object.attach %}
+                            <img src="{{ Poster.url(item)|escape('html_attr') }}" class="w-1 h-1 cover" draggable="false" />
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if object.see_also is not empty %}
+                    <div class="w-full column">
+                        <span class="link--section">{{ __('See also') }}</span>
+                        <div class="row w-full">
+                            {% for item in object.see_also %}
+                                <a class="flex pt-6 column end" title="{{ item.title|escape('html_attr')|raw }}" style="width: 40%; background-size: cover; background-position: center; background-image: url('{{ Poster.url(item)|escape('html_attr') }}')">
+                                    <span class="w-full p-1 bg-overlay mono f-s">{{ item.title|raw }}</span>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
             </div>
-        {% endif %}
     </div>
-</div>
+</cl-card-details>

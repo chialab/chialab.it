@@ -17,7 +17,7 @@ a {
     border-right: solid 1px var(--color-text);
 }
 
-.link--section:hover {
+a.link--section:hover {
     text-decoration: underline;
     text-decoration-color: var(--color-accent);
 }
@@ -31,6 +31,6 @@ a {
     border-right: solid 1px var(--color-text);
 }
 
-.link--section:hover .link--section::before {
+a.link--section:hover .link--section::before {
     text-decoration: none;
 }

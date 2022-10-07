@@ -106,3 +106,7 @@ article header {
     font-size: var(--font-size-5);
     font-weight: normal;
 }
+
+.upper {
+    text-transform: uppercase;
+}

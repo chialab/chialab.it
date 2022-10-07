@@ -1,3 +1,4 @@
+@import '@chialab/dna-button';
 @import '@chialab/dna-masonry';
 @import '../scripts/Elements/Topbar/Topbar.css';
 @import './cards.css';
@@ -14,6 +15,12 @@
 
 body {
     overflow: auto;
+}
+
+.list--plain {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .list--comma {

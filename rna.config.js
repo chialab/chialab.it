@@ -14,7 +14,7 @@ const config = {
                 './plugins/Design/resources/scripts/index.ts',
                 './plugins/Design/resources/styles/index.css',
             ],
-            publicPath: '/build/',
+            publicPath: '/design/build/',
             output: 'plugins/Design/webroot/build/',
             manifestPath: 'plugins/Design/webroot/build/manifest.json',
             entrypointsPath: 'plugins/Design/webroot/build/entrypoints.json',
