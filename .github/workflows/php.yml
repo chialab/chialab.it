@@ -23,7 +23,7 @@ jobs:
         id: 'cachedir'
         run: 'echo "path=$(composer global config cache-dir)" >> $GITHUB_OUTPUT'
       - name: 'Share Composer cache across runs'
-        uses: 'actions/cache@v3'
+        uses: 'actions/cache@v4'
         with:
           path: '${{ steps.cachedir.outputs.path }}'
           key: "composer-${{ github.job }}-${{ hashFiles('**/composer.json') }}"
@@ -53,7 +53,7 @@ jobs:
         id: 'cachedir'
         run: 'echo "path=$(composer global config cache-dir)" >> $GITHUB_OUTPUT'
       - name: 'Share Composer cache across runs'
-        uses: 'actions/cache@v3'
+        uses: 'actions/cache@v4'
         with:
           path: '${{ steps.cachedir.outputs.path }}'
           key: "composer-${{ github.job }}-${{ hashFiles('**/composer.json') }}"
@@ -111,7 +111,7 @@ jobs:
         id: 'cachedir'
         run: 'echo "path=$(composer global config cache-dir)" >> $GITHUB_OUTPUT'
       - name: 'Share Composer cache across runs'
-        uses: 'actions/cache@v3'
+        uses: 'actions/cache@v4'
         with:
           path: '${{ steps.cachedir.outputs.path }}'
           key: "composer-${{ matrix.php }}-${{ hashFiles('**/composer.json') }}"
