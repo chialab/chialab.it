@@ -1,23 +1,23 @@
 {
-    "name": "your-name-here/OpenSource",
-    "description": "OpenSource plugin for CakePHP",
-    "type": "cakephp-plugin",
-    "license": "MIT",
-    "require": {
-        "cakephp/cakephp": "^3.5"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.14|^6.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "OpenSource\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "OpenSource\\Test\\": "tests/",
-            "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
-        }
+  "name": "chialab/opensource",
+  "description": "OpenSource plugin for CakePHP",
+  "type": "cakephp-plugin",
+  "license": "MIT",
+  "require": {
+    "cakephp/cakephp": "^3.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7.14|^6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "OpenSource\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OpenSource\\Test\\": "tests/",
+      "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
+    }
+  }
 }

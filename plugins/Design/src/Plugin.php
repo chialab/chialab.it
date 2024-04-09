@@ -3,18 +3,17 @@
 namespace Design;
 
 use Cake\Core\BasePlugin;
-use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 
 /**
- * Plugin for Chialab
+ * Plugin for Design
  */
 class Plugin extends BasePlugin
 {
     /**
      * @inheritdoc
      */
-    public function bootstrap(PluginApplicationInterface $app)
+    public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
 
@@ -22,17 +21,5 @@ class Plugin extends BasePlugin
         //     'ga_code' => '',
         //     'matomo_code' => '',
         // ]);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getTemplatePath(): string
-    {
-        if ($this->templatePath) {
-            return $this->templatePath;
-        }
-
-        return $this->templatePath = $this->getPath() . 'src' . DS . 'Template';
     }
 }

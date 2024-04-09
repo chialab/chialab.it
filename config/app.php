@@ -1,6 +1,5 @@
 <?php
 
-use App\Error\AppExceptionRenderer;
 use Cake\Cache\Engine\FileEngine;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
@@ -63,8 +62,8 @@ return [
         'jsBaseUrl' => 'js/',
         'paths' => [
             'plugins' => [ROOT . DS . 'plugins' . DS],
-            'templates' => [APP . 'Template' . DS],
-            'locales' => [APP . 'Locale' . DS],
+            'templates' => [ROOT . DS . 'templates' . DS],
+            'locales' => [RESOURCES . 'locales' . DS],
         ],
     ],
 
@@ -179,7 +178,7 @@ return [
 
         '_twig_views_' => [
             'className' => FileEngine::class,
-            'path' => CACHE . 'twigView/',
+            'path' => CACHE . 'twig_view/',
             'serialize' => true,
             'duration' => '+1 year',
         ],
@@ -216,7 +215,6 @@ return [
      */
     'Error' => [
         'errorLevel' => E_ALL,
-        'exceptionRenderer' => AppExceptionRenderer::class,
         'skipLog' => [],
         'log' => true,
         'trace' => true,
@@ -518,6 +516,7 @@ return [
         'generators' => [
             'default' => [
                 'className' => 'BEdita/Core.Glide',
+                'driver' => 'imagick',
                 // 'cache' => 'thumbnails',
                 'url' => env('THUMBNAILS_DEFAULT_URL', null),
             ],
@@ -534,8 +533,11 @@ return [
             'it_IT' => 'it',
             'en_US' => 'en',
         ],
-
         'lang' => 'it',
         'default' => 'it',
+    ],
+
+    'Publish' => [
+        'checkDate' => true,
     ],
 ];

@@ -1,5 +1,0 @@
-<div class="w-full column">
-    {% for item in children %}
-        {{ _view.element('card-wide', { object: item, class: 'w-' ~ columns|default(4) })|raw }}
-    {% endfor %}
-</div>

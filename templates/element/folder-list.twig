@@ -1,0 +1,5 @@
+<div class="w-full column">
+    {% for item in children %}
+        {{ element('card-wide', { object: item, class: 'w-' ~ columns|default(4) })|raw }}
+    {% endfor %}
+</div>

@@ -1,0 +1,5 @@
+<dna-masonry class="w-full grid m-0">
+    {% for item in children %}
+        {{ element('card-collapsable', { object: item })|raw }}
+    {% endfor %}
+</dna-masonry>

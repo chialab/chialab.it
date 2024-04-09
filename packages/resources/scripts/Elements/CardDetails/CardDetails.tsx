@@ -1,4 +1,4 @@
-import { customElement, Component, state, listen } from '@chialab/dna';
+import { Component, customElement, listen, state } from '@chialab/dna';
 import { ButtonVariant } from '@chialab/dna-button';
 import { __ } from '@chialab/dna-theming';
 
@@ -6,28 +6,34 @@ import { __ } from '@chialab/dna-theming';
 export class CardDetails extends Component {
     @state({
         type: Boolean,
-    }) expanded: boolean = false;
+    })
+    expanded: boolean = false;
 
     get cardDescriptionElement() {
         return this.querySelector('.card__description');
     }
 
     render() {
-        return <>
-            <slot name="cover"></slot>
-            <div class="column w-full p-2">
-                <slot name="details"></slot>
-                {this.expanded && <slot name="extra"></slot>}
-                {this.cardDescriptionElement && <div class="card-details__commands w-full row end">
-                    <button is="dna-button"
-                        class="card-details__toggle"
-                        variant={ButtonVariant.action}
-                        icon={this.expanded ? 'close' : 'plus'}
-                        aria-label={this.expanded ? __('collapse') : __('expand')}
-                    />
-                </div>}
-            </div>
-        </>;
+        return (
+            <>
+                <slot name="cover"></slot>
+                <div class="column w-full p-2">
+                    <slot name="details"></slot>
+                    {this.expanded && <slot name="extra"></slot>}
+                    {this.cardDescriptionElement && (
+                        <div class="card-details__commands w-full row end">
+                            <button
+                                is="dna-button"
+                                class="card-details__toggle"
+                                variant={ButtonVariant.action}
+                                icon={this.expanded ? 'close' : 'plus'}
+                                aria-label={this.expanded ? __('collapse') : __('expand')}
+                            />
+                        </div>
+                    )}
+                </div>
+            </>
+        );
     }
 
     forceUpdate() {

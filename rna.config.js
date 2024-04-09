@@ -1,6 +1,4 @@
-/* eslint-env node */
-import { hmrCssPlugin } from '@chialab/wds-plugin-hmr';
-import { hmrPlugin } from '@chialab/wds-plugin-hmr-dna';
+import process from 'node:process';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -10,19 +8,12 @@ const isProduction = process.env.NODE_ENV === 'production';
 const config = {
     entrypoints: [
         {
-            input: [
-                './plugins/Design/resources/scripts/index.ts',
-                './plugins/Design/resources/styles/index.css',
-            ],
+            input: ['./plugins/Design/resources/scripts/index.ts', './plugins/Design/resources/styles/index.css'],
             publicPath: '/design/build/',
             output: 'plugins/Design/webroot/build/',
             manifestPath: 'plugins/Design/webroot/build/manifest.json',
             entrypointsPath: 'plugins/Design/webroot/build/entrypoints.json',
         },
-    ],
-    servePlugins: [
-        hmrPlugin(),
-        hmrCssPlugin(),
     ],
     clean: true,
     sourcemap: !isProduction,

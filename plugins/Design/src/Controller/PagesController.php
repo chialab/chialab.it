@@ -22,7 +22,7 @@ class PagesController extends AppController
      */
     public function home(): void
     {
-        $root = $this->Publication->getRoot();
+        $root = $this->Publication->getPublication();
 
         $loader = new ObjectsLoader([
             'objects' => ['include' => 'poster'],

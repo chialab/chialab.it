@@ -5,23 +5,36 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
-use Cake\Event\Event;
-use Cake\Http\Response;
-use Cake\I18n\I18n;
 
+/**
+ * Application Controller
+ *
+ * @property \Chialab\FrontendKit\Controller\Component\FiltersComponent $Filters
+ * @property \Chialab\FrontendKit\Controller\Component\CategoriesComponent $Categories
+ * @property \Chialab\FrontendKit\Controller\Component\TagsComponent $Tags
+ * @property \Chialab\FrontendKit\Controller\Component\ObjectsComponent $Objects
+ * @property \Chialab\FrontendKit\Controller\Component\PublicationComponent $Publication
+ * @property \Chialab\FrontendKit\Controller\Component\MenuComponent $Menu
+ * @property \Chialab\FrontendKit\Controller\Component\StagingComponent $Staging
+ */
 class AppController extends Controller
 {
     /**
+     * Name of root folder.
+     *
+     * @var string
+     */
+    protected const ROOT_FOLDER = 'root';
+
+    /**
      * @inheritDoc
      */
-    public function beforeRender(Event $event): ?Response
+    public function initialize(): void
     {
-        parent::beforeRender($event);
+        parent::initialize();
 
-        $locales = Configure::read('I18n.locales', []);
-        $locale = Configure::read('I18n.lang', I18n::getLocale());
-        $this->set(compact('locale', 'locales'));
-
-        return null;
+        $this->loadComponent('RequestHandler', [
+            'enableBeforeRedirect' => false,
+        ]);
     }
 }

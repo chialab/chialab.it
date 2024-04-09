@@ -1,0 +1,17 @@
+<cl-topbar url="{{ Url.build({ _name: 'pages:home' })|escape('html_attr')|raw }}" tooltip="{{ __('Back to home') }}">
+    {% for child in menu.children %}
+        <a class="link--underline" href="{{ Url.build({
+            _name: 'pages:objects',
+            _entity: child,
+        }) }}" {% if object is defined and ancestors|first|default(object).uname == child.uname %}aria-current="page"{% endif %}>{{ child.title|raw }}</a>
+    {% endfor %}
+    {% set request = _view.getRequest() %}
+    {% for _locale in locales %}
+        {% set params = { locale: _locale }|merge(request.getParam('pass')) %}
+        {% for key in request.getParam('pass') %}
+            {% set params = params|merge({ (key): request.getParam(key) }) %}
+        {% endfor %}
+
+        <a class="link--underline" href="{{ Url.build(params) }}" lang="{{ _locale }}" hreflang="{{ _locale }}" {% if _locale == locale %}data-current-locale{% endif %} slot="locale">{{ _locale|raw }}</a>
+    {% endfor %}
+</cl-topbar>

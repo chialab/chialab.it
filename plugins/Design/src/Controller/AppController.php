@@ -4,8 +4,9 @@ namespace Design\Controller;
 
 use App\Controller\AppController as BaseController;
 use Cake\Core\Configure;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\Http\Response;
+use Cake\I18n\I18n;
 
 /**
  * App Controller.
@@ -34,16 +35,6 @@ class AppController extends BaseController
         parent::initialize();
 
         $this->loadComponent('Paginator');
-        $this->loadComponent('RequestHandler', [
-            'enableBeforeRedirect' => false,
-        ]);
-        $this->loadComponent('Flash');
-
-        /*
-         * Enable the following component for recommended CakePHP security settings.
-         * see https://book.cakephp.org/3/en/controllers/components/security.html
-         */
-        //$this->loadComponent('Security');
 
         $this->loadComponent('Chialab/FrontendKit.Filters');
         $this->loadComponent('Chialab/FrontendKit.Categories');
@@ -56,7 +47,7 @@ class AppController extends BaseController
         ]);
         $this->loadComponent('Chialab/FrontendKit.Menu');
         $this->loadComponent('Chialab/FrontendKit.Publication', [
-            'publication' => 'chialab-design-company-publication',
+            'publication' => 'chialab-design-company',
             'publicationLoader' => [
                 'objectTypesConfig' => [
                     'profiles' => ['include' => 'poster|1'],
@@ -65,26 +56,26 @@ class AppController extends BaseController
             ],
         ]);
 
-        $isStaging = Configure::read('StagingSite');
-        $this->set('isStaging', $isStaging);
-        if ($isStaging) {
-            $this->loadComponent('Authentication.Authentication');
+        if (Configure::read('StagingSite')) {
+            $this->loadComponent('Chialab/FrontendKit.Staging');
         }
     }
 
     /**
      * @inheritDoc
      */
-    public function beforeRender(Event $event): ?Response
+    public function beforeRender(EventInterface $event): ?Response
     {
         parent::beforeRender($event);
 
-        $root = $this->Publication->getRoot();
+        $root = $this->Publication->getPublication();
         $menu = $this->Menu->load($root->id);
-        $footer = $this->Menu->load('chialab-design-component-footer')->children;
+        $footer = $this->Menu->load('chialab-design-company-footer')->children;
         $analytics = Configure::read('Analytics', '');
+        $locales = Configure::read('I18n.locales', []);
+        $locale = Configure::read('I18n.lang', I18n::getLocale());
 
-        $this->set(compact('menu', 'footer', 'analytics'));
+        $this->set(compact('menu', 'footer', 'analytics', 'locale', 'locales'));
 
         return null;
     }

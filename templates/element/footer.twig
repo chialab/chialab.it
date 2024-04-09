@@ -1,0 +1,72 @@
+<footer class="w-full bt-1 mt-6 py-2 pb-8 row">
+    <div class="footer__info mono light f-s column w-4">
+        <span class="mono f-2 column gap-xs bold">
+            chialab
+            <span class="text-accent" aria-hidden="true">ẞ</span>
+        </span>
+        {% if publication.get('has_publisher') is not empty %}
+            {% set contacts = publication.has_publisher|first %}
+            <div class="column gap-xs">
+                {% if contacts.email is not empty %}
+                    <a class="link--underline" href="mailto:{{ contacts.email }}">{{ contacts.email }}</a>
+                {% endif %}
+                {% if contacts.street_address is not empty %}
+                    <span>{{ contacts.street_address|striptags|raw }}</span>
+                {% endif %}
+                <span>
+                    {% if contacts.zipcode is not empty %}
+                        {{ contacts.zipcode|raw }}
+                    {% endif %}
+                    {% if contacts.city is not empty %}
+                        {{ contacts.city|raw }},
+                    {% endif %}
+                    {% if contacts.country is not empty %}
+                        {{ contacts.country|raw }}
+                    {% endif %}
+                </span>
+                {% if contacts.phone is not empty %}
+                    <a class="link--underline" href="tel:{{ contacts.phone }}">{{ contacts.phone }}</a>
+                {% endif %}
+                {% if contacts.vat_number is not empty %}
+                    <span>{{ contacts.vat_number|raw }}</span>
+                {% endif %}
+                {% if publication.has_privacy_policies is not empty %}
+                    <a class="link--underline" href="{{ Url.build({ _name: 'pages:objects', _entity: publication.has_privacy_policies|first }) }}">{{ __('privacy policy') }}</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="w-6 row">
+        {% for child in footer %}
+            <div class="w-2 column">
+                <span class="mono upper light">{{ child.title|raw }}</span>
+                {% if child.children is not empty %}
+                    <ul class="list--plain f-s column gap-xs">
+                        {% for subchild in child.children %}
+                            <li class="mono">
+                                <a class="link--underline upper" href="{{ Url.build({ _name: 'pages:objects', _entity: subchild }) }}">
+                                    {{ subchild.title|raw }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% if publication.has_newsletters is not empty %}
+            <div class="w-2 column">
+                <span class="mono upper light">{{ __('newsletter')|raw }}</span>
+                <ul class="list--plain f-s column gap-xs">
+                    {% for item in publication.has_newsletters %}
+                        <li class="mono">
+                            <span class="upper">{{ item.title|raw }}</span>
+                            <span class="light">
+                                (<a class="link--underline" href="{{ item.url|escape('html_attr')|raw }}" target="_blank">{{ __('signup') }}</a>)
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</footer>

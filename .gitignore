@@ -41,9 +41,9 @@ Thumbs.db
 *.tmPreferences.cache
 # Eclipse
 .settings/*
-# JetBrains, aka PHPStorm, IntelliJ IDEA
-.idea/*
 # NetBeans
 nbproject/*
-# Visual Studio Code
-.vscode
+
+# PHPUnit #
+###########
+.phpunit.result.cache
