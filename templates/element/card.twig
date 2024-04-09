@@ -8,16 +8,16 @@
         </div>
     {% endif %}
     <div class="card__details serif w-full py-1 column gap-xs">
-        {% if object.has_clients %}
+        {% if object.get('has_clients') is not empty %}
             <span class="mono f-s text-accent bold">{{ object.has_clients|first.title|raw }}</span>
         {% endif %}
         <h3 class="f-6 m-0 regular italic card__title">{{ object.title|raw }}</h3>
-        {% if object.description is not empty %}
+        {% if object.get('description') is not empty %}
             <div class="f-3 clamp-4 body card__description">
                 {{ Text.renderDescription(object.description)|raw }}
             </div>
         {% endif %}
-        {% if object.categories is not empty %}
+        {% if object.get('categories') is not empty %}
             <ul class="list--comma">
                 {% for category in object.categories %}
                     <li class="mono f-xs">{{ category.label|raw }}</li>

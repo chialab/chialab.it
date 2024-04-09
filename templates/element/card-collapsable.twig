@@ -5,26 +5,26 @@
         </div>
     {% endif %}
     <div class="card__details sans w-full column gap-xs" slot="details">
-        {% if object.has_clients %}
-            <span class="mono f-s text-accent bold card__title">{{ object.has_clients|first.title|raw }}</span>
+        {% if object.get('has_clients') is not empty %}
+            <span class="mono f-s text-accent bold card__title">{{ (object.has_clients|first).title|raw }}</span>
         {% endif %}
         <h3 class="f-5 m-0 regular card__title">{{ object.title|raw }}</h3>
             <div class="card__description column">
-                {% if object.description is not empty %}
+                {% if object.get('description') is not empty %}
                     <div class="w-full f-3 body">
                         {{ Text.renderDescription(object.description)|raw }}
                     </div>
                 {% endif %}
 
-                {% if object.attach is not empty %}
+                {% if object.get('has_media') is not empty %}
                     <div class="w-full row">
-                        {% for item in object.attach %}
+                        {% for item in object.has_media %}
                             <img src="{{ Poster.url(item)|escape('html_attr') }}" class="w-1 h-1 cover" draggable="false" />
                         {% endfor %}
                     </div>
                 {% endif %}
 
-                {% if object.see_also is not empty %}
+                {% if object.get('see_also') is not empty %}
                     <div class="w-full column">
                         <span class="link--section">{{ __('See also') }}</span>
                         <div class="row w-full">

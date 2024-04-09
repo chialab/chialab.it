@@ -6,11 +6,11 @@
 }) }}" style="--r: {{ rgb.r }}; --g: {{ rgb.g }}; --b: {{ rgb.b }};">
     <div class="w-full row no-wrap gap-5">
         <div class="w-4 py-3 card__details serif w-4 column gap-xs">
-            {% if object.has_clients %}
+            {% if object.get('has_clients') is not empty %}
                 <span class="mono f-s text-accent bold">{{ object.has_clients|first.title|raw }}</span>
             {% endif %}
             <h3 class="f-5 m-0 regular italic card__title">{{ object.title|raw }}</h3>
-            {% if object.description is not empty %}
+            {% if object.get('description') is not empty %}
                 <div class="f-3 clamp-4 body card__description">
                     {{ Text.renderDescription(object.description)|raw }}
                 </div>
