@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\View\Helper;
 
 use BEdita\Core\Utility\Text;
@@ -14,24 +16,27 @@ class TextHelper extends Helper
 {
     /**
      * Default error reporting.
+     *
+     * @var int
      */
-    protected static $_defaultErrorReporting = 1;
+    protected static int $_defaultErrorReporting = 1;
 
     /**
      * Default configuration.
      *
      * @var array
      */
-    protected $_defaultConfig = [];
+    protected array $_defaultConfig = [];
 
     /**
      * Convert all major XML entities in a string to the unicode form.
      *
      * @param string $text
-     * @return string.
+     * @return string
      */
-    protected static function convertXmlEntity($text) {
-        static $table = array('&quot;' => '&#34;','&amp;' => '&#38;','&lt;' => '&#60;','&gt;' => '&#62;','&OElig;' => '&#338;','&oelig;' => '&#339;','&Scaron;' => '&#352;',
+    protected static function convertXmlEntity(string $text): string
+    {
+        static $table = ['&quot;' => '&#34;','&amp;' => '&#38;','&lt;' => '&#60;','&gt;' => '&#62;','&OElig;' => '&#338;','&oelig;' => '&#339;','&Scaron;' => '&#352;',
             '&scaron;' => '&#353;','&Yuml;' => '&#376;','&circ;' => '&#710;','&tilde;' => '&#732;','&ensp;' => '&#8194;','&emsp;' => '&#8195;',
             '&thinsp;' => '&#8201;','&zwnj;' => '&#8204;','&zwj;' => '&#8205;','&lrm;' => '&#8206;','&rlm;' => '&#8207;','&ndash;' => '&#8211;',
             '&mdash;' => '&#8212;','&lsquo;' => '&#8216;','&rsquo;' => '&#8217;','&sbquo;' => '&#8218;','&ldquo;' => '&#8220;','&rdquo;' => '&#8221;',
@@ -64,7 +69,7 @@ class TextHelper extends Helper
             '&ecirc;' => '&#234;','&euml;' => '&#235;','&igrave;' => '&#236;','&iacute;' => '&#237;','&icirc;' => '&#238;','&iuml;' => '&#239;','&eth;' => '&#240;','&ntilde;' => '&#241;',
             '&ograve;' => '&#242;','&oacute;' => '&#243;','&ocirc;' => '&#244;','&otilde;' => '&#245;','&ouml;' => '&#246;','&divide;' => '&#247;','&oslash;' => '&#248;','&ugrave;' => '&#249;',
             '&uacute;' => '&#250;','&ucirc;' => '&#251;','&uuml;' => '&#252;','&yacute;' => '&#253;','&thorn;' => '&#254;','&yuml;' => '&#255;',
-        );
+        ];
 
         return str_replace(array_keys($table), array_values($table), $text);
     }
@@ -74,7 +79,7 @@ class TextHelper extends Helper
      *
      * @return void
      */
-    protected static function disableErrorReporting()
+    protected static function disableErrorReporting(): void
     {
         static::$_defaultErrorReporting = error_reporting();
     }
@@ -96,7 +101,7 @@ class TextHelper extends Helper
      * @param bool $convertEntities Convert encoding and XML entities.
      * @return \DOMDocument
      */
-    protected function parseHTML(string $text, $convertEntities = true): DOMDocument
+    protected function parseHTML(string $text, bool $convertEntities = true): DOMDocument
     {
         static::disableErrorReporting();
 
@@ -123,14 +128,14 @@ class TextHelper extends Helper
      * @param string $name
      * @return \DOMElement
      */
-    protected function changeTag($dom, $element, $name): DOMElement
+    protected function changeTag(DOMDocument $dom, DOMElement $element, string $name): DOMElement
     {
         /**
          * @var \DOMElement $newnode
          */
         $newNode = $dom->createElement($name);
         $newNode->nodeValue = $element->nodeValue;
-        foreach ($element->childNodes as $child){
+        foreach ($element->childNodes as $child) {
             $newNode->appendChild($child, true);
         }
         foreach ($element->attributes as $attrName => $attrNode) {
@@ -145,10 +150,10 @@ class TextHelper extends Helper
      * Downgrade heading levels.
      *
      * @param \DOMDocument $dom
-     * @param number $downgrade
+     * @param int $downgrade
      * @return void
      */
-    protected function downgradeHeadings($dom, $downgrade = 0): void
+    protected function downgradeHeadings(DOMDocument $dom, int $downgrade = 0): void
     {
         static $headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
@@ -179,11 +184,11 @@ class TextHelper extends Helper
         }
     }
 
-
     /**
      * Render a body text with some transformations:
      * * Downgrade headings
      * * Add pilcrow link to headings
+     *
      * @param string $text The original text to render.
      * @param array|null $options Render options.
      * @return string
@@ -195,8 +200,9 @@ class TextHelper extends Helper
 
         $content = $dom->saveHTML();
         $content = preg_replace(
-            '/^<!DOCTYPE.+?>/', '',
-            str_replace(array('<html>', '</html>', '<head>', '<meta http-equiv="Content-type" content="text/html; charset=UTF-8">', '</head>', '<body>', '</body>'), '', $content)
+            '/^<!DOCTYPE.+?>/',
+            '',
+            str_replace(['<html>', '</html>', '<head>', '<meta http-equiv="Content-type" content="text/html; charset=UTF-8">', '</head>', '<body>', '</body>'], '', $content)
         );
 
         return $content;
@@ -204,6 +210,7 @@ class TextHelper extends Helper
 
     /**
      * Render a text removing block tags and links.
+     *
      * @param string $text The original text to render.
      * @return string
      */

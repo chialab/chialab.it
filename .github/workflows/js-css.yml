@@ -15,6 +15,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
+          token: ${{ secrets.NPM_TOKEN }}
           cache: yarn
       - name: Install project dependencies
         run: yarn install
