@@ -8,6 +8,11 @@
         </div>
     {% endif %}
     <div class="card__details serif w-full py-1 column gap-xs">
+        {% if object.get('categories') is not empty %}
+            {% for category in object.categories %}
+                <span class="mono f-s text-accent bold">{{ category.label|raw }}</span>
+            {% endfor %}
+        {% endif %}
         {% if object.get('has_clients') is not empty %}
             <span class="mono f-s text-accent bold">{{ object.has_clients|first.title|raw }}</span>
         {% endif %}
@@ -17,10 +22,10 @@
                 {{ Text.renderDescription(object.description)|raw }}
             </div>
         {% endif %}
-        {% if object.get('categories') is not empty %}
+        {% if object.get('tags') is not empty %}
             <ul class="list--comma">
-                {% for category in object.categories %}
-                    <li class="mono f-xs">{{ category.label|raw }}</li>
+                {% for tag in object.tags %}
+                    <li class="mono f-xs">{{ tag.label|raw }}</li>
                 {% endfor %}
             </ul>
         {% endif %}

@@ -8,7 +8,7 @@
             {% set contacts = publication.has_publisher|first %}
             <div class="column gap-xs">
                 {% if contacts.get('email') is not empty %}
-                    <a class="link--underline" href="mailto:{{ contacts.email }}">{{ contacts.email }}</a>
+                    <a class="text-underline link--underline" href="mailto:{{ contacts.email }}">{{ contacts.email }}</a>
                 {% endif %}
                 {% if contacts.get('street_address') is not empty %}
                     <span>{{ contacts.street_address|striptags|raw }}</span>

@@ -110,3 +110,7 @@ article header {
 .upper {
     text-transform: uppercase;
 }
+
+.text-underline {
+    text-decoration: underline;
+}
