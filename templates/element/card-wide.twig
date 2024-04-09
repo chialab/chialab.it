@@ -1,4 +1,4 @@
-{% set rgb = Color.hexToRgb(object.extra.color|default('#e5e5e5')) %}
+{% set rgb = Color.hexToRgb(object.get('color')|default('#e5e5e5')) %}
 
 <a class="card explode-x pr-0" title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
     _name: 'pages:objects',

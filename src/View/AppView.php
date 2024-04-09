@@ -40,6 +40,8 @@ class AppView extends BaseAppView
     {
         parent::initialize();
 
+        $this->loadHelper('Text');
+
         if (Configure::check('FrontendPlugin')) {
             $this->setPlugin(Configure::read('FrontendPlugin'));
             $this->setTheme(Configure::read('FrontendPlugin'));

@@ -284,7 +284,32 @@
       "right": ["objects"]
     }
   ],
-  "property_types": [],
-  "properties": [],
+  "property_types": [
+    {
+      "name": "layout",
+      "params": {
+        "type": "string",
+        "enum": ["grid", "masonry", "list"]
+      }
+    }
+  ],
+  "properties": [
+    {
+      "name": "color",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "folders",
+      "property": "string"
+    },
+    {
+      "name": "layout",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "folders",
+      "property": "layout"
+    }
+  ],
   "categories": []
 }

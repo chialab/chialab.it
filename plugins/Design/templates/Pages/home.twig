@@ -1,7 +1,7 @@
 {{ element('claim')|raw }}
 
 {% for folder in folders %}
-    {% if folder.type == 'folders' and folder.children is not empty %}
+    {% if folder.type == 'folders' and folder.get('children') is not empty %}
         <div class="w-full column section">
             <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ folder.title|raw }} /</h2>
 
@@ -14,7 +14,7 @@
     {% endif %}
 {% endfor %}
 
-{% if publication.has_featured_clients is not empty %}
+{% if publication.get('has_featured_clients') is not empty %}
     <div class="w-full column section">
         <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Clients')|raw }} /</h2>
 
@@ -30,7 +30,7 @@
     </div>
 {% endif %}
 
-{% if publication.see_also is not empty %}
+{% if publication.get('see_also') is not empty %}
     <div class="w-full column section">
         <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Connections')|raw }} /</h2>
 

@@ -1,6 +1,6 @@
-{% if folder.extra.layout == 'masonry' %}
+{% if folder.get('layout') == 'masonry' %}
     {{ element('folder-masonry', { children: folder.children })|raw }}
-{% elseif folder.extra.layout == 'list' %}
+{% elseif folder.get('layout') == 'list' %}
     {{ element('folder-list', { children: folder.children })|raw }}
 {% else %}
     {{ element('folder-grid', { children: folder.children, columns: columns|default(4) })|raw }}
