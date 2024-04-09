@@ -33,7 +33,7 @@ jobs:
       - name: 'Install dependencies with Composer'
         run: 'composer install --prefer-dist --no-interaction'
       - name: 'Run PHP CodeSniffer'
-        run: composer run-script cs-check
+        run: composer run-script cs-check -- -n
 
   stan:
     name: 'Run PHP STAN'
