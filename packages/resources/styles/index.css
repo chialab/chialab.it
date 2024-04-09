@@ -1,5 +1,5 @@
-@import '@chialab/dna-button';
-@import '@chialab/dna-masonry';
+@import '@chialab/dna-button/style';
+@import '@chialab/dna-masonry/style';
 @import '../scripts/Elements/Topbar/Topbar.css';
 @import './cards.css';
 @import './borders.css';
