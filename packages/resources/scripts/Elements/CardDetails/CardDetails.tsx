@@ -10,7 +10,10 @@ export class CardDetails extends Component {
     expanded: boolean = false;
 
     get cardDescriptionElement() {
-        return this.querySelector('.card__description');
+        const details = this.slotChildNodes?.find(
+            (node) => node.nodeType === Node.ELEMENT_NODE && (node as HTMLElement).getAttribute('slot') === 'details'
+        ) as HTMLElement;
+        return details?.querySelector('.card__description');
     }
 
     render() {

@@ -51,6 +51,7 @@ class AppController extends BaseController
             'publicationLoader' => [
                 'objectTypesConfig' => [
                     'profiles' => ['include' => 'poster|1'],
+                    'links' => ['include' => 'poster|1'],
                     'publications' => ['include' => 'poster|1'],
                 ],
             ],

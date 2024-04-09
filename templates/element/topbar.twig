@@ -3,7 +3,7 @@
         <a class="link--underline" href="{{ Url.build({
             _name: 'pages:objects',
             _entity: child,
-        }) }}" {% if object is defined and ancestors|first|default(object).uname == child.uname %}aria-current="page"{% endif %}>{{ child.title|raw }}</a>
+        }) }}" {% if object is defined and ancestors|default([])|first|default(object).uname == child.uname %}aria-current="page"{% endif %}>{{ child.title|raw }}</a>
     {% endfor %}
     {% set request = _view.getRequest() %}
     {% for _locale in locales %}
