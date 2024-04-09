@@ -22,13 +22,6 @@ class TextHelper extends Helper
     protected static int $_defaultErrorReporting = 1;
 
     /**
-     * Default configuration.
-     *
-     * @var array
-     */
-    protected array $_defaultConfig = [];
-
-    /**
      * Convert all major XML entities in a string to the unicode form.
      *
      * @param string $text
@@ -131,12 +124,12 @@ class TextHelper extends Helper
     protected function changeTag(DOMDocument $dom, DOMElement $element, string $name): DOMElement
     {
         /**
-         * @var \DOMElement $newnode
+         * @var \DOMElement $newNode
          */
         $newNode = $dom->createElement($name);
         $newNode->nodeValue = $element->nodeValue;
         foreach ($element->childNodes as $child) {
-            $newNode->appendChild($child, true);
+            $newNode->appendChild($child);
         }
         foreach ($element->attributes as $attrName => $attrNode) {
             $newNode->setAttribute($attrName, $attrNode);
@@ -163,7 +156,7 @@ class TextHelper extends Helper
             $len = $elements->length;
             for ($i = $len - 1; $i >= 0; $i--) {
                 /**
-                 * @var \DOMElement $element
+                 * @var \DOMElement|null $element
                  */
                 $element = $elements->item($i);
                 if (!$element) {
@@ -193,7 +186,7 @@ class TextHelper extends Helper
      * @param array|null $options Render options.
      * @return string
      */
-    public function renderBody(string $text, array $options = []): string
+    public function renderBody(string $text, array|null $options = []): string
     {
         $dom = $this->parseHTML($text);
         $this->downgradeHeadings($dom, Hash::get($options, 'downgradeHeadings', 0));
