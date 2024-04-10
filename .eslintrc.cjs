@@ -6,5 +6,5 @@ module.exports = {
     env: {
         browser: true,
     },
-    ignorePatterns: ['webroot/build/*'],
+    ignorePatterns: ['vendor/**/*', 'webroot/build/**/*', 'plugins/*/webroot/build/**/*'],
 };

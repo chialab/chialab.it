@@ -1,6 +1,6 @@
 import { Component, customElement, listen, state } from '@chialab/dna';
 import { ButtonVariant } from '@chialab/dna-button';
-import { __ } from '@chialab/dna-theming';
+import { __ } from '@chialab/dna-i18n';
 
 @customElement('cl-card-details')
 export class CardDetails extends Component {
@@ -10,7 +10,7 @@ export class CardDetails extends Component {
     expanded: boolean = false;
 
     get cardDescriptionElement() {
-        const details = this.slotChildNodes?.find(
+        const details = this.realm.childNodes.find(
             (node) => node.nodeType === Node.ELEMENT_NODE && (node as HTMLElement).getAttribute('slot') === 'details'
         ) as HTMLElement;
         return details?.querySelector('.card__description');

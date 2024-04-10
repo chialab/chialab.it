@@ -18,10 +18,12 @@
   ],
   "dependencies": {
     "@chialab/cells": "^1.2.0",
-    "@chialab/dna": "^3.20.2",
-    "@chialab/dna-button": "^3.12.4",
-    "@chialab/dna-masonry": "^3.12.2",
-    "@chialab/dna-theming": "^3.12.2"
+    "@chialab/dna": "^4.0.0",
+    "@chialab/dna-button": "^4.0.0-beta.0",
+    "@chialab/dna-i18n": "^4.0.0-beta.0",
+    "@chialab/dna-icons": "^4.0.0-beta.0",
+    "@chialab/dna-masonry": "^4.0.0-beta.0",
+    "@chialab/dna-theming": "^4.0.0-beta.0"
   },
   "devDependencies": {
     "@chialab/eslint-config": "^4.1.0",

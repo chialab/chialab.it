@@ -984,50 +984,52 @@
   dependencies:
     "@chialab/estransform" "^0.17.3"
 
-"@chialab/dna-button@^3.12.4":
-  version "3.16.6"
-  resolved "https://registry.npmjs.org/@chialab/dna-button/-/dna-button-3.16.6.tgz#92da4b6b5dbeb8e8f8430717431c47edfe2fbdac"
-  integrity sha512-PZ3ox2c2r8jXEfOE9jANoLgpmMtqAhbZoXwALLKpfM0KWX9TGdXXm+DhLFrURj/FdR6qUb5M+7UAtbagpZPuGg==
+"@chialab/dna-button@^4.0.0-beta.0":
+  version "4.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-button/-/dna-button-4.0.0-beta.0.tgz#45d93422d57f40ab29533ff7aac682aa1212c88b"
+  integrity sha512-tMFpXx9eYYJJODP8DDnSs0DBQXhcE8AuYW4eSi9cYTPAzTgVoQC5sHu5fh9Qb12OMwFb1Gh8JyCwrodK/lniGA==
   dependencies:
-    "@chialab/dna" "^3.4.0"
-    "@chialab/dna-theming" "^3.13.0"
-    tslib "^2.0.3"
+    "@chialab/dna" "^4.0.0"
+    "@chialab/dna-icons" "^4.0.0-beta.0"
+    "@chialab/dna-theming" "^4.0.0-beta.0"
 
-"@chialab/dna-icons@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/@chialab/dna-icons/-/dna-icons-3.1.0.tgz#0f98e223f8a794b2d3e4c7167e213016d1c8cd43"
-  integrity sha512-Lcnvko5sU7YrB5yFeGuh608+pMzHmYK9wc9+n52lT9fvhQ0cFSvzgCA1z7ff8XoCz8jOazF8OyJgdsOyGWhOzA==
+"@chialab/dna-i18n@^4.0.0-beta.0":
+  version "4.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-i18n/-/dna-i18n-4.0.0-beta.0.tgz#2014975fc9c1656414bd7a6561a57bcb58581d07"
+  integrity sha512-7dr6II4euLzR3B+RK35xl/03qPVBFJknrWdMvIJ9/yPom0Xd7o5EIpYcizPLaJIOWHyJ0j+qalkbeaIr8bNAKg==
   dependencies:
-    "@chialab/dna" "^3.4.0"
-    tslib "^2.0.3"
-
-"@chialab/dna-masonry@^3.12.2":
-  version "3.14.0"
-  resolved "https://registry.npmjs.org/@chialab/dna-masonry/-/dna-masonry-3.14.0.tgz#e2d57edb0846041fb37efc0a8d58a5c622aa3e70"
-  integrity sha512-SkX3ZwspbdqTKAtMvGm1BpsAbTLV6931TBU+MqUWg/8PcNhzgaKj0dng4dHR79FbR7uaIhQGZw6Vr1tXFFIR3Q==
-  dependencies:
-    "@chialab/dna" "^3.4.0"
-    "@chialab/dna-theming" "^3.13.0"
-    resize-observer-polyfill "^1.5.1"
-    tslib "^2.0.3"
-
-"@chialab/dna-theming@^3.12.2", "@chialab/dna-theming@^3.13.0":
-  version "3.13.1"
-  resolved "https://registry.npmjs.org/@chialab/dna-theming/-/dna-theming-3.13.1.tgz#51d7a71f8e5c60d23998a2c2cd10456604d5a32a"
-  integrity sha512-yyHCEtma1slsq8v4XHZguhsrhxS/RAtq0AaUCdpNi2XcAzmf/fpjW05yfwUf3oDJGknZ90Z8Sl2GLb0PDmbDwQ==
-  dependencies:
-    "@chialab/cells" "^1.0.0"
-    "@chialab/dna" "^3.4.0"
-    "@chialab/dna-icons" "^3.1.0"
     i18next "^23.0.0"
     i18next-browser-languagedetector "^7.0.1"
 
-"@chialab/dna@^3.20.2", "@chialab/dna@^3.4.0":
-  version "3.22.7"
-  resolved "https://registry.npmjs.org/@chialab/dna/-/dna-3.22.7.tgz#1ae013f65a12e67280e0b76573a4639678cad205"
-  integrity sha512-94pOE66xduwTqJbHS6FngaWDOwwoDOOzdXhdCkOA/sOTGWJQkJqujN5JiRscfLHxfhYrKcTJJkQHdG37WDRBKg==
+"@chialab/dna-icons@^4.0.0-beta.0":
+  version "4.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-icons/-/dna-icons-4.0.0-beta.0.tgz#1153e43553c51fe2ced8e4ee6f412877887f2b09"
+  integrity sha512-yHZFmN/DhpLG6EFeRcYGI0ighQqB6e/95OqOqv3TS5SuXvmDbGi1qDjvWCIb3SbqPIK3GQl4pnXre+FKOFeU/A==
   dependencies:
-    "@types/jsdom" "^16.0.0"
+    "@chialab/dna" "^4.0.0"
+
+"@chialab/dna-masonry@^4.0.0-beta.0":
+  version "4.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-masonry/-/dna-masonry-4.0.0-beta.0.tgz#ddd60f028b1b74988493e886d3567f6865478ce9"
+  integrity sha512-iBk5960poBPA8KNJ2Lk3TF56y4K/CdTbRih0LZtgtBiXq2llimS+uuSHisi4ASGgjhUCtP8HDnQzBg0Cq6TLdg==
+  dependencies:
+    "@chialab/dna" "^4.0.0"
+    "@chialab/dna-theming" "^4.0.0-beta.0"
+
+"@chialab/dna-theming@^4.0.0-beta.0":
+  version "4.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-theming/-/dna-theming-4.0.0-beta.0.tgz#a7ad369930bb6f7128ce3b5c5c5ae5e6d9520231"
+  integrity sha512-V4sQ6sPlwbPChPIyGfhb9tVNIHcxpBPHnn4p2YuCccZAOHYYT00UFXyOQXOThp+ddcSscg7PYCNu5kUtWpOqCw==
+  dependencies:
+    "@chialab/cells" "^1.0.0"
+
+"@chialab/dna@^4.0.0":
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/@chialab/dna/-/dna-4.0.3.tgz#dfe0451de93b8feded1d337fa3a96cbb12740d64"
+  integrity sha512-uqOaoWX0HAcQrx8tn+DaGw4T1lIEQxe+d8mIUGu1B4Lp4bGHzFkrMziqLsqWXAS8PwqXBdEVvpmhHIvnt7zkTg==
+  dependencies:
+    "@chialab/quantum" "^1.0.0"
+    htm "^3.0.3"
 
 "@chialab/es-dev-server@^0.17.0", "@chialab/es-dev-server@^0.17.1":
   version "0.17.2"
@@ -1163,6 +1165,11 @@
   integrity sha512-L9Sm8oj6/TV33JENBCA6C17x35MJGuhK7Rn3qHaTx/DENbEQSxiI4fha/jWJSMASMF0eTyqkKFxgvqj20sRSTQ==
   dependencies:
     "@ianvs/prettier-plugin-sort-imports" "^4.1.0"
+
+"@chialab/quantum@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/@chialab/quantum/-/quantum-1.0.1.tgz#936b49f71c21870170085781a8069f1bed2d8b3e"
+  integrity sha512-+zSKXVJwmrK2eHG+Z+kDEhjd6doMqJX80AjNINkcuJsSFC8YzKvwGJQiNcZW8Hp1e3ez9CMpbjwZAr5vhMvFPw==
 
 "@chialab/rna-bundler@^0.17.0", "@chialab/rna-bundler@^0.17.6":
   version "0.17.6"
@@ -1495,15 +1502,6 @@
   resolved "https://registry.npmjs.org/@types/http-errors/-/http-errors-2.0.4.tgz#7eb47726c391b7345a6ec35ad7f4de469cf5ba4f"
   integrity sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==
 
-"@types/jsdom@^16.0.0":
-  version "16.2.15"
-  resolved "https://registry.npmjs.org/@types/jsdom/-/jsdom-16.2.15.tgz#6c09990ec43b054e49636cba4d11d54367fc90d6"
-  integrity sha512-nwF87yjBKuX/roqGYerZZM0Nv1pZDMAT5YhOHYeM/72Fic+VEqJh4nyoqoapzJnW3pUlfxPY5FhgsJtM+dRnQQ==
-  dependencies:
-    "@types/node" "*"
-    "@types/parse5" "^6.0.3"
-    "@types/tough-cookie" "*"
-
 "@types/json-schema@^7.0.12":
   version "7.0.15"
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
@@ -1546,9 +1544,9 @@
   integrity sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==
 
 "@types/node@*":
-  version "20.12.6"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.12.6.tgz#72d068870518d7da1d97b49db401e2d6a1805294"
-  integrity sha512-3KurE8taB8GCvZBPngVbp0lk5CKi8M9f9k1rsADh0Evdz5SzJ+Q+Hx9uHoFGsLnLnd1xmkDQr2hVhlA0Mn0lKQ==
+  version "20.12.7"
+  resolved "https://registry.npmjs.org/@types/node/-/node-20.12.7.tgz#04080362fa3dd6c5822061aa3124f5c152cff384"
+  integrity sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==
   dependencies:
     undici-types "~5.26.4"
 
@@ -1559,7 +1557,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/parse5@^6.0.1", "@types/parse5@^6.0.3":
+"@types/parse5@^6.0.1":
   version "6.0.3"
   resolved "https://registry.npmjs.org/@types/parse5/-/parse5-6.0.3.tgz#705bb349e789efa06f43f128cef51240753424cb"
   integrity sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==
@@ -1595,11 +1593,6 @@
     "@types/http-errors" "*"
     "@types/node" "*"
     "@types/send" "*"
-
-"@types/tough-cookie@*":
-  version "4.0.5"
-  resolved "https://registry.npmjs.org/@types/tough-cookie/-/tough-cookie-4.0.5.tgz#cb6e2a691b70cb177c6e3ae9c1d2e8b2ea8cd304"
-  integrity sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==
 
 "@types/ws@^7.4.0":
   version "7.4.7"
@@ -2030,9 +2023,9 @@ callsites@^3.0.0:
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
 caniuse-lite@^1.0.30001587:
-  version "1.0.30001607"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001607.tgz#b91e8e033f6bca4e13d3d45388d87fa88931d9a5"
-  integrity sha512-WcvhVRjXLKFB/kmOFVwELtMxyhq3iM/MvmXcyCe2PNf166c39mptscOc/45TTS96n2gpNV2z7+NakArTWZCQ3w==
+  version "1.0.30001608"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001608.tgz#7ae6e92ffb300e4b4ec2f795e0abab456ec06cc0"
+  integrity sha512-cjUJTQkk9fQlJR2s4HMuPMvTiRggl0rAVMtthQuyOlDWuqHXqN8azLq+pi8B2TjwKJ32diHjUqRIKeFX4z1FoA==
 
 chalk@^2.4.2:
   version "2.4.2"
@@ -2319,9 +2312,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.668, electron-to-chromium@^1.4.67:
-  version "1.4.730"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.730.tgz#5e382c83085b50b9c63cb08692e8fcd875c1b9eb"
-  integrity sha512-oJRPo82XEqtQAobHpJIR3zW5YO3sSRRkPz2an4yxi1UvqhsGm54vR/wzTFV74a3soDOJ8CKW7ajOOX5ESzddwg==
+  version "1.4.731"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.731.tgz#d3dc19f359045b750a1fb0bc42315a502d950187"
+  integrity sha512-+TqVfZjpRz2V/5SPpmJxq9qK620SC5SqCnxQIOi7i/U08ZDcTpKbT7Xjj9FU5CbXTMUb4fywbIr8C7cGv4hcjw==
 
 emoji-regex@^10.2.1:
   version "10.3.0"
@@ -3176,6 +3169,11 @@ hasown@^2.0.0, hasown@^2.0.1, hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
+htm@^3.0.3:
+  version "3.1.1"
+  resolved "https://registry.npmjs.org/htm/-/htm-3.1.1.tgz#49266582be0dc66ed2235d5ea892307cc0c24b78"
+  integrity sha512-983Vyg8NwUE7JkZ6NmOqpCZ+sh1bKv2iYTlUkzlWmA5JD2acKoxd4KVxbMmxX/85mtfdnDmTFoNKcg5DGAvxNQ==
+
 html-tags@^3.3.1:
   version "3.3.1"
   resolved "https://registry.npmjs.org/html-tags/-/html-tags-3.3.1.tgz#a04026a18c882e4bba8a01a3d39cfe465d40b5ce"
@@ -3218,9 +3216,9 @@ i18next-browser-languagedetector@^7.0.1:
     "@babel/runtime" "^7.23.2"
 
 i18next@^23.0.0:
-  version "23.11.0"
-  resolved "https://registry.npmjs.org/i18next/-/i18next-23.11.0.tgz#3aaa38e887350db573af91eabddd71ab9fcd9ea8"
-  integrity sha512-VwFtlgy2LDbY0Qs6VfekIm6mv5/JmSJrtBf4aszl7Vby8+GcBlri0/7dkMZXmzTfiBMPUPBOmYCdQK7K4emkGQ==
+  version "23.11.1"
+  resolved "https://registry.npmjs.org/i18next/-/i18next-23.11.1.tgz#8e384b6ad7d6ba70c40cb86e020438251a5ff8b1"
+  integrity sha512-mXw4A24BiPZKRsbb9ewgSvjYd6fxFCNwJyfK6nYfSTIAX2GkCWcb598m3DFkDZmqADatvuASrKo6qwORz3VwTQ==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
@@ -4162,11 +4160,6 @@ requireindex@^1.2.0, requireindex@~1.2.0:
   resolved "https://registry.npmjs.org/requireindex/-/requireindex-1.2.0.tgz#3463cdb22ee151902635aa6c9535d4de9c2ef1ef"
   integrity sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==
 
-resize-observer-polyfill@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.npmjs.org/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
-  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
-
 resolve-from@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
@@ -4550,11 +4543,6 @@ tsconfig-paths@^3.15.0:
     json5 "^1.0.2"
     minimist "^1.2.6"
     strip-bom "^3.0.0"
-
-tslib@^2.0.3:
-  version "2.6.2"
-  resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
-  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
 
 tsscmp@1.0.6:
   version "1.0.6"

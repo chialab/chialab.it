@@ -1,4 +1,4 @@
-import { Component, customElement, listen, property, state, window } from '@chialab/dna';
+import { Component, customElement, property, state } from '@chialab/dna';
 
 @customElement('cl-topbar')
 export class Topbar extends Component {
@@ -23,6 +23,25 @@ export class Topbar extends Component {
     })
     fixed: boolean = false;
 
+    /**
+     * @inheritdoc
+     */
+    connectedCallback() {
+        super.connectedCallback();
+        window.addEventListener('scroll', this.onWindowScroll);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        window.removeEventListener('scroll', this.onWindowScroll);
+    }
+
+    /**
+     * @inheritdoc
+     */
     render() {
         return (
             <div class="viewport column gap-xs py-3">
@@ -54,8 +73,7 @@ export class Topbar extends Component {
         );
     }
 
-    @listen('scroll', window)
-    protected onWindowScroll() {
+    protected onWindowScroll = () => {
         this.fixed = window.scrollY > 0;
-    }
+    };
 }
