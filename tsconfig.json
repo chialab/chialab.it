@@ -14,5 +14,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["resources/**/*", "plugins/*/resources/**/*"]
+  "include": ["packages/**/*", "plugins/*/resources/**/*"]
 }

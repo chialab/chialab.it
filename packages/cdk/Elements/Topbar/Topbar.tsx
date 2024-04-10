@@ -58,7 +58,7 @@ export class Topbar extends Component {
                             aria-hidden="true">
                             ẞ
                         </span>
-                        <slot></slot>
+                        <slot />
                     </nav>
                     <div class="row gap-0 align-center">
                         <span
@@ -66,7 +66,7 @@ export class Topbar extends Component {
                             aria-hidden="true">
                             ß
                         </span>
-                        <slot name="locale"></slot>
+                        <slot name="locale" />
                     </div>
                 </div>
             </div>

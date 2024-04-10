@@ -1,0 +1,14 @@
+{
+  "name": "@chialab/cdk",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./index.ts"
+    },
+    "./style": {
+      "default": "./index.css"
+    }
+  }
+}

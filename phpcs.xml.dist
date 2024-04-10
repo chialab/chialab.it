@@ -4,10 +4,14 @@
     <file>./tests</file>
     <file>./config</file>
     <file>./webroot</file>
-    <!-- <file>./plugins/**/src</file>
-    <file>./plugins/**/tests</file>
-    <file>./plugins/**/config</file>
-    <file>./plugins/**/webroot</file> -->
+    <file>./plugins/Design/src</file>
+    <file>./plugins/Design/tests</file>
+    <file>./plugins/Design/config</file>
+    <file>./plugins/Design/webroot</file>
+    <file>./plugins/OpenSource/src</file>
+    <file>./plugins/OpenSource/tests</file>
+    <file>./plugins/OpenSource/config</file>
+    <file>./plugins/OpenSource/webroot</file>
 
     <arg name="colors"/>
     <arg value="p"/>

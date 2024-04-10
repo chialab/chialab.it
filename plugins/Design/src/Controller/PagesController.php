@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
+
 namespace Design\Controller;
 
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
 use Chialab\FrontendKit\Model\TreeLoader;
-use Design\Controller\AppController;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
 
 /**
@@ -35,7 +36,7 @@ class PagesController extends AppController
             'attach' => 3,
         ]);
         $treeLoader = new TreeLoader($loader);
-        $folders = $treeLoader->loadMenu($root->id)->children;
+        $folders = $treeLoader->loadMenu((string)$root->id)->children;
 
         $this->set(compact('folders'));
     }
@@ -50,7 +51,7 @@ class PagesController extends AppController
     {
         $loader = new ObjectsLoader();
         $object = $loader->loadObject($uname, 'objects');
-        $object = $loader->loadObject($object->id, $object->type);
+        $object = $loader->loadObject((string)$object->id, $object->type);
 
         switch ($object->type) {
             case 'publications':

@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace Design\Test\TestCase\Controller;
 
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
-use Design\Controller\PagesController;
 
 /**
  * Design\Controller\PagesController Test Case

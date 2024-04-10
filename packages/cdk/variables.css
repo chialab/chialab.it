@@ -3,8 +3,6 @@
 :root {
     --gutter: calc(var(--spacing, 0.25rem) * 4);
 
-    --color-surface: #ffffff;
-    --color-primary: #343434;
     --color-accent: #ef7d00;
     --color-success: #24a148;
     --color-fail: #da1e28;
@@ -18,6 +16,10 @@
     --color-grey-700: #8a8a8a;
     --color-grey-800: #707070;
     --color-grey-900: #343434;
+
+    --color-surface: #ffffff;
+    --color-primary: var(--color-grey-900);
+    --color-text: var(--color-grey-900);
 
     --font-scale-9: 3.75;
 

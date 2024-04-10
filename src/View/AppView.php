@@ -44,6 +44,11 @@ class AppView extends BaseAppView
 
         if (Configure::check('FrontendPlugin')) {
             $this->setPlugin(Configure::read('FrontendPlugin'));
+        }
+
+        if (Configure::check('Theme')) {
+            $this->setTheme(Configure::read('Theme'));
+        } elseif (Configure::check('FrontendPlugin')) {
             $this->setTheme(Configure::read('FrontendPlugin'));
         }
     }

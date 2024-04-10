@@ -8,11 +8,18 @@ const isProduction = process.env.NODE_ENV === 'production';
 const config = {
     entrypoints: [
         {
-            input: ['./plugins/Design/resources/scripts/index.ts', './plugins/Design/resources/styles/index.css'],
+            input: ['./plugins/Design/resources/index.ts', './plugins/Design/resources/index.css'],
             publicPath: '/design/build/',
             output: 'plugins/Design/webroot/build/',
             manifestPath: 'plugins/Design/webroot/build/manifest.json',
             entrypointsPath: 'plugins/Design/webroot/build/entrypoints.json',
+        },
+        {
+            input: ['./plugins/OpenSource/resources/index.ts', './plugins/OpenSource/resources/index.css'],
+            publicPath: '/open_source/build/',
+            output: 'plugins/OpenSource/webroot/build/',
+            manifestPath: 'plugins/OpenSource/webroot/build/manifest.json',
+            entrypointsPath: 'plugins/OpenSource/webroot/build/entrypoints.json',
         },
     ],
     clean: true,

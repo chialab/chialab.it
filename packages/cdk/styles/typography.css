@@ -1,14 +1,10 @@
 @import 'https://use.typekit.net/sby1muy.css';
-@import '@chialab/cells/lib/layout.css';
-@import '@chialab/cells/lib/spacing.css';
-@import '@chialab/cells/lib/margins.css';
-@import '@chialab/cells/lib/typography.css';
 
 @font-face {
     font-family: 'DiisMonospace';
     font-weight: 100;
     font-style: normal;
-    src: url('../fonts/DiisMonospace/DiisMonospace-Thin.ttf') format('opentype');
+    src: url('../Fonts/DiisMonospace/DiisMonospace-Thin.ttf') format('opentype');
     font-display: swap;
 }
 
@@ -16,7 +12,7 @@
     font-family: 'DiisMonospace';
     font-weight: 300;
     font-style: normal;
-    src: url('../fonts/DiisMonospace/DiisMonospace-Light.ttf') format('opentype');
+    src: url('../Fonts/DiisMonospace/DiisMonospace-Light.ttf') format('opentype');
     font-display: swap;
 }
 
@@ -24,7 +20,7 @@
     font-family: 'DiisMonospace';
     font-weight: 400;
     font-style: normal;
-    src: url('../fonts/DiisMonospace/DiisMonospace-Regular.ttf') format('opentype');
+    src: url('../Fonts/DiisMonospace/DiisMonospace-Regular.ttf') format('opentype');
     font-display: swap;
 }
 
@@ -32,7 +28,7 @@
     font-family: 'DiisMonospace';
     font-weight: 500;
     font-style: normal;
-    src: url('../fonts/DiisMonospace/DiisMonospace-Medium.ttf') format('opentype');
+    src: url('../Fonts/DiisMonospace/DiisMonospace-Medium.ttf') format('opentype');
     font-display: swap;
 }
 
@@ -40,7 +36,7 @@
     font-family: 'DiisMonospace';
     font-weight: 600;
     font-style: normal;
-    src: url('../fonts/DiisMonospace/DiisMonospace-SemiBold.ttf') format('opentype');
+    src: url('../Fonts/DiisMonospace/DiisMonospace-SemiBold.ttf') format('opentype');
     font-display: swap;
 }
 
@@ -48,7 +44,7 @@
     font-family: 'DiisMonospace';
     font-weight: 700;
     font-style: normal;
-    src: url('../fonts/DiisMonospace/DiisMonospace-Bold.ttf') format('opentype');
+    src: url('../Fonts/DiisMonospace/DiisMonospace-Bold.ttf') format('opentype');
     font-display: swap;
 }
 

@@ -1,5 +1,3 @@
-@import '../../../styles/variables.css';
-
 cl-topbar {
     position: sticky;
     top: 0;

@@ -5,15 +5,14 @@ use Cake\Routing\Router;
 use Chialab\FrontendKit\Routing\LocaleUrlFilter;
 use Chialab\FrontendKit\Routing\Route\ObjectRoute;
 
-return static function (RouteBuilder $routes): void
-{
+return static function (RouteBuilder $routes): void {
     Router::addUrlFilter(new LocaleUrlFilter());
 
     $routes->plugin(
         'Design',
         ['path' => '/'],
-        function (RouteBuilder $routes) {
-            $routeBuilder = function (RouteBuilder $routes) {
+        function (RouteBuilder $routes): void {
+            $routeBuilder = function (RouteBuilder $routes): void {
                 $routes->connect(
                     '/',
                     ['controller' => 'Pages', 'action' => 'home'],

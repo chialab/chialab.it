@@ -11,11 +11,11 @@
         <title>{{ Metadata.getTitle(object|default(null), publication)|striptags|raw }}</title>
         <meta name="description" content="{{ Metadata.getDescription(object|default(null), publication)|striptags|raw }}" />
 
-        {{ Html.meta('icon', "#{_view.plugin}.favicon.png", { type:'image/png' } )|raw }}
+        {{ Html.meta('icon', "#{_view.theme}.favicon.png", { type:'image/png' } )|raw }}
 
-        {{ Rna.devServer(_view.plugin)|raw }}
-        {{ Rna.css("#{_view.plugin}.index", { block: true })|raw }}
-        {{ Rna.script("#{_view.plugin}.index", { block: true })|raw }}
+        {{ Rna.devServer(_view.theme)|raw }}
+        {{ Rna.css("#{_view.theme}.index", { block: true })|raw }}
+        {{ Rna.script("#{_view.theme}.index", { block: true })|raw }}
 
         {{ fetch('meta')|raw }}
         {{ Metadata.metaDc()|raw }}

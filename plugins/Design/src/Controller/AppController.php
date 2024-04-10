@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Design\Controller;
 
@@ -65,12 +66,12 @@ class AppController extends BaseController
     /**
      * @inheritDoc
      */
-    public function beforeRender(EventInterface $event): ?Response
+    public function beforeRender(EventInterface $event): Response|null
     {
         parent::beforeRender($event);
 
         $root = $this->Publication->getPublication();
-        $menu = $this->Menu->load($root->id);
+        $menu = $this->Menu->load((string)$root->id);
         $footer = $this->Menu->load('chialab-design-company-footer')->children;
         $analytics = Configure::read('Analytics', '');
         $locales = Configure::read('I18n.locales', []);

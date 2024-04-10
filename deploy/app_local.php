@@ -129,6 +129,7 @@ return [
     ],
 
     'FrontendPlugin' => env('FRONTEND_PLUGIN', 'BEdita/API'),
+    'Theme' => env('THEME_PLUGIN', 'Design'),
 
     'StagingSite' => filter_var(env('STAGING', false), FILTER_VALIDATE_BOOLEAN),
 

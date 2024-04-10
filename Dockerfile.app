@@ -19,7 +19,11 @@ RUN composer install --no-dev --no-cache --prefer-dist
 # Add sources and built assets
 COPY --chown=www-data:www-data . /app/
 RUN composer dump-autoload --classmap-authoritative --no-cache \
- && composer run post-install-cmd --no-interaction \
- && mkdir -p /app/tmp/cache/models/ /app/tmp/cache/persistent/ /app/tmp/cache/twig_view/ \
- && chown -R www-data:www-data /app \
- && chmod -R a=rwX /app
+    && composer run post-install-cmd --no-interaction \
+    && mkdir -p /app/tmp/cache/models/ /app/tmp/cache/persistent/ /app/tmp/cache/twig_view/ \
+    && chown -R www-data:www-data /app \
+    && chmod -R a=rwX /app
+
+# Copy plugins assets
+COPY /app/plugins/Design/webroot /app/webroot/design/
+COPY /app/plugins/OpenSource/webroot /app/webroot/open_source/

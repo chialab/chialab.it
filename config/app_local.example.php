@@ -94,6 +94,11 @@ return [
      */
     'FrontendPlugin' => env('FRONTEND_PLUGIN', 'BEdita/API'),
 
+    /**
+     * Theme plugin to load.
+     */
+    'Theme' => env('THEME_PLUGIN', 'Design'),
+
     /*
      * Enable or disable staging site.
      */
