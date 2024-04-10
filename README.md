@@ -1,59 +1,56 @@
-# BEdita Application Skeleton
+# Chialab.it & friends
 
-A skeleton for creating applications with [BEdita](https://www.bedita.com) 5.x.
+## Websites
 
-The framework source code can be found here: [bedita/bedita](https://github.com/bedita/bedita).
+* Chialab Design Company (https://www.chialab.it)
+* Chialab Open Source (https://www.chialab.io)
+* Illustratorium (https://www.illustratorium.it/)
 
-## Installation
+## Local project setup
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `composer create-project --prefer-dist chialab/bedita-app-template [app_name]`.
+### Requirements
 
-If Composer is installed globally, run
+* PHP >= 8.2
+* MySQL >= 8
+* Composer
+* Node.js
+* Yarn
+
+### Install dependencies
 
 ```bash
-composer create-project --prefer-dist "chialab/bedita-app-template:^5.0"
+composer install
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
-
 ```bash
-composer create-project --prefer-dist "chialab/bedita-app-template:^5.0" myapp
+yarn install
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+### Config
+
+Copy the `config/app_local.example.php` file to `config/app_local.php` and set your local configuration.
 
 ```bash
-bin/cake server -p 8765
+cp config/app_local.example.php config/app_local.php
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+and make sure to update the `Datasource` section with your MySQL connection settings.
 
-## Update
+Then, ensure the following environment variables are set:
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+* `FRONTEND_PLUGIN` - The frontend plugin to use (could be `BEdita/API` for API frontend or `Chialab` for websites frontends
+* `THEME` - The theme to use (could be `Chialab` for chialab.it or `OpenSource` for chialab.io)
 
-## Configuration
+You can set the environment variables in your virtual host, configuration:
 
-Read and edit `config/app.php` and setup the `'Datasources'` and any other
-configuration relevant for your application.
-
-## Testing
-
-[![GitHub Actions tests](https://github.com/chialab/bedita-app-template/actions/workflows/php.yml/badge.svg?event=push&branch=main)](https://github.com/chialab/bedita-app-template/actions/workflows/test.yml?query=event%3Apush+branch%3Amain)
-[![codecov](https://codecov.io/gh/chialab/bedita-app-template/branch/main/graph/badge.svg)](https://codecov.io/gh/chialab/bedita-app-template)
-
-Test database configuration is in `app_local.php`. You can override the database url using the `DATABASE_TEST_URL` environment variable:
-
-```bash
-export DATABASE_TEST_URL='mysql://root:****@localhost/bedita4_app'
+```
+SetEnv FRONTEND_PLUGIN Chialab
+SetEnv THEME Chialab
 ```
 
-Then, you can launch tests using the `test` composer command:
+or in the `config/.env` file:
 
-```bash
-composer run test
+```
+export FRONTEND_PLUGIN="Chialab"
+export THEME="Chialab"
 ```
