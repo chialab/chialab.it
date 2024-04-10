@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Design;
+namespace Chialab;
 
 use Cake\Core\BasePlugin;
 use Cake\Core\PluginApplicationInterface;
 
 /**
- * Plugin for Design
+ * Plugin for Chialab websites.
  */
 class Plugin extends BasePlugin
 {

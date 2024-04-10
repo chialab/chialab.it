@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Design\Controller;
+namespace Chialab\Controller;
 
 use Chialab\FrontendKit\Traits\AuthTrait;
 

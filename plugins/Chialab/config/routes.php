@@ -9,7 +9,7 @@ return static function (RouteBuilder $routes): void {
     Router::addUrlFilter(new LocaleUrlFilter());
 
     $routes->plugin(
-        'Design',
+        'Chialab',
         ['path' => '/'],
         function (RouteBuilder $routes): void {
             $routeBuilder = function (RouteBuilder $routes): void {
@@ -33,7 +33,7 @@ return static function (RouteBuilder $routes): void {
 
                 $routes->connect(
                     '/link/{uname}',
-                    ['controller' => 'Pages', 'action' => 'link', '_filters' => ['type' => 'publications']],
+                    ['controller' => 'Pages', 'action' => 'link', '_filters' => ['type' => 'links']],
                     ['_name' => 'pages:links', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class]
                 );
 

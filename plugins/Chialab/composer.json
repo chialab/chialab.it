@@ -1,5 +1,5 @@
 {
-  "name": "chialab/design",
+  "name": "chialab/chialab-it",
   "description": "Chialab.it plugin for CakePHP",
   "type": "cakephp-plugin",
   "license": "MIT",
@@ -11,12 +11,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Design\\": "src/"
+      "Chialab\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Design\\Test\\": "tests/",
+      "Chialab\\Test\\": "tests/",
       "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
     }
   }

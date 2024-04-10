@@ -25,5 +25,5 @@ RUN composer dump-autoload --classmap-authoritative --no-cache \
     && chmod -R a=rwX /app
 
 # Copy plugins assets
-COPY /app/plugins/Design/webroot /app/webroot/design/
+COPY /app/plugins/Chialab/webroot /app/webroot/chialab/
 COPY /app/plugins/OpenSource/webroot /app/webroot/open_source/

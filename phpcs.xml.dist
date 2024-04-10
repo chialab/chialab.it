@@ -4,10 +4,10 @@
     <file>./tests</file>
     <file>./config</file>
     <file>./webroot</file>
-    <file>./plugins/Design/src</file>
-    <file>./plugins/Design/tests</file>
-    <file>./plugins/Design/config</file>
-    <file>./plugins/Design/webroot</file>
+    <file>./plugins/Chialab/src</file>
+    <file>./plugins/Chialab/tests</file>
+    <file>./plugins/Chialab/config</file>
+    <file>./plugins/Chialab/webroot</file>
     <file>./plugins/OpenSource/src</file>
     <file>./plugins/OpenSource/tests</file>
     <file>./plugins/OpenSource/config</file>

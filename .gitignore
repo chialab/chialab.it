@@ -47,3 +47,6 @@ nbproject/*
 # PHPUnit #
 ###########
 .phpunit.result.cache
+
+.eslintcache
+.stylelintcache

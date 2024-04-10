@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Design\Controller;
+namespace Chialab\Controller;
 
 use App\Controller\AppController as BaseController;
 use Cake\Core\Configure;

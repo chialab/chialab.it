@@ -7,7 +7,7 @@ Configure::write(
     array_merge(
         (array)Configure::read('App.paths.templates'),
         [
-            ROOT . DS . 'plugins' . DS . 'Design' . DS . 'templates' . DS,
+            ROOT . DS . 'plugins' . DS . 'Chialab' . DS . 'templates' . DS,
         ]
     )
 );
@@ -17,7 +17,7 @@ Configure::write(
     array_merge(
         (array)Configure::read('App.paths.locales'),
         [
-            ROOT . DS . 'plugins' . DS . 'Design' . DS . 'resources' . DS . 'locales' . DS,
+            ROOT . DS . 'plugins' . DS . 'Chialab' . DS . 'resources' . DS . 'locales' . DS,
         ]
     )
 );

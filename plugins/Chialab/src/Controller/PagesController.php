@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Design\Controller;
+namespace Chialab\Controller;
 
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
@@ -54,8 +54,8 @@ class PagesController extends AppController
         $object = $loader->loadObject((string)$object->id, $object->type);
 
         switch ($object->type) {
-            case 'publications':
-                return $this->redirect($object->get('public_url'));
+            case 'links':
+                return $this->redirect($object->get('url'));
         }
 
         throw new NotFoundException('Missing url');

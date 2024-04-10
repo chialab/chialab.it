@@ -97,7 +97,7 @@ return [
     /**
      * Theme plugin to load.
      */
-    'Theme' => env('THEME_PLUGIN', 'Design'),
+    'Theme' => env('THEME_PLUGIN', 'Chialab'),
 
     /*
      * Enable or disable staging site.
