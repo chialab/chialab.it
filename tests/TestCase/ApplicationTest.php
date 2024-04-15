@@ -63,11 +63,14 @@ class ApplicationTest extends TestCase
         Configure::write('FrontendPlugin', null);
 
         $expectedPlugins = [
+            'Authentication',
+            'Authorization',
             'Bake',
             'BEdita/AWS',
             'BEdita/Core',
             'BEdita/DevTools',
             'BEdita/I18n',
+            'BEdita/Placeholders',
             'Chialab/FrontendKit',
             'DebugKit',
             'Migrations',
@@ -99,11 +102,14 @@ class ApplicationTest extends TestCase
         Configure::write('FrontendPlugin', 'BEdita/API');
 
         $expectedPlugins = [
+            'Authentication',
+            'Authorization',
             'Bake',
             'BEdita/API',
             'BEdita/AWS',
             'BEdita/Core',
             'BEdita/I18n',
+            'BEdita/Placeholders',
             'Chialab/FrontendKit',
             'Migrations',
         ];
