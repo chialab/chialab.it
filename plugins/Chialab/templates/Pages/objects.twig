@@ -16,7 +16,7 @@
 
     {% if object.get('body') is not empty %}
         <div class="column serif f-3 body">
-            {{ Text.renderBody(object.body, {
+            {{ Text.renderBody(object, 'body', {
                 downgradeHeadings: 2,
             })|raw }}
         </div>

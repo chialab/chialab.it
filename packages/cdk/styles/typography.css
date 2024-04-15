@@ -53,11 +53,11 @@ article header {
 }
 
 .serif {
-    text-rendering: geometricprecision;
+    text-rendering: optimizelegibility;
 }
 
 .sans {
-    text-rendering: geometricprecision;
+    text-rendering: optimizelegibility;
 }
 
 .claim {

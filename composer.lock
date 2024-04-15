@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c31d96662397dbb5ea011009d906bc9a",
+    "content-hash": "ac25c7d4f956b64dcd0325ab98bbe247",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -385,6 +385,50 @@
                 "source": "https://github.com/bedita/i18n"
             },
             "time": "2023-11-03T07:20:15+00:00"
+        },
+        {
+            "name": "bedita/placeholders",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bedita/placeholders.git",
+                "reference": "5ca81fecc0ad653535d7ed32eb799e1d0013d171"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bedita/placeholders/zipball/5ca81fecc0ad653535d7ed32eb799e1d0013d171",
+                "reference": "5ca81fecc0ad653535d7ed32eb799e1d0013d171",
+                "shasum": ""
+            },
+            "require": {
+                "bedita/api": "^5.14",
+                "bedita/core": "^5.14",
+                "cakephp/cakephp": "^4.4",
+                "php": ">= 7.4"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "^4.5",
+                "cakephp/plugin-installer": "^1.3",
+                "league/flysystem-memory": "^2.0.0",
+                "phpstan/phpstan": "^1.7",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "BEdita\\Placeholders\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "description": "Placeholders plugin for BEdita.",
+            "support": {
+                "issues": "https://github.com/bedita/placeholders/issues",
+                "source": "https://github.com/bedita/placeholders/tree/v2.0.1"
+            },
+            "time": "2023-12-20T15:31:50+00:00"
         },
         {
             "name": "brick/math",
@@ -8756,5 +8800,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

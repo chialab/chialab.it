@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\View\Helper;
 
 use BEdita\Core\Utility\Text;
+use Cake\Datasource\EntityInterface;
 use Cake\Utility\Hash;
 use Cake\View\Helper;
 use DOMDocument;
@@ -11,9 +12,16 @@ use DOMElement;
 
 /**
  * Text helper
+ *
+ * @property \App\View\Helper\PlaceholdersHelper $Placeholders
  */
 class TextHelper extends Helper
 {
+    /**
+     * @inheritDoc
+     */
+    protected $helpers = ['Placeholders'];
+
     /**
      * Default error reporting.
      *
@@ -182,12 +190,14 @@ class TextHelper extends Helper
      * * Downgrade headings
      * * Add pilcrow link to headings
      *
-     * @param string $text The original text to render.
+     * @param \Cake\Datasource\EntityInterface $entity Entity.
+     * @param string $field Field to be templated.
      * @param array|null $options Render options.
      * @return string
      */
-    public function renderBody(string $text, array|null $options = []): string
+    public function renderBody(EntityInterface $entity, string $field, array|null $options = []): string
     {
+        $text = $this->Placeholders->template($entity, $field);
         $dom = $this->parseHTML($text);
         $this->downgradeHeadings($dom, Hash::get($options, 'downgradeHeadings', 0));
 

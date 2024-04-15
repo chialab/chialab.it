@@ -35,8 +35,6 @@ class AppController extends BaseController
     {
         parent::initialize();
 
-        $this->loadComponent('Paginator');
-
         $this->loadComponent('Chialab/FrontendKit.Filters');
         $this->loadComponent('Chialab/FrontendKit.Categories');
         $this->loadComponent('Chialab/FrontendKit.Tags');

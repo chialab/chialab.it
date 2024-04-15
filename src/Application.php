@@ -69,6 +69,7 @@ class Application extends BaseApplication
 
         $this->addPlugin('BEdita/Core');
         $this->addPlugin('BEdita/AWS');
+        $this->addPlugin('BEdita/Placeholders');
         $this->addPlugin('BEdita/I18n');
         $this->addPlugin('Chialab/FrontendKit');
 
