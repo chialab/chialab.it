@@ -63,8 +63,6 @@ class ApplicationTest extends TestCase
         Configure::write('FrontendPlugin', null);
 
         $expectedPlugins = [
-            'Authentication',
-            'Authorization',
             'Bake',
             'BEdita/AWS',
             'BEdita/Core',
@@ -102,8 +100,6 @@ class ApplicationTest extends TestCase
         Configure::write('FrontendPlugin', 'BEdita/API');
 
         $expectedPlugins = [
-            'Authentication',
-            'Authorization',
             'Bake',
             'BEdita/API',
             'BEdita/AWS',
