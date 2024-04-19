@@ -1,0 +1,59 @@
+{
+	admin off
+	local_certs
+	skip_install_trust
+	default_sni chialab
+}
+
+(common) {
+	root * /app/webroot
+
+	encode gzip
+	push
+
+	@assets path /css/* /js/* # Do NOT cache plugin assets for a long time, as they do not use cache-busting mechanisms!
+	header @assets ?Cache-Control "public, max-age=31536000, immutable"
+	header -Server
+
+	file_server {
+		hide .*
+	}
+
+	log {
+		output stderr
+		format json
+		level INFO
+		format filter {
+			wrap json
+			fields {
+				request>headers>Authorization delete
+				request>headers>Cookie delete
+				resp_headers>Set-Cookie delete
+			}
+		}
+	}
+}
+
+# Manager
+https://dev-manage.chialab.dt.bedita.cloud, https://manage.chialab.it {
+	import common
+
+	php_fastcgi {$PHPFPM_HOST} {
+		trusted_proxies private_ranges
+	}
+}
+
+# Health checks
+https://chialab, https://localhost, https:// {
+	# ALB health check
+	respond /status 204
+
+	# Task health check for PHP container
+	php_fastcgi {$PHPFPM_HOST} {
+		trusted_proxies private_ranges
+	}
+}
+http://localhost {
+	# Task health check for Caddy container
+	respond /status 204
+}

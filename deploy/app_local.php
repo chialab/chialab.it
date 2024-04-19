@@ -15,6 +15,7 @@ return [
     'Datasources' => [
         'default' => [
             'url' => env('DATABASE_URL', null),
+            'ssl_ca' => env('DATABASE_SSL_CA_PATH', null),
             'log' => false,
         ],
     ],
@@ -25,6 +26,7 @@ return [
             'host' => env('CACHE_REDIS_HOST', null),
             'port' => env('CACHE_REDIS_PORT', 6379),
             'database' => 0,
+            'prefix' => 'chialab_cake_',
         ],
 
         'session' => [
@@ -32,6 +34,7 @@ return [
             'host' => env('CACHE_REDIS_HOST', null),
             'port' => env('CACHE_REDIS_PORT', 6379),
             'database' => 3,
+            'prefix' => 'chialab_cake_',
             'duration' => 'tomorrow 4:00',
         ],
 
@@ -95,6 +98,7 @@ return [
 
         '_twig_views_' => [
             'className' => FileEngine::class,
+            'prefix' => 'chialab_cake_',
             'path' => CACHE . 'twigView/',
             'serialize' => true,
             'duration' => '+1 year',

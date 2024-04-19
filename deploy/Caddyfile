@@ -2,57 +2,101 @@
 	admin off
 	local_certs
 	skip_install_trust
-	default_sni bedita
+	default_sni chialab
 }
 
 (common) {
-    root * /app/webroot
+	root * /app/webroot
 
-    encode gzip
-    push
+	encode gzip
+	push
 
-    header /build/* ?Cache-Control "public, max-age=604800, immutable"
-    header -Server
+	header /build/* ?Cache-Control "public, max-age=604800, immutable"
+	header -Server
 
-    file_server {
-        hide .*
-    }
+	file_server {
+		hide .*
+	}
 
-    log {
-        output stderr
-        format json
-        level DEBUG
-        format filter {
-            wrap json
-            fields {
-                request>headers>Authorization delete
-                request>headers>Cookie delete
-                resp_headers>Set-Cookie delete
-            }
-        }
-    }
+	log {
+		output stderr
+		format json
+		level DEBUG
+		format filter {
+			wrap json
+			fields {
+				request>headers>Authorization delete
+				request>headers>Cookie delete
+				resp_headers>Set-Cookie delete
+			}
+		}
+	}
 }
 
 (site) {
-    php_fastcgi {$PHPFPM_HOST} {
-        env FRONTEND_PLUGIN "{args.0}"
-        env STATUS_LEVEL "{args.1}"
-        env STAGING "{args.2}"
-        env MANAGER_URL "{args.3}"
-    }
+	php_fastcgi {$PHPFPM_HOST} {
+		env FRONTEND_PLUGIN "{args.0}"
+		env STATUS_LEVEL "{args.1}"
+		env STAGING "{args.2}"
+	}
 }
 
-# API
-https://bedita, https://localhost, https://api.test.bedita.local, https://api.bedita.local, https:// {
-    import common
-
-    # ELB health check
-    respond /status 204
-
-    import site "BEdita/API" "off" "0"
+# Handy macro for redirecting a path prefix to another prefix while preserving the remaining part of the URI.
+(redirect) {
+	redir {args[0]} {args[1]} permanent
+	handle_path {args[0]}/* {
+		redir /* {args[1]}{uri} permanent
+	}
 }
 
-# Task health check
+# BEdita API
+https://dev-api.chialab.dt.bedita.cloud, https://api.chialab.dt.bedita.cloud, https://api.chialab.it {
+	import common
+
+	import site "BEdita/API" "off" "false"
+}
+
+# Chialab.it
+https://dev-www.chialab.dt.bedita.cloud {
+	import common
+
+	import ./Caddyfile.redirects
+	import site "Chialab" "draft" "false"
+}
+https://www.chialab.it {
+	import common
+
+	import ./Caddyfile.redirects
+	import site "Chialab" "on" "false"
+}
+
+# Chialab.io
+https://dev-chialabio.chialab.dt.bedita.cloud {
+	import common
+
+	import site "OpenSource" "draft" "false"
+}
+https://www.chialab.io {
+	import common
+
+	import site "OpenSource" "on" "false"
+}
+
+# TODO: Illustratorium
+https://dev-illustratorium.chialab.dt.bedita.cloud {}
+
+# TODO: Tipografia
+https://dev-tipografia.chialab.dt.bedita.cloud {}
+
+# Health checks
+https://chialab, https://localhost, https:// {
+	# ALB health check
+	respond /status 204
+
+	# Task health check for PHP container
+	php_fastcgi {$PHPFPM_HOST}
+}
+# Task health check for Caddy container
 http://localhost {
-    respond /status 204
+	respond /status 204
 }

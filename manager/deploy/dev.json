@@ -1,43 +1,46 @@
 {
-  "family": "dev-bedita-chialab",
-  "taskRoleArn": "arn:aws:iam::515626109584:role/dev-bedita-chialab-20240412133731241100000002",
-  "executionRoleArn": "arn:aws:iam::515626109584:role/dev-bedita-chialab-exec-20240412133733976000000005",
+  "family": "dev-manager-chialab",
+  "taskRoleArn": "arn:aws:iam::515626109584:role/dev-manager-chialab-20240412133732447100000003",
+  "executionRoleArn": "arn:aws:iam::515626109584:role/dev-manager-chialab-exec-20240412133733214600000004",
   "requiresCompatibilities": ["EC2"],
   "networkMode": "bridge",
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "${ECR_IMAGE_APP}:${IMAGE_TAG}",
+      "image": "${ECR_MANAGER_APP}:${IMAGE_TAG}",
       "essential": true,
-      "memory": 512,
+      "memory": 128,
       "environment": [
+        {"name": "DEBUG", "value": "0"},
+        {"name": "APP_DEFAULT_LOCALE", "value": "it_IT"},
+        {"name": "APP_DEFAULT_TIMEZONE", "value": "Europe/Rome"},
         {"name": "CACHE_REDIS_HOST", "value": "dev-redis.dreamteam.local"},
-        {"name": "S3_BUCKET_NAME", "value": "dev-bedita-chialab-assets"},
-        {"name": "S3_BUCKET_REGION", "value": "${AWS_DEFAULT_REGION}"},
-        {"name": "CDN_DISTRIBUTION_ID", "value": "E16400QPVDJ8WM"},
-        {"name": "CDN_DISTRIBUTION_URL", "value": "https://da7liyf9y4drw.cloudfront.net"},
-        {"name": "MANAGER_URL", "value": "https://dev-manage.chialab.dt.bedita.cloud"}
+        {"name": "BEDITA_API", "value": "https://dev-api.chialab.dt.bedita.cloud"},
+        {"name": "ALERT_TEXT", "value": "Ambiente di DEV"},
+        {"name": "ALERT_COLOR", "value": "#498fde"}
       ],
       "secrets": [
-        {"name": "DATABASE_URL", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/database-url"},
-        {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/security-salt"}
+        {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-manager-chialab/security-salt"},
+        {"name": "BEDITA_API_KEY", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-manager-chialab/bedita-api-key"}
       ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/${ECS_CLUSTER}",
           "awslogs-region": "${AWS_DEFAULT_REGION}",
-          "awslogs-stream-prefix": "dev/chialab",
+          "awslogs-stream-prefix": "dev/manager/chialb",
           "awslogs-multiline-pattern": "^(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3} - |\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} |\\[[\\d ]?\\d-\\w{3}-\\d{4} \\d{2}:\\d{2}:\\d{2}\\] )"
         }
       }
     },
     {
       "name": "web",
-      "image": "${ECR_IMAGE_WEB}:${IMAGE_TAG}",
+      "image": "${ECR_MANAGER_WEB}:${IMAGE_TAG}",
       "essential": true,
       "memory": 64,
-      "environment": [{ "name": "PHPFPM_HOST", "value": "app:9000" }],
+      "environment": [
+        {"name": "PHPFPM_HOST", "value": "app:9000"}
+      ],
       "portMappings": [
         {
           "containerPort": 443,
@@ -57,7 +60,7 @@
         "options": {
           "awslogs-group": "/ecs/${ECS_CLUSTER}",
           "awslogs-region": "${AWS_DEFAULT_REGION}",
-          "awslogs-stream-prefix": "dev/chialab"
+          "awslogs-stream-prefix": "dev/manager/chialab"
         }
       }
     }
