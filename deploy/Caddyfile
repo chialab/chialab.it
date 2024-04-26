@@ -21,7 +21,7 @@
 	log {
 		output stderr
 		format json
-		level DEBUG
+		level INFO
 		format filter {
 			wrap json
 			fields {
@@ -35,9 +35,10 @@
 
 (site) {
 	php_fastcgi {$PHPFPM_HOST} {
-		env FRONTEND_PLUGIN "{args.0}"
-		env STATUS_LEVEL "{args.1}"
-		env STAGING "{args.2}"
+		env FRONTEND_PLUGIN "{args[0]}"
+		env THEME "{args[1]}"
+		env STATUS_LEVEL "{args[2]}"
+		env STAGING "{args[3]}"
 	}
 }
 
@@ -53,7 +54,7 @@
 https://dev-api.chialab.dt.bedita.cloud, https://api.chialab.dt.bedita.cloud, https://api.chialab.it {
 	import common
 
-	import site "BEdita/API" "off" "false"
+	import site "BEdita/API" "" "off" "false"
 }
 
 # Chialab.it
@@ -61,32 +62,32 @@ https://dev-www.chialab.dt.bedita.cloud {
 	import common
 
 	import ./Caddyfile.redirects
-	import site "Chialab" "draft" "false"
+	import site "Chialab" "Chialab" "draft" "false"
 }
 https://www.chialab.it {
 	import common
 
 	import ./Caddyfile.redirects
-	import site "Chialab" "on" "false"
+	import site "Chialab" "Chialab" "on" "false"
 }
 
 # Chialab.io
 https://dev-chialabio.chialab.dt.bedita.cloud {
 	import common
 
-	import site "OpenSource" "draft" "false"
+	import site "OpenSource" "OpenSource" "draft" "false"
 }
 https://www.chialab.io {
 	import common
 
-	import site "OpenSource" "on" "false"
+	import site "OpenSource" "OpenSource" "on" "false"
 }
 
 # TODO: Illustratorium
-https://dev-illustratorium.chialab.dt.bedita.cloud {}
+# https://dev-illustratorium.chialab.dt.bedita.cloud {}
 
 # TODO: Tipografia
-https://dev-tipografia.chialab.dt.bedita.cloud {}
+# https://dev-tipografia.chialab.dt.bedita.cloud {}
 
 # Health checks
 https://chialab, https://localhost, https:// {

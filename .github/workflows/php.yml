@@ -2,7 +2,9 @@ name: 'PHP'
 
 on:
   pull_request: {}
-  push: {}
+  push:
+    branches:
+      - main
 
 jobs:
   cs:
@@ -125,12 +127,12 @@ jobs:
       - name: 'Run PHPUnit'
         run: 'phpdbg -qrr vendor/bin/phpunit --coverage-clover=clover.xml'
       - name: 'Export coverage results'
-        uses: 'codecov/codecov-action@v3'
+        uses: 'codecov/codecov-action@v4'
         with:
           file: './clover.xml'
           env_vars: PHP_VERSION,MYSQL_VERSION
       - name: 'Archive code coverage results'
-        uses: 'actions/upload-artifact@v3'
+        uses: 'actions/upload-artifact@v4'
         with:
           name: 'PHP ${{ matrix.php }} with MySQL ${{ matrix.mysql }}'
           path: 'clover.xml'

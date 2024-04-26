@@ -2,7 +2,9 @@ name: 'JS/CSS'
 
 on:
   pull_request: {}
-  push: {}
+  push:
+    branches:
+      - main
 
 jobs:
   lint:

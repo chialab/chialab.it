@@ -7,13 +7,12 @@
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "${ECR_IMAGE_APP}:${IMAGE_TAG}",
+      "image": "",
       "essential": true,
       "memory": 512,
       "environment": [
         {"name": "CACHE_REDIS_HOST", "value": "prod-redis.dreamteam.local"},
         {"name": "S3_BUCKET_NAME", "value": "TODO"},
-        {"name": "S3_BUCKET_REGION", "value": "${AWS_DEFAULT_REGION}"},
         {"name": "CDN_DISTRIBUTION_ID", "value": "TODO"},
         {"name": "CDN_DISTRIBUTION_URL", "value": "TODO"},
         {"name": "MANAGER_URL", "value": "https://manage.chialab.it"}
@@ -25,8 +24,8 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/${ECS_CLUSTER}",
-          "awslogs-region": "${AWS_DEFAULT_REGION}",
+          "awslogs-group": "",
+          "awslogs-region": "",
           "awslogs-stream-prefix": "prod/chialab",
           "awslogs-multiline-pattern": "^(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3} - |\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} |\\[[\\d ]?\\d-\\w{3}-\\d{4} \\d{2}:\\d{2}:\\d{2}\\] )"
         }
@@ -34,7 +33,7 @@
     },
     {
       "name": "web",
-      "image": "${ECR_IMAGE_WEB}:${IMAGE_TAG}",
+      "image": "",
       "essential": true,
       "memory": 64,
       "environment": [{ "name": "PHPFPM_HOST", "value": "app:9000" }],
@@ -55,8 +54,8 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/${ECS_CLUSTER}",
-          "awslogs-region": "${AWS_DEFAULT_REGION}",
+          "awslogs-group": "",
+          "awslogs-region": "",
           "awslogs-stream-prefix": "prod/chialab"
         }
       }

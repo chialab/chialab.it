@@ -118,7 +118,7 @@ return [
             'className' => S3Adapter::class,
             'host' => env('S3_BUCKET_NAME', null),
             'path' => '',
-            'region' => env('S3_BUCKET_REGION', null),
+            'region' => env('S3_BUCKET_REGION', env('AWS_DEFAULT_REGION', null)),
             'distributionId' => env('CDN_DISTRIBUTION_ID', null),
             'baseUrl' => env('CDN_DISTRIBUTION_URL', null),
         ],
@@ -126,14 +126,14 @@ return [
             'className' => S3Adapter::class,
             'host' => env('S3_BUCKET_NAME', null),
             'path' => '',
-            'region' => env('S3_BUCKET_REGION', null),
+            'region' => env('S3_BUCKET_REGION', env('AWS_DEFAULT_REGION', null)),
             'distributionId' => env('CDN_DISTRIBUTION_ID', null),
             'baseUrl' => env('CDN_DISTRIBUTION_URL', null),
         ],
     ],
 
     'FrontendPlugin' => env('FRONTEND_PLUGIN', 'BEdita/API'),
-    'Theme' => env('THEME_PLUGIN', 'Chialab'),
+    'Theme' => env('THEME', 'Chialab'),
 
     'StagingSite' => filter_var(env('STAGING', false), FILTER_VALIDATE_BOOLEAN),
 
