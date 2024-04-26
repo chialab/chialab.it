@@ -43,6 +43,8 @@ Thumbs.db
 .settings/*
 # NetBeans
 nbproject/*
+# IntelliJ
+.idea
 
 # PHPUnit #
 ###########
