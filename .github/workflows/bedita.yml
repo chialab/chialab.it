@@ -1,4 +1,4 @@
-name: Deploy site
+name: Deploy BEdita
 
 on:
   push:
@@ -22,7 +22,7 @@ env:
 
 jobs:
   deploy:
-    name: Build and deploy environment
+    name: Build and deploy BEdita environment
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name == 'main' && 'Production' || 'Development' }}
