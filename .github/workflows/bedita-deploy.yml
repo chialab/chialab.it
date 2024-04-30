@@ -1,5 +1,14 @@
 on:
   workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      AWS_CD_ROLE:
+        required: true
+      NPMRC:
+        required: true
 
 jobs:
   deploy:
