@@ -27,13 +27,13 @@ class PagesController extends AppController
 
         $loader = new ObjectsLoader([
             'objects' => ['include' => 'poster'],
-            'documents' => ['include' => 'poster,has_clients,see_also,attach'],
-            'news' => ['include' => 'poster,see_also,attach'],
+            'documents' => ['include' => 'poster,has_media,has_clients,see_also'],
+            'news' => ['include' => 'poster,has_media,see_also'],
             'folders' => ['include' => 'children'],
         ], [
             'children' => 3,
+            'has_media' => 3,
             'see_also' => 3,
-            'attach' => 3,
         ]);
         $treeLoader = new TreeLoader($loader);
         $folders = $treeLoader->loadMenu((string)$root->id)->children;
