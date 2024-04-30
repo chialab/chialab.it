@@ -38,7 +38,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_CD_ROLE }}
           role-session-name: GitHubActions
-          aws-region: ${{ inputs.AWS_REGION }}
+          aws-region: ${{ inputs.region }}
           mask-aws-account-id: true
 
       - name: Login to Amazon ECR
@@ -92,8 +92,8 @@ jobs:
           container-name: app
           image: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           log-configuration-options: |
-            awslogs-group=/ecs/${{ inputs.ECS_CLUSTER }}
-            awslogs-region=${{ inputs.AWS_REGION }}
+            awslogs-group=/ecs/${{ inputs.cluster }}
+            awslogs-region=${{ inputs.region }}
 
       - name: Fill in the "web" container definition in the Amazon ECS task definition
         id: render-web-container
@@ -103,8 +103,8 @@ jobs:
           container-name: web
           image: ${{ fromJSON(steps.meta.outputs.json).tags[1] }}
           log-configuration-options: |
-            awslogs-group=/ecs/${{ inputs.ECS_CLUSTER }}
-            awslogs-region=${{ inputs.AWS_REGION }}
+            awslogs-group=/ecs/${{ inputs.cluster }}
+            awslogs-region=${{ inputs.region }}
 
       - name: Deploy Amazon ECS task definition
         id: register-task-definition
@@ -112,7 +112,7 @@ jobs:
         with:
           task-definition: ${{ steps.render-web-container.outputs.task-definition }}
           service: ${{ vars.ECS_SERVICE }}
-          cluster: ${{ inputs.ECS_CLUSTER }}
+          cluster: ${{ inputs.cluster }}
           wait-for-service-stability: true
           force-new-deployment: true
 
