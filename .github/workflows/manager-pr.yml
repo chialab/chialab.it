@@ -11,17 +11,13 @@ permissions:
   id-token: write
   contents: read
 
-env:
-  AWS_REGION: 'eu-south-1'
-  ECS_CLUSTER: 'dreamteam'
-
 jobs:
   deploy:
     uses: ./.github/workflows/bedita-deploy.yml
     with:
       environment: 'Development'
-      region: ${{ env.AWS_REGION }}
-      cluster: ${{ env.ECS_CLUSTER }}
+      region: 'eu-south-1'
+      cluster: 'dreamteam'
     secrets: inherit
     concurrency:
       group: manager-${{ github.workflow }}-${{ github.ref }}-Development
