@@ -18,9 +18,12 @@ jobs:
       matrix:
         environment: ['Production', 'Development']
     with:
-      environment: ${{ matrix.environment }}
-      region: 'eu-south-1'
-      cluster: 'dreamteam'
+      AWS_REGION: 'eu-south-1'
+      ECS_CLUSTER: 'dreamteam'
+      ECS_SERVICE: ${{ vars.ECS_SERVICE }}
+      ENV_NAME: ${{ matrix.environment }}
+      ENV_URL: ${{ vars.ENV_URL }}
+      TASK_FILE: ${{ vars.TASK_FILE }}
     secrets: inherit
     concurrency:
       group: manager-${{ github.workflow }}-${{ github.ref }}-${{ matrix.environment }}

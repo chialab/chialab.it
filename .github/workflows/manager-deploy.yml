@@ -1,13 +1,22 @@
 on:
   workflow_call:
     inputs:
-      environment:
+      AWS_REGION:
         required: true
         type: string
-      region:
+      ECS_CLUSTER:
         required: true
         type: string
-      cluster:
+      ECS_SERVICE:
+        required: true
+        type: string
+      ENV_NAME:
+        required: true
+        type: string
+      ENV_URL:
+        required: true
+        type: string
+      TASK_FILE:
         required: true
         type: string
     secrets:
@@ -21,8 +30,8 @@ jobs:
     name: Build and deploy Manager environment (DEV)
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.environment }}
-      url: ${{ vars.ENV_URL }}
+      name: ${{ inputs.ENV_NAME }}
+      url: ${{ inputs.ENV_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,7 +47,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_CD_ROLE }}
           role-session-name: GitHubActions
-          aws-region: ${{ inputs.region }}
+          aws-region: ${{ inputs.AWS_REGION }}
           mask-aws-account-id: true
 
       - name: Login to Amazon ECR
@@ -92,8 +101,8 @@ jobs:
           container-name: app
           image: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           log-configuration-options: |
-            awslogs-group=/ecs/${{ inputs.cluster }}
-            awslogs-region=${{ inputs.region }}
+            awslogs-group=/ecs/${{ inputs.ECS_CLUSTER }}
+            awslogs-region=${{ inputs.AWS_REGION }}
 
       - name: Fill in the "web" container definition in the Amazon ECS task definition
         id: render-web-container
@@ -103,22 +112,22 @@ jobs:
           container-name: web
           image: ${{ fromJSON(steps.meta.outputs.json).tags[1] }}
           log-configuration-options: |
-            awslogs-group=/ecs/${{ inputs.cluster }}
-            awslogs-region=${{ inputs.region }}
+            awslogs-group=/ecs/${{ inputs.ECS_CLUSTER }}
+            awslogs-region=${{ inputs.AWS_REGION }}
 
       - name: Deploy Amazon ECS task definition
         id: register-task-definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.render-web-container.outputs.task-definition }}
-          service: ${{ vars.ECS_SERVICE }}
-          cluster: ${{ inputs.cluster }}
+          service: ${{ inputs.ECS_SERVICE }}
+          cluster: ${{ inputs.ECS_CLUSTER }}
           wait-for-service-stability: true
           force-new-deployment: true
 
       - name: Clear cache
         env:
-          ECS_SERVICE: ${{ vars.ECS_SERVICE }}
+          ECS_SERVICE: ${{ inputs.ECS_SERVICE }}
           TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
         run: |
           CLEAR_CACHE_TASK_ARN="$(aws ecs run-task --cluster "${ECS_CLUSTER}" --task-definition "${TASK_DEFINITION_ARN}" --overrides '{"containerOverrides":[{"name":"app","command":["bin/cake","cache","clear_all"]},{"name":"web","command":["tail","-f","/dev/null"]}]}' --query 'tasks[0].taskArn' --output text)"

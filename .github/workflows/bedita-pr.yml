@@ -15,9 +15,12 @@ jobs:
   deploy:
     uses: ./.github/workflows/bedita-deploy.yml
     with:
-      environment: 'Development'
-      region: 'eu-south-1'
-      cluster: 'dreamteam'
+      AWS_REGION: 'eu-south-1'
+      ECS_CLUSTER: 'dreamteam'
+      ECS_SERVICE: ${{ vars.ECS_SERVICE }}
+      ENV_NAME: 'Development'
+      ENV_URL: ${{ vars.ENV_URL }}
+      TASK_FILE: ${{ vars.TASK_FILE }}
     secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-Development
