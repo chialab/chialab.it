@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac25c7d4f956b64dcd0325ab98bbe247",
+    "content-hash": "3c4fecb8a10bf64ec31ef634b4662c6b",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1023,16 +1023,16 @@
         },
         {
             "name": "chialab/frontend-kit",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chialab/bedita-frontend-kit.git",
-                "reference": "c53857f13645e2a0f2c456b27e5bb7f52a3f60e7"
+                "reference": "32e80fdd3f57d01c3b9220c98cb2409b23c5929e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chialab/bedita-frontend-kit/zipball/c53857f13645e2a0f2c456b27e5bb7f52a3f60e7",
-                "reference": "c53857f13645e2a0f2c456b27e5bb7f52a3f60e7",
+                "url": "https://api.github.com/repos/chialab/bedita-frontend-kit/zipball/32e80fdd3f57d01c3b9220c98cb2409b23c5929e",
+                "reference": "32e80fdd3f57d01c3b9220c98cb2409b23c5929e",
                 "shasum": ""
             },
             "require": {
@@ -1067,9 +1067,9 @@
             "description": "BEdita 5 plugin to help with development of websites.",
             "support": {
                 "issues": "https://github.com/chialab/bedita-frontend-kit/issues",
-                "source": "https://github.com/chialab/bedita-frontend-kit/tree/v3.3.4"
+                "source": "https://github.com/chialab/bedita-frontend-kit/tree/v3.3.5"
             },
-            "time": "2024-04-05T12:49:28+00:00"
+            "time": "2024-04-30T10:52:49+00:00"
         },
         {
             "name": "chialab/ip",
@@ -8800,7 +8800,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "ext-intl": "*",
         "ext-json": "*"
     },
