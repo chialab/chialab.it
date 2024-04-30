@@ -23,6 +23,8 @@ jobs:
         environment: ['Production', 'Development']
     with:
       environment: ${{ matrix.environment }}
+      region: ${{ env.AWS_REGION }}
+      cluster: ${{ env.ECS_CLUSTER }}
     secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ matrix.environment }}

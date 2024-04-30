@@ -20,6 +20,8 @@ jobs:
     uses: ./.github/workflows/bedita-deploy.yml
     with:
       environment: 'Development'
+      region: ${{ env.AWS_REGION }}
+      cluster: ${{ env.ECS_CLUSTER }}
     secrets: inherit
     concurrency:
       group: manager-${{ github.workflow }}-${{ github.ref }}-Development

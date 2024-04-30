@@ -4,6 +4,12 @@ on:
       environment:
         required: true
         type: string
+      region:
+        required: true
+        type: string
+      cluster:
+        required: true
+        type: string
     secrets:
       AWS_CD_ROLE:
         required: true
@@ -32,7 +38,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_CD_ROLE }}
           role-session-name: GitHubActions
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ inputs.AWS_REGION }}
           mask-aws-account-id: true
 
       - name: Login to Amazon ECR
@@ -86,8 +92,8 @@ jobs:
           container-name: app
           image: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           log-configuration-options: |
-            awslogs-group=/ecs/${{ env.ECS_CLUSTER }}
-            awslogs-region=${{ env.AWS_REGION }}
+            awslogs-group=/ecs/${{ inputs.ECS_CLUSTER }}
+            awslogs-region=${{ inputs.AWS_REGION }}
 
       - name: Fill in the "web" container definition in the Amazon ECS task definition
         id: render-web-container
@@ -97,8 +103,8 @@ jobs:
           container-name: web
           image: ${{ fromJSON(steps.meta.outputs.json).tags[1] }}
           log-configuration-options: |
-            awslogs-group=/ecs/${{ env.ECS_CLUSTER }}
-            awslogs-region=${{ env.AWS_REGION }}
+            awslogs-group=/ecs/${{ inputs.ECS_CLUSTER }}
+            awslogs-region=${{ inputs.AWS_REGION }}
 
       - name: Register Amazon ECS task definition
         id: register-task-definition
@@ -106,7 +112,7 @@ jobs:
         with:
           task-definition: ${{ steps.render-web-container.outputs.task-definition }}
           service: ${{ vars.ECS_SERVICE }}
-          cluster: ${{ env.ECS_CLUSTER }}
+          cluster: ${{ inputs.ECS_CLUSTER }}
 
       - name: Run migrations
         env:
