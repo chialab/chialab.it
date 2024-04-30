@@ -309,6 +309,14 @@
       "read_only": false,
       "object": "folders",
       "property": "layout"
+    },
+    {
+      "name": "color",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "documents",
+      "property": "string"
     }
   ],
   "categories": []
