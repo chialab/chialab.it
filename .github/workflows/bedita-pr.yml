@@ -1,10 +1,10 @@
-name: Deploy Manager
+name: Deploy BEdita from PR
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-    paths:
+    paths-ignore:
       - manager/**
 
 permissions:
@@ -18,12 +18,9 @@ env:
 jobs:
   deploy:
     uses: ./.github/workflows/bedita-deploy.yml
-    strategy:
-      matrix:
-        environment: ['Production', 'Development']
     with:
-      environment: ${{ matrix.environment }}
+      environment: 'Development'
     secrets: inherit
     concurrency:
-      group: manager-${{ github.workflow }}-${{ github.ref }}-${{ matrix.environment }}
+      group: ${{ github.workflow }}-${{ github.ref }}-Development
       cancel-in-progress: true
