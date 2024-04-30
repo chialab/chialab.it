@@ -19,8 +19,6 @@ jobs:
       ECS_CLUSTER: 'dreamteam'
       ECS_SERVICE: ${{ vars.ECS_SERVICE }}
       ENV_NAME: 'Development'
-      ENV_URL: ${{ vars.ENV_URL }}
-      TASK_FILE: ${{ vars.TASK_FILE }}
     secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-Development

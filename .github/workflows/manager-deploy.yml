@@ -13,12 +13,6 @@ on:
       ENV_NAME:
         required: true
         type: string
-      ENV_URL:
-        required: true
-        type: string
-      TASK_FILE:
-        required: true
-        type: string
     secrets:
       AWS_CD_ROLE:
         required: true
@@ -31,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.ENV_NAME }}
-      url: ${{ inputs.ENV_URL }}
+      url: ${{ vars.ENV_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
