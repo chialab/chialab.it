@@ -7,9 +7,6 @@ on:
       ECS_CLUSTER:
         required: true
         type: string
-      ECS_SERVICE:
-        required: true
-        type: string
       ENV_NAME:
         required: true
         type: string
@@ -114,14 +111,14 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.render-web-container.outputs.task-definition }}
-          service: ${{ inputs.ECS_SERVICE }}
+          service: ${{ vars.ECS_SERVICE }}
           cluster: ${{ inputs.ECS_CLUSTER }}
           wait-for-service-stability: true
           force-new-deployment: true
 
       - name: Clear cache
         env:
-          ECS_SERVICE: ${{ inputs.ECS_SERVICE }}
+          ECS_SERVICE: ${{ vars.ECS_SERVICE }}
           TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
         run: |
           CLEAR_CACHE_TASK_ARN="$(aws ecs run-task --cluster "${ECS_CLUSTER}" --task-definition "${TASK_DEFINITION_ARN}" --overrides '{"containerOverrides":[{"name":"app","command":["bin/cake","cache","clear_all"]},{"name":"web","command":["tail","-f","/dev/null"]}]}' --query 'tasks[0].taskArn' --output text)"

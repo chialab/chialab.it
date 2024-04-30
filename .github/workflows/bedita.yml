@@ -20,7 +20,6 @@ jobs:
     with:
       AWS_REGION: 'eu-south-1'
       ECS_CLUSTER: 'dreamteam'
-      ECS_SERVICE: ${{ vars.ECS_SERVICE }}
       ENV_NAME: ${{ matrix.environment }}
     secrets: inherit
     concurrency:

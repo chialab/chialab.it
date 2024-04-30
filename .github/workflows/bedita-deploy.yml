@@ -7,9 +7,6 @@ on:
       ECS_CLUSTER:
         required: true
         type: string
-      ECS_SERVICE:
-        required: true
-        type: string
       ENV_NAME:
         required: true
         type: string
@@ -114,12 +111,12 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.render-web-container.outputs.task-definition }}
-          service: ${{ inputs.ECS_SERVICE }}
+          service: ${{ vars.ECS_SERVICE }}
           cluster: ${{ inputs.ECS_CLUSTER }}
 
       - name: Run migrations
         env:
-          ECS_SERVICE: ${{ inputs.ECS_SERVICE }}
+          ECS_SERVICE: ${{ vars.ECS_SERVICE }}
           TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
         run: |
           MIGRATION_TASK_ARN="$(aws ecs run-task --cluster "${ECS_CLUSTER}" --task-definition "${TASK_DEFINITION_ARN}" --capacity-provider-strategy "$(aws ecs describe-services --cluster "${ECS_CLUSTER}" --services "${ECS_SERVICE}" --query 'services[0].capacityProviderStrategy')" --overrides '{"containerOverrides":[{"name":"app","command":["composer","migrate"]},{"name":"web","command":["tail","-f","/dev/null"]}]}' --query 'tasks[0].taskArn' --output text)"
@@ -130,7 +127,7 @@ jobs:
 
       - name: Deploy Amazon ECS task definition
         env:
-          ECS_SERVICE: ${{ inputs.ECS_SERVICE }}
+          ECS_SERVICE: ${{ vars.ECS_SERVICE }}
           TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
         run: |
           aws ecs update-service --cluster "${ECS_CLUSTER}" --service "${ECS_SERVICE}" --task-definition "${TASK_DEFINITION_ARN}" --force-new-deployment
