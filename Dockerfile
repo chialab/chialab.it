@@ -60,6 +60,7 @@ COPY ./deploy/phpfpm-conf.ini /usr/local/etc/php-fpm.d/zzz-chialab.conf
 RUN chown www-data:www-data /app
 USER www-data
 ENV DEBUG=0 \
+    AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
     LOG_DEBUG_URL="console:///?stream=php://stdout" \
     LOG_ERROR_URL="console:///?stream=php://stdout" \
     DATABASE_SSL_CA_PATH="/etc/ssl/certs/rds.${AWS_DEFAULT_REGION}.amazonaws.com-ca.pem"
