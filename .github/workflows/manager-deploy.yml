@@ -13,12 +13,10 @@ on:
     secrets:
       AWS_CD_ROLE:
         required: true
-      NPMRC:
-        required: true
 
 jobs:
   deploy:
-    name: Build and deploy Manager environment (DEV)
+    name: Build and deploy Manager
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.ENV_NAME }}
@@ -68,8 +66,6 @@ jobs:
           tags: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
           cache-to: type=registry,mode=max,image-manifest=true,oci-mediatypes=true,ref=${{ steps.login-ecr.outputs.registry }}/chialab/manager/app:cache-${{ steps.meta.outputs.version }}
           cache-from: type=registry,ref=${{ steps.login-ecr.outputs.registry }}/chialab/manager/app:cache-${{ steps.meta.outputs.version }}
-          secrets: |
-            "npm=${{ secrets.NPMRC }}"
 
       - name: Build and push "web" image
         uses: docker/build-push-action@v5
@@ -81,8 +77,6 @@ jobs:
           tags: ${{ fromJSON(steps.meta.outputs.json).tags[1] }}
           cache-to: type=registry,mode=max,image-manifest=true,oci-mediatypes=true,ref=${{ steps.login-ecr.outputs.registry }}/chialab/manager/app:cache-${{ steps.meta.outputs.version }}
           cache-from: type=registry,ref=${{ steps.login-ecr.outputs.registry }}/chialab/manager/app:cache-${{ steps.meta.outputs.version }}
-          secrets: |
-            "npm=${{ secrets.NPMRC }}"
 
       - name: Fill in the "app" container definition in the Amazon ECS task definition
         id: render-app-container
@@ -118,6 +112,7 @@ jobs:
 
       - name: Clear cache
         env:
+          ECS_CLUSTER: ${{ inputs.ECS_CLUSTER }}
           ECS_SERVICE: ${{ vars.ECS_SERVICE }}
           TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
         run: |

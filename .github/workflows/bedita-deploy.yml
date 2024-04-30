@@ -18,7 +18,7 @@ on:
 
 jobs:
   deploy:
-    name: Build and deploy BEdita environment
+    name: Build and deploy BEdita
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.ENV_NAME }}
@@ -116,6 +116,7 @@ jobs:
 
       - name: Run migrations
         env:
+          ECS_CLUSTER: ${{ inputs.ECS_CLUSTER }}
           ECS_SERVICE: ${{ vars.ECS_SERVICE }}
           TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
         run: |
@@ -127,6 +128,7 @@ jobs:
 
       - name: Deploy Amazon ECS task definition
         env:
+          ECS_CLUSTER: ${{ inputs.ECS_CLUSTER }}
           ECS_SERVICE: ${{ vars.ECS_SERVICE }}
           TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
         run: |
