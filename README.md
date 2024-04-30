@@ -62,9 +62,3 @@ Run cake migrations to create or update the database schema:
 ```bash
 composer migrate
 ```
-
-Then, update the project model:
-
-```bash
-bin/cake project_model
-```

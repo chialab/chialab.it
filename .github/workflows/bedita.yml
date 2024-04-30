@@ -1,0 +1,141 @@
+name: Deploy BEdita
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - manager/**
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - manager/**
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: 'eu-south-1'
+  ECS_CLUSTER: 'dreamteam'
+
+jobs:
+  deploy:
+    name: Build and deploy BEdita environment
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name == 'main' && 'Production' || 'Development' }}
+      url: ${{ vars.ENV_URL }}
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_CD_ROLE }}
+          role-session-name: GitHubActions
+          aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app
+            ${{ steps.login-ecr.outputs.registry }}/chialab/bedita/web
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+          flavor: |
+            suffix=-{{sha}}
+
+      - name: Build and push "app" image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: app
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          cache-to: type=registry,mode=max,image-manifest=true,oci-mediatypes=true,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
+          cache-from: type=registry,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
+          secrets: |
+            "npm=${{ secrets.NPMRC }}"
+
+      - name: Build and push "web" image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: web
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ fromJSON(steps.meta.outputs.json).tags[1] }}
+          cache-to: type=registry,mode=max,image-manifest=true,oci-mediatypes=true,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
+          cache-from: type=registry,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
+          secrets: |
+            "npm=${{ secrets.NPMRC }}"
+
+      - name: Fill in the "app" container definition in the Amazon ECS task definition
+        id: render-app-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: deploy/${{ vars.TASK_FILE }}
+          container-name: app
+          image: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          log-configuration-options: |
+            awslogs-group=/ecs/${{ env.ECS_CLUSTER }}
+            awslogs-region=${{ env.AWS_REGION }}
+
+      - name: Fill in the "web" container definition in the Amazon ECS task definition
+        id: render-web-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-app-container.outputs.task-definition }}
+          container-name: web
+          image: ${{ fromJSON(steps.meta.outputs.json).tags[1] }}
+          log-configuration-options: |
+            awslogs-group=/ecs/${{ env.ECS_CLUSTER }}
+            awslogs-region=${{ env.AWS_REGION }}
+
+      - name: Register Amazon ECS task definition
+        id: register-task-definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+          service: ${{ vars.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+
+      - name: Run migrations
+        env:
+          ECS_SERVICE: ${{ vars.ECS_SERVICE }}
+          TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
+        run: |
+          MIGRATION_TASK_ARN="$(aws ecs run-task --cluster "${ECS_CLUSTER}" --task-definition "${TASK_DEFINITION_ARN}" --capacity-provider-strategy "$(aws ecs describe-services --cluster "${ECS_CLUSTER}" --services "${ECS_SERVICE}" --query 'services[0].capacityProviderStrategy')" --overrides '{"containerOverrides":[{"name":"app","command":["composer","migrate"]},{"name":"web","command":["tail","-f","/dev/null"]}]}' --query 'tasks[0].taskArn' --output text)"
+          printf "Migration task: %s\n" "${MIGRATION_TASK_ARN}"
+          aws ecs wait tasks-stopped --cluster "${ECS_CLUSTER}" --task "${MIGRATION_TASK_ARN}"
+          MIGRATION_EXIT_CODE="$(aws ecs describe-tasks --cluster "${ECS_CLUSTER}" --task "${MIGRATION_TASK_ARN}" --query 'tasks[0].containers[?name == `app`].exitCode' --output text)"
+          if [ "${MIGRATION_EXIT_CODE}" != 0 ]; then exit "${MIGRATION_EXIT_CODE}"; fi
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: ${{ vars.ECS_SERVICE }}
+          TASK_DEFINITION_ARN: ${{ steps.register-task-definition.outputs.task-definition-arn }}
+        run: |
+          aws ecs update-service --cluster "${ECS_CLUSTER}" --service "${ECS_SERVICE}" --task-definition "${TASK_DEFINITION_ARN}" --force-new-deployment
+          aws ecs wait services-stable --cluster "${ECS_CLUSTER}" --services "${ECS_SERVICE}"
