@@ -49,9 +49,9 @@ class AppController extends BaseController
             'publication' => 'chialab-design-company',
             'publicationLoader' => [
                 'objectTypesConfig' => [
+                    'folders' => ['include' => 'poster|1'],
                     'profiles' => ['include' => 'poster|1'],
                     'links' => ['include' => 'poster|1'],
-                    'publications' => ['include' => 'poster|1'],
                 ],
             ],
         ]);
