@@ -11,7 +11,7 @@
         <object class="w-full" data="{{ object.media_url }}" type="{{ stream.mime_type }}"></object>
     {% endif %}
 
-    {% if title is not null or description is not null %}
+    {% if title is not null and description is not null %}
         <div class="media_caption sans f-1 column gap-0">
             {% if title is not null %}
                 <span class="media_title">{{ title|raw }}</span>

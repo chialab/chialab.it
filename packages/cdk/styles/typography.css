@@ -80,6 +80,18 @@ article header {
 
 .body p {
     margin: 0;
+    line-height: 1.5;
+}
+
+.body a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+}
+
+.body ul,
+.body ol {
+    margin: var(--gap) 0;
+    line-height: 1.5;
 }
 
 .body blockquote {
@@ -96,6 +108,13 @@ article header {
 .body h6 {
     margin: 0;
     line-height: 1.125;
+}
+
+.body h3 {
+    margin: calc(var(--gap) * 2) 0 var(--gap);
+    font-size: var(--font-size-5);
+    font-weight: normal;
+    font-style: italic;
 }
 
 .body h4 {
