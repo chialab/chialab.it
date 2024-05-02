@@ -86,6 +86,7 @@ class Application extends BaseApplication
         parent::bootstrapCli();
 
         $this->addOptionalPlugin('Cake/Repl');
+        $this->addOptionalPlugin('Chialab', ['routes' => false]);
     }
 
     /**
