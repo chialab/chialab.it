@@ -44,7 +44,8 @@
                     <ul class="list--plain f-s column gap-xs">
                         {% for subchild in child.children %}
                             <li class="mono">
-                                <a class="link--underline upper" href="{{ Url.build({ _name: 'pages:objects', _entity: subchild }) }}">
+                                {% set url = subchild %}
+                                <a class="link--underline upper" href="{{ Url.build({ _name: 'pages:objects', _entity: subchild }) }}" target="_blank">
                                     {{ subchild.title|raw }}
                                 </a>
                             </li>
