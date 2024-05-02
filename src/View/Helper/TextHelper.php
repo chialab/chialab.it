@@ -141,7 +141,7 @@ class TextHelper extends Helper
             $newNode->appendChild($child);
         }
         foreach ($element->attributes as $attrName => $attrNode) {
-            $newNode->setAttribute($attrName, $attrNode);
+            $newNode->setAttribute($attrName, $attrNode->value);
         }
         $element->parentNode->replaceChild($newNode, $element);
 
