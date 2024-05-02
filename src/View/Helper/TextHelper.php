@@ -220,6 +220,6 @@ class TextHelper extends Helper
      */
     public function renderDescription(string $text): string
     {
-        return strip_tags($text, ['strong', 'em', 'ul', 'li', 'u', 'b', 'i']);
+        return strip_tags($text, ['strong', 'em', 'ul', 'li', 'u', 'b', 'i', 'a']);
     }
 }
