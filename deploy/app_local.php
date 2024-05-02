@@ -116,16 +116,18 @@ return [
     'Filesystem' => [
         'default' => [
             'className' => S3Adapter::class,
-            'host' => env('S3_BUCKET_NAME', null),
-            'path' => '',
+            'visibility' => 'private',
+            'bucket' => env('S3_BUCKET_NAME', null),
+            'prefix' => '',
             'region' => env('S3_BUCKET_REGION', env('AWS_DEFAULT_REGION', null)),
             'distributionId' => env('CDN_DISTRIBUTION_ID', null),
             'baseUrl' => env('CDN_DISTRIBUTION_URL', null),
         ],
         'thumbnails' => [
             'className' => S3Adapter::class,
-            'host' => env('S3_BUCKET_NAME', null),
-            'path' => '',
+            'visibility' => 'private',
+            'bucket' => env('S3_BUCKET_NAME', null),
+            'prefix' => '',
             'region' => env('S3_BUCKET_REGION', env('AWS_DEFAULT_REGION', null)),
             'distributionId' => env('CDN_DISTRIBUTION_ID', null),
             'baseUrl' => env('CDN_DISTRIBUTION_URL', null),
