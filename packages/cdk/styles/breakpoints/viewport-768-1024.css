@@ -1,6 +1,5 @@
 @media (min-width: 768px) and (max-width: 1023px) {
     :root {
-        --gutter: calc(var(--spacing, 0.25rem) * 2);
         --columns: 8;
 
         font-size: 16px;

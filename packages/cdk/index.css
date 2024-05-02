@@ -10,8 +10,6 @@
 @import './styles/breakpoints/viewport-640.css';
 @import './styles/breakpoints/viewport-640-768.css';
 @import './styles/breakpoints/viewport-768-1024.css';
-@import './styles/breakpoints/viewport-1024-1280.css';
-@import './styles/breakpoints/viewport-1280-1440.css';
 
 body {
     overflow: auto;

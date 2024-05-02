@@ -20,7 +20,7 @@
         {% if object.get('categories') is not empty %}
             <ul class="list--comma">
                 {% for category in object.categories %}
-                    <li class="mono f-xs">{{ category.label|raw }}</li>
+                    <li class="mono f-xs light">{{ category.label|raw }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
