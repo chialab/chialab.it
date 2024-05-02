@@ -31,7 +31,7 @@
     text-rendering: optimizelegibility;
 }
 
-a.card:hover .card__cover img {
+.card:hover .card__cover--zoom img {
     transform: scale(1.05);
 }
 

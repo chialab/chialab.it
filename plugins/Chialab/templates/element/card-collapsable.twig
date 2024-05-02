@@ -1,6 +1,6 @@
 <cl-card-details class="card bt-1 w-4 column gap-0 bg-neutral" title="{{ object.title|striptags|escape('html_attr')|raw }}">
     {% if Poster.exists(object) %}
-        <div class="card__cover" slot="cover">
+        <div class="card__cover card__cover--zoom" slot="cover">
             <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
         </div>
     {% endif %}
