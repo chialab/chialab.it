@@ -21,9 +21,9 @@
         <div class="w-full row align-center">
             {% for client in publication.has_featured_clients|filter((client) => client.poster is not empty) %}
                 {% if Poster.exists(client, { variant: 1 }) %}
-                    <img class="w-2" alt="{{ __('{0} logo', client.title)|escape('html_attr')|raw }}" src="{{ Poster.url(client, { variant: 1 }) }}" draggable="false" />
+                    <img class="w-2" alt="{{ __('{0} logo', client.title)|escape('html_attr')|raw }}" src="{{ Poster.url(client, { variant: 1 }) }}" title="{{ client.title|escape('html_attr') }}" draggable="false" />
                 {% else %}
-                    <img class="bw w-2" alt="{{ __('{0} logo', client.title)|escape('html_attr')|raw }}" src="{{ Poster.url(client) }}" draggable="false" />
+                    <img class="bw w-2" alt="{{ __('{0} logo', client.title)|escape('html_attr')|raw }}" src="{{ Poster.url(client) }}" title="{{ client.title|escape('html_attr') }}" draggable="false" />
                 {% endif %}
             {% endfor %}
         </div>
