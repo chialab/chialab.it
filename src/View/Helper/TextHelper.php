@@ -108,7 +108,7 @@ class TextHelper extends Helper
         static::disableErrorReporting();
 
         if ($convertEntities) {
-            $text = static::convertXmlEntity(mb_convert_encoding($text, 'HTML-ENTITIES', 'UTF-8'));
+            $text = static::convertXmlEntity(mb_encode_numericentity($text, [0x80, 0x10FFFF, 0, ~0], 'UTF-8'));
         }
 
         $doc = new DOMDocument('1.0', 'UTF-8');
