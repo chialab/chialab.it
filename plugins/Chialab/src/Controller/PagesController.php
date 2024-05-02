@@ -29,7 +29,7 @@ class PagesController extends AppController
             'objects' => ['include' => 'poster'],
             'documents' => ['include' => 'poster,has_media,has_clients,see_also'],
             'news' => ['include' => 'poster,has_media,see_also'],
-            'folders' => ['include' => 'children'],
+            'folders' => ['include' => 'children,poster'],
         ], [
             'children' => 3,
             'has_media' => 3,
