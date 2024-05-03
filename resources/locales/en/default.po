@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BEdita 4 \n"
-"POT-Creation-Date: 2024-05-03 12:49:29 \n"
+"POT-Creation-Date: 2024-05-03 12:54:57 \n"
 "PO-Revision-Date:  \n"
 "Last-Translator:  \n"
 "Language-Team: BEdita I18N & I10N Team \n"
@@ -10,6 +10,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8 \n"
 "Content-Transfer-Encoding: 8bit \n"
 "Plural-Forms: nplurals=2; plural=(n != 1); \n"
+
+msgid "Author"
+msgstr ""
 
 msgid "Back"
 msgstr ""

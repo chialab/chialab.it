@@ -203,6 +203,15 @@
   ],
   "relations": [
     {
+      "name": "has_authors",
+      "label": "Has authors",
+      "inverse_name": "author_of",
+      "inverse_label": "Author of",
+      "description": "Author of a document",
+      "left": ["documents"],
+      "right": ["profiles"]
+    },
+    {
       "name": "has_clients",
       "label": "Has clients",
       "inverse_name": "client_of",

@@ -31,6 +31,13 @@
         </div>
     {% endif %}
 
+    {% if object.get('has_authors') is not empty %}
+        <div class="column gap-xs">
+            <span class="mono text-accent bold">{{ __('Author') }}</span>
+            <span class="mono bold">{{ (object.has_authors|first).title|raw }}</span>
+        </div>
+    {% endif %}
+
     {% if object.get('year') is not empty %}
         <div class="column gap-xs">
             <span class="mono text-accent bold">{{ __('Year') }}</span>
