@@ -221,6 +221,15 @@
       "right": ["profiles"]
     },
     {
+      "name": "has_links",
+      "label": "Has links",
+      "inverse_name": "link_of",
+      "inverse_label": "Link of",
+      "description": "Object has link",
+      "left": ["documents", "events", "news_item"],
+      "right": ["links"]
+    },
+    {
       "name": "has_location",
       "label": "Has location",
       "inverse_name": "location_of",
@@ -312,6 +321,14 @@
     },
     {
       "name": "color",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "documents",
+      "property": "string"
+    },
+    {
+      "name": "year",
       "description": null,
       "is_nullable": true,
       "read_only": false,

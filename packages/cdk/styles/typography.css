@@ -70,12 +70,22 @@ article header {
     text-rendering: geometricprecision;
 }
 
-.body > *:first-child {
+.description {
+    text-wrap: balance;
+}
+
+.body > *:first-child,
+.description > *:first-child {
     margin-top: 0;
 }
 
-.body > *:last-child {
+.body > *:last-child,
+.description > *:last-child {
     margin-bottom: 0;
+}
+
+.description p {
+    margin: 0;
 }
 
 .body p {

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BEdita 4 \n"
-"POT-Creation-Date: 2024-05-02 11:20:37 \n"
+"POT-Creation-Date: 2024-05-03 12:49:29 \n"
 "PO-Revision-Date:  \n"
 "Last-Translator:  \n"
 "Language-Team: BEdita I18N & I10N Team \n"
@@ -17,11 +17,20 @@ msgstr "Indietro"
 msgid "Back to home"
 msgstr "Torna alla home"
 
+msgid "Client"
+msgstr "Cliente"
+
 msgid "Clients"
 msgstr "Clienti"
 
 msgid "Connections"
 msgstr "Connessioni"
+
+msgid "Job categories"
+msgstr "Attività"
+
+msgid "Links"
+msgstr "Collegamenti"
 
 msgid "Password"
 msgstr ""
@@ -31,6 +40,9 @@ msgstr "Vedi anche"
 
 msgid "Username"
 msgstr ""
+
+msgid "Year"
+msgstr "Anno"
 
 msgid "log in"
 msgstr "accedi"
