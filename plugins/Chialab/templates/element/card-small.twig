@@ -1,0 +1,8 @@
+<a class="block h-1 column end mono bg-neutral"
+    href="{{ Url.build({ _name: 'pages:objects', _entity: object }) }}"
+    target="_blank"
+    title="{{ object.title|escape('html_attr')|raw }}"
+    {% if Poster.exists(object) %}style="background-image: url('{{ Poster.url(object) }}'); background-size: cover; background-position: center;"{% endif %}
+>
+    <div class="w-full p-1 bg-overlay f-xs light">{{ object.title|raw }}</div>
+</a>

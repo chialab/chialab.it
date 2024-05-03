@@ -6,6 +6,7 @@
 @import './styles/colors.css';
 @import './styles/typography.css';
 @import './styles/links.css';
+@import './styles/layout.css';
 @import './variables.css';
 @import './styles/breakpoints/viewport-640.css';
 @import './styles/breakpoints/viewport-640-768.css';

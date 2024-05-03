@@ -68,15 +68,11 @@
     {% if object.get('see_also') is not empty %}
         <div class="mt-2 column">
             <span class="link--section">{{ __('See also') }}</span>
-            <div class="row">
+            <div class="columns-2">
                 {% for item in object.see_also %}
-                    <a class="block w-2 h-1 column end mono bg-neutral"
-                        href="{{ Url.build({ _name: 'pages:objects', _entity: item }) }}"
-                        target="_blank"
-                        {% if Poster.exists(item) %}style="background-image: url('{{ Poster.url(item) }}'); background-size: cover; background-position: center;"{% endif %}
-                    >
-                        <div class="w-full p-1 bg-overlay f-xs light">{{ item.title|raw }}</div>
-                    </a>
+                    {{ element('card-small', {
+                        object: item,
+                    })|raw }}
                 {% endfor %}
             </div>
         </div>

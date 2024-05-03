@@ -25,13 +25,13 @@
                 {% endif %}
 
                 {% if object.get('see_also') is not empty %}
-                    <div class="w-full column">
+                    <div class="mt-2 w-full column f-s">
                         <span class="link--section">{{ __('See also') }}</span>
-                        <div class="row w-full">
+                        <div class="columns-2 w-full">
                             {% for item in object.see_also %}
-                                <a class="flex pt-6 column end" title="{{ item.title|escape('html_attr')|raw }}" style="width: 40%; background-size: cover; background-position: center; background-image: url('{{ Poster.url(item)|escape('html_attr') }}')">
-                                    <span class="w-full p-1 bg-overlay mono f-s">{{ item.title|raw }}</span>
-                                </a>
+                                {{ element('card-small', {
+                                    object: item,
+                                })|raw }}
                             {% endfor %}
                         </div>
                     </div>
