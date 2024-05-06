@@ -41,6 +41,7 @@ class AppController extends BaseController
         $this->loadComponent('Chialab/FrontendKit.Objects', [
             'objectTypesConfig' => [
                 'objects' => ['include' => 'poster'],
+                'news' => ['include' => 'poster,has_media,see_also'],
                 'documents' => ['include' => 'poster,has_clients'],
             ],
         ]);
