@@ -14,7 +14,7 @@
         <h3 class="f-6 m-0 regular italic card__title">{{ object.title|raw }}</h3>
         {% if object.get('description') is not empty %}
             <div class="f-3 clamp-4 body card__description">
-                {{ Text.renderDescription(object.description)|raw }}
+                {{ object.description|raw }}
             </div>
         {% endif %}
         {% if object.get('categories') is not empty %}

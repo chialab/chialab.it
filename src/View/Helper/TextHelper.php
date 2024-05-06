@@ -211,15 +211,4 @@ class TextHelper extends Helper
 
         return $content;
     }
-
-    /**
-     * Render a text removing block tags and links.
-     *
-     * @param string $text The original text to render.
-     * @return string
-     */
-    public function renderDescription(string $text): string
-    {
-        return strip_tags($text, ['strong', 'em', 'ul', 'li', 'u', 'b', 'i', 'a']);
-    }
 }

@@ -19,10 +19,12 @@
   "dependencies": {
     "@chialab/cells": "^1.2.0",
     "@chialab/dna": "^4.0.0",
+    "@chialab/dna-backdrop": "^4.0.0-beta.0",
     "@chialab/dna-button": "^4.0.0-beta.0",
     "@chialab/dna-i18n": "^4.0.0-beta.0",
     "@chialab/dna-icons": "^4.0.0-beta.0",
     "@chialab/dna-masonry": "^4.0.0-beta.0",
+    "@chialab/dna-slideshow": "^4.0.0-beta.0",
     "@chialab/dna-theming": "^4.0.0-beta.0"
   },
   "devDependencies": {

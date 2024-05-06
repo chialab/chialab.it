@@ -9,3 +9,5 @@ const updateViewportSize = () => {
 
 updateViewportSize();
 window.addEventListener('resize', updateViewportSize);
+
+export * from './Lib/openModal';

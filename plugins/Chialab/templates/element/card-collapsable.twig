@@ -12,14 +12,19 @@
             <div class="card__description column">
                 {% if object.get('description') is not empty %}
                     <div class="w-full f-3 body">
-                        {{ Text.renderDescription(object.description)|raw }}
+                        {{ object.description|raw }}
                     </div>
                 {% endif %}
 
                 {% if object.get('has_media') is not empty %}
                     <div class="w-full row">
                         {% for item in object.has_media %}
-                            <img src="{{ Poster.url(item)|escape('html_attr') }}" class="w-1 h-1 cover" draggable="false" />
+                            <img
+                                src="{{ Poster.url(item)|escape('html_attr') }}"
+                                class="w-1 h-1 cover"
+                                draggable="false"
+                                data-modal="{{ object.uname }}"
+                            />
                         {% endfor %}
                     </div>
                 {% endif %}

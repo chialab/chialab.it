@@ -979,6 +979,19 @@
   dependencies:
     "@chialab/estransform" "^0.17.3"
 
+"@chialab/dna-backdrop@^4.0.0-beta.0":
+  version "4.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-backdrop/-/dna-backdrop-4.0.0-beta.0.tgz#c9c00655789d05782441c028761fff9bcb2da20e"
+  integrity sha512-yCh0o497R+ME8IREaYaI197zhXh291J+PQoR4KlFFVm95dz1VyirEUzGrP7xo39l5TGGxrHu4JleFWn9Zgeexw==
+  dependencies:
+    "@chialab/dna" "^4.0.0"
+    "@chialab/dna-button" "^4.0.0-beta.0"
+    "@chialab/dna-floating" "^4.0.0-beta.0"
+    "@chialab/dna-i18n" "^4.0.0-beta.0"
+    "@chialab/dna-icons" "^4.0.0-beta.0"
+    "@chialab/dna-theming" "^4.0.0-beta.0"
+    "@chialab/loock" "^4.0.0"
+
 "@chialab/dna-button@^4.0.0-beta.0":
   version "4.0.0-beta.0"
   resolved "https://registry.npmjs.org/@chialab/dna-button/-/dna-button-4.0.0-beta.0.tgz#45d93422d57f40ab29533ff7aac682aa1212c88b"
@@ -987,6 +1000,27 @@
     "@chialab/dna" "^4.0.0"
     "@chialab/dna-icons" "^4.0.0-beta.0"
     "@chialab/dna-theming" "^4.0.0-beta.0"
+
+"@chialab/dna-floating@^4.0.0-beta.0":
+  version "4.0.0-beta.1"
+  resolved "https://registry.npmjs.org/@chialab/dna-floating/-/dna-floating-4.0.0-beta.1.tgz#7721181c04caa37229dce5a9e2c270d772f89640"
+  integrity sha512-WjG7DnVGIA1qVI1lRgrm0dRbuKAJ1Xwhi2zZkHE2AOcb4psk4nsYTHYKYTpl3bVLcdZf6bwUXv/6LAW88t2wxw==
+  dependencies:
+    "@chialab/dna" "^4.0.0"
+    "@chialab/dna-theming" "^4.0.0-beta.0"
+    "@chialab/loock" "^4.0.0"
+
+"@chialab/dna-gallery@^4.0.0-beta.0":
+  version "4.0.0-beta.1"
+  resolved "https://registry.npmjs.org/@chialab/dna-gallery/-/dna-gallery-4.0.0-beta.1.tgz#7a98f6ff59b952fde04ebbe23b411d888fa73aa5"
+  integrity sha512-f14/Uz1wyAQOiw7FnHSf1EZX3FOqOdcBFoNsumIYcPV8H0LH/dQCyG9opD5DjnsihXxY9sy3yTxW7S9N97NVYg==
+  dependencies:
+    "@chialab/dna" "^4.0.0"
+    "@chialab/dna-button" "^4.0.0-beta.0"
+    "@chialab/dna-i18n" "^4.0.0-beta.0"
+    "@chialab/dna-icons" "^4.0.0-beta.0"
+    "@chialab/dna-theming" "^4.0.0-beta.0"
+    "@react-aria/live-announcer" "^3.3.1"
 
 "@chialab/dna-i18n@^4.0.0-beta.0":
   version "4.0.0-beta.0"
@@ -1009,6 +1043,29 @@
   integrity sha512-iBk5960poBPA8KNJ2Lk3TF56y4K/CdTbRih0LZtgtBiXq2llimS+uuSHisi4ASGgjhUCtP8HDnQzBg0Cq6TLdg==
   dependencies:
     "@chialab/dna" "^4.0.0"
+    "@chialab/dna-theming" "^4.0.0-beta.0"
+
+"@chialab/dna-slides@^4.0.0-beta.0":
+  version "4.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-slides/-/dna-slides-4.0.0-beta.0.tgz#fb039e7edf3f2a70dd01a89f9b1ce316571ebec7"
+  integrity sha512-7CyJdsR14T9IaTTOYj40CJukStPoWBH7+CsyRuzaGEraF7Mfm/CmUhsePhRyZ0nEfb6/v41BiSHN8w5aQ1Hy7w==
+  dependencies:
+    "@chialab/dna" "^4.0.0"
+    "@chialab/dna-button" "^4.0.0-beta.0"
+    "@chialab/dna-i18n" "^4.0.0-beta.0"
+    "@chialab/dna-icons" "^4.0.0-beta.0"
+    "@chialab/dna-theming" "^4.0.0-beta.0"
+    scroll-behavior-polyfill "^2.0.0"
+
+"@chialab/dna-slideshow@^4.0.0-beta.0":
+  version "4.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-slideshow/-/dna-slideshow-4.0.0-beta.0.tgz#7b6d64b1e165d0c319e97428ee155346d297ed23"
+  integrity sha512-TlJ5mGdSnkPetd9qNuMvFvHd24+4MBroGebPMY6Q35SP0X9xJap3iH4Vs/q9qR/bb6XvID7Optue/Ib95CBRLQ==
+  dependencies:
+    "@chialab/dna" "^4.0.0"
+    "@chialab/dna-button" "^4.0.0-beta.0"
+    "@chialab/dna-gallery" "^4.0.0-beta.0"
+    "@chialab/dna-slides" "^4.0.0-beta.0"
     "@chialab/dna-theming" "^4.0.0-beta.0"
 
 "@chialab/dna-theming@^4.0.0-beta.0":
@@ -1148,6 +1205,11 @@
   integrity sha512-maJUFkwk0ie0L4VvDO74NDYyRvaTQAI0qmSmrms8bZxUkZ+zQZd1ByWKDCYTRwtR6AOzTvgEOl2ZvEG+OUKv/A==
   dependencies:
     "@parcel/source-map" "^2.0.0"
+
+"@chialab/loock@^4.0.0":
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/@chialab/loock/-/loock-4.0.1.tgz#7a0c456df1fc739ce79432c5f8a79269553ed644"
+  integrity sha512-CUx6omHE2OmpscS9NudNEx9zSeZRI7OtDLdmk9nGHRzKnoJ8HJ8NTgmPTjPUL92bEZKjhWg9oPgoLahFKcwECw==
 
 "@chialab/node-resolve@^0.17.0", "@chialab/node-resolve@^0.17.1":
   version "0.17.1"
@@ -1429,6 +1491,20 @@
   integrity sha512-Ejx1P/mj+kMjQb8/y5XxDUn4reGdr+WyKYloBljpppUy8gs42T+BNoEOuRYqDVdgPc6NxduzIDoJS9pOFfV5Ew==
   dependencies:
     detect-libc "^1.0.3"
+
+"@react-aria/live-announcer@^3.3.1":
+  version "3.3.3"
+  resolved "https://registry.npmjs.org/@react-aria/live-announcer/-/live-announcer-3.3.3.tgz#7ed90f1e0051ad2fc81c23d40e41e2b7ecb61a1d"
+  integrity sha512-sMaBzzIgDPBDCeZ/UFbuXR/UnXikcE7t4OJ4cESzmUq6r6LvxzmZnG9ocwpH75n7udmUbINycKD082fneryHlg==
+  dependencies:
+    "@swc/helpers" "^0.5.0"
+
+"@swc/helpers@^0.5.0":
+  version "0.5.11"
+  resolved "https://registry.npmjs.org/@swc/helpers/-/helpers-0.5.11.tgz#5bab8c660a6e23c13b2d23fcd1ee44a2db1b0cb7"
+  integrity sha512-YNlnKRWF2sVojTpIyzwou9XoTNbzbzONwRhOoniEioF1AtaitTvVZblaQRrAzChWQ1bLYyYSWzM18y4WwgzJ+A==
+  dependencies:
+    tslib "^2.4.0"
 
 "@types/accepts@*":
   version "1.3.7"
@@ -4231,6 +4307,11 @@ safe-regex-test@^1.0.3:
     es-errors "^1.3.0"
     is-regex "^1.1.4"
 
+scroll-behavior-polyfill@^2.0.0:
+  version "2.0.13"
+  resolved "https://registry.npmjs.org/scroll-behavior-polyfill/-/scroll-behavior-polyfill-2.0.13.tgz#f6f4db9eecdb94d5744b85b653440602fcf3b24b"
+  integrity sha512-X1AC6+k0++Y3XOT8Likr5Dh4XMmwvbTolr3Mp2g1jYPpOQ3++wff/JPfPEK6zqPCkZ88Ac0/OMRW/Uwh16U+HQ==
+
 semver@^6.3.1:
   version "6.3.1"
   resolved "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"
@@ -4539,6 +4620,11 @@ tsconfig-paths@^3.15.0:
     json5 "^1.0.2"
     minimist "^1.2.6"
     strip-bom "^3.0.0"
+
+tslib@^2.4.0:
+  version "2.6.2"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
+  integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
 
 tsscmp@1.0.6:
   version "1.0.6"
