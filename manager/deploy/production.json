@@ -1,5 +1,5 @@
 {
-  "family": "manager-chialab",
+  "family": "prod-manager-chialab",
   "taskRoleArn": "arn:aws:iam::515626109584:role/prod-manager-chialab-20240508081844423100000004",
   "executionRoleArn": "arn:aws:iam::515626109584:role/prod-manager-chialab-exec-20240508081844422700000001",
   "requiresCompatibilities": ["EC2"],

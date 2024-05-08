@@ -1,5 +1,5 @@
 {
-  "family": "bedita-chialab",
+  "family": "prod-bedita-chialab",
   "taskRoleArn": "arn:aws:iam::515626109584:role/prod-bedita-chialab-20240508081844422800000003",
   "executionRoleArn": "arn:aws:iam::515626109584:role/prod-bedita-chialab-exec-20240508081844422800000002",
   "requiresCompatibilities": ["EC2"],
