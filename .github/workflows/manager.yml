@@ -13,14 +13,14 @@ permissions:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/bedita-deploy.yml
+    uses: ./.github/workflows/manager-deploy.yml
     strategy:
       matrix:
         environment: ['Production', 'Development']
     with:
       AWS_REGION: 'eu-south-1'
       ECS_CLUSTER: 'dreamteam'
-      ENV_NAME: ${{ matrix.environment }}
+      ENV_NAME: Manager ${{ matrix.environment }}
     secrets: inherit
     concurrency:
       group: manager-${{ github.workflow }}-${{ github.ref }}-${{ matrix.environment }}
