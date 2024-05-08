@@ -15,7 +15,7 @@
         {"name": "APP_DEFAULT_LOCALE", "value": "it_IT"},
         {"name": "APP_DEFAULT_TIMEZONE", "value": "Europe/Rome"},
         {"name": "CACHE_REDIS_HOST", "value": "prod-redis.dreamteam.local"},
-        {"name": "BEDITA_API", "value": "https://api.chialab.it"}
+        {"name": "BEDITA_API", "value": "https://api.chialab.dt.bedita.cloud"}
       ],
       "secrets": [
         {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-manager-chialab/security-salt"},
