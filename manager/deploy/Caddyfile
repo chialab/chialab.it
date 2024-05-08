@@ -35,7 +35,7 @@
 }
 
 # Manager
-https://dev-manage.chialab.dt.bedita.cloud, https://manage.chialab.it {
+https://dev-manage.chialab.dt.bedita.cloud, https://manage.chialab.dt.bedita.cloud, https://manage.chialab.it {
 	import common
 
 	php_fastcgi {$PHPFPM_HOST} {
