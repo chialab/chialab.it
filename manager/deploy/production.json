@@ -1,7 +1,7 @@
 {
   "family": "manager-chialab",
-  "taskRoleArn": "TODO",
-  "executionRoleArn": "TODO",
+  "taskRoleArn": "arn:aws:iam::515626109584:role/prod-manager-chialab-20240508081844423100000004",
+  "executionRoleArn": "arn:aws:iam::515626109584:role/prod-manager-chialab-exec-20240508081844422700000001",
   "requiresCompatibilities": ["EC2"],
   "networkMode": "bridge",
   "containerDefinitions": [
@@ -18,8 +18,8 @@
         {"name": "BEDITA_API", "value": "https://api.chialab.it"}
       ],
       "secrets": [
-        {"name": "SECURITY_SALT", "valueFrom": "TODO"},
-        {"name": "BEDITA_API_KEY", "valueFrom": "TODO"}
+        {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-manager-chialab/security-salt"},
+        {"name": "BEDITA_API_KEY", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-manager-chialab/bedita-api-key"}
       ],
       "logConfiguration": {
         "logDriver": "awslogs",

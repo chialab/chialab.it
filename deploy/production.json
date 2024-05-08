@@ -1,7 +1,7 @@
 {
   "family": "bedita-chialab",
-  "taskRoleArn": "TODO",
-  "executionRoleArn": "TODO",
+  "taskRoleArn": "arn:aws:iam::515626109584:role/prod-bedita-chialab-20240508081844422800000003",
+  "executionRoleArn": "arn:aws:iam::515626109584:role/prod-bedita-chialab-exec-20240508081844422800000002",
   "requiresCompatibilities": ["EC2"],
   "networkMode": "bridge",
   "containerDefinitions": [
@@ -12,14 +12,14 @@
       "memory": 512,
       "environment": [
         {"name": "CACHE_REDIS_HOST", "value": "prod-redis.dreamteam.local"},
-        {"name": "S3_BUCKET_NAME", "value": "TODO"},
-        {"name": "CDN_DISTRIBUTION_ID", "value": "TODO"},
-        {"name": "CDN_DISTRIBUTION_URL", "value": "TODO"},
+        {"name": "S3_BUCKET_NAME", "value": "prod-bedita-chialab-assets"},
+        {"name": "CDN_DISTRIBUTION_ID", "value": "E3Q2CJHCPGZBEU"},
+        {"name": "CDN_DISTRIBUTION_URL", "value": "https://d32x3x0le505gt.cloudfront.net"},
         {"name": "MANAGER_URL", "value": "https://manage.chialab.it"}
       ],
       "secrets": [
-        {"name": "DATABASE_URL", "valueFrom": "TODO"},
-        {"name": "SECURITY_SALT", "valueFrom": "TODO"}
+        {"name": "DATABASE_URL", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/database-url"},
+        {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/security-salt"}
       ],
       "logConfiguration": {
         "logDriver": "awslogs",
