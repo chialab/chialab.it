@@ -64,7 +64,7 @@ https://dev-www.chialab.dt.bedita.cloud {
 	import ./Caddyfile.redirects
 	import site "Chialab" "Chialab" "draft" "false"
 }
-https://www.chialab.it {
+https://www.chialab.it, https://www.chialab.dt.bedita.cloud {
 	import common
 
 	import ./Caddyfile.redirects
@@ -77,7 +77,7 @@ https://dev-chialabio.chialab.dt.bedita.cloud {
 
 	import site "OpenSource" "OpenSource" "draft" "false"
 }
-https://www.chialab.io {
+https://www.chialab.io, https://chialabio.chialab.dt.bedita.cloud {
 	import common
 
 	import site "OpenSource" "OpenSource" "on" "false"
