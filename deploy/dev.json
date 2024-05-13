@@ -4,12 +4,15 @@
   "executionRoleArn": "arn:aws:iam::515626109584:role/dev-bedita-chialab-exec-20240412133733976000000005",
   "requiresCompatibilities": ["EC2"],
   "networkMode": "bridge",
+  "cpu": "1024",
+  "memory": "896",
   "containerDefinitions": [
     {
       "name": "app",
       "image": "",
       "essential": true,
-      "memory": 512,
+      "cpu": 512,
+      "memory": 768,
       "environment": [
         {"name": "CACHE_REDIS_HOST", "value": "dev-redis.dreamteam.local"},
         {"name": "S3_BUCKET_NAME", "value": "dev-bedita-chialab-assets"},
@@ -35,10 +38,12 @@
       "name": "web",
       "image": "",
       "essential": true,
+      "cpu": 256,
       "memory": 64,
       "environment": [{ "name": "PHPFPM_HOST", "value": "app:9000" }],
       "portMappings": [
         {
+          "name": "https",
           "containerPort": 443,
           "hostPort": 0,
           "protocol": "tcp"
