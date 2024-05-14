@@ -14,8 +14,8 @@
         {"name": "DEBUG", "value": "0"},
         {"name": "APP_DEFAULT_LOCALE", "value": "it_IT"},
         {"name": "APP_DEFAULT_TIMEZONE", "value": "Europe/Rome"},
-        {"name": "CACHE_REDIS_HOST", "value": "dev-redis.dreamteam.ecs"},
-        {"name": "BEDITA_API", "value": "https://dev-api.chialab.dreamteam.ecs"},
+        {"name": "CACHE_REDIS_HOST", "value": "dev-redis.dreamteam.local"},
+        {"name": "BEDITA_API", "value": "https://dev-api.chialab.dt.bedita.cloud"},
         {"name": "ALERT_TEXT", "value": "Ambiente di DEV"},
         {"name": "ALERT_COLOR", "value": "#498fde"}
       ],

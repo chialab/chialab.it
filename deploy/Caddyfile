@@ -51,7 +51,7 @@
 }
 
 # BEdita API
-https://dev-api.chialab.dt.bedita.cloud, https://api.chialab.dt.bedita.cloud, https://dev-api.chialab.dreamteam.ecs, https://api.chialab.dreamteam.ecs, https://api.chialab.it {
+https://dev-api.chialab.dt.bedita.cloud, https://api.chialab.dt.bedita.cloud, https://api.chialab.it {
 	import common
 
 	import site "BEdita/API" "" "off" "false"
