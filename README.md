@@ -55,6 +55,14 @@ export FRONTEND_PLUGIN="Chialab"
 export THEME="Chialab"
 ```
 
+## Folder structure
+
+-   chialab-design-company [required]
+    -   footer [required]
+    -   .....
+-   chialab-open-source [required]
+    -   .....
+
 ## Migrations
 
 Run cake migrations to create or update the database schema:

@@ -71,7 +71,7 @@ class AppController extends BaseController
 
         $root = $this->Publication->getPublication();
         $menu = $this->Menu->load((string)$root->id);
-        $footer = $this->Menu->load('chialab-design-company-footer')->children;
+        $footer = $this->Menu->load('footer')->children;
         $analytics = Configure::read('Analytics', '');
         $locales = Configure::read('I18n.locales', []);
         $locale = Configure::read('I18n.lang', I18n::getLocale());
