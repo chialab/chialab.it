@@ -21,6 +21,8 @@ jobs:
           tools: 'composer'
           extensions: 'mbstring, intl'
           coverage: 'none'
+        env:
+          COMPOSER_AUTH_JSON: '${{ secrets.COMPOSER_AUTH }}'
       - name: 'Discover Composer cache directory'
         id: 'cachedir'
         run: 'echo "path=$(composer global config cache-dir)" >> $GITHUB_OUTPUT'
@@ -51,6 +53,8 @@ jobs:
           tools: 'composer'
           extensions: 'mbstring, intl'
           coverage: 'none'
+        env:
+          COMPOSER_AUTH_JSON: '${{ secrets.COMPOSER_AUTH }}'
       - name: 'Discover Composer cache directory'
         id: 'cachedir'
         run: 'echo "path=$(composer global config cache-dir)" >> $GITHUB_OUTPUT'
@@ -109,6 +113,8 @@ jobs:
           tools: 'composer'
           extensions: 'mbstring, intl, pdo_mysql'
           coverage: 'none' # Using PHPDBG
+        env:
+          COMPOSER_AUTH_JSON: '${{ secrets.COMPOSER_AUTH }}'
       - name: 'Discover Composer cache directory'
         id: 'cachedir'
         run: 'echo "path=$(composer global config cache-dir)" >> $GITHUB_OUTPUT'
