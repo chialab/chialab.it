@@ -13,7 +13,7 @@ WORKDIR /app/
 COPY --chown=www-data:www-data ./composer.json ./composer.lock /app/
 COPY --chown=www-data:www-data ./plugins/Chialab/composer.json /app/plugins/Chialab/
 COPY --chown=www-data:www-data ./plugins/OpenSource/composer.json /app/plugins/OpenSource/
-RUN composer install --no-dev --prefer-dist --no-interaction
+RUN --mount=type=secret,id=composer,required=true,target=auth.json composer install --no-dev --prefer-dist --no-interaction
 
 # Add sources and dump Composer autoloader
 COPY --chown=www-data:www-data ./ /app/
