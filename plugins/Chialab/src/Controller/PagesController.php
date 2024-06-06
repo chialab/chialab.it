@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Chialab\Controller;
 
+use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
@@ -14,7 +15,9 @@ use Chialab\FrontendKit\Traits\GenericActionsTrait;
  */
 class PagesController extends AppController
 {
-    use GenericActionsTrait;
+    use GenericActionsTrait {
+        fallback as private _fallback;
+    }
 
     /**
      * Load home objects.
@@ -59,5 +62,51 @@ class PagesController extends AppController
         }
 
         throw new NotFoundException('Missing url');
+    }
+
+    /**
+     * Generic object view.
+     *
+     * @param string $path Object path.
+     * @return \Cake\Http\Response
+     */
+    public function fallback(string $path): Response
+    {
+        $parts = array_filter(explode('/', $path));
+        $object = $this->Objects->loadObject(array_pop($parts), 'objects');
+
+        // include folders from redirect first children
+        $include = ['cosacome', 'umani'];
+
+        // redirect to first children of folder, if it is in the include list
+        if ($object->type == 'folders' && in_array($object->uname, $include)) {
+            $fullObject = $this->Objects->loadObject($object->uname, 'folders', ['include' => 'children|1']);
+
+            if (!empty($fullObject->children)) {
+                $first_children = $fullObject->children->toArray()[0];
+
+                return $this->redirect(['_name' => 'pages:objects', 'uname' => $first_children->uname]);
+            }
+        }
+
+        try {
+            return $this->_fallback($path);
+        } catch (RecordNotFoundException $e) {
+            // If path is wrong, but the requested object exists, redirect to `/objects/{uname}`.
+            // First, read last path element.
+            $parts = array_filter(explode('/', $path));
+            $object = array_pop($parts);
+            try {
+                // Now, try to load the object.
+                $object = $this->Objects->loadObject($object);
+
+                // If we reach this point, the object does exist, but the path at which it was being accessed was wrong.
+                // Try to redirect to `/objects/{object}` to see if we can display it somehow.
+                return $this->redirect(['_name' => 'pages:objects', 'uname' => $object->uname]);
+            } catch (RecordNotFoundException $err) {
+                // No object exists under this name. Re-throw original exception.
+                throw $e;
+            }
+        }
     }
 }

@@ -3,6 +3,15 @@ a {
     text-decoration: none;
 }
 
+.toc a {
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+.toc a[aria-current] {
+    color: var(--color-accent);
+}
+
 .link--underline:hover {
     text-decoration: underline;
     text-decoration-color: var(--color-accent);

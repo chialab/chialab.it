@@ -60,6 +60,13 @@ article header {
     text-rendering: optimizelegibility;
 }
 
+.body blockquote {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-4);
+    font-weight: 300;
+    font-style: italic;
+}
+
 .claim {
     margin: 0;
     font-family: var(--font-serif);

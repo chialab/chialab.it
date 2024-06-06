@@ -1,0 +1,33 @@
+<header class="w-full">
+    {{ element('claim')|raw }}
+</header>
+<main class="w-full">
+    {% if parent is defined and parent.get('children')|length > 0 %}
+        {{ element('toc', { items: parent.children, current: object })|raw }}
+    {% endif %}
+    <section class="w-full">
+        <h1 class="serif italic regular f-7">{{ object.title }}</h1>
+        {% if object.get('description') is defined %}
+            <p class="serif regular f-6">{{ object.description|striptags|raw }}</p>
+        {% endif %}
+        {% if object.get('children')|length > 0 %}
+            <div class="w-full column">
+                {% for item in object.children %}
+                    <h2 class="serif regular f-6">
+                        {{ item.title }}
+                    </h2>
+                    {% if item.get('body') is defined %}
+                        <div class="m-0 serif f-3 body">{{ item.get('body')|raw }}</div>
+                    {% endif %}
+
+                    {% if item.get('see_also')|default([])|length > 0 %}
+                        <div class="row w-full">
+                            {% for child in item.see_also %}
+                                {{ element('card-small', { class: item.see_also|length < 4 ? 'h-2 flex-1' : 'h-1-half flex-1', object: child })|raw }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+        {% endif %}
+    </section>
+</main>

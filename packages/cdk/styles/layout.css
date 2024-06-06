@@ -3,3 +3,11 @@
     grid-template-columns: repeat(auto-fill, minmax(calc(var(--column) * 1.5), 1fr));
     grid-gap: var(--gap);
 }
+
+.h-1-half {
+    --h-span: 1.5 !important;
+}
+
+.flex-1 {
+    flex: 1;
+}
