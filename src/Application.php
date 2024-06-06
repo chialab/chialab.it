@@ -33,6 +33,7 @@ use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Chialab\FrontendKit\Authentication\AuthenticationServiceProvider;
 use Chialab\FrontendKit\Middleware\ExceptionWrapperMiddleware;
+use Chialab\FrontendKit\Middleware\LocaleMiddleware;
 use Chialab\FrontendKit\Middleware\StatusMiddleware;
 
 /**
@@ -107,6 +108,8 @@ class Application extends BaseApplication
 
             // Add routing middleware.
             ->add(new RoutingMiddleware($this))
+
+            ->add(new LocaleMiddleware())
 
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()
