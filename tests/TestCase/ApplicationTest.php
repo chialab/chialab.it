@@ -29,6 +29,7 @@ use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 use Chialab\FrontendKit\Middleware\ExceptionWrapperMiddleware;
+use Chialab\FrontendKit\Middleware\LocaleMiddleware;
 use Chialab\FrontendKit\Middleware\StatusMiddleware;
 
 /**
@@ -141,6 +142,7 @@ class ApplicationTest extends TestCase
             AssetMiddleware::class,
             StatusMiddleware::class,
             RoutingMiddleware::class,
+            LocaleMiddleware::class,
             BodyParserMiddleware::class,
             CsrfProtectionMiddleware::class,
         ];
