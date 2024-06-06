@@ -44,6 +44,7 @@ class AppController extends BaseController
                 'folders' => ['include' => 'children,parents'],
                 'news' => ['include' => 'poster|1,has_media,see_also'],
                 'documents' => ['include' => 'poster|1,has_clients,see_also'],
+                'galleries' => ['include' => 'poster|1,has_media'],
             ],
         ]);
         $this->loadComponent('Chialab/FrontendKit.Menu');

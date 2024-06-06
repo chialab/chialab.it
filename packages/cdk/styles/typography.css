@@ -111,12 +111,6 @@ article header {
     line-height: 1.5;
 }
 
-.body blockquote {
-    margin: var(--gap) 0 var(--gap) calc(var(--gap) * 4);
-    font-size: var(--font-size-4);
-    font-style: italic;
-}
-
 .body h1,
 .body h2,
 .body h3,
@@ -145,4 +139,9 @@ article header {
 
 .text-underline {
     text-decoration: underline;
+}
+
+.slideshow__arrows {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-2);
 }

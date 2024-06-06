@@ -38,6 +38,7 @@ class PagesController extends AppController
             'has_media' => 3,
             'see_also' => 3,
         ]);
+
         $treeLoader = new TreeLoader($loader);
         $folders = $treeLoader->loadMenu((string)$root->id)->children;
 
@@ -78,7 +79,7 @@ class PagesController extends AppController
         // include folders from redirect first children
         $include = ['cosacome', 'umani'];
 
-        // redirect to first children of folder, if it is in the include list
+        // redirect to first children of folder, if it's in the include list
         if ($object->type == 'folders' && in_array($object->uname, $include)) {
             $fullObject = $this->Objects->loadObject($object->uname, 'folders', ['include' => 'children|1']);
 
