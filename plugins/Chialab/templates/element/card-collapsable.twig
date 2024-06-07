@@ -1,14 +1,20 @@
 <cl-card-details class="card bt-1 w-4 column gap-0 bg-neutral" title="{{ object.title|striptags|escape('html_attr')|raw }}">
     {% if Poster.exists(object) %}
-        <div class="card__cover" slot="cover">
+        <div class="w-full card__cover" slot="cover">
             <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
         </div>
     {% endif %}
     <div class="card__details sans w-full column gap-xs" slot="details">
+        {% if object.has('email') is not empty %}
+            <span class="mono f-s text-accent">{{ object.email|raw }}</span>
+        {% endif %}
         {% if object.get('has_clients') is not empty %}
             <span class="mono f-s text-accent bold card__title">{{ (object.has_clients|first).title|raw }}</span>
         {% endif %}
-        <h3 class="f-5 m-0 regular card__title">{{ object.title|raw }}</h3>
+        <span class="f-5 m-0 regular card__title">{{ object.title|raw }}</span>
+            {% if object.has('person_title') is not empty %}
+                <span class="f-3 body">{{ object.person_title|raw }}</span>
+            {% endif %}
             <div class="card__description column">
                 {% if object.get('description') is not empty %}
                     <div class="w-full f-3 body">
