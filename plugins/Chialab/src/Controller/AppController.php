@@ -46,6 +46,9 @@ class AppController extends BaseController
                 'documents' => ['include' => 'poster|1,has_clients,see_also'],
                 'galleries' => ['include' => 'poster|1,has_media'],
             ],
+            'autoHydrateAssociations' => [
+                'see_also' => 2,
+            ],
         ]);
         $this->loadComponent('Chialab/FrontendKit.Menu');
         $this->loadComponent('Chialab/FrontendKit.Publication', [

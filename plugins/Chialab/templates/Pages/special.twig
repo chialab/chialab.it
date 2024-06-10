@@ -53,10 +53,11 @@
                                 {% if item.get('body') is defined %}
                                     <div class="m-0 mb-2 serif f-3 body">{{ item.get('body')|raw }}</div>
                                 {% endif %}
-                                {% if item.get('see_also')|default([])|length > 0 %}
+                                {% set len = item.get('see_also')|default([])|length %}
+                                {% if len > 0 %}
                                     <div class="grid w-full">
                                         {% for child in item.see_also %}
-                                            {{ element('card-small', { class: item.see_also|length < 4 ? 'h-1-half w-3' : 'h-1-half w-2', object: child })|raw }}
+                                            {{ element('card-small', { class: len < 4 ? 'h-1-half w-3' : 'h-1-half w-2', object: child })|raw }}
                                         {% endfor %}
                                     </div>
                                 {% endif %}
