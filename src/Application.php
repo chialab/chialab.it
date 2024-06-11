@@ -72,6 +72,7 @@ class Application extends BaseApplication
         $this->addPlugin('BEdita/AWS');
         $this->addPlugin('BEdita/Placeholders');
         $this->addPlugin('BEdita/I18n');
+        $this->addPlugin('BEdita/Galleries');
         $this->addPlugin('Chialab/FrontendKit');
 
         if (Configure::check('FrontendPlugin')) {
@@ -104,7 +105,7 @@ class Application extends BaseApplication
                 'cacheTime' => Configure::read('Asset.cacheTime'),
             ]))
 
-            ->add(new StatusMiddleware(['BEdita/Core']))
+            ->add(new StatusMiddleware(['BEdita/Core', 'BEdita/Galleries']))
 
             // Add routing middleware.
             ->add(new RoutingMiddleware($this))
