@@ -1,0 +1,8 @@
+<nav class="f-s column toc gap-s">
+    {% for item in items %}
+        <a href="{{ Url.build({ _name: 'pages:objects', _entity: item }) }}"
+            {% if current != null and item.get('path') in current.path %}aria-current="page"{% endif %}
+            class="sans">{{ item.title }}
+        </a>
+    {% endfor %}
+</nav>

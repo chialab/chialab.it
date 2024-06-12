@@ -72,6 +72,19 @@
     },
     {
       "is_abstract": false,
+      "singular": "gallery",
+      "name": "galleries",
+      "description": "Gallery model",
+      "associations": ["Categories", "Tags"],
+      "hidden": null,
+      "enabled": true,
+      "translation_rules": null,
+      "is_translatable": true,
+      "table": "BEdita/Core.Objects",
+      "parent_name": "objects"
+    },
+    {
+      "is_abstract": false,
       "singular": "image",
       "name": "images",
       "description": "Image model",
@@ -253,7 +266,7 @@
       "inverse_name": "media_of",
       "inverse_label": "Media of",
       "description": "Object has media",
-      "left": ["documents", "events", "links", "locations", "news_item", "profiles"],
+      "left": ["documents", "events", "links", "locations", "galleries", "news_item", "profiles"],
       "right": ["media"]
     },
     {
