@@ -16,11 +16,13 @@ declare(strict_types=1);
  */
 namespace App;
 
+use App\Command\ImportOld;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Authorization\Middleware\AuthorizationMiddleware;
 use BEdita\API\App\BaseApplication;
 use BEdita\API\Middleware\ApplicationMiddleware;
 use BEdita\API\Middleware\LoggedUserMiddleware;
+use Cake\Console\CommandCollection;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Datasource\FactoryLocator;
@@ -44,6 +46,15 @@ use Chialab\FrontendKit\Middleware\StatusMiddleware;
  */
 class Application extends BaseApplication
 {
+    /**
+     * @inheritDoc
+     */
+    public function console(CommandCollection $commands): CommandCollection
+    {
+        return parent::console($commands)
+            ->add('import:old', ImportOld::class);
+    }
+
     /**
      * @inheritDoc
      */
