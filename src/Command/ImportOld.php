@@ -71,41 +71,62 @@ class ImportOld extends Command
      */
     public function initialize(): void
     {
-        foreach (['Folders', 'Galleries'] as $tableName) {
+        foreach (['Folders', 'Galleries', 'Streams'] as $tableName) {
             $this->{$tableName} = $this->fetchTable($tableName); // @phpstan-ignore-line
         }
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @throws \Exception Transaction error
      */
     public function execute(Arguments $args, ConsoleIo $io): int|null
     {
         $this->io = $io;
         $this->args = $args;
-        $this->sourceConnection = ConnectionManager::get((string)$args->getOption('source-connection'));
-        if (!$this->sourceConnection instanceof Connection) {
+        $sourceConnection = ConnectionManager::get((string)$args->getOption('source-connection'));
+        if (!$sourceConnection instanceof Connection) {
             throw new UnexpectedValueException(
                 sprintf(
                     'Invalid connection type: expected "%s", got "%s"',
                     Connection::class,
-                    get_debug_type($this->sourceConnection),
+                    get_debug_type($sourceConnection),
                 )
             );
         }
 
-        $result = $this->Folders->getConnection()->transactional(function (): int {
-            $galleries = array_map(
-                fn (array $gallery): ObjectEntity|bool => $this->importGallery($gallery),
-                $this->getGalleries(),
+        $this->sourceConnection = $sourceConnection;
+        $i = 0;
+        foreach ($this->mediaIterator() as $data) {
+            $result = $this->Folders->getConnection()->transactional(
+                fn (): Media|bool => $this->findOrCreateMedia(
+                    $data['original_uname'],
+                    $data,
+                    $data['type_name'],
+                    !empty($data['stream_hash_md5']) && $this->args->getOption('download'),
+                ),
             );
-            $successfulGalleries = array_filter($galleries);
-            $this->io->info(sprintf('Imported %d galleries out of %d', count($successfulGalleries), count($galleries)));
+            if ($result === false) {
+                $this->io->error(sprintf('Error importing media "%s"', $data['original_uname']));
+                continue;
+            }
 
-            return static::CODE_SUCCESS;
-        });
+            $i++;
+            $this->io->verbose(sprintf('(%d) Imported media "%s"', $i, $data['original_uname']));
+            if ($i % 100 === 0) {
+                $this->io->info(sprintf('Imported %d media', $i));
+            }
+        }
 
-        return (int)$result;
+        $galleries = array_map(
+            fn (array $gallery): ObjectEntity|bool => $this->importGallery($gallery),
+            $this->getGalleries(),
+        );
+        $successfulGalleries = array_filter($galleries);
+        $this->io->info(sprintf('Imported %d galleries out of %d', count($successfulGalleries), count($galleries)));
+
+        return static::CODE_SUCCESS;
     }
 
     /**
@@ -113,6 +134,7 @@ class ImportOld extends Command
      *
      * @param Be3Gallery $data Gallery data
      * @return \BEdita\Core\Model\Entity\ObjectEntity|false `false` if the import failed (see log messages)
+     * @throws \Exception Transaction error
      */
     protected function importGallery(array $data): ObjectEntity|false
     {
@@ -121,15 +143,17 @@ class ImportOld extends Command
             return false;
         }
 
-        if (empty($gallery->get('gallery_contains'))) {
+        if (empty($gallery->get('has_media'))) {
             $sourceAttaches = $this->getBe3RelatedMedia($data['original_id'], 'attached_to', (string)$this->args->getOption('download-baseurl'));
             if (!empty($sourceAttaches)) {
                 $attaches = array_map(
-                    fn (array $object): Media|bool => $this->findOrCreateMedia(
-                        $object['original_uname'],
-                        $object,
-                        $object['type_name'],
-                        !empty($object['stream_hash_md5']) && $this->args->getOption('download'),
+                    fn (array $object): Media|bool => $this->Folders->getConnection()->transactional(
+                        fn (): Media|bool => $this->findOrCreateMedia(
+                            $object['original_uname'],
+                            $object,
+                            $object['type_name'],
+                            !empty($object['stream_hash_md5']) && $this->args->getOption('download'),
+                        ),
                     ),
                     $sourceAttaches,
                 );
@@ -140,7 +164,7 @@ class ImportOld extends Command
                     return false;
                 }
 
-                $action = new AddRelatedObjectsAction(['association' => $this->Galleries->getAssociation('GalleryContains')]);
+                $action = new AddRelatedObjectsAction(['association' => $this->Galleries->getAssociation('HasMedia')]);
                 $action(['entity' => $gallery, 'relatedEntities' => $successfulAttaches]);
             }
         }
@@ -165,9 +189,17 @@ class ImportOld extends Command
                 'created' => 'o.created',
                 'modified' => 'o.modified',
                 'extra' => new FunctionExpression('JSON_MERGE_PATCH', [
-                    new FunctionExpression('COALESCE', [
-                        'obp.property' => 'identifier',
-                        new FunctionExpression('JSON_OBJECT'),
+                    // MySQL throws if `p.name` is null (object has no properties)
+                    // We handle it by IFNULLing to a specific property name, which we then remove from the JSON object
+                    new FunctionExpression('JSON_REMOVE', [
+                        new FunctionExpression('JSON_OBJECTAGG', [
+                            new FunctionExpression('IFNULL', [
+                                'p.name' => 'identifier',
+                                'no__properties__',
+                            ]),
+                            'obp.property_value' => 'identifier',
+                        ]),
+                        '$.no__properties__',
                     ]),
                     new FunctionExpression('JSON_OBJECT', [
                         'rights', 'o.rights' => 'identifier',
@@ -189,18 +221,13 @@ class ImportOld extends Command
                 ],
                 'obp' => [
                     'type' => 'LEFT',
-                    'table' => $this->sourceConnection->newQuery()
-                        ->select([
-                            'id' => 'obp.object_id',
-                            'property' => new FunctionExpression('JSON_OBJECTAGG', [
-                                'p.name' => 'identifier',
-                                'obp.property_value' => 'identifier',
-                            ]),
-                        ])
-                        ->from(['p' => 'properties'])
-                        ->innerJoin(['obp' => 'object_properties'], 'obp.property_id = p.id')
-                        ->group('obp.object_id'),
-                    'conditions' => 'obp.id = o.id',
+                    'table' => 'object_properties',
+                    'conditions' => 'obp.object_id = o.id',
+                ],
+                'p' => [
+                    'type' => 'LEFT',
+                    'table' => 'properties',
+                    'conditions' => 'p.id = obp.property_id',
                 ],
             ])
             ->group('o.id')
@@ -214,18 +241,34 @@ class ImportOld extends Command
     }
 
     /**
-     * Get related media from a BEdita 3 database.
+     * Get media as iterable.
      *
-     * This method is specifically for relations with media objects, and returns more information about the related objects
-     * than the {@see \App\Command\ImportBe3Trait::getSourceRelatedObjects()} method.
+     * @return iterable<Be3Media>
+     */
+    protected function mediaIterator(): iterable
+    {
+        $lastId = 0;
+        while (true) {
+            $media = $this->getMedia($lastId);
+            if (empty($media)) {
+                break;
+            }
+
+            $lastId = $media[count($media) - 1]['original_id'];
+            yield from $media;
+        }
+    }
+
+    /**
+     * Paginate through all media.
      *
-     * @param int $objectId Object ID
-     * @param string $relation Relation name
-     * @param string|null $providerUrlPrefix Prefix to prepend to the provider URL when it's a relative URL
+     * @param int $fromId Media ID to start from
+     * @param int $limit Amount of media objects to fetch
      * @return array<Be3Media>
      */
-    protected function getBe3RelatedMedia(int $objectId, string $relation, string|null $providerUrlPrefix = null): array
+    protected function getMedia(int $fromId = 0, int $limit = 100): array
     {
+        $providerUrlPrefix = (string)$this->args->getOption('download-baseurl');
         $query = $this->sourceConnection->newQuery();
         $media = $query
             ->select([
@@ -238,27 +281,24 @@ class ImportOld extends Command
                 'status' => 'o.status',
                 'created' => 'o.created',
                 'modified' => 'o.modified',
-                'relation_params' => 'obr.params',
                 'image_width' => 'i.width',
                 'image_height' => 'i.height',
                 'provider' => 'v.provider',
                 'provider_uid' => 'v.video_uid',
                 'provider_thumbnail' => 'v.thumbnail',
-                'provider_url' => $providerUrlPrefix === null
-                    ? 's.uri'
-                    : new FunctionExpression('IF', [
-                        's.uri IS NULL' => 'literal',
-                        'null' => 'literal',
-                        new FunctionExpression('IF', [
-                            'LEFT(s.uri, 4) = "http"' => 'literal',
-                            's.uri' => 'literal',
-                            new FunctionExpression('CONCAT', [
-                                rtrim($providerUrlPrefix, '/'),
-                                '/',
-                                "TRIM(LEADING '/' FROM s.uri)" => 'literal',
-                            ]),
+                'provider_url' => new FunctionExpression('IF', [
+                    's.uri IS NULL' => 'literal',
+                    'null' => 'literal',
+                    new FunctionExpression('IF', [
+                        'LEFT(s.uri, 4) = "http"' => 'literal',
+                        's.uri' => 'literal',
+                        new FunctionExpression('CONCAT', [
+                            rtrim($providerUrlPrefix, '/'),
+                            '/',
+                            "TRIM(LEADING '/' FROM s.uri)" => 'literal',
                         ]),
                     ]),
+                ]),
                 'provider_extra' => new FunctionExpression('IF', [
                     'c.duration IS NULL' => 'literal',
                     'null' => 'literal',
@@ -266,14 +306,22 @@ class ImportOld extends Command
                         'duration', 'c.duration' => 'literal',
                     ]),
                 ]),
-                'name' => new FunctionExpression('COALESCE', [
-                    's.original_name' => 'identifier',
-                    's.name' => 'identifier',
-                ]),
+                'name' => new FunctionExpression('COALESCE', ['s.original_name' => 'identifier', 's.name' => 'identifier']),
+                'stream_mime_type' => 's.mime_type',
+                'stream_file_size' => 's.file_size',
+                'stream_hash_md5' => 's.hash_file',
                 'extra' => new FunctionExpression('JSON_MERGE_PATCH', [
-                    new FunctionExpression('COALESCE', [
-                        'obp.properties' => 'identifier',
-                        new FunctionExpression('JSON_OBJECT'),
+                    // MySQL throws if `p.name` is null (object has no properties)
+                    // We handle it by IFNULLing to a specific property name, which we then remove from the JSON object
+                    new FunctionExpression('JSON_REMOVE', [
+                        new FunctionExpression('JSON_OBJECTAGG', [
+                            new FunctionExpression('IFNULL', [
+                                'p.name' => 'identifier',
+                                'no__properties__',
+                            ]),
+                            'obp.property_value' => 'identifier',
+                        ]),
+                        '$.no__properties__',
                     ]),
                     new FunctionExpression('JSON_OBJECT', [
                         'rights', 'o.rights' => 'identifier',
@@ -283,25 +331,14 @@ class ImportOld extends Command
                         'note', 'o.note' => 'identifier',
                     ]),
                 ]),
-                'stream_mime_type' => 's.mime_type',
-                'stream_file_size' => 's.file_size',
-                'stream_hash_md5' => 's.hash_file',
             ])
             ->from(['o' => 'objects'])
             ->join([
-                'obr' => [
-                    'table' => 'object_relations',
-                    'conditions' => [
-                        'obr.object_id' => $objectId,
-                        'obr.switch' => $relation,
-                        'obr.id = o.id',
-                    ],
-                ],
                 'ot' => [
                     'table' => 'object_types',
                     'conditions' => [
                         'ot.id = o.object_type_id',
-                        'ot.module_name' => 'multimedia',
+                        'ot.name IN' => ['b_e_file', 'image', 'audio', 'video', 'caption'], // there is only one "application" and it's a Flash file :')
                     ],
                 ],
                 's' => [
@@ -326,26 +363,30 @@ class ImportOld extends Command
                 ],
                 'obp' => [
                     'type' => 'LEFT',
-                    'table' => $this->sourceConnection->newQuery()
-                        ->select([
-                            'id' => 'op.object_id',
-                            'properties' => new FunctionExpression('JSON_OBJECTAGG', [
-                                'p.name' => 'identifier',
-                                'op.property_value' => 'identifier',
-                            ]),
-                        ])
-                        ->from(['op' => 'object_properties'])
-                        ->innerJoin(['p' => 'properties'], 'p.id = op.property_id')
-                        ->group('op.object_id'),
-                    'conditions' => 'obp.id = o.id',
+                    'table' => 'object_properties',
+                    'conditions' => 'obp.object_id = o.id',
+                ],
+                'p' => [
+                    'type' => 'LEFT',
+                    'table' => 'properties',
+                    'conditions' => 'p.id = obp.property_id',
                 ],
             ])
-            ->orderAsc('obr.priority')
+            ->where(['o.id >' => $fromId])
+            ->group(['o.id'])
+            ->limit($limit)
+            ->orderAsc('o.id')
             ->execute()
             ->fetchAll(PDO::FETCH_ASSOC);
         if ($media === false) {
-            throw new RuntimeException(sprintf('Error retrieving "%s" objects related to object %d', $relation, $objectId));
+            throw new RuntimeException('Error retrieving media');
         }
+
+        /** @var array<Be3Media> $media */
+        $media = array_map(
+            fn (array $object): array => $object + ['relation_params' => null],
+            $media,
+        );
 
         return $media;
     }
@@ -362,7 +403,7 @@ class ImportOld extends Command
         /** @var \BEdita\Core\Model\Entity\ObjectEntity|null $gallery */
         $gallery = $this->Galleries->find()
             ->where(compact('uname'))
-            ->contain(['GalleryContains'])
+            ->contain(['HasMedia'])
             ->first();
         if ($gallery !== null) {
             if (Hash::get((array)$gallery->extra, 'imported.uname') === $data['original_uname'] && Hash::get((array)$gallery->extra, 'imported.id') === $data['original_id'] && $gallery->type === 'galleries') {
@@ -379,7 +420,7 @@ class ImportOld extends Command
         $gallery = $this->Galleries->newEntity(compact('uname'));
         $gallery->created_by = UsersTable::ADMIN_USER;
         $gallery->modified_by = UsersTable::ADMIN_USER;
-        $gallery = $this->Galleries->patchEntity($gallery, array_merge($data, [
+        $gallery = $this->Galleries->patchEntity($gallery, array_merge_recursive($data, [
             'extra' => [
                 'imported' => [
                     'id' => $data['original_id'],
