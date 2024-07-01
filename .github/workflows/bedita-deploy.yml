@@ -15,8 +15,6 @@ on:
         required: true
       NPMRC:
         required: true
-      COMPOSER_AUTH:
-        required: true
 
 jobs:
   deploy:
@@ -72,7 +70,6 @@ jobs:
           cache-from: type=registry,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
           secrets: |
             "npm=${{ secrets.NPMRC }}"
-            "composer=${{ secrets.COMPOSER_AUTH }}"
 
       - name: Build and push "web" image
         uses: docker/build-push-action@v5
@@ -86,7 +83,6 @@ jobs:
           cache-from: type=registry,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
           secrets: |
             "npm=${{ secrets.NPMRC }}"
-            "composer=${{ secrets.COMPOSER_AUTH }}"
 
       - name: Fill in the "app" container definition in the Amazon ECS task definition
         id: render-app-container
