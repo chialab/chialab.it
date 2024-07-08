@@ -28,4 +28,7 @@
             <property name="nullPosition" type="string" value="last"/>
         </properties>
     </rule>
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <severity>0</severity>
+    </rule>
 </ruleset>
