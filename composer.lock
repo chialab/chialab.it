@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8adcf4d62ba7d5da826fa9d20546f543",
+    "content-hash": "3c4fecb8a10bf64ec31ef634b4662c6b",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -338,44 +338,6 @@
                 "source": "https://github.com/bedita/bedita"
             },
             "time": "2024-04-19T12:32:15+00:00"
-        },
-        {
-            "name": "bedita/galleries",
-            "version": "2.0.1",
-            "source": {
-                "type": "git",
-                "url": "git@gitlab.com:bedita/galleries.git",
-                "reference": "fbf3848221b7fcdbeb3d90479a7860d8fafc290b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/23933078/packages/composer/archives/bedita/galleries.zip?sha=fbf3848221b7fcdbeb3d90479a7860d8fafc290b",
-                "reference": "fbf3848221b7fcdbeb3d90479a7860d8fafc290b",
-                "shasum": ""
-            },
-            "require": {
-                "bedita/core": "^5.0",
-                "cakephp/cakephp": "^4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "cakephp-plugin",
-            "autoload": {
-                "psr-4": {
-                    "BEdita\\Galleries\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Cake\\Test\\": "vendor/cakephp/cakephp/tests/",
-                    "BEdita\\Galleries\\Test\\": "tests/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Galleries plugin for BEdita."
         },
         {
             "name": "bedita/i18n",

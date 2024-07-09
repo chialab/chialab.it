@@ -4,6 +4,8 @@ use BEdita\AWS\Filesystem\Adapter\S3Adapter;
 use BEdita\Core\Cache\Engine\LayeredEngine;
 use Cake\Cache\Engine\FileEngine;
 use Cake\Cache\Engine\RedisEngine;
+use Cake\Database\Connection;
+use Cake\Database\Driver\Mysql;
 
 return [
     'debug' => filter_var(env('DEBUG', false), FILTER_VALIDATE_BOOLEAN),
@@ -17,6 +19,20 @@ return [
             'url' => env('DATABASE_URL', null),
             'ssl_ca' => env('DATABASE_SSL_CA_PATH', null),
             'log' => false,
+        ],
+
+        'old-import' => [
+            'className' => Connection::class,
+            'driver' => Mysql::class,
+            'persistent' => false,
+            'timezone' => 'UTC',
+            'flags' => [],
+            'cacheMetadata' => true,
+            'log' => false,
+            'quoteIdentifiers' => false,
+
+            'url' => env('DATABASE_IMPORT_URL', null),
+            'ssl_ca' => env('DATABASE_SSL_CA_PATH', null),
         ],
     ],
 

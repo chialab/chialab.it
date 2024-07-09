@@ -22,6 +22,7 @@
       ],
       "secrets": [
         {"name": "DATABASE_URL", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/database-url"},
+        {"name": "DATABASE_IMPORT_URL", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/database-import-url"},
         {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/security-salt"}
       ],
       "logConfiguration": {

@@ -313,6 +313,24 @@
       "description": "Linked resources",
       "left": ["objects"],
       "right": ["objects"]
+    },
+    {
+      "name": "team",
+      "label": "Team",
+      "inverse_name": "working_on",
+      "inverse_label": "Working on",
+      "description": "Project team",
+      "left": ["documents"],
+      "right": ["profiles"]
+    },
+    {
+      "name": "featured",
+      "label": "Featured content",
+      "inverse_name": "featured_in",
+      "inverse_label": "Featured in",
+      "description": "Content is featured prominently",
+      "left": ["folders"],
+      "right": ["objects"]
     }
   ],
   "property_types": [
@@ -356,6 +374,22 @@
       "read_only": false,
       "object": "documents",
       "property": "string"
+    },
+    {
+      "name": "start_date",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "documents",
+      "property": "datetime"
+    },
+    {
+      "name": "end_date",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "documents",
+      "property": "datetime"
     }
   ],
   "categories": []

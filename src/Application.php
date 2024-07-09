@@ -16,11 +16,13 @@ declare(strict_types=1);
  */
 namespace App;
 
+use App\Command\ImportOld;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Authorization\Middleware\AuthorizationMiddleware;
 use BEdita\API\App\BaseApplication;
 use BEdita\API\Middleware\ApplicationMiddleware;
 use BEdita\API\Middleware\LoggedUserMiddleware;
+use Cake\Console\CommandCollection;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Datasource\FactoryLocator;
@@ -44,6 +46,15 @@ use Chialab\FrontendKit\Middleware\StatusMiddleware;
  */
 class Application extends BaseApplication
 {
+    /**
+     * @inheritDoc
+     */
+    public function console(CommandCollection $commands): CommandCollection
+    {
+        return parent::console($commands)
+            ->add('import:old', ImportOld::class);
+    }
+
     /**
      * @inheritDoc
      */
@@ -72,7 +83,6 @@ class Application extends BaseApplication
         $this->addPlugin('BEdita/AWS');
         $this->addPlugin('BEdita/Placeholders');
         $this->addPlugin('BEdita/I18n');
-        $this->addPlugin('BEdita/Galleries');
         $this->addPlugin('Chialab/FrontendKit');
 
         if (Configure::check('FrontendPlugin')) {
@@ -105,7 +115,7 @@ class Application extends BaseApplication
                 'cacheTime' => Configure::read('Asset.cacheTime'),
             ]))
 
-            ->add(new StatusMiddleware(['BEdita/Core', 'BEdita/Galleries']))
+            ->add(new StatusMiddleware(['BEdita/Core']))
 
             // Add routing middleware.
             ->add(new RoutingMiddleware($this))

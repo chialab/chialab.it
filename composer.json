@@ -4,20 +4,16 @@
   "homepage": "https://www.bedita.com/",
   "type": "project",
   "license": "MIT",
-  "repositories": {
-    "gitlab.com/112642": {
-      "type": "composer",
-      "url": "https://gitlab.com/api/v4/group/112642/-/packages/composer/packages.json"
-    }
-  },
   "require": {
     "php": ">=8.2",
+    "ext-curl": "*",
+    "ext-dom": "*",
     "ext-intl": "*",
     "ext-json": "*",
+    "ext-pdo": "*",
     "bedita/api": "^5.0",
     "bedita/aws": "^3.0",
     "bedita/core": "^5.0",
-    "bedita/galleries": "^2.0",
     "bedita/i18n": "^4.0",
     "bedita/placeholders": "^2.0",
     "cakephp/cakephp": "^4.0",
@@ -61,7 +57,6 @@
     "post-create-project-cmd": "App\\Console\\Installer::postInstall",
     "migrate": [
       "bin/cake migrations migrate -p BEdita/Core",
-      "bin/cake migrations migrate -p BEdita/Galleries",
       "bin/cake migrations migrate -p BEdita/Placeholders",
       "bin/cake migrations migrate",
       "bin/cake cache clear_all",
