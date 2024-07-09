@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - .github/workflows/manager*
-      - manager/**
 
 permissions:
   id-token: write
