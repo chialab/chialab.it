@@ -194,6 +194,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\Profile|null $author */
         $author = $this->Profiles->find()
             ->where(compact('uname'))
+            ->contain(['Parents'])
             ->first();
         if ($author !== null) {
             if (Hash::get((array)$author->extra, 'imported.uname') === $data['original_uname'] && $author->type === 'profiles') {
@@ -226,6 +227,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\Link|null $link */
         $link = $this->Links->find()
             ->where(compact('uname'))
+            ->contain(['Parents'])
             ->first();
         if ($link !== null) {
             if (Hash::get((array)$link->extra, 'imported.uname') === $data['original_uname'] && Hash::get((array)$link->extra, 'imported.id') === $data['original_id'] && $link->type === 'links') {
@@ -258,7 +260,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\ObjectEntity|null $gallery */
         $gallery = $this->Galleries->find()
             ->where(compact('uname'))
-            ->contain(['HasMedia'])
+            ->contain(['HasMedia', 'Parents'])
             ->first();
         if ($gallery !== null) {
             if (Hash::get((array)$gallery->extra, 'imported.uname') === $data['original_uname'] && Hash::get((array)$gallery->extra, 'imported.id') === $data['original_id'] && $gallery->type === 'galleries') {
@@ -291,7 +293,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\ObjectEntity|null $event */
         $event = $this->Events->find()
             ->where(compact('uname'))
-            ->contain(['DateRanges'])
+            ->contain(['DateRanges', 'Parents'])
             ->first();
         if ($event !== null) {
             if (Hash::get((array)$event->extra, 'imported.uname') === $data['original_uname'] && $event->type === 'events') {
@@ -336,6 +338,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\Location|null $location */
         $location = $this->Locations->find()
             ->where(compact('uname'))
+            ->contain(['Parents'])
             ->first();
         if ($location !== null) {
             if (Hash::get((array)$location->extra, 'imported.uname') === $data['original_uname'] && $location->type === 'locations') {
@@ -421,7 +424,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\Media|null $media */
         $media = $Media->find()
             ->where(compact('uname'))
-            ->contain(['Streams'])
+            ->contain(['Streams', 'Parents'])
             ->first();
         if ($media !== null) {
             if (Hash::get((array)$media->extra, 'imported.id') === $data['original_id'] && Hash::get((array)$media->extra, 'imported.uname') === $data['original_uname']) {

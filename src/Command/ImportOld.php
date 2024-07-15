@@ -272,7 +272,7 @@ class ImportOld extends Command
         if (!empty($missingImported)) {
             /** @var \BEdita\Core\Model\Entity\ObjectEntity $child */
             foreach ($missingImported as $child) {
-                $child->parents = [$destinationFolder];
+                $child->parents = array_merge($child->parents ?? [], [$destinationFolder]);
                 $child->getTable()->saveOrFail($child);
             }
         }
@@ -299,6 +299,7 @@ class ImportOld extends Command
 
         $document = $this->findOrCreateDocument($data['original_uname'], $data, [
             'Categories',
+            'Parents',
             'Poster',
             'Placeholder',
             'HasLinks',
