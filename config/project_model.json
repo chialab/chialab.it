@@ -267,7 +267,7 @@
       "inverse_label": "Media of",
       "description": "Object has media",
       "left": ["documents", "events", "links", "locations", "galleries", "news_item", "profiles"],
-      "right": ["media"]
+      "right": ["media", "galleries"]
     },
     {
       "name": "has_newsletters",
