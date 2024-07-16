@@ -553,6 +553,29 @@ class ImportOld extends Command
     }
 
     /**
+     * Import a profile and its poster.
+     *
+     * @param Be3Content $data Event data
+     * @return \BEdita\Core\Model\Entity\ObjectEntity|false `false` if the import failed (see log messages)
+     */
+    protected function importProfile(array $data): ObjectEntity|false
+    {
+        $profile = $this->findOrCreateAuthor($data['original_uname'], $data);
+        if ($profile === false) {
+            return false;
+        }
+
+        $profile = $this->importRelation('poster_of', 'poster', $data['original_id'], $profile, true);
+        if ($profile === false) {
+            $this->io->warning(sprintf('One or more posters of profile "%s" had an error, skipping import of the profile', $data['original_uname']));
+
+            return false;
+        }
+
+        return $profile;
+    }
+
+    /**
      * Find or create an object of any type, excluded documents which need to be imported.
      *
      * @see \App\Command\ImportOld::importDocument()
@@ -564,7 +587,7 @@ class ImportOld extends Command
     {
         $entity = match ($data['type_name']) {
             'gallery' => $this->importGallery($data),
-            'card' => $this->findOrCreateAuthor($uname, $data),
+            'card' => $this->importProfile($data),
             'link' => $this->findOrCreateLink($uname, $data),
             'event' => $this->importEvent($data),
             'audio',
