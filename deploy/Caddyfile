@@ -75,12 +75,12 @@ https://www.chialab.it, https://it.chialab.dt.bedita.cloud {
 https://dev-io.chialab.dt.bedita.cloud {
 	import common
 
-	import site "OpenSource" "OpenSource" "draft" "false"
+	import site "Chialab" "OpenSource" "draft" "false"
 }
 https://www.chialab.io, https://io.chialab.dt.bedita.cloud {
 	import common
 
-	import site "OpenSource" "OpenSource" "on" "false"
+	import site "Chialab" "OpenSource" "on" "false"
 }
 
 # TODO: Illustratorium
