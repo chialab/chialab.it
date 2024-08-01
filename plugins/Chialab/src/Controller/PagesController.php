@@ -7,7 +7,6 @@ use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
-use Chialab\FrontendKit\Model\TreeLoader;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
 
 /**
@@ -26,7 +25,6 @@ class PagesController extends AppController
      */
     public function home(): void
     {
-
         $loader = new ObjectsLoader([
             'objects' => ['include' => 'poster'],
             'documents' => ['include' => 'poster,has_media,has_clients,see_also'],
