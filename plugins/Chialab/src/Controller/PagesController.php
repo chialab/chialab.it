@@ -7,7 +7,6 @@ use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
-use Chialab\FrontendKit\Model\TreeLoader;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
 
 /**
@@ -26,23 +25,21 @@ class PagesController extends AppController
      */
     public function home(): void
     {
-        $root = $this->Publication->getPublication();
-
         $loader = new ObjectsLoader([
             'objects' => ['include' => 'poster'],
             'documents' => ['include' => 'poster,has_media,has_clients,see_also'],
             'news' => ['include' => 'poster,has_media,see_also'],
-            'folders' => ['include' => 'children,poster'],
+            'folders' => ['include' => 'children|10,poster'],
         ], [
             'children' => 3,
             'has_media' => 3,
-            'see_also' => 3,
+            'see_also' => 4,
         ]);
 
-        $treeLoader = new TreeLoader($loader);
-        $folders = $treeLoader->loadMenu((string)$root->id)->children;
+        $root = $this->Publication->getPublication();
+        $root = $loader->loadObject($root->uname, 'folders');
 
-        $this->set(compact('folders'));
+        $this->set('folders', $root['children']);
     }
 
     /**

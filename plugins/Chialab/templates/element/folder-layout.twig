@@ -1,7 +1,9 @@
+{% set children = limit is defined ? folder.children|slice(0, limit) : folder.children %}
+
 {% if folder.get('layout') == 'masonry' %}
-    {{ element('folder-masonry', { children: folder.children })|raw }}
+    {{ element('folder-masonry', { children: children })|raw }}
 {% elseif folder.get('layout') == 'list' %}
-    {{ element('folder-list', { children: folder.children })|raw }}
+    {{ element('folder-list', { children: children })|raw }}
 {% else %}
-    {{ element('folder-grid', { children: folder.children, columns: columns|default(4) })|raw }}
+    {{ element('folder-grid', { children: children, columns: columns|default(4) })|raw }}
 {% endif %}
