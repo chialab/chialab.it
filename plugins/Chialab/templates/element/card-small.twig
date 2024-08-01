@@ -1,4 +1,4 @@
-<a class="h-1 {{ class|default('')}} block column end mono bg-neutral"
+<a class="card-small {{ class|default('')}} column end mono bg-neutral"
     href="{{ Url.build({ _name: 'pages:objects', _entity: object }) }}"
     target="_blank"
     title="{{ object.get('title')|default('')|escape('html_attr')|raw }}"

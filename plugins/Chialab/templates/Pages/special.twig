@@ -1,21 +1,21 @@
 <header class="w-full">
-	{{ element('claim')|raw }}
+    {{ element('claim')|raw }}
 </header>
 <main class="w-full gap-1 grid">
-	{% if parent is defined and parent.get('children')|length > 0 %}
-		<div class="w-2">
-			{{ element('toc', { items: parent.children, current: object })|raw }}
-		</div>
-	{% endif %}
-	<section class="w-9">
-		<h1 class="m-0 serif italic regular f-7">{{ object.title }}</h1>
-		{% if object.get('description') is defined %}
-			<p class="serif regular f-6">{{ object.get('description')|striptags|raw }}</p>
-		{% endif %}
+    {% if parent is defined and parent.get('children')|length > 0 %}
+        <div class="w-3">
+            {{ element('toc', { items: parent.children, current: object })|raw }}
+        </div>
+    {% endif %}
+    <section class="w-8">
+        <h1 class="m-0 serif italic regular f-7">{{ object.title }}</h1>
+        {% if object.get('description') is defined %}
+            <p class="serif regular f-6">{{ object.get('description')|striptags|raw }}</p>
+        {% endif %}
 
         {# here "object" should be a folder #}
-		{% if object.get('children')|length > 0 %}
-			<div class="w-full column">
+        {% if object.get('children')|length > 0 %}
+            <div class="w-full column">
                 {% set childrenLen = object.get('children')|length %}
                 {% if object.get('children')|filter((c) => c.type == 'profiles')|length == childrenLen %}
                     {# all children are profiles #}
@@ -33,14 +33,12 @@
                                     {% for slide in item.has_media %}
                                         <div class="w-full slideshow-item">
                                             {% if Poster.exists(slide) %}
-                                                <img class="w-full h-4 poster {{ Poster.position(slide) }}" alt="{{ slide.title|striptags|raw|escape('html_attr') }}"
-                                                    src="{{ Poster.url(slide) }}"/>
+                                                <img class="w-full h-4 poster {{ Poster.position(slide) }}" alt="{{ slide.title|striptags|raw|escape('html_attr') }}" src="{{ Poster.url(slide) }}"/>
                                             {% endif %}
                                         </div>
                                     {% endfor %}
                                 </dna-slideshow>
-                                {# We should model the old BE3 text multimedia as the body of the whole gallery,
-                                as it it does not change from slide to slide #}
+                                {# We should model the old BE3 text multimedia as the body of the whole gallery, as it it does not change from slide to slide #}
                                 {% if item.get('body') is defined %}
                                     <div class="mt-2 serif light italic f-4">
                                         {{ item.get('body')|raw }}
@@ -65,6 +63,7 @@
                         </article>
                     {% endfor %}
                 {% endif %}
-			{% endif %}
-		</section>
-	</main>
+            </div>
+        {% endif %}
+    </section>
+</main>
