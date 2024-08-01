@@ -60,7 +60,13 @@ article header {
     text-rendering: optimizelegibility;
 }
 
+.body > *:empty {
+    display: none;
+}
+
 .body blockquote {
+    margin: var(--gap) 0;
+    padding: 0 0 0 3em;
     font-family: var(--font-serif);
     font-size: var(--font-size-4);
     font-weight: 300;
@@ -100,6 +106,11 @@ article header {
     line-height: 1.5;
 }
 
+.body > p + p {
+    margin-top: var(--gap);
+}
+
+.description a,
 .body a {
     text-decoration: underline;
     text-decoration-color: var(--color-accent);
@@ -107,7 +118,7 @@ article header {
 
 .body ul,
 .body ol {
-    margin: var(--gap) 0;
+    margin: var(--gap) 0 0;
     line-height: 1.5;
 }
 
@@ -117,14 +128,17 @@ article header {
 .body h4,
 .body h5,
 .body h6 {
-    margin: 0;
+    margin: 1em 0 0.75em;
+    font-weight: normal;
     line-height: 1.125;
 }
 
+.body h2 {
+    font-size: var(--font-size-6);
+}
+
 .body h3 {
-    margin: calc(var(--gap) * 2) 0 var(--gap);
     font-size: var(--font-size-5);
-    font-weight: normal;
     font-style: italic;
 }
 

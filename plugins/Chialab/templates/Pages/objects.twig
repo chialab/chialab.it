@@ -8,17 +8,17 @@
 {% endif %}
 
 <article class="column w-8 gap-2">
-    <header class="column gap-0">
+    <header class="column gap-row-2">
         <h1 class="m-0 f-7 serif regular italic">{{ object.title|raw }}</h1>
         {% if object.get('description') is not empty %}
-            <div class="mt-4 f-6 serif regular light description">
+            <div class="f-6 serif regular light description">
                 {{ object.description|raw }}
             </div>
         {% endif %}
     </header>
 
     {% if object.get('body') is not empty %}
-        <div class="column serif f-3 body">
+        <div class="column serif regular f-3 body gap-0">
             {{ Text.renderBody(object, 'body')|raw }}
         </div>
     {% endif %}
@@ -89,9 +89,9 @@
     </div>
 
     {% if object.get('see_also') is not empty %}
-        <div class="mt-2 column">
+        <div class="mt-2 column w-full">
             <span class="link--section">{{ __('See also') }}</span>
-            <div class="columns-2">
+            <div class="columns-2 w-full">
                 {% for item in object.see_also %}
                     {{ element('card-small', {
                         object: item,

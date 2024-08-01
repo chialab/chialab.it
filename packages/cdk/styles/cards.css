@@ -40,6 +40,12 @@ a.card:hover .card__title {
     text-decoration-color: var(--color-accent);
 }
 
+.card-small {
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    min-height: 6rem;
+}
+
 @media (prefers-reduced-motion) {
     .card .card__cover img {
         transition: none;
