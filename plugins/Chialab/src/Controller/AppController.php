@@ -76,12 +76,20 @@ class AppController extends BaseController
 
         $root = $this->Publication->getPublication();
         $menu = $this->Menu->load((string)$root->id);
-        $footer = $this->Menu->load('footer')->children;
+        
+        $footerChildren = $this->Menu->load('footer')->children;
+        foreach ($footerChildren as $key => $child) {
+            if ($child->type === 'documents') {
+                $footerChildren[$key]->has_links = $this->Objects->loadRelatedObjects($child->uname, 'documents', 'has_links');
+            }
+        }
+
+
         $analytics = Configure::read('Analytics', '');
         $locales = Configure::read('I18n.locales', []);
         $locale = Configure::read('I18n.lang', I18n::getLocale());
 
-        $this->set(compact('menu', 'footer', 'analytics', 'locale', 'locales'));
+        $this->set(compact('menu', 'footerChildren', 'analytics', 'locale', 'locales'));
 
         return null;
     }
