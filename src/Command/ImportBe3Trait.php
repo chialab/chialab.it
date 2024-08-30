@@ -98,7 +98,7 @@ trait ImportBe3Trait
         $entity->modified_by = UsersTable::ADMIN_USER;
         $entity->created = $data['created'] ?? FrozenTime::now(); // @phpstan-ignore-line
         $entity->modified = $data['modified'] ?? FrozenTime::now(); // @phpstan-ignore-line
-        if (!empty($data['extra']) && is_string($data['extra'])) {
+        if (!empty($data['extra'])) {
             $data['extra'] = json_decode($data['extra'], true);
         }
 
