@@ -11,6 +11,7 @@ use BEdita\Core\Model\Entity\ObjectEntity;
 use BEdita\Core\Model\Entity\Profile;
 use BEdita\Core\Model\Entity\Stream;
 use BEdita\Core\Model\Entity\Tag;
+use BEdita\Core\Model\Entity\Translation;
 use BEdita\Core\Model\Table\UsersTable;
 use Cake\Database\Expression\FunctionExpression;
 use Cake\Database\Expression\QueryExpression;
@@ -34,13 +35,15 @@ use RuntimeException;
  * @property \BEdita\Core\Model\Table\CategoriesTable $Categories
  * @property \BEdita\Core\Model\Table\StreamsTable $Streams
  * @property \BEdita\Core\Model\Table\LinksTable $Links
+ * @property \BEdita\Core\Model\Table\TranslationsTable $Translations
  * @property \Cake\Database\Connection $sourceConnection
  * @property \Cake\Console\ConsoleIo $io
- * @phpstan-type Be3Folder array{content_order: string, original_id: int, original_uname: string, status: 'on'|'draft'|'off', title: string, description: string, extra: string|null, created: string, modified: string}
- * @phpstan-type Be3Content array{type_name: string, original_id: int, original_uname: string, status: 'on'|'draft'|'off', title: string, description: string, body: string, relation_params: string|null, extra: string|null, name: string|null, surname: string|null, email: string|null, publish_start: string|null, publish_end: string|null, url: string|null, location_title: string|null, address: string|null, coords: string|null, start_date: string|null, end_date: string|null, date_params: string|null, created: string, modified: string}
- * @phpstan-type Be3Media array{type_name: string, original_id: int, original_uname: string, status: 'on'|'draft'|'off', title: string|null, description: string|null, body: string|null, extra: string|null, relation_params: string|null, provider: string|null, provider_uid: string|null, provider_thumbnail: string|null, provider_url: string|null, provider_extra: string|null, name: string, image_width: int|null, image_height: int|null, created: string, modified: string, stream_mime_type: string|null, stream_file_size: int|null, stream_hash_md5: string|null}
- * @phpstan-type Be3Gallery array{status: 'on'|'draft'|'off', original_id: int, original_uname: string, title: string, description: string, created: string, modified: string, extra: string}
+ * @phpstan-type Be3Folder array{content_order: string, original_id: int, original_uname: string, status: 'on'|'draft'|'off', title: string, description: string, lang: string, extra: string|null, created: string, modified: string}
+ * @phpstan-type Be3Content array{type_name: string, original_id: int, original_uname: string, status: 'on'|'draft'|'off', title: string, description: string, body: string, lang: string, relation_params: string|null, extra: string|null, name: string|null, surname: string|null, email: string|null, publish_start: string|null, publish_end: string|null, url: string|null, location_title: string|null, address: string|null, coords: string|null, start_date: string|null, end_date: string|null, date_params: string|null, created: string, modified: string}
+ * @phpstan-type Be3Media array{type_name: string, original_id: int, original_uname: string, status: 'on'|'draft'|'off', title: string|null, description: string|null, body: string|null, lang: string, extra: string|null, relation_params: string|null, provider: string|null, provider_uid: string|null, provider_thumbnail: string|null, provider_url: string|null, provider_extra: string|null, name: string, image_width: int|null, image_height: int|null, created: string, modified: string, stream_mime_type: string|null, stream_file_size: int|null, stream_hash_md5: string|null}
+ * @phpstan-type Be3Gallery array{status: 'on'|'draft'|'off', original_id: int, original_uname: string, title: string, description: string, lang: string, created: string, modified: string, extra: string}
  * @phpstan-type Be3Category array{label: string, name: string}
+ * @phpstan-type Be3Translation array{lang: string, status: 'on'|'draft'|'off', translated_fields: string, created: string, modified: string}
  */
 trait ImportBe3Trait
 {
@@ -95,7 +98,7 @@ trait ImportBe3Trait
         $entity->modified_by = UsersTable::ADMIN_USER;
         $entity->created = $data['created'] ?? FrozenTime::now(); // @phpstan-ignore-line
         $entity->modified = $data['modified'] ?? FrozenTime::now(); // @phpstan-ignore-line
-        if (!empty($data['extra'])) {
+        if (!empty($data['extra']) && is_string($data['extra'])) {
             $data['extra'] = json_decode($data['extra'], true);
         }
 
@@ -124,7 +127,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\Folder|null $folder */
         $folder = $this->Folders->find()
             ->where(compact('uname'))
-            ->contain(['Children'])
+            ->contain(['Children', 'Translations'])
             ->first();
         if ($folder !== null) {
             return $folder;
@@ -194,7 +197,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\Profile|null $author */
         $author = $this->Profiles->find()
             ->where(compact('uname'))
-            ->contain(['Parents'])
+            ->contain(['Parents', 'Translations'])
             ->first();
         if ($author !== null) {
             if (Hash::get((array)$author->extra, 'imported.uname') === $data['original_uname'] && $author->type === 'profiles') {
@@ -227,7 +230,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\Link|null $link */
         $link = $this->Links->find()
             ->where(compact('uname'))
-            ->contain(['Parents'])
+            ->contain(['Parents', 'Translations'])
             ->first();
         if ($link !== null) {
             if (Hash::get((array)$link->extra, 'imported.uname') === $data['original_uname'] && Hash::get((array)$link->extra, 'imported.id') === $data['original_id'] && $link->type === 'links') {
@@ -260,7 +263,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\ObjectEntity|null $gallery */
         $gallery = $this->Galleries->find()
             ->where(compact('uname'))
-            ->contain(['HasMedia', 'Parents'])
+            ->contain(['HasMedia', 'Parents', 'Translations'])
             ->first();
         if ($gallery !== null) {
             if (Hash::get((array)$gallery->extra, 'imported.uname') === $data['original_uname'] && Hash::get((array)$gallery->extra, 'imported.id') === $data['original_id'] && $gallery->type === 'galleries') {
@@ -293,7 +296,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\ObjectEntity|null $event */
         $event = $this->Events->find()
             ->where(compact('uname'))
-            ->contain(['DateRanges', 'Parents'])
+            ->contain(['DateRanges', 'Parents', 'Translations'])
             ->first();
         if ($event !== null) {
             if (Hash::get((array)$event->extra, 'imported.uname') === $data['original_uname'] && $event->type === 'events') {
@@ -338,7 +341,7 @@ trait ImportBe3Trait
         /** @var \BEdita\Core\Model\Entity\Location|null $location */
         $location = $this->Locations->find()
             ->where(compact('uname'))
-            ->contain(['Parents'])
+            ->contain(['Parents', 'Translations'])
             ->first();
         if ($location !== null) {
             if (Hash::get((array)$location->extra, 'imported.uname') === $data['original_uname'] && $location->type === 'locations') {
@@ -394,6 +397,42 @@ trait ImportBe3Trait
         }
 
         return $tag;
+    }
+
+    /**
+     * Find or create a translation.
+     *
+     * @param int $objectId ID of translated object
+     * @param Be3Translation $data Translation data
+     * @return \BEdita\Core\Model\Entity\Translation
+     */
+    protected function findOrCreateTranslation(int $objectId, array $data): Translation
+    {
+        /** @var \BEdita\Core\Model\Entity\Translation|null $translation */
+        $translation = $this->Translations->find()
+            ->where(fn (QueryExpression $exp): QueryExpression => $exp
+                ->eq('object_id', $objectId)
+                ->eq('lang', $data['lang']))
+            ->first();
+        if ($translation !== null) {
+            $this->io->verbose(sprintf('Reusing already existing "%s" translation for object %d', $translation->lang, $objectId));
+
+            return $translation;
+        }
+
+        if (is_string($data['translated_fields'])) {
+            $data['translated_fields'] = json_decode($data['translated_fields'], true);
+        }
+
+        $translation = $this->Translations->newEntity(['object_id' => $objectId] + $data);
+        $translation->created = FrozenTime::createFromTimestamp((int)$data['created']);
+        $translation->modified = FrozenTime::createFromTimestamp((int)$data['modified']);
+        $translation->created_by = UsersTable::ADMIN_USER;
+        $translation->modified_by = UsersTable::ADMIN_USER;
+        /** @var \BEdita\Core\Model\Entity\Translation $translation */
+        $translation = $this->Translations->saveOrFail($translation, ['atomic' => false]);
+
+        return $translation;
     }
 
     /**
@@ -622,6 +661,7 @@ trait ImportBe3Trait
                 'content_order' => 's.priority_order',
                 'title' => 'o.title',
                 'description' => 'o.description',
+                'lang' => new FunctionExpression('IF', ['o.lang = "eng"' => 'literal', 'en', 'it']),
                 'status' => 'o.status',
                 'created' => 'o.created',
                 'modified' => 'o.modified',
@@ -686,6 +726,7 @@ trait ImportBe3Trait
                     'pi.body' => 'identifier',
                     'c.body' => 'identifier',
                 ]),
+                'lang' => new FunctionExpression('IF', ['o.lang = "eng"' => 'literal', 'en', 'it']),
                 'status' => 'o.status',
                 'publish_start' => 'c.start_date',
                 'publish_end' => 'c.end_date',
@@ -828,8 +869,7 @@ trait ImportBe3Trait
      */
     protected function getBe3FolderMedia(int $id, string $order = 'asc', string|null $providerUrlPrefix = null, array $includedTypes = ['b_e_file', 'image', 'application', 'audio', 'video', 'caption']): array
     {
-        $query = $this->sourceConnection->newQuery();
-        $media = $query
+        $media = $this->sourceConnection->newQuery()
             ->select([
                 'type_name' => 'ot.name',
                 'original_id' => 'o.id',
@@ -837,6 +877,7 @@ trait ImportBe3Trait
                 'title' => 'o.title',
                 'description' => 'o.description',
                 'body' => 'c.body',
+                'lang' => new FunctionExpression('IF', ['o.lang = "eng"' => 'literal', 'en', 'it']),
                 'status' => 'o.status',
                 'created' => 'o.created',
                 'modified' => 'o.modified',
@@ -975,6 +1016,7 @@ trait ImportBe3Trait
                 'body' => new FunctionExpression('COALESCE', ['pi.body' => 'identifier', 'c.body' => 'identifier']),
                 'title' => 'o.title',
                 'description' => 'o.description',
+                'lang' => new FunctionExpression('IF', ['o.lang = "eng"' => 'literal', 'en', 'it']),
                 'status' => 'o.status',
                 'relation_params' => 'obr.params',
                 'publish_start' => 'c.start_date',
@@ -1130,8 +1172,7 @@ trait ImportBe3Trait
      */
     protected function getBe3RelatedMedia(int $objectId, string $relation, string|null $providerUrlPrefix = null, array $includedTypes = ['b_e_file', 'image', 'application', 'audio', 'video', 'caption']): array
     {
-        $query = $this->sourceConnection->newQuery();
-        $media = $query
+        $media = $this->sourceConnection->newQuery()
             ->select([
                 'type_name' => 'ot.name',
                 'original_id' => 'o.id',
@@ -1139,6 +1180,7 @@ trait ImportBe3Trait
                 'title' => 'o.title',
                 'description' => 'o.description',
                 'body' => 'c.body',
+                'lang' => new FunctionExpression('IF', ['o.lang = "eng"' => 'literal', 'en', 'it']),
                 'status' => 'o.status',
                 'created' => 'o.created',
                 'modified' => 'o.modified',
@@ -1327,5 +1369,58 @@ trait ImportBe3Trait
         }
 
         return $tags;
+    }
+
+    /**
+     * Get translations of an object from a BEdita 3 database.
+     *
+     * @param int $objectId Object ID
+     * @return array<Be3Translation>
+     */
+    protected function getBe3ObjectTranslations(int $objectId): array
+    {
+        $translations = $this->sourceConnection->newQuery()
+            ->select([
+                'lang' => new FunctionExpression('IF', ['lt.lang = "eng"' => 'literal', 'en', 'it']), // there are only these 2, so a simple IF is sufficient
+                'translated_fields' => new FunctionExpression('JSON_OBJECTAGG', [
+                    'lt.name' => 'identifier',
+                    'lt.text' => 'identifier',
+                ]),
+            ])
+            ->from(['lt' => 'lang_texts'])
+            ->where([
+                'lt.object_id' => $objectId,
+                'NOT' => [
+                    'OR' => [
+                        'lt.text' => '',
+                        'lt.text IS NULL',
+                        'lt.name IN' => ['created_by', 'modified_by'],
+                    ],
+                ],
+            ])
+            ->group(['lt.lang'])
+            ->execute()
+            ->fetchAll(PDO::FETCH_ASSOC);
+        if ($translations === false) {
+            throw new RuntimeException(sprintf('Error retrieving translations for object %d', $objectId));
+        }
+
+        // Extract some object properties from the aggregated fields
+        foreach ($translations as &$translation) {
+            $translatedFields = json_decode($translation['translated_fields'], true);
+            $translation['status'] = Hash::get($translatedFields, 'status', 'draft');
+            // "required" was a sort of "TODO" status
+            if ($translation['status'] === 'required') {
+                $translation['status'] = 'draft';
+            }
+
+            $translation['created'] = Hash::get($translatedFields, 'created_on', time());
+            $translation['modified'] = Hash::get($translatedFields, 'modified_on', time());
+            unset($translatedFields['status'], $translatedFields['created_on'], $translatedFields['modified_on']);
+            $translation['translated_fields'] = json_encode($translatedFields);
+        }
+        unset($translation);
+
+        return $translations;
     }
 }

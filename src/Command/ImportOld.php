@@ -14,6 +14,7 @@ use BEdita\Core\Model\Table\LinksTable;
 use BEdita\Core\Model\Table\LocationsTable;
 use BEdita\Core\Model\Table\ObjectsTable;
 use BEdita\Core\Model\Table\ProfilesTable;
+use BEdita\Core\Model\Table\TranslationsTable;
 use Cake\Command\Command;
 use Cake\Console\Arguments;
 use Cake\Console\ConsoleIo;
@@ -54,6 +55,7 @@ class ImportOld extends Command
     protected ObjectsTable $Events;
     protected LocationsTable $Locations;
     protected DateRangesTable $DateRanges;
+    protected TranslationsTable $Translations;
 
     protected const PLACEHOLDER_REGEX = '#<a class="(?:placeholder|placeref)" href="([^"]+)">(.*?)</a>#i';
     protected const PLACEHOLDER_REPLACE_FORMAT = '<div data-placeholder="%d"><!--BE-PLACEHOLDER.%d.%s--></div>';
@@ -99,7 +101,7 @@ class ImportOld extends Command
      */
     public function initialize(): void
     {
-        foreach (['Folders', 'Objects', 'Galleries', 'Streams', 'Links', 'Profiles', 'Documents', 'Categories', 'Events', 'Locations', 'DateRanges'] as $tableName) {
+        foreach (['Folders', 'Objects', 'Galleries', 'Streams', 'Links', 'Profiles', 'Documents', 'Categories', 'Events', 'Locations', 'DateRanges', 'Translations'] as $tableName) {
             $this->{$tableName} = $this->fetchTable($tableName); // @phpstan-ignore-line
             // Disable Timestamp behavior to let us set `created` and `modified`
             if ($this->{$tableName}->hasBehavior('Timestamp')) {
@@ -277,6 +279,9 @@ class ImportOld extends Command
             }
         }
 
+        /** @var \BEdita\Core\Model\Entity\Folder $destinationFolder */
+        $destinationFolder = $this->importTranslations($sourceFolder['original_id'], $destinationFolder);
+
         return $destinationFolder;
     }
 
@@ -307,6 +312,7 @@ class ImportOld extends Command
             'HasClients',
             'Team',
             'SeeAlso',
+            'Translations',
         ]);
         if ($document === false) {
             return false;
@@ -372,6 +378,7 @@ class ImportOld extends Command
             $action(['entity' => $document, 'relatedEntities' => [$location]]);
         }
 
+        $document = $this->importTranslations($data['original_id'], $document);
         if ($document->isDirty()) {
             /** @var \BEdita\Core\Model\Entity\ObjectEntity $document */
             $document = $this->Documents->saveOrFail($document, ['atomic' => false]);
@@ -526,7 +533,7 @@ class ImportOld extends Command
             return false;
         }
 
-        return $gallery;
+        return $this->importTranslations($data['original_id'], $gallery);
     }
 
     /**
@@ -549,7 +556,7 @@ class ImportOld extends Command
             return false;
         }
 
-        return $event;
+        return $this->importTranslations($data['original_id'], $event);
     }
 
     /**
@@ -572,7 +579,7 @@ class ImportOld extends Command
             return false;
         }
 
-        return $profile;
+        return $this->importTranslations($data['original_id'], $profile);
     }
 
     /**
@@ -601,9 +608,35 @@ class ImportOld extends Command
             ),
             default => $this->io->warning(sprintf('Object "%s" has unknown type "%s"', $uname, $data['type_name'])),
         };
-
         if (!($entity instanceof ObjectEntity)) {
             return false;
+        }
+
+        return $this->importTranslations($data['original_id'], $entity);
+    }
+
+    /**
+     * Import translations for an object, if possible, and associates them with the entity.
+     *
+     * @param int $originalId Original object ID
+     * @param \BEdita\Core\Model\Entity\ObjectEntity $entity The object for which to import translations
+     * @return \BEdita\Core\Model\Entity\ObjectEntity
+     */
+    protected function importTranslations(int $originalId, ObjectEntity $entity): ObjectEntity
+    {
+        if (!$entity->getTable()->hasAssociation('Translations') || !empty($entity->get('translations'))) {
+            return $entity;
+        }
+
+        $translations = [];
+        $sourceTranslations = $this->getBe3ObjectTranslations($originalId);
+        foreach ($sourceTranslations as $sourceTranslation) {
+            $translations[] = $this->findOrCreateTranslation($entity->id, $sourceTranslation);
+        }
+        if (!empty($translations)) {
+            $action = new AddRelatedObjectsAction(['association' => $entity->getTable()->getAssociation('Translations')]);
+            $action(['entity' => $entity, 'relatedEntities' => $translations]);
+            $entity->getTable()->loadInto($entity, ['Translations']);
         }
 
         return $entity;

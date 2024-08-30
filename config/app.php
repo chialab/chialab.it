@@ -535,6 +535,10 @@ return [
         ],
         'lang' => 'it',
         'default' => 'it',
+        'languages' => [
+            'en' => 'English',
+            'it' => 'Italiano',
+        ],
     ],
 
     'Publish' => [
