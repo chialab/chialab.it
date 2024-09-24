@@ -52,7 +52,7 @@ class AppController extends BaseController
         ]);
         $this->loadComponent('Chialab/FrontendKit.Menu');
         $this->loadComponent('Chialab/FrontendKit.Publication', [
-            'publication' => 'chialab-design-company',
+            'publication' => Configure::read('RootFolder', 'chialab-design-company'),
             'publicationLoader' => [
                 'objectTypesConfig' => [
                     'folders' => ['include' => 'poster|1'],

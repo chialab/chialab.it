@@ -1,4 +1,6 @@
 <?php
 declare(strict_types=1);
 
-return [];
+return [
+    'RootFolder' => 'chialab-open-source',
+];
