@@ -89,12 +89,7 @@ class Application extends BaseApplication
             $this->addPlugin(Configure::read('FrontendPlugin'));
         }
         if (Configure::check('Theme')) {
-            $theme = Configure::read('Theme');
-            $this->addPlugin($theme);
-            $themePlugin = $this->plugins->get($theme);
-            if (file_exists($themePlugin->getConfigPath() . 'overrides.php')) {
-                Configure::load(sprintf('%s.overrides', $theme), 'default');
-            }
+            $this->addPlugin(Configure::read('Theme'));
         }
     }
 

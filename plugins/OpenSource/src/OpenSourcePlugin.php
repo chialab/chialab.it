@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace OpenSource;
 
 use Cake\Core\BasePlugin;
+use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 
 /**
@@ -18,9 +19,6 @@ class OpenSourcePlugin extends BasePlugin
     {
         parent::bootstrap($app);
 
-        // Configure::write('Analytics', [
-        //     'ga_code' => '',
-        //     'matomo_code' => '',
-        // ]);
+        Configure::load('OpenSource.overrides');
     }
 }

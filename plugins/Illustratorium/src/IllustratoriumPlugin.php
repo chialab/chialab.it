@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Illustratorium;
 
 use Cake\Core\BasePlugin;
+use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 
 /**
@@ -18,9 +19,6 @@ class IllustratoriumPlugin extends BasePlugin
     {
         parent::bootstrap($app);
 
-        // Configure::write('Analytics', [
-        //     'ga_code' => '',
-        //     'matomo_code' => '',
-        // ]);
+        Configure::load('Illustratorium.overrides');
     }
 }
