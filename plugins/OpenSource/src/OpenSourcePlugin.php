@@ -9,7 +9,7 @@ use Cake\Core\PluginApplicationInterface;
 /**
  * Plugin for OpenSource
  */
-class Plugin extends BasePlugin
+class OpenSourcePlugin extends BasePlugin
 {
     /**
      * @inheritDoc
