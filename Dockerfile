@@ -42,6 +42,7 @@ FROM caddy:2-alpine AS web
 COPY ./deploy/Caddyfile ./deploy/Caddyfile.redirects /etc/caddy/
 COPY --from=npm /app/webroot/ /app/webroot/
 COPY --from=npm /app/plugins/Chialab/webroot/ /app/webroot/chialab/
+COPY --from=npm /app/plugins/Illustratorium/webroot/ /app/webroot/illustratorium/
 COPY --from=npm /app/plugins/OpenSource/webroot/ /app/webroot/open_source/
 
 ###
@@ -72,5 +73,6 @@ COPY --chown=www-data:www-data --from=npm /app/webroot/ /app/webroot/
 COPY --chown=www-data:www-data --from=npm /app/plugins/Chialab/webroot/ /app/webroot/chialab/
 COPY --chown=www-data:www-data --from=npm /app/plugins/OpenSource/webroot/ /app/webroot/open_source/
 COPY --from=npm /app/plugins/Chialab/webroot/build/entrypoints.json /app/plugins/Chialab/webroot/build/entrypoints.json
+COPY --from=npm /app/plugins/Illustratorium/webroot/build/entrypoints.json /app/plugins/Illustratorium/webroot/build/entrypoints.json
 COPY --from=npm /app/plugins/OpenSource/webroot/build/entrypoints.json /app/plugins/OpenSource/webroot/build/entrypoints.json
 RUN composer run post-install-cmd --no-interaction
