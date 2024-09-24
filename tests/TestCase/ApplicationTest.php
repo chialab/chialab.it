@@ -62,6 +62,7 @@ class ApplicationTest extends TestCase
         Configure::write('debug', true);
         Configure::write('StagingSite', false);
         Configure::write('FrontendPlugin', null);
+        Configure::write('Theme', null);
 
         $expectedPlugins = [
             'Bake',
@@ -99,6 +100,7 @@ class ApplicationTest extends TestCase
         Configure::write('debug', false);
         Configure::write('StagingSite', false);
         Configure::write('FrontendPlugin', 'BEdita/API');
+        Configure::write('Theme', null);
 
         $expectedPlugins = [
             'Bake',
