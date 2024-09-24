@@ -37,16 +37,18 @@
         {% endif %}
     </div>
     <div class="w-6 row">
-        {% for child in footer %}
+        {% for child in footerChildren|default([]) %}
             <div class="w-2 column">
                 <span class="mono upper light">{{ child.title|raw }}</span>
-                {% if child.children is not empty %}
+                {% if child.get('has_links') is not empty %}
                     <ul class="list--plain f-s column gap-xs">
-                        {% for subchild in child.children %}
+                        {% for link in child.get('has_links') %}
                             <li class="mono">
-                                {% set url = subchild %}
-                                <a class="link--underline upper" href="{{ Url.build({ _name: 'pages:objects', _entity: subchild }) }}" target="_blank">
-                                    {{ subchild.title|raw }}
+                                <a class="text-underline upper"
+                                    {% if link.get('title') is not empty %}title="{{ link.get('title')|striptags|raw|escape('html_attr') }}"{% endif %}
+                                        href="{{ link.url|escape('html_attr') }}"
+                                        target="_blank"
+                                    >{{ link.title|default(link.url)|raw|striptags }}
                                 </a>
                             </li>
                         {% endfor %}
