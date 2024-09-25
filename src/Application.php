@@ -88,6 +88,9 @@ class Application extends BaseApplication
         if (Configure::check('FrontendPlugin')) {
             $this->addPlugin(Configure::read('FrontendPlugin'));
         }
+        if (Configure::check('Theme')) {
+            $this->addPlugin(Configure::read('Theme'));
+        }
     }
 
     /**

@@ -1,0 +1,16 @@
+{% set title = object.get('title')|default(null) %}
+{% set description = object.get('description')|default(null) %}
+
+<div class="object_container column gap-s" data-object-type="{{ object.type }}">
+    {% if title is not null and description is not null %}
+        <div class="object_caption sans f-1 column gap-0">
+            {% if title is not null %}
+                <span class="object_title">{{ title|raw }}</span>
+            {% endif %}
+
+            {% if description is not null %}
+                <div class="object_description">{{ description|raw }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

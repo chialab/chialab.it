@@ -1,15 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace OpenSource;
+namespace Illustratorium;
 
 use Cake\Core\BasePlugin;
+use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 
 /**
- * Plugin for OpenSource
+ * Plugin for Illustratorium
  */
-class Plugin extends BasePlugin
+class IllustratoriumPlugin extends BasePlugin
 {
     /**
      * @inheritDoc
@@ -18,9 +19,6 @@ class Plugin extends BasePlugin
     {
         parent::bootstrap($app);
 
-        // Configure::write('Analytics', [
-        //     'ga_code' => '',
-        //     'matomo_code' => '',
-        // ]);
+        Configure::load('Illustratorium.overrides');
     }
 }

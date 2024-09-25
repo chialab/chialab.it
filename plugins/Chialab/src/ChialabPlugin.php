@@ -10,7 +10,7 @@ use Cake\Core\PluginApplicationInterface;
 /**
  * Plugin for Chialab websites.
  */
-class Plugin extends BasePlugin
+class ChialabPlugin extends BasePlugin
 {
     /**
      * @inheritDoc

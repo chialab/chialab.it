@@ -15,6 +15,13 @@ const config = {
             entrypointsPath: 'plugins/Chialab/webroot/build/entrypoints.json',
         },
         {
+            input: ['./plugins/Illustratorium/resources/index.ts', './plugins/Illustratorium/resources/index.css'],
+            publicPath: '/illustratorium/build/',
+            output: 'plugins/Illustratorium/webroot/build/',
+            manifestPath: 'plugins/Illustratorium/webroot/build/manifest.json',
+            entrypointsPath: 'plugins/Illustratorium/webroot/build/entrypoints.json',
+        },
+        {
             input: ['./plugins/OpenSource/resources/index.ts', './plugins/OpenSource/resources/index.css'],
             publicPath: '/open_source/build/',
             output: 'plugins/OpenSource/webroot/build/',

@@ -83,8 +83,17 @@ https://www.chialab.io, https://io.chialab.dt.bedita.cloud {
 	import site "Chialab" "OpenSource" "on" "false"
 }
 
-# TODO: Illustratorium
-# https://dev-illustratorium.chialab.dt.bedita.cloud {}
+# Illustratorium
+https://dev-illustratorium.chialab.dt.bedita.cloud {
+	import common
+
+	import site "Chialab" "Illustratorium" "draft" "false"
+}
+https://www.illustratorium.it, https://illustratorium.chialab.dt.bedita.cloud {
+	import common
+
+	import site "Chialab" "Illustratorium" "on" "false"
+}
 
 # TODO: Tipografia
 # https://dev-tipografia.chialab.dt.bedita.cloud {}
