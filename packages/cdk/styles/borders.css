@@ -1,3 +1,7 @@
+.b-1 {
+    border: solid 1px var(--color-grey-200);
+}
+
 .bt-1 {
     border-top: solid 1px currentcolor;
 }

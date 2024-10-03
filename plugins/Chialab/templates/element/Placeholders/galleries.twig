@@ -1,11 +1,22 @@
 {% set title = object.get('title')|default(null) %}
 {% set description = object.get('description')|default(null) %}
+{% set gallery_contents = object.get('has_media')|default([]) %}
 
-<div class="gallery_container column gap-s">
-    {% if title is not null and description is not null %}
+<div class="gallery_container columns-2 my-2">
+    {% if gallery_contents|length > 0 %}
+        {% for content in gallery_contents %}
+            {% if content.get('type') == 'images' %}
+                {{ Thumb.image(content, 'default', {class: 'b-1 w-100'})|raw }}
+            {% else %}
+                {% set stream = content.get('streams')|first %}
+                <object class="b-1 " data="{{ content.media_url }}" type="{{ stream.mime_type }}"></object>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% if title is not null or description is not null %}
         <div class="gallery_caption sans f-1 column gap-0">
             {% if title is not null %}
-                <span class="gallery_title">{{ title|raw }}</span>
+                <div class="gallery_title">{{ title|raw }}</div>
             {% endif %}
 
             {% if description is not null %}
@@ -13,6 +24,4 @@
             {% endif %}
         </div>
     {% endif %}
-
-    <!-- TODO: Display gallery contents -->
 </div>

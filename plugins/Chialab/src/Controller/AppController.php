@@ -48,6 +48,7 @@ class AppController extends BaseController
             ],
             'autoHydrateAssociations' => [
                 'see_also' => 2,
+                'has_media' => 3,
             ],
         ]);
         $this->loadComponent('Chialab/FrontendKit.Menu');
