@@ -43,6 +43,10 @@ body {
     aspect-ratio: 16 / 9;
 }
 
+.gallery_container > * {
+    width: 100%;
+}
+
 dna-backdrop dna-slideshow {
     width: calc(var(--viewport) - 2 * var(--gutter));
     max-width: 100%;

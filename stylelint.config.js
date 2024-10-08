@@ -9,7 +9,7 @@ export default {
         'csstools/value-no-unknown-custom-properties': [
             true,
             {
-                importFrom: [require.resolve('@chialab/cells/lib/index.css')],
+                importFrom: [require.resolve('@chialab/cells/lib/index.css'), './packages/cdk/variables.css'],
             },
         ],
     },
