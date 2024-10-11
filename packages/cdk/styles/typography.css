@@ -56,6 +56,11 @@ article header {
     text-rendering: optimizelegibility;
 }
 
+.serif.f-6,
+.serif.f-7 {
+    text-rendering: geometricprecision;
+}
+
 .sans {
     text-rendering: optimizelegibility;
 }
