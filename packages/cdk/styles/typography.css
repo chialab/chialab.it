@@ -151,6 +151,10 @@ article header {
     text-transform: uppercase;
 }
 
+.lower {
+    text-transform: lowercase;
+}
+
 .text-underline {
     text-decoration: underline;
 }

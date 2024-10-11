@@ -10,11 +10,6 @@ export class Topbar extends Component {
     @property({
         type: String,
     })
-    title: string = 'chialab';
-
-    @property({
-        type: String,
-    })
     tooltip: string = 'Back to home';
 
     @state({
@@ -48,8 +43,8 @@ export class Topbar extends Component {
                 <a
                     href={this.url}
                     title={this.tooltip}
-                    class="mono bold f-2">
-                    {this.title}
+                    class="mono bold f-2 lower">
+                    <slot name="title">chialab</slot>
                 </a>
                 <div class="row topbar__links">
                     <nav class="row gap-0 align-center">

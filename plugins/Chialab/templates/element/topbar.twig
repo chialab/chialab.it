@@ -1,4 +1,5 @@
 <cl-topbar url="{{ Url.build({ _name: 'pages:home' })|escape('html_attr')|raw }}" tooltip="{{ __('Back to home') }}">
+    <span slot="title">{{ publication.title|default('chialab') }}</span>
     {% for child in menu.children %}
         <a class="link--underline" href="{{ Url.build({
             _name: 'pages:objects',
