@@ -10,7 +10,8 @@ a {
 }
 
 .toc a:hover {
-    border-bottom: 1px solid var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
 }
 
 .toc a[aria-current] {
