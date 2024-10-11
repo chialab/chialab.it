@@ -1,5 +1,5 @@
 <header class="w-full">
-    {{ element('claim')|raw }}
+    {{ element('claim', { object: parent })|raw }}
 </header>
 <main class="w-full gap-1 grid">
     {% if parent is defined and parent.get('children')|length > 0 %}
