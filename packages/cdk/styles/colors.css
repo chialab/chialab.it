@@ -1,1 +1,5 @@
 @import '@chialab/cells/lib/colors.css';
+
+.bg-overlay {
+    backdrop-filter: blur(3px);
+}
