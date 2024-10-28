@@ -111,7 +111,7 @@ article header {
     line-height: 1.5;
 }
 
-.body > p + p {
+.body > :is(p, [data-placeholder]) + :is(p, [data-placeholder]) {
     margin-top: var(--gap);
 }
 
