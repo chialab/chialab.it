@@ -1,4 +1,4 @@
-<footer class="w-full bt-1 mt-6 py-2 pb-8 row">
+<footer class="w-full bt-1 mt-6 py-2 pb-8 grid">
     <div class="footer__info mono light f-s column w-4">
         <span class="mono f-2 column gap-xs bold">
             chialab
@@ -36,7 +36,7 @@
             </div>
         {% endif %}
     </div>
-    <div class="w-6 row">
+    <div class="w-8 row">
         {% for child in footerChildren|default([]) %}
             <div class="w-2 column">
                 <span class="mono upper light">{{ child.title|raw }}</span>
@@ -61,11 +61,9 @@
                 <span class="mono upper light">{{ __('newsletter')|raw }}</span>
                 <ul class="list--plain f-s column gap-xs">
                     {% for item in publication.has_newsletters %}
-                        <li class="mono">
+                        <li class="mono column gap-xs">
                             <span class="upper">{{ item.title|raw }}</span>
-                            <span class="light">
-                                (<a class="link--underline" href="{{ item.url|escape('html_attr')|raw }}" target="_blank">{{ __('signup') }}</a>)
-                            </span>
+                            <a class="link--underline light" href="{{ item.url|escape('html_attr')|raw }}" target="_blank">{{ __('signup') }}</a>
                         </li>
                     {% endfor %}
                 </ul>

@@ -530,8 +530,8 @@ return [
 
     'I18n' => [
         'locales' => [
-            'it_IT' => 'it',
-            'en_US' => 'en',
+            'it' => 'it',
+            'en' => 'en',
         ],
         'lang' => 'it',
         'default' => 'it',
