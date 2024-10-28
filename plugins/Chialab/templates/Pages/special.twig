@@ -48,8 +48,10 @@
                                 <h2 class="m-0 mb-2 serif regular f-6">
                                     {{ item.title }}
                                 </h2>
-                                {% if item.get('body') is defined %}
-                                    <div class="m-0 mb-2 serif f-3 body">{{ item.get('body')|raw }}</div>
+                                {% if item.get('body') is not empty %}
+                                    <div class="m-0 mb-2 serif f-3 body">
+                                        {{ Text.renderBody(item, 'body')|raw }}
+                                    </div>
                                 {% endif %}
                                 {% set len = item.get('see_also')|default([])|length %}
                                 {% if len > 0 %}
