@@ -1,12 +1,17 @@
 {% set stream = object.get('streams')|first %}
 {% set title = object.get('title')|default(null) %}
 {% set description = object.get('description')|default(null) %}
+{% set _caption = caption is defined ? caption : true %}
 
 <div class="media_container column gap-s">
     {% if object.get('type') == 'images' %}
-        {{ Thumb.image(object, 'default', {
-            class: 'w-full',
-        })|raw }}
+        {% if stream.mime_type == 'image/gif' %}
+            <img class="w-full" src="{{ object.media_url }}" />
+        {% else %}
+            {{ Thumb.image(object, 'default', {
+                class: 'w-full',
+            })|raw }}
+        {% endif %}
     {% elseif object.has('body') %}
         <div class="media_body w-full">
             {{ object.get('body')|raw }}
@@ -15,7 +20,7 @@
         <object class="media_object w-full" data="{{ object.media_url }}" type="{{ stream.mime_type }}"></object>
     {% endif %}
 
-    {% if title is not null and description is not null %}
+    {% if _caption and title is not null and description is not null %}
         <div class="media_caption sans f-1 column gap-0">
             {% if title is not null %}
                 <span class="media_title">{{ title|raw }}</span>

@@ -43,6 +43,12 @@ body {
     aspect-ratio: 16 / 9;
 }
 
+.gallery_container {
+    display: grid;
+    grid-gap: var(--gap);
+    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+}
+
 .gallery_container > * {
     width: 100%;
 }
