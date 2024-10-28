@@ -115,6 +115,10 @@ article header {
     margin-top: var(--gap);
 }
 
+.body > [data-placeholder] {
+    width: 100%;
+}
+
 .description a,
 .body a {
     text-decoration: underline;

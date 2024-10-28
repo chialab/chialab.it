@@ -7,3 +7,7 @@
 .h-1-half {
     --h-span: 1.5 !important;
 }
+
+.flex-none {
+    flex: none;
+}

@@ -15,10 +15,6 @@
     line-height: 1.125;
 }
 
-.card .card__details {
-    flex: none;
-}
-
 .card[style*='--r:'] {
     --aa-brightness: ((var(--r, 255) * 299) + (var(--g, 255) * 587) + (var(--b, 255) * 114)) / 1000;
     --aa-color: calc((var(--aa-brightness) - 128) * -1000);

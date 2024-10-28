@@ -7,7 +7,7 @@
             <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
         </div>
     {% endif %}
-    <div class="card__details serif w-full py-1 column gap-xs">
+    <div class="card__details flex-none serif w-full py-1 column gap-xs">
         {% if object.get('has_clients') is not empty %}
             <span class="mono f-s text-accent bold">{{ object.has_clients|first.title|raw }}</span>
         {% endif %}
