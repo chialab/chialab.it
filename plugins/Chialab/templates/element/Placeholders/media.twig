@@ -7,8 +7,12 @@
         {{ Thumb.image(object, 'default', {
             class: 'w-full',
         })|raw }}
+    {% elseif object.has('body') %}
+        <div class="media_body w-full">
+            {{ object.get('body')|raw }}
+        </div>
     {% else %}
-        <object class="w-full" data="{{ object.media_url }}" type="{{ stream.mime_type }}"></object>
+        <object class="media_object w-full" data="{{ object.media_url }}" type="{{ stream.mime_type }}"></object>
     {% endif %}
 
     {% if title is not null and description is not null %}

@@ -47,6 +47,19 @@ body {
     width: 100%;
 }
 
+.media_body > embed,
+.media_body > iframe,
+.media_object {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+}
+
+[data-placeholder]:has(.media_body, .media_object) {
+    width: 100%;
+}
+
 dna-backdrop dna-slideshow {
     width: calc(var(--viewport) - 2 * var(--gutter));
     max-width: 100%;
