@@ -42,6 +42,10 @@ class AppView extends BaseAppView
 
         $this->loadHelper('Text');
         $this->loadHelper('Color');
+        $this->helpers()->get('Paginator')->setTemplates([
+            'prevActive' => '<a rel="prev" class="link--section" href="{{url}}">{{text}}</a>',
+            'nextActive' => '<a rel="next" class="link--section" href="{{url}}">{{text}}</a>',
+        ]);
 
         if (Configure::check('FrontendPlugin')) {
             $this->setPlugin(Configure::read('FrontendPlugin'));

@@ -8,6 +8,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1); \n"
 "Content-Type: text/plain; charset=utf-8 \n"
 
+msgid "Articles"
+msgstr ""
+
 msgid "Author"
 msgstr ""
 
@@ -56,7 +59,16 @@ msgstr ""
 msgid "newsletter"
 msgstr ""
 
+msgid "next"
+msgstr ""
+
 msgid "open {0}"
+msgstr ""
+
+msgid "page {{page}} of {{pages}}"
+msgstr ""
+
+msgid "previous"
 msgstr ""
 
 msgid "privacy policy"

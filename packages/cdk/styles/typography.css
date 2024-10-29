@@ -183,3 +183,7 @@ article header {
     white-space: nowrap;
     border: 0;
 }
+
+.pagination {
+    user-select: none;
+}

@@ -11,6 +11,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit \n"
 "Plural-Forms: nplurals=2; plural=(n != 1); \n"
 
+msgid "Articles"
+msgstr "Articoli"
+
 msgid "Author"
 msgstr "Autore"
 
@@ -59,8 +62,17 @@ msgstr "accedi"
 msgid "newsletter"
 msgstr ""
 
+msgid "next"
+msgstr "prossima"
+
 msgid "open {0}"
 msgstr "apri {0}"
+
+msgid "page {{page}} of {{pages}}"
+msgstr "pagina {{page}} di {{pages}}"
+
+msgid "previous"
+msgstr "precendente"
 
 msgid "privacy policy"
 msgstr ""
