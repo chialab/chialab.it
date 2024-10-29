@@ -192,7 +192,7 @@ class TextHelper extends Helper
      * @param \DOMDocument $dom
      * @return void
      */
-    protected function removeEmptyParagraphs(DOMDocument $dom)
+    protected function removeEmptyParagraphs(DOMDocument $dom): void
     {
         $elements = $dom->getElementsByTagName('p');
         $len = $elements->length;
