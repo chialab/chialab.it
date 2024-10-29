@@ -44,6 +44,11 @@ a.link--section:hover {
     border-right: solid 1px var(--color-text);
 }
 
+.link--section + .link--section::before {
+    display: none;
+    content: '';
+}
+
 a.link--section:hover .link--section::before {
     text-decoration: none;
 }

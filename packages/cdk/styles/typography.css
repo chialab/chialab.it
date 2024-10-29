@@ -102,16 +102,16 @@ article header {
     margin-bottom: 0;
 }
 
+.body p,
 .description p {
     margin: 0;
 }
 
 .body p {
-    margin: 0;
     line-height: 1.5;
 }
 
-.body > :is(p, [data-placeholder]) + :is(p, [data-placeholder]) {
+.body > :is(p, ul, ol, [data-placeholder]) + :is(p, ul, ol, [data-placeholder]) {
     margin-top: var(--gap);
 }
 

@@ -1,4 +1,4 @@
-{% set children = limit is defined ? folder.children|slice(0, limit) : folder.children %}
+{% set children = folder.get(relation|default('children')) %}
 
 {% if folder.get('layout') == 'masonry' %}
     {{ element('folder-masonry', { children: children })|raw }}

@@ -29,15 +29,19 @@ class PagesController extends AppController
             'objects' => ['include' => 'poster'],
             'documents' => ['include' => 'poster,has_media,has_clients,see_also'],
             'news' => ['include' => 'poster,has_media,see_also'],
-            'folders' => ['include' => 'children|10,poster'],
+            'folders' => ['include' => 'featured,poster'],
         ], [
-            'children' => 3,
+            'featured' => 3,
             'has_media' => 3,
             'see_also' => 4,
         ]);
 
         $root = $this->Publication->getPublication();
-        $root = $loader->loadObject($root->uname, 'folders');
+        $root = $loader->loadObject($root->uname, 'folders', [
+            'include' => 'children,poster',
+        ], [
+            'children' => 2,
+        ]);
 
         $this->set('folders', $root['children']);
     }

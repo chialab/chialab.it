@@ -15,6 +15,10 @@
     line-height: 1.125;
 }
 
+.card .card__description p {
+    margin: 0;
+}
+
 .card[style*='--r:'] {
     --aa-brightness: ((var(--r, 255) * 299) + (var(--g, 255) * 587) + (var(--b, 255) * 114)) / 1000;
     --aa-color: calc((var(--aa-brightness) - 128) * -1000);
@@ -31,7 +35,8 @@
     transform: scale(1.05);
 }
 
-a.card:hover .card__title {
+.card a:hover .card__title,
+.card .card__cover:hover ~ .card__details .card__title {
     text-decoration: underline;
     text-decoration-color: var(--color-accent);
 }

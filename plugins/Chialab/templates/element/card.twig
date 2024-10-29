@@ -1,19 +1,24 @@
-<a class="card column gap-0 {{ class|default('') }}" title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
-    _name: 'pages:objects',
-    _entity: object,
-}) }}">
+<div class="card column gap-0 {{ class|default('') }}">
     {% if Poster.exists(object) %}
-        <div class="card__cover card__cover--zoom ratio--16-9">
+        <a class="card__cover card__cover--zoom ratio--16-9" title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
+            _name: 'pages:objects',
+            _entity: object,
+        }) }}">
             <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
-        </div>
+        </a>
     {% endif %}
     <div class="card__details flex-none serif w-full py-1 column gap-xs">
         {% if object.get('has_clients') is not empty %}
             <span class="mono f-s text-accent bold">{{ object.has_clients|first.title|raw }}</span>
         {% endif %}
-        <h3 class="f-6 m-0 regular italic card__title">{{ object.title|raw }}</h3>
+        <a title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
+            _name: 'pages:objects',
+            _entity: object,
+        }) }}">
+            <h3 class="f-6 m-0 regular italic card__title">{{ object.title|raw }}</h3>
+        </a>
         {% if object.get('description') is not empty %}
-            <div class="f-3 clamp-4 body card__description">
+            <div class="f-3 clamp-4 description card__description">
                 {{ object.description|raw }}
             </div>
         {% endif %}
@@ -25,4 +30,4 @@
             </ul>
         {% endif %}
     </div>
-</a>
+</div>
