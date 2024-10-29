@@ -2,7 +2,7 @@
     {{ element('claim', { object: parent })|raw }}
 </header>
 <main class="w-full gap-1 grid">
-    {% if parent is defined and parent.get('children')|length > 0 %}
+    {% if parent.get('children')|length > 0 %}
         <div class="w-3 py-2">
             {{ element('toc', { items: parent.children, current: object })|raw }}
         </div>
@@ -10,8 +10,8 @@
     <section class="w-8 column">
         <header>
             <h1 class="m-0 serif italic regular f-7">{{ object.title }}</h1>
-            {% if object.get('description') is defined and object.get('description')|striptags is not empty %}
-                <p class="serif regular f-6">{{ object.get('description')|striptags|raw }}</p>
+            {% if object.get('description') is defined and object.get('description') is not empty %}
+                <div class="serif regular f-6">{{ object.get('description')|raw }}</div>
             {% endif %}
         </header>
 
@@ -47,9 +47,9 @@
                                     </div>
                                 {% endif %}
                             {% else %}
-                                <h2 class="m-0 mb-2 serif regular f-6">
-                                    {{ item.title }}
-                                </h2>
+                                {% if item.title is not empty %}
+                                    <h2 class="m-0 mb-2 serif regular f-6">{{ item.title }}</h2>
+                                {% endif %}
                                 {% if item.get('body') is not empty %}
                                     <div class="m-0 mb-2 serif f-3 body">
                                         {{ Text.renderBody(item, 'body')|raw }}

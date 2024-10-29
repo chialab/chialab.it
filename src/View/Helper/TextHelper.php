@@ -187,6 +187,32 @@ class TextHelper extends Helper
     }
 
     /**
+     * Remove empty paragraphs.
+     *
+     * @param \DOMDocument $dom
+     * @return void
+     */
+    protected function removeEmptyParagraphs(DOMDocument $dom)
+    {
+        $elements = $dom->getElementsByTagName('p');
+        $len = $elements->length;
+        for ($i = $len - 1; $i >= 0; $i--) {
+            /**
+             * @var \DOMElement|null $element
+             */
+            $element = $elements->item($i);
+            if (!$element) {
+                continue;
+            }
+
+            $content = preg_replace('/[\s]+/mu', '', $element->textContent);
+            if (empty($content)) {
+                $element->parentNode->removeChild($element);
+            }
+        }
+    }
+
+    /**
      * Render a body text with some transformations:
      * * Downgrade headings
      * * Add pilcrow link to headings
@@ -201,6 +227,7 @@ class TextHelper extends Helper
         $text = $this->Placeholders->template($entity, $field);
         $dom = $this->parseHTML($text);
         $this->downgradeHeadings($dom, Hash::get($options, 'downgradeHeadings', 0));
+        $this->removeEmptyParagraphs($dom);
 
         $content = $dom->saveHTML();
         $content = preg_replace(

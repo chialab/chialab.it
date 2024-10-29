@@ -44,6 +44,18 @@ return static function (RouteBuilder $routes): void {
                 );
 
                 $routes->connect(
+                    '/cosacome/**',
+                    ['controller' => 'Pages', 'action' => 'cosacome'],
+                    ['_name' => 'pages:cosacome']
+                );
+
+                $routes->connect(
+                    '/umani/**',
+                    ['controller' => 'Pages', 'action' => 'umani'],
+                    ['_name' => 'pages:umani']
+                );
+
+                $routes->connect(
                     '/**',
                     ['controller' => 'Pages', 'action' => 'fallback'],
                     ['_name' => 'pages:fallback']

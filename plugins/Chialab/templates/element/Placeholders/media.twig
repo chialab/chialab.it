@@ -5,7 +5,7 @@
 
 <div class="media_container column gap-s">
     {% if object.get('type') == 'images' %}
-        {% if stream.mime_type == 'image/gif' %}
+        {% if stream is not empty and stream.mime_type == 'image/gif' %}
             <img class="w-full" src="{{ object.media_url }}" />
         {% else %}
             {{ Thumb.image(object, 'default', {

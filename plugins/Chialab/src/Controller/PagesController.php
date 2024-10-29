@@ -27,7 +27,7 @@ class PagesController extends AppController
     {
         $loader = new ObjectsLoader([
             'objects' => ['include' => 'poster'],
-            'documents' => ['include' => 'poster,has_media,has_clients,see_also,placeholder'],
+            'documents' => ['include' => 'poster,has_media,has_clients,see_also'],
             'news' => ['include' => 'poster,has_media,see_also'],
             'folders' => ['include' => 'children|10,poster'],
         ], [
@@ -63,6 +63,46 @@ class PagesController extends AppController
     }
 
     /**
+     * Load special section object "cosacome".
+     *
+     * @param string $path Object path.
+     * @return \Cake\Http\Response
+     */
+    public function cosacome(string|null $path = null): Response
+    {
+        if (!empty($path)) {
+            return $this->fallback(sprintf('cosacome/%s', $path));
+        }
+
+        $firstChild = $this->Objects->loadRelatedObjects('cosacome', 'folders', 'children')->first();
+        if (!empty($firstChild)) {
+            return $this->redirect(['_name' => 'pages:objects', 'uname' => $firstChild->uname]);
+        }
+
+        return $this->fallback('cosacome');
+    }
+
+    /**
+     * Load special section object "umani".
+     *
+     * @param string $path Object path.
+     * @return \Cake\Http\Response
+     */
+    public function umani(string|null $path = null): Response
+    {
+        if (!empty($path)) {
+            return $this->fallback(sprintf('umani/%s', $path));
+        }
+
+        $firstChild = $this->Objects->loadRelatedObjects('umani', 'folders', 'children')->first();
+        if (!empty($firstChild)) {
+            return $this->redirect(['_name' => 'pages:objects', 'uname' => $firstChild->uname]);
+        }
+
+        return $this->fallback('umani');
+    }
+
+    /**
      * Generic object view.
      *
      * @param string $path Object path.
@@ -70,23 +110,6 @@ class PagesController extends AppController
      */
     public function fallback(string $path): Response
     {
-        $parts = array_filter(explode('/', $path));
-        $object = $this->Objects->loadObject(array_pop($parts), 'objects');
-
-        // include folders from redirect first children
-        $include = ['cosacome', 'umani'];
-
-        // redirect to first children of folder, if it's in the include list
-        if ($object->type == 'folders' && in_array($object->uname, $include)) {
-            $fullObject = $this->Objects->loadObject($object->uname, 'folders', ['include' => 'children|1']);
-
-            if (!empty($fullObject->children)) {
-                $first_children = $fullObject->children->toArray()[0];
-
-                return $this->redirect(['_name' => 'pages:objects', 'uname' => $first_children->uname]);
-            }
-        }
-
         try {
             return $this->_fallback($path);
         } catch (RecordNotFoundException $e) {
