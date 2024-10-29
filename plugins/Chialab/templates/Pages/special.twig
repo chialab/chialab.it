@@ -39,7 +39,7 @@
                                     {% endfor %}
                                 </dna-slideshow>
                                 {# We should model the old BE3 text multimedia as the body of the whole gallery, as it it does not change from slide to slide #}
-                                {% if item.get('body') is defined %}
+                                {% if item.get('body') is not empty %}
                                     <div class="mt-2 serif light italic f-4">
                                         {{ item.get('body')|raw }}
                                     </div>
