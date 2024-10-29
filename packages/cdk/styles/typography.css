@@ -88,7 +88,7 @@ article header {
     text-rendering: geometricprecision;
 }
 
-.description {
+.balance {
     text-wrap: balance;
 }
 
@@ -105,13 +105,10 @@ article header {
 .body p,
 .description p {
     margin: 0;
-}
-
-.body p {
     line-height: 1.5;
 }
 
-.body > :is(p, ul, ol, [data-placeholder]) + :is(p, ul, ol, [data-placeholder]) {
+:is(.body, .description) > :is(p, ul, ol, [data-placeholder]) + :is(p, ul, ol, [data-placeholder]) {
     margin-top: var(--gap);
 }
 

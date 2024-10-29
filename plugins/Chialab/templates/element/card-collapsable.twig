@@ -12,41 +12,41 @@
             <span class="mono f-s text-accent bold card__title">{{ (object.has_clients|first).title|raw }}</span>
         {% endif %}
         <span class="f-5 m-0 regular card__title">{{ object.title|raw }}</span>
-            {% if object.has('person_title') is not empty %}
-                <span class="f-3 body">{{ object.person_title|raw }}</span>
+        <div class="card__description column">
+            {% if object.get('extra') is not empty and object.extra.person_role is not empty %}
+                <p class="m-0 f-3 body">{{ object.extra.person_role|raw }}</p>
             {% endif %}
-            <div class="card__description column">
-                {% if object.get('description') is not empty %}
-                    <div class="w-full f-3 description">
-                        {{ object.description|raw }}
-                    </div>
-                {% endif %}
+            {% if object.get('description') is not empty %}
+                <div class="w-full f-3 description">
+                    {{ object.description|raw }}
+                </div>
+            {% endif %}
 
-                {% if object.get('has_media') is not empty %}
-                    <div class="w-full row">
-                        {% for item in object.has_media %}
-                            <img
-                                src="{{ Poster.url(item)|escape('html_attr') }}"
-                                class="w-1 h-1 cover"
-                                draggable="false"
-                                data-modal="{{ object.uname }}"
-                            />
+            {% if object.get('has_media') is not empty %}
+                <div class="w-full row">
+                    {% for item in object.has_media %}
+                        <img
+                            src="{{ Poster.url(item)|escape('html_attr') }}"
+                            class="w-1 h-1 cover"
+                            draggable="false"
+                            data-modal="{{ object.uname }}"
+                        />
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if object.get('see_also') is not empty %}
+                <div class="mt-2 w-full column f-s">
+                    <span class="link--section">{{ __('See also') }}</span>
+                    <div class="columns-2 w-full">
+                        {% for item in object.see_also %}
+                            {{ element('card-small', {
+                                object: item,
+                            })|raw }}
                         {% endfor %}
                     </div>
-                {% endif %}
-
-                {% if object.get('see_also') is not empty %}
-                    <div class="mt-2 w-full column f-s">
-                        <span class="link--section">{{ __('See also') }}</span>
-                        <div class="columns-2 w-full">
-                            {% for item in object.see_also %}
-                                {{ element('card-small', {
-                                    object: item,
-                                })|raw }}
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
+        </div>
     </div>
 </cl-card-details>

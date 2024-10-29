@@ -15,10 +15,6 @@
     line-height: 1.125;
 }
 
-.card .card__description p {
-    margin: 0;
-}
-
 .card[style*='--r:'] {
     --aa-brightness: ((var(--r, 255) * 299) + (var(--g, 255) * 587) + (var(--b, 255) * 114)) / 1000;
     --aa-color: calc((var(--aa-brightness) - 128) * -1000);
@@ -45,6 +41,10 @@
     aspect-ratio: 16 / 9;
     max-width: 100%;
     min-height: 6rem;
+}
+
+cl-card-details:not([\:expanded]) .card__description > *:not(:first-child) {
+    display: none;
 }
 
 @media (prefers-reduced-motion) {
