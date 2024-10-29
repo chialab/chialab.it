@@ -42,7 +42,11 @@ class AppView extends BaseAppView
 
         $this->loadHelper('Text');
         $this->loadHelper('Color');
-        $this->helpers()->get('Paginator')->setTemplates([
+        /**
+         * @var \Cake\View\Helper\PaginatorHelper $paginator
+         */
+        $paginator = $this->helpers()->get('Paginator');
+        $paginator->setTemplates([
             'prevActive' => '<a rel="prev" class="link--section" href="{{url}}">{{text}}</a>',
             'nextActive' => '<a rel="next" class="link--section" href="{{url}}">{{text}}</a>',
         ]);
