@@ -1,4 +1,5 @@
 <header class="w-full">
+    <h1 class="hidden-title">{{ object.title|default(publication.title) }}</h1>
     {{ element('claim')|raw }}
 </header>
 

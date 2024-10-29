@@ -1,4 +1,7 @@
-{{ element('claim')|raw }}
+<header class="w-full">
+    <h1 class="hidden-title">{{ publication.title }}</h1>
+    {{ element('claim')|raw }}
+</header>
 
 {% set sectionsToShow = ['works', 'tatzebao', 'topics'] %}
 {% for folder in folders %}

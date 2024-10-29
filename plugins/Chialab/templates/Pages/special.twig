@@ -3,15 +3,17 @@
 </header>
 <main class="w-full gap-1 grid">
     {% if parent is defined and parent.get('children')|length > 0 %}
-        <div class="w-3">
+        <div class="w-3 py-2">
             {{ element('toc', { items: parent.children, current: object })|raw }}
         </div>
     {% endif %}
-    <section class="w-8">
-        <h1 class="m-0 serif italic regular f-7">{{ object.title }}</h1>
-        {% if object.get('description') is defined and object.get('description')|striptags is not empty %}
-            <p class="serif regular f-6">{{ object.get('description')|striptags|raw }}</p>
-        {% endif %}
+    <section class="w-8 column">
+        <header>
+            <h1 class="m-0 serif italic regular f-7">{{ object.title }}</h1>
+            {% if object.get('description') is defined and object.get('description')|striptags is not empty %}
+                <p class="serif regular f-6">{{ object.get('description')|striptags|raw }}</p>
+            {% endif %}
+        </header>
 
         {# here "object" should be a folder #}
         {% if object.get('children')|length > 0 %}
