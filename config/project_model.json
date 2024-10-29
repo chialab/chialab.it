@@ -248,7 +248,7 @@
       "inverse_name": "link_of",
       "inverse_label": "Link of",
       "description": "Object has link",
-      "left": ["documents", "events", "news_item"],
+      "left": ["documents", "events", "news_item", "profiles"],
       "right": ["links"]
     },
     {
