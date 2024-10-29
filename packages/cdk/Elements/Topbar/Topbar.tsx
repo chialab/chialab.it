@@ -1,4 +1,5 @@
-import { Component, customElement, property, state } from '@chialab/dna';
+import { Component, customElement, listen, property, state } from '@chialab/dna';
+import { ButtonVariant } from '@chialab/dna-button';
 
 @customElement('cl-topbar')
 export class Topbar extends Component {
@@ -11,6 +12,22 @@ export class Topbar extends Component {
         type: String,
     })
     tooltip: string = 'Back to home';
+
+    @property({
+        type: String,
+    })
+    openTooltip: string = 'Open menu';
+
+    @property({
+        type: String,
+    })
+    closeTooltip: string = 'Close menu';
+
+    @state({
+        type: Boolean,
+        attribute: ':open',
+    })
+    open: boolean = false;
 
     @state({
         type: Boolean,
@@ -46,24 +63,58 @@ export class Topbar extends Component {
                     class="mono bold f-2 lower">
                     <slot name="title">chialab</slot>
                 </a>
-                <div class="row topbar__links">
-                    <nav class="row gap-0 align-center">
-                        <span
-                            class="f-2 mr-1 mono bold text-accent"
-                            aria-hidden="true">
-                            ẞ
-                        </span>
+                <div class="topbar__container">
+                    <span
+                        class="f-2 mr-1 mono bold text-accent"
+                        aria-hidden="true">
+                        ẞ
+                    </span>
+                    <nav class="topbar__main-nav">
                         <slot />
                     </nav>
-                    <div class="row gap-0 align-center">
+                    <div class="topbar__group">
                         <span
                             class="f-2 mr-1 mono"
                             aria-hidden="true">
                             ß
                         </span>
-                        <slot name="locale" />
+                        <nav class="topbar__lang-nav">
+                            <slot name="locale" />
+                        </nav>
                     </div>
                 </div>
+                <button
+                    is="dna-button"
+                    variant={ButtonVariant.action}
+                    class="topbar__toggle"
+                    role="switch"
+                    aria-checked={this.open ? 'true' : 'false'}
+                    aria-label={this.open ? this.closeTooltip : this.openTooltip}>
+                    <svg viewBox="0 0 256 256">
+                        <rect
+                            y="47.5"
+                            width="256"
+                            height="14.6"
+                        />
+                        <rect
+                            y="120.7"
+                            width="256"
+                            height="14.6"
+                            class="topbar__toggle-middle-1"
+                        />
+                        <rect
+                            y="120.7"
+                            width="256"
+                            height="14.6"
+                            class="topbar__toggle-middle-2"
+                        />
+                        <rect
+                            y="193.8"
+                            width="256"
+                            height="14.6"
+                        />
+                    </svg>
+                </button>
             </div>
         );
     }
@@ -71,4 +122,9 @@ export class Topbar extends Component {
     protected onWindowScroll = () => {
         this.fixed = window.scrollY > 0;
     };
+
+    @listen('click', '.topbar__toggle')
+    protected onToggleClick() {
+        this.open = !this.open;
+    }
 }

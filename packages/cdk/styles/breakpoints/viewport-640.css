@@ -16,7 +16,42 @@
         --w-span: 4;
     }
 
-    .claim {
-        font-size: var(--font-size-6, 2rem);
+    .f-xs {
+        font-size: var(--font-size-xsmall);
+    }
+
+    .f-s {
+        font-size: var(--font-size-xsmall);
+    }
+
+    .f-1 {
+        font-size: var(--font-size-small);
+    }
+
+    .f-2 {
+        font-size: var(--font-size-1);
+    }
+
+    .f-3 {
+        font-size: var(--font-size-2);
+    }
+
+    .f-4 {
+        font-size: var(--font-size-3);
+    }
+
+    .f-5 {
+        font-size: var(--font-size-4);
+    }
+
+    .f-6 {
+        font-size: var(--font-size-5);
+    }
+
+    .claim,
+    .f-7,
+    .f-8,
+    .f-9 {
+        font-size: var(--font-size-6);
     }
 }

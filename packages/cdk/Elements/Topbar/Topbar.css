@@ -13,9 +13,25 @@ cl-topbar[\:fixed] {
     box-shadow: var(--shadow-3);
 }
 
-cl-topbar .topbar__links a {
+cl-topbar .topbar__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 0;
+    row-gap: var(--margin);
+}
+
+cl-topbar .topbar__group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 0;
+    row-gap: var(--gap);
+}
+
+cl-topbar .topbar__container a {
     position: relative;
-    margin: 0 var(--margin);
+    padding: 0 var(--margin) 0 0;
     color: inherit;
     font-family: var(--font-mono);
     font-weight: var(--weight-light);
@@ -23,21 +39,105 @@ cl-topbar .topbar__links a {
     text-decoration: none;
 }
 
-cl-topbar .topbar__links a[aria-current='page'],
-cl-topbar .topbar__links a[data-current-locale] {
+cl-topbar .topbar__main-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+cl-topbar .topbar__lang-nav,
+cl-topbar .topbar__main-nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--margin);
+    margin-right: var(--gap);
+}
+
+cl-topbar .topbar__container a[aria-current='page'],
+cl-topbar .topbar__container a[data-current-locale] {
     color: var(--color-accent);
     font-weight: var(--weight-bold);
 }
 
-cl-topbar .topbar__links a:hover {
+cl-topbar .topbar__container a:hover {
     text-decoration: underline;
 }
 
-cl-topbar .topbar__links a + a::before {
+cl-topbar .topbar__container a:not(:last-child)::after {
     content: '';
     position: absolute;
-    left: calc(-1 * var(--margin));
+    top: 0;
+    right: 0;
     display: block;
     height: 100%;
     border-left: solid 1px var(--color-text);
+}
+
+cl-topbar .topbar__toggle {
+    position: absolute;
+    top: calc(var(--gutter) * 1.25);
+    right: var(--gutter);
+    display: none;
+}
+
+cl-topbar .topbar__toggle svg {
+    display: block;
+    width: 2em;
+    height: 2em;
+    pointer-events: none;
+}
+
+cl-topbar .topbar__toggle svg rect {
+    transform-origin: center;
+    transition: transform 250ms ease-out;
+}
+
+cl-topbar[\:open] .topbar__toggle .topbar__toggle-middle-1 {
+    transform: rotate(45deg);
+}
+
+cl-topbar[\:open] .topbar__toggle .topbar__toggle-middle-2 {
+    transform: rotate(-45deg);
+}
+
+@media (max-width: 767px) {
+    cl-topbar[\:open] .topbar__container {
+        flex-direction: column;
+        gap: var(--gap);
+        width: 100%;
+    }
+
+    cl-topbar[\:open] .topbar__main-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--gap);
+        width: 100%;
+        margin: 0;
+        padding: var(--margin) 0;
+    }
+
+    cl-topbar:not([\:open]) .topbar__group {
+        display: none;
+    }
+
+    cl-topbar:not([\:open]) .topbar__main-nav a:not([aria-current='page']) {
+        display: none;
+    }
+
+    cl-topbar[\:open] .topbar__main-nav a {
+        display: block;
+        width: 100%;
+    }
+
+    cl-topbar .topbar__main-nav a:not(:last-child)::after {
+        content: '';
+        display: none;
+    }
+
+    cl-topbar .topbar__toggle {
+        display: flex;
+    }
 }
