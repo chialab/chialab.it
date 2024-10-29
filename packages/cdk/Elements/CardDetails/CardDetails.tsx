@@ -6,6 +6,7 @@ import { __ } from '@chialab/dna-i18n';
 export class CardDetails extends Component {
     @state({
         type: Boolean,
+        attribute: ':expanded',
     })
     expanded: boolean = false;
 
@@ -46,6 +47,13 @@ export class CardDetails extends Component {
         if (!element) {
             return;
         }
+        Array.from(element.querySelectorAll('a, button')).forEach((child) => {
+            if (this.expanded) {
+                child.removeAttribute('tabindex');
+            } else {
+                child.setAttribute('tabindex', '-1');
+            }
+        });
         if (this.expanded) {
             element.classList.remove('clamp-4');
         } else {
@@ -53,7 +61,7 @@ export class CardDetails extends Component {
         }
     }
 
-    @listen('click', '.card__cover, .card__title, .card__description .body, .card-details__toggle')
+    @listen('click', '.card__cover, .card__title, .card__description .description, .card-details__toggle')
     protected onToggleClick() {
         this.expanded = !this.expanded;
     }
