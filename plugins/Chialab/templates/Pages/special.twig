@@ -2,9 +2,9 @@
     {{ element('claim', { object: parent })|raw }}
 </header>
 <main class="w-full gap-1 grid">
-    {% if parent.get('children')|length > 0 %}
+    {% if toc is defined and toc is not empty %}
         <div class="w-3 py-2">
-            {{ element('toc', { items: parent.children, current: object })|raw }}
+            {{ element('toc', { items: toc, current: object })|raw }}
         </div>
     {% endif %}
     <section class="w-8 column">
@@ -27,7 +27,7 @@
                         <article class="w-full mb-4">
                             {% if item.type == 'galleries' %}
                                 {% if item.get('description') is not empty %}
-                                    <div class="serif light italic f-4 mb-2">
+                                    <div class="serif light description italic f-4 mb-2">
                                         {{ item.get('description')|raw }}
                                     </div>
                                 {% endif %}

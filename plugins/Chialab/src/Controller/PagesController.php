@@ -19,16 +19,6 @@ class PagesController extends AppController
     }
 
     /**
-     * @inheritDoc
-     */
-    public function implementedEvents(): array
-    {
-        return parent::implementedEvents() + [
-            'Controller.beforeObjectRender' => 'loadTatzebaoItems',
-        ];
-    }
-
-    /**
      * Load home objects.
      *
      * @return void
@@ -36,10 +26,10 @@ class PagesController extends AppController
     public function home(): void
     {
         $loader = new ObjectsLoader([
-            'objects' => ['include' => 'poster'],
-            'documents' => ['include' => 'poster,has_media,has_clients,see_also'],
-            'news' => ['include' => 'poster,has_media,see_also'],
-            'folders' => ['include' => 'featured,poster'],
+            'objects' => ['include' => 'poster|1'],
+            'documents' => ['include' => 'poster|1,has_media,has_clients,see_also'],
+            'news' => ['include' => 'poster|1,has_media,see_also'],
+            'folders' => ['include' => 'poster|1,featured'],
         ], [
             'featured' => 3,
             'has_media' => 4,
@@ -54,6 +44,89 @@ class PagesController extends AppController
         ]);
 
         $this->set('folders', $root['children']);
+    }
+
+    /**
+     * Load "works" section.
+     *
+     * @param string|null $uname The uname of the requested entity.
+     * @return \Cake\Http\Response
+     */
+    public function works(string|null $path = null): Response
+    {
+        if ($path !== null) {
+            return $this->fallback(sprintf('works/%s', $path));
+        }
+
+        $this->components()->unload('Objects');
+        $this->loadComponent('Chialab/FrontendKit.Objects', [
+            'objectTypesConfig' => [
+                'objects' => ['include' => 'poster|1'],
+                'documents' => ['include' => 'poster|1,has_clients'],
+            ],
+        ]);
+
+        return $this->fallback('works');
+    }
+
+    /**
+     * Load "tatzebao" section.
+     *
+     * @param string|null $uname The uname of the requested entity.
+     * @return \Cake\Http\Response
+     */
+    public function tatzebao(string|null $path = null): Response
+    {
+        if ($path !== null) {
+            $tatzebao = $this->Objects->loadRelatedObjects('tatzebao', 'folders', 'featured')->toArray();
+            $this->set(compact('tatzebao'));
+
+            return $this->fallback(sprintf('tatzebao/%s', $path));
+        }
+
+        return $this->fallback('tatzebao');
+    }
+
+    /**
+     * Load special section object "cosacome".
+     *
+     * @param string $path Object path.
+     * @return \Cake\Http\Response
+     */
+    public function cosacome(string|null $path = null): Response
+    {
+        if ($path === null) {
+            $firstChild = $this->Objects->loadRelatedObjects('cosacome', 'folders', 'children')->first();
+            if (!empty($firstChild)) {
+                return $this->redirect(['_name' => 'pages:objects', 'uname' => $firstChild->uname]);
+            }
+        }
+
+        $toc = $this->Objects->loadRelatedObjects('cosacome', 'folders', 'children', null, [], [])->toArray();
+        $this->set(compact('toc'));
+
+        return $this->fallback(sprintf('cosacome/%s', $path));
+    }
+
+    /**
+     * Load special section object "umani".
+     *
+     * @param string $path Object path.
+     * @return \Cake\Http\Response
+     */
+    public function umani(string|null $path = null): Response
+    {
+        if ($path === null) {
+            $firstChild = $this->Objects->loadRelatedObjects('umani', 'folders', 'children')->first();
+            if (!empty($firstChild)) {
+                return $this->redirect(['_name' => 'pages:objects', 'uname' => $firstChild->uname]);
+            }
+        }
+
+        $toc = $this->Objects->loadRelatedObjects('umani', 'folders', 'children', null, [], [])->toArray();
+        $this->set(compact('toc'));
+
+        return $this->fallback(sprintf('umani/%s', $path));
     }
 
     /**
@@ -74,63 +147,6 @@ class PagesController extends AppController
         }
 
         throw new NotFoundException('Missing url');
-    }
-
-    /**
-     * Load special section object "cosacome".
-     *
-     * @param string $path Object path.
-     * @return \Cake\Http\Response
-     */
-    public function cosacome(string|null $path = null): Response
-    {
-        if (!empty($path)) {
-            return $this->fallback(sprintf('cosacome/%s', $path));
-        }
-
-        $firstChild = $this->Objects->loadRelatedObjects('cosacome', 'folders', 'children')->first();
-        if (!empty($firstChild)) {
-            return $this->redirect(['_name' => 'pages:objects', 'uname' => $firstChild->uname]);
-        }
-
-        return $this->fallback('cosacome');
-    }
-
-    /**
-     * Load special section object "umani".
-     *
-     * @param string $path Object path.
-     * @return \Cake\Http\Response
-     */
-    public function umani(string|null $path = null): Response
-    {
-        if (!empty($path)) {
-            return $this->fallback(sprintf('umani/%s', $path));
-        }
-
-        $firstChild = $this->Objects->loadRelatedObjects('umani', 'folders', 'children')->first();
-        if (!empty($firstChild)) {
-            return $this->redirect(['_name' => 'pages:objects', 'uname' => $firstChild->uname]);
-        }
-
-        return $this->fallback('umani');
-    }
-
-    /**
-     * Load "tatzebao" items if it is the current section.
-     *
-     * @return void
-     */
-    public function loadTatzebaoItems(): void
-    {
-        $parent = $this->viewBuilder()->getVar('parent');
-        if ($parent == null) {
-            return;
-        }
-        if ($parent['uname'] !== 'tatzebao') {
-            return;
-        }
-        $parent['featured'] = $this->Objects->loadRelatedObjects($parent['uname'], 'folders', 'featured')->toArray();
     }
 
     /**

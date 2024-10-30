@@ -21,7 +21,9 @@
     </aside>
 </div>
 
-<div class="w-full column section mt-4">
-    <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ parent.title|raw }} /</h2>
-    {{ element('folder-layout', { folder: parent, columns: 6, relation: 'featured' })|raw }}
-</div>
+{% if tatzebao is defined and tatzebao is not empty %}
+    <div class="w-full column section mt-4">
+        <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ parent.title|raw }} /</h2>
+        {{ element('folder-layout', { folder: parent, children: tatzebao, columns: 6 })|raw }}
+    </div>
+{% endif %}
