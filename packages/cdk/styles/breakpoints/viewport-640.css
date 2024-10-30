@@ -3,6 +3,12 @@
         --gutter: var(--spacing, 0.25rem);
     }
 
+    .gap-3,
+    .gap-4,
+    .gap-5 {
+        gap: var(--gap);
+    }
+
     .w-3,
     .w-4,
     .w-5,

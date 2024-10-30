@@ -1,3 +1,39 @@
+.max-10p {
+    max-width: 10%;
+}
+
+.max-20p {
+    max-width: 20%;
+}
+
+.max-30p {
+    max-width: 30%;
+}
+
+.max-40p {
+    max-width: 40%;
+}
+
+.max-50p {
+    max-width: 50%;
+}
+
+.max-60p {
+    max-width: 60%;
+}
+
+.max-70p {
+    max-width: 70%;
+}
+
+.max-80p {
+    max-width: 80%;
+}
+
+.max-90p {
+    max-width: 90%;
+}
+
 .columns-2 {
     display: grid;
     grid-template-columns: repeat(2, minmax(var(--column), 1fr));
