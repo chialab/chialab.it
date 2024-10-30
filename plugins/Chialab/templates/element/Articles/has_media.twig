@@ -12,12 +12,7 @@
                 {% endfor %}
             </dna-slideshow>
         {% else %}
-            {% set stream = item.get('streams')|first %}
-            {% if stream is not empty and stream.mime_type == 'image/gif' %}
-                <img src="{{ item.media_url }}" />
-            {% else %}
-                {{ Thumb.image(item, 'default')|raw }}
-            {% endif %}
+            {{ Thumb.image(item, 'default')|raw }}
         {% endif %}
     {% endfor %}
 </div>
