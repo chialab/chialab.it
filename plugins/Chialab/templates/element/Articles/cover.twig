@@ -1,7 +1,7 @@
 {% set variant = Poster.exists(object, { variant: 1 }) ? 1 : 0 %}
 
 <div class="w-full">
-    <img class="explode-x p-0 block h-2 cover" alt="" src="{{ Poster.url(object, 'default', {
+    <img class="explode-x p-0 block h-2 cover" alt="" src="{{ Poster.url(object, 'ultra', {
         variant: variant,
     }) }}" />
 </div>
