@@ -1,0 +1,59 @@
+{% if object.get('has_clients') is not empty %}
+    <div class="column gap-xs">
+        <span class="mono text-accent bold">{{ __('Client') }}</span>
+        <span class="mono bold">{{ (object.has_clients|first).title|raw }}</span>
+    </div>
+{% endif %}
+
+{% if object.get('has_authors') is not empty %}
+    <div class="column gap-xs">
+        <span class="mono text-accent bold">{{ __('Author') }}</span>
+        <span class="mono bold">{{ (object.has_authors|first).title|raw }}</span>
+    </div>
+{% endif %}
+
+{% if object.get('year') is not empty %}
+    <div class="column gap-xs">
+        <span class="mono text-accent bold">{{ __('Year') }}</span>
+        <span class="mono light">{{ object.year|raw }}</span>
+    </div>
+{% endif %}
+
+{% if object.get('categories') is not empty %}
+    <div class="column gap-xs">
+        <span class="mono text-accent bold">{{ __('Job categories') }}</span>
+        <ul class="list--comma">
+            {% for category in object.categories %}
+                <li class="mono light">{{ category.label|raw }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% if object.get('has_links') is not empty %}
+    <div class="column gap-xs">
+        <span class="mono text-accent bold">{{ __('Links') }}</span>
+        {% for link in object.has_links %}
+            <a class="mono bold link--underline" href="{{ Url.build({ _name: 'pages:objects', _entity: link }) }}" target="_blank">{{ link.title|raw }}</a>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% set isUpdated = object.get('created') != object.get('modified') %}
+<div class="column gap-xs">
+    <span class="mono text-accent bold">{{ isUpdated ? __('Updated on') : __('Published on') }}</span>
+    <span class="mono light">{{ Time.format(isUpdated ? object.get('modified') : object.get('created'), 'd MMM yyyy') }}</span>
+</div>
+
+{% if object.get('see_also') is not empty %}
+    <div class="mt-2 column w-full">
+        <span class="link--section">{{ __('See also') }}</span>
+        <div class="columns-2 w-full">
+            {% for item in object.see_also %}
+                {{ element('card-small', {
+                    object: item,
+                })|raw }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

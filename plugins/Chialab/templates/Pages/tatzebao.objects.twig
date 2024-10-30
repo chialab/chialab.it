@@ -1,0 +1,27 @@
+<div class="w-full grid">
+    <article class="column w-8 gap-2">
+        {{ element('Articles/header', {
+            title: object.title,
+        }) }}
+
+        {% if object.get('description') is not empty %}
+            {{ element('Articles/body', {
+                field: 'description',
+            }) }}
+        {% endif %}
+
+        {% if object.get('has_media') is not empty %}
+            {{ element('Articles/has_media') }}
+        {% endif %}
+    </article>
+    <aside class="column w-4 aside f-s">
+        {% if Poster.exists(object) %}
+            {{ element('Articles/poster') }}
+        {% endif %}
+    </aside>
+</div>
+
+<div class="w-full column section mt-4">
+    <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ parent.title|raw }} /</h2>
+    {{ element('folder-layout', { folder: parent, columns: 6, relation: 'featured' })|raw }}
+</div>

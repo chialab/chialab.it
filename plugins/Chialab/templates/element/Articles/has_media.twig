@@ -1,0 +1,23 @@
+<div class="columns-2">
+    {% for item in object.get('has_media') %}
+        {% if item.type == 'galleries' %}
+            <dna-slideshow class="w-full" controls carousel controlslist="noplayback nodots" autoplay="5000">
+                {% for slide in item.has_media %}
+                    <div class="w-full slideshow-item">
+                        {% if Poster.exists(slide) %}
+                            <img class="w-full h-4 poster {{ Poster.position(slide) }}" alt="{{ slide.title|striptags|raw|escape('html_attr') }}"
+                                src="{{ Poster.url(slide) }}"/>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </dna-slideshow>
+        {% else %}
+            {% set stream = item.get('streams')|first %}
+            {% if stream is not empty and stream.mime_type == 'image/gif' %}
+                <img src="{{ item.media_url }}" />
+            {% else %}
+                {{ Thumb.image(item, 'default')|raw }}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>

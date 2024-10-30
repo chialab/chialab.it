@@ -1,6 +1,6 @@
 <div class="card column gap-0 {{ class|default('') }}">
     {% if Poster.exists(object) %}
-        <a class="card__cover card__cover--zoom ratio--16-9" title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
+        <a class="w-full card__cover card__cover--zoom ratio--16-9" title="{{ object.title|striptags|escape('html_attr')|raw }}" href="{{ Url.build({
             _name: 'pages:objects',
             _entity: object,
         }) }}">

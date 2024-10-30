@@ -13,7 +13,7 @@
         {% endif %}
         <span class="f-5 m-0 regular card__title">{{ object.title|raw }}</span>
         <div class="card__description column">
-            {% if object.get('extra') is not empty and object.extra.person_role is not empty %}
+            {% if object.get('extra') is not empty and object.extra.person_role is defined and object.extra.person_role is not empty %}
                 <p class="m-0 f-3 body">{{ object.extra.person_role|raw }}</p>
             {% endif %}
             {% if object.get('description') is not empty %}

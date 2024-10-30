@@ -1,103 +1,21 @@
 {% if Poster.exists(object) %}
-    <div class="w-full">
-        {% set variant = Poster.exists(object, { variant: 1 }) ? 1 : 0 %}
-        <img class="explode-x h-2 p-0 block cover" alt="" src="{{ Poster.url(object, 'default', {
-            variant: variant,
-        }) }}" />
-    </div>
+    {{ element('Articles/cover') }}
 {% endif %}
 
 <article class="column w-8 gap-2">
-    <header class="column gap-row-2">
-        <h1 class="m-0 f-7 serif regular italic">{{ object.title|raw }}</h1>
-        {% if object.get('description') is not empty %}
-            <div class="f-6 serif regular light description balance">
-                {{ object.description|raw }}
-            </div>
-        {% endif %}
-    </header>
+    {{ element('Articles/header', {
+        title: object.title,
+        description: object.get('description'),
+    }) }}
 
     {% if object.get('body') is not empty %}
-        <div class="column serif regular f-3 body gap-0">
-            {{ Text.renderBody(object, 'body')|raw }}
-        </div>
+        {{ element('Articles/body') }}
     {% endif %}
 
     {% if object.get('has_media') is not empty %}
-        {% for item in object.get('has_media') %}
-            {% if item.type == 'galleries' %}
-                <dna-slideshow class="w-full" controls carousel controlslist="noplayback nodots" autoplay="5000">
-                    {% for slide in item.has_media %}
-                        <div class="w-full slideshow-item">
-                            {% if Poster.exists(slide) %}
-                                <img class="w-full h-4 poster {{ Poster.position(slide) }}" alt="{{ slide.title|striptags|raw|escape('html_attr') }}"
-                                    src="{{ Poster.url(slide) }}"/>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                </dna-slideshow>
-            {% endif %}
-        {% endfor %}
+        {{ element('Articles/has_media') }}
     {% endif %}
 </article>
 <aside class="column w-4 aside f-s">
-    {% if object.get('has_clients') is not empty %}
-        <div class="column gap-xs">
-            <span class="mono text-accent bold">{{ __('Client') }}</span>
-            <span class="mono bold">{{ (object.has_clients|first).title|raw }}</span>
-        </div>
-    {% endif %}
-
-    {% if object.get('has_authors') is not empty %}
-        <div class="column gap-xs">
-            <span class="mono text-accent bold">{{ __('Author') }}</span>
-            <span class="mono bold">{{ (object.has_authors|first).title|raw }}</span>
-        </div>
-    {% endif %}
-
-    {% if object.get('year') is not empty %}
-        <div class="column gap-xs">
-            <span class="mono text-accent bold">{{ __('Year') }}</span>
-            <span class="mono light">{{ object.year|raw }}</span>
-        </div>
-    {% endif %}
-
-    {% if object.get('categories') is not empty %}
-        <div class="column gap-xs">
-            <span class="mono text-accent bold">{{ __('Job categories') }}</span>
-            <ul class="list--comma">
-                {% for category in object.categories %}
-                    <li class="mono light">{{ category.label|raw }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
-    {% if object.get('has_links') is not empty %}
-        <div class="column gap-xs">
-            <span class="mono text-accent bold">{{ __('Links') }}</span>
-            {% for link in object.has_links %}
-                <a class="mono bold link--underline" href="{{ Url.build({ _name: 'pages:objects', _entity: link }) }}" target="_blank">{{ link.title|raw }}</a>
-            {% endfor %}
-        </div>
-    {% endif %}
-
-    {% set isUpdated = object.get('created') != object.get('modified') %}
-    <div class="column gap-xs">
-        <span class="mono text-accent bold">{{ isUpdated ? __('Updated on') : __('Published on') }}</span>
-        <span class="mono light">{{ Time.format(isUpdated ? object.get('modified') : object.get('created'), 'd MMM yyyy') }}</span>
-    </div>
-
-    {% if object.get('see_also') is not empty %}
-        <div class="mt-2 column w-full">
-            <span class="link--section">{{ __('See also') }}</span>
-            <div class="columns-2 w-full">
-                {% for item in object.see_also %}
-                    {{ element('card-small', {
-                        object: item,
-                    })|raw }}
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
+    {{ element('Articles/aside') }}
 </aside>

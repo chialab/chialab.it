@@ -18,6 +18,11 @@ body {
     overflow: auto;
 }
 
+::selection {
+    color: #fff;
+    background-color: #000;
+}
+
 .list--plain {
     margin: 0;
     padding: 0;

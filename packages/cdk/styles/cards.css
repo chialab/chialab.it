@@ -43,7 +43,8 @@
     min-height: 6rem;
 }
 
-.card .card__description:is(.clamp-1, .clamp-2, .clamp-3, .clamp-4) > *:not(:first-child) {
+.card .card__description:is(.clamp-1, .clamp-2, .clamp-3, .clamp-4) > *:not(:first-child),
+.card .card__description:is(.clamp-1, .clamp-2, .clamp-3, .clamp-4) .description > *:not(:first-child) {
     display: none;
 }
 

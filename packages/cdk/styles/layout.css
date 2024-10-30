@@ -4,6 +4,10 @@
     grid-gap: var(--gap);
 }
 
+.columns-2 > * {
+    width: 100%;
+}
+
 .h-1-half {
     --h-span: 1.5 !important;
 }
