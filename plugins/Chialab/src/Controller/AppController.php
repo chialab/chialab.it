@@ -43,7 +43,7 @@ class AppController extends BaseController
                 'objects' => ['include' => 'poster|1'],
                 'folders' => ['include' => 'children,parents,featured'],
                 'news' => ['include' => 'poster|1,has_media,see_also'],
-                'documents' => ['include' => 'poster|1,has_clients,see_also,placeholder'],
+                'documents' => ['include' => 'poster|1,has_clients,has_media,see_also,placeholder'],
                 'galleries' => ['include' => 'poster|1,has_media'],
             ],
             'autoHydrateAssociations' => [

@@ -32,7 +32,7 @@ class PagesController extends AppController
             'folders' => ['include' => 'featured,poster'],
         ], [
             'featured' => 3,
-            'has_media' => 3,
+            'has_media' => 4,
             'see_also' => 4,
         ]);
 
