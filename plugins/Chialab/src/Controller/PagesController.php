@@ -19,6 +19,16 @@ class PagesController extends AppController
     }
 
     /**
+     * @inheritDoc
+     */
+    public function implementedEvents(): array
+    {
+        return parent::implementedEvents() + [
+            'Controller.beforeObjectRender' => 'loadTatzebaoItems',
+        ];
+    }
+
+    /**
      * Load home objects.
      *
      * @return void
@@ -104,6 +114,23 @@ class PagesController extends AppController
         }
 
         return $this->fallback('umani');
+    }
+
+    /**
+     * Load "tatzebao" items if it is the current section.
+     *
+     * @return void
+     */
+    public function loadTatzebaoItems(): void
+    {
+        $parent = $this->viewBuilder()->getVar('parent');
+        if ($parent == null) {
+            return;
+        }
+        if ($parent['uname'] !== 'tatzebao') {
+            return;
+        }
+        $parent['featured'] = $this->Objects->loadRelatedObjects($parent['uname'], 'folders', 'featured')->toArray();
     }
 
     /**

@@ -11,8 +11,8 @@
             {% endif %}
             <h3 class="f-5 m-0 regular italic card__title">{{ object.title|raw }}</h3>
             {% if object.get('description') is not empty %}
-                <div class="f-3 clamp-4 description card__description">
-                    {{ object.description|raw }}
+                <div class="clamp-4 card__description">
+                    <div class="f-3 description">{{ object.description|raw }}</div>
                 </div>
             {% endif %}
         </div>

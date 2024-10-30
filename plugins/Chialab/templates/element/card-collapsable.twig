@@ -4,18 +4,20 @@
             <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
         </div>
     {% endif %}
-    <div class="card__details flex-none sans w-full column gap-xs" slot="details">
-        {% if object.has('email') is not empty %}
-            <span class="mono f-s text-accent">{{ object.email|raw }}</span>
-        {% endif %}
-        {% if object.get('has_clients') is not empty %}
-            <span class="mono f-s text-accent bold card__title">{{ (object.has_clients|first).title|raw }}</span>
-        {% endif %}
-        <span class="f-5 m-0 regular card__title">{{ object.title|raw }}</span>
-        <div class="card__description column">
-            {% if object.get('extra') is not empty and object.extra.person_role is defined and object.extra.person_role is not empty %}
-                <p class="m-0 f-3 body">{{ object.extra.person_role|raw }}</p>
+    <div class="card__details flex-none sans w-full column gap-s" slot="details">
+        <div class="w-full column gap-xs">
+            {% if object.has('email') is not empty %}
+                <span class="mono f-s text-accent">{{ object.email|raw }}</span>
             {% endif %}
+            {% if object.get('has_clients') is not empty %}
+                <span class="mono f-s text-accent bold card__title">{{ (object.has_clients|first).title|raw }}</span>
+            {% endif %}
+            <span class="f-5 m-0 regular card__title">{{ object.title|raw }}</span>
+            {% if object.get('extra') is not empty and object.extra.person_role is defined and object.extra.person_role is not empty %}
+                <p class="m-0 f-3">{{ object.extra.person_role|raw }}</p>
+            {% endif %}
+        </div>
+        <div class="card__description column">
             {% if object.get('description') is not empty %}
                 <div class="w-full f-3 description">
                     {{ object.description|raw }}
