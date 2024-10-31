@@ -1,5 +1,13 @@
 <div class="w-full column">
     {% for item in children %}
-        {{ element('card-wide', { object: item, class: 'w-' ~ columns|default(4) })|raw }}
+        {% if item.type == 'folders' %}
+            <div class="w-full column section">
+                <h3 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ item.title|raw }} /</h3>
+
+                {{ element('folder-list', { folder: item, children: item.get('featured')|default([]), columns: 6 })|raw }}
+            </div>
+        {% else %}
+            {{ element('card-wide', { object: item, class: 'w-' ~ columns|default(4) })|raw }}
+        {% endif %}
     {% endfor %}
 </div>
