@@ -1,5 +1,6 @@
 @import '@chialab/dna-button/style';
 @import '@chialab/dna-backdrop/style';
+@import '@chialab/dna-code/style';
 @import '@chialab/dna-masonry/style';
 @import '@chialab/dna-qrcode/style';
 @import '@chialab/dna-slideshow/style';
@@ -17,6 +18,14 @@
 
 body {
     overflow: auto;
+}
+
+pre[class*='language-'] {
+    width: 100%;
+    font-size: 0.75em;
+    line-height: 1.2;
+    border-radius: var(--radius);
+    opacity: auto;
 }
 
 ::selection {

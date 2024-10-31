@@ -24,17 +24,22 @@ export class CardDetails extends Component {
                 <div class="column w-full p-2">
                     <slot name="details"></slot>
                     {this.expanded && <slot name="extra"></slot>}
-                    {this.cardDescriptionElement && (
-                        <div class="card-details__commands w-full row end">
-                            <button
-                                is="dna-button"
-                                class="card-details__toggle"
-                                variant={ButtonVariant.action}
-                                icon={this.expanded ? 'close' : 'plus'}
-                                aria-label={this.expanded ? __('collapse') : __('expand')}
-                            />
+                    <div class="row w-full no-wrap justify align-end">
+                        <div class="pb-1">
+                            <slot name="footer" />
                         </div>
-                    )}
+                        {this.cardDescriptionElement && (
+                            <div class="card-details__commands">
+                                <button
+                                    is="dna-button"
+                                    class="card-details__toggle"
+                                    variant={ButtonVariant.action}
+                                    icon={this.expanded ? 'close' : 'plus'}
+                                    aria-label={this.expanded ? __('collapse') : __('expand')}
+                                />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </>
         );

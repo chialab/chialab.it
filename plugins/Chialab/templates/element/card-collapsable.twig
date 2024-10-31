@@ -6,14 +6,11 @@
     {% endif %}
     <div class="card__details flex-none sans w-full column gap-s" slot="details">
         <div class="w-full column gap-xs">
-            {% if object.has('email') is not empty %}
-                <span class="mono f-s text-accent">{{ object.email|raw }}</span>
-            {% endif %}
-            {% if object.get('has_clients') is not empty %}
-                <span class="mono f-s text-accent bold card__title">{{ (object.has_clients|first).title|raw }}</span>
-            {% endif %}
-            <span class="f-5 m-0 regular card__title">{{ object.title|raw }}</span>
-            {% if object.get('extra') is not empty and object.extra.person_role is defined and object.extra.person_role is not empty %}
+            {{ element('card-heading', {
+                object: object,
+            }) }}
+            <span class="f-5 m-0 regular card__title balance">{{ object.title|raw }}</span>
+            {% if object.type == 'profiles' and object.get('extra') is not empty and object.extra.person_role is defined and object.extra.person_role is not empty %}
                 <p class="m-0 f-3">{{ object.extra.person_role|raw }}</p>
             {% endif %}
         </div>
@@ -50,5 +47,10 @@
                 </div>
             {% endif %}
         </div>
+    </div>
+    <div slot="footer">
+        {{ element('card-footer', {
+            object: object,
+        }) }}
     </div>
 </cl-card-details>

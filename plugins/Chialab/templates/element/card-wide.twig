@@ -6,15 +6,18 @@
 }) }}" style="--r: {{ rgb.r }}; --g: {{ rgb.g }}; --b: {{ rgb.b }};">
     <div class="w-full row no-wrap gap-5">
         <div class="w-4 max-60p py-3 card__details serif flex-none column gap-xs">
-            {% if object.get('has_clients') is not empty %}
-                <span class="mono f-s text-accent bold">{{ object.has_clients|first.title|raw }}</span>
-            {% endif %}
-            <h3 class="f-5 m-0 regular italic card__title">{{ object.title|raw }}</h3>
+            {{ element('card-heading', {
+                object: object,
+            }) }}
+            <h3 class="f-5 m-0 regular italic card__title balance">{{ object.title|raw }}</h3>
             {% if object.get('description') is not empty %}
                 <div class="clamp-4 card__description">
-                    <div class="f-3 description">{{ object.description|raw }}</div>
+                    <div class="f-3 description">{{ object.description|striptags('<p><ul><ol><li><br><strong><em><i><u>')|raw }}</div>
                 </div>
             {% endif %}
+            {{ element('card-footer', {
+                object: object,
+            }) }}
         </div>
         {% if Poster.exists(object) %}
             <div class="fill h-3 card__cover">

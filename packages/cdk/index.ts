@@ -1,4 +1,5 @@
 import './theme';
+import '@chialab/dna-code';
 import '@chialab/dna-masonry';
 import '@chialab/dna-qrcode';
 import '@chialab/dna-slideshow';

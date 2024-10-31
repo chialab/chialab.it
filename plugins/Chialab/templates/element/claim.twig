@@ -1,3 +1,6 @@
-<div class="w-full claim bt-1">
-    {{ object.description|default(publication.description)|striptags|raw }}
-</div>
+{% set main = object is defined ? object : publication %}
+{% if main.get('description') is not empty %}
+    <div class="w-full claim bt-1">
+        {{ main.description|striptags|raw }}
+    </div>
+{% endif %}
