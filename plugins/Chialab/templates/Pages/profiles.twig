@@ -45,7 +45,7 @@
         <div class="w-full column section">
             <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Projects')|raw }} /</h2>
 
-            {{ element('folder-grid', { children: object.working_on, columns: 6 })|raw }}
+            {{ element('folder-grid', { children: object.working_on, columns: 4 })|raw }}
         </div>
     {% endif %}
 
@@ -53,7 +53,7 @@
         <div class="w-full column section">
             <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Articles')|raw }} /</h2>
 
-            {{ element('folder-grid', { children: object.author_of, columns: 6 })|raw }}
+            {{ element('folder-grid', { children: object.author_of, columns: 4 })|raw }}
         </div>
     {% endif %}
 </main>
