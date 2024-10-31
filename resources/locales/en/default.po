@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BEdita 4 \n"
-"POT-Creation-Date: 2024-05-06 11:40:19 \n"
+"POT-Creation-Date: 2024-10-31 11:03:16 \n"
 "PO-Revision-Date:  \n"
 "Last-Translator:  \n"
 "Language-Team: BEdita I18N & I10N Team \n"
@@ -32,6 +32,9 @@ msgstr ""
 msgid "Connections"
 msgstr ""
 
+msgid "Download VCard"
+msgstr ""
+
 msgid "Job categories"
 msgstr ""
 
@@ -39,6 +42,9 @@ msgid "Links"
 msgstr ""
 
 msgid "Password"
+msgstr ""
+
+msgid "Projects"
 msgstr ""
 
 msgid "Published on"

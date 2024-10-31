@@ -1,23 +1,37 @@
-<header class="w-full">
-    <h1 class="m-0 f-7 serif regular italic">{{ object.title|default(publication.title) }}</h1>
-    {% if object.extra is not empty and object.extra.person_role is not empty %}
-        <h2 class="m-0 f-5 serif regular italic balance">{{ object.extra.person_role }}</h2>
-    {% endif %}
+<header class="w-full row justify">
+    <div>
+        {% if Poster.exists(object) %}
+            <div class="w-full avatar my-4">
+                <img alt="" src="{{ Poster.url(object) }}" draggable="false" />
+            </div>
+        {% endif %}
+        <h1 class="m-0 f-7 sans regular">{{ object.title|default(publication.title) }}</h1>
+        {% if object.extra is not empty and object.extra.person_role is not empty %}
+            <h2 class="m-0 f-5 sans regular balance">{{ object.extra.person_role }}</h2>
+        {% endif %}
+    </div>
+    <aside class="column w-2">
+        <a class="mono f-s link--underline text-accent" download="{{ object.title }}.vcf" target="_blank"
+            href="{{ VCard.url(object) }}">
+            {{__('Download VCard')}}
+        </a>
+        <dna-qrcode url="{{ VCard.content(object) }}" />
+    </aside>
 </header>
 
-<main class="w-full column gap-2">
+<main class="w-full column gap-2 profile">
     <article class="column w-8 gap-2">
         <div class="column gap-xs">
             {% if object.get('email') is not empty %}
-                <a class="sans f-3 link--underline" href="mailto:{{ object.email }}">{{ object.email }}</a>
+                <a class="sans f-4 link--underline" href="mailto:{{ object.email }}">{{ object.email }}</a>
             {% endif %}
             {% if object.get('website') is not empty %}
-                <a class="sans f-3 link--underline" href="{{ object.website }}">{{ object.website }}</a>
+                <a class="sans f-4 link--underline" href="{{ object.website }}">{{ object.website }}</a>
             {% endif %}
             {% if object.get('has_links') is not empty %}
-                <div class="row gap-s">
+                <div class="links row gap-s my-xs">
                     {% for link in object.get('has_links') %}
-                        <a class="link--section" href="{{ link.url }}">{{ link.title|raw }}</a>
+                        <a class="link--section" rel="noopener" href="{{ link.url }}">{{ link.title|raw }}</a>
                     {% endfor %}
                 </div>
             {% endif %}
@@ -27,11 +41,19 @@
         </div>
     </article>
 
+    {% if object.get('working_on') is not empty %}
+        <div class="w-full column section">
+            <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Projects')|raw }} /</h2>
+
+            {{ element('folder-grid', { children: object.working_on, columns: 6 })|raw }}
+        </div>
+    {% endif %}
+
     {% if object.get('author_of') is not empty %}
         <div class="w-full column section">
             <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Articles')|raw }} /</h2>
 
-            {{ element('folder-grid', { children: object.author_of, columns: 4 })|raw }}
+            {{ element('folder-grid', { children: object.author_of, columns: 6 })|raw }}
         </div>
     {% endif %}
 </main>

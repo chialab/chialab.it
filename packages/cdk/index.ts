@@ -1,5 +1,6 @@
 import './theme';
 import '@chialab/dna-masonry';
+import '@chialab/dna-qrcode';
 import '@chialab/dna-slideshow';
 import './Elements/Topbar/Topbar';
 import './Elements/CardDetails/CardDetails';

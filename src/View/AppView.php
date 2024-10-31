@@ -46,6 +46,7 @@ class AppView extends BaseAppView
         /** @todo Remove this line when `ThumbHelper` supports GIF images. */
         $this->helpers()->unload('Thumb');
         $this->loadHelper('Thumb');
+        $this->loadHelper('VCard');
 
         /**
          * @var \Cake\View\Helper\PaginatorHelper $paginator

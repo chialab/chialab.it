@@ -24,6 +24,7 @@
     "@chialab/dna-i18n": "^4.0.0-beta.0",
     "@chialab/dna-icons": "^4.0.0-beta.0",
     "@chialab/dna-masonry": "^4.0.0-beta.0",
+    "@chialab/dna-qrcode": "^4.0.0-beta.0",
     "@chialab/dna-slideshow": "^4.0.0-beta.0",
     "@chialab/dna-theming": "^4.0.0-beta.0"
   },

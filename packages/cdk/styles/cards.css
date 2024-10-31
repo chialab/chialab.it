@@ -47,6 +47,11 @@ a.card:hover .card__title {
     display: none;
 }
 
+.profile .section .card .card__title {
+    font-family: var(--font-sans);
+    font-style: normal;
+}
+
 @media (prefers-reduced-motion) {
     .card .card__cover img {
         transition: none;
