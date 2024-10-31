@@ -137,16 +137,13 @@ class PagesController extends AppController
      */
     public function link(string $uname): Response
     {
-        $loader = new ObjectsLoader();
-        $object = $loader->loadObject($uname, 'objects');
-        $object = $loader->loadObject((string)$object->id, $object->type);
-
-        switch ($object->type) {
-            case 'links':
-                return $this->redirect($object->get('url'));
+        try {
+            $object = (new ObjectsLoader())->loadObject($uname, 'links');
+        } catch (RecordNotFoundException $e) {
+            throw new NotFoundException('Missing url');
         }
 
-        throw new NotFoundException('Missing url');
+        return $this->redirect($object->get('url'));
     }
 
     /**

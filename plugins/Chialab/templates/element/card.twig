@@ -3,7 +3,7 @@
     _entity: object,
 }) }}">
     {% if Poster.exists(object) %}
-        <div class="w-full card__cover card__cover--zoom ratio--16-9">
+        <div class="w-full card__cover ratio--16-9">
             <img alt="" src="{{ Poster.url(object, 'default') }}" draggable="false" />
         </div>
     {% endif %}

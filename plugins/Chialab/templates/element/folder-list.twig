@@ -1,6 +1,6 @@
 <div class="w-full column">
     {% for item in children %}
-        {% if item.type == 'folders' %}
+        {% if item.type == 'folders' and item.get('featured') is not empty %}
             <div class="w-full column section">
                 <h3 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ item.title|raw }} /</h3>
 

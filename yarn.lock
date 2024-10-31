@@ -852,6 +852,16 @@
     "@chialab/dna-theming" "^4.0.0-beta.6"
     "@chialab/dna-tooltip" "^4.0.0-beta.9"
 
+"@chialab/dna-code@^4.0.0-beta.0":
+  version "4.0.0-beta.6"
+  resolved "https://registry.npmjs.org/@chialab/dna-code/-/dna-code-4.0.0-beta.6.tgz#4891b2ff17d93029c289886e9fe1b18e32691d35"
+  integrity sha512-tiaJsOsv0dVnUyBwvrCjNd7Vrc9MEODrVyNwrskakej2GPdzYTcSpPMb2oBqubuhCvnLF/X32xSByWo4rskJrQ==
+  dependencies:
+    "@chialab/dna" "^4.0.0"
+    "@chialab/dna-theming" "^4.0.0-beta.6"
+    "@types/prismjs" "^1.26.1"
+    prismjs "^1.22.0"
+
 "@chialab/dna-floating@^4.0.0-beta.13":
   version "4.0.0-beta.13"
   resolved "https://registry.npmjs.org/@chialab/dna-floating/-/dna-floating-4.0.0-beta.13.tgz#c2a7dc2d4f2d62cfacf8a1dee2a4634a55e98b62"
@@ -1509,6 +1519,11 @@
   version "6.0.3"
   resolved "https://registry.npmjs.org/@types/parse5/-/parse5-6.0.3.tgz#705bb349e789efa06f43f128cef51240753424cb"
   integrity sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==
+
+"@types/prismjs@^1.26.1":
+  version "1.26.5"
+  resolved "https://registry.npmjs.org/@types/prismjs/-/prismjs-1.26.5.tgz#72499abbb4c4ec9982446509d2f14fb8483869d6"
+  integrity sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==
 
 "@types/qs@*":
   version "6.9.16"
@@ -3885,6 +3900,11 @@ prettier@^3.2.5:
   version "3.3.3"
   resolved "https://registry.npmjs.org/prettier/-/prettier-3.3.3.tgz#30c54fe0be0d8d12e6ae61dbb10109ea00d53105"
   integrity sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==
+
+prismjs@^1.22.0:
+  version "1.29.0"
+  resolved "https://registry.npmjs.org/prismjs/-/prismjs-1.29.0.tgz#f113555a8fa9b57c35e637bba27509dcf802dd12"
+  integrity sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==
 
 pseudomap@^1.0.2:
   version "1.0.2"
