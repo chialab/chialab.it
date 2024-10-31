@@ -1,0 +1,15 @@
+{% if object.type == 'profiles' and object.has('email') is not empty %}
+    <span class="mono f-s text-accent">{{ object.email|raw }}</span>
+{% elseif object.get('has_clients') is not empty %}
+    <span class="mono f-s text-accent bold">{{ (object.has_clients|first).title|raw }}</span>
+{% elseif object.type == 'events' %}
+    <span class="mono f-s text-accent bold">
+        {% if object.get('extra') is not empty and object.extra.creator is defined and object.extra.creator is not empty %}
+            {{ object.extra.creator }}{% if object.get('date_ranges') is not empty %} • {% endif %}
+        {% endif %}{% if object.get('date_ranges') is not empty %}
+            {% for range in object.date_ranges %}
+                {{ DateRanges.formatRange(range) }}
+            {% endfor %}
+        {% endif %}
+    </span>
+{% endif %}

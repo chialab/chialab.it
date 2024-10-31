@@ -1,0 +1,23 @@
+{% if object.get('categories') is not empty or object.get('has_links') is not empty %}
+    <div class="column gap-xs">
+        {% if object.get('categories') is not empty %}
+            <ul class="list--comma">
+                {% for category in object.categories %}
+                    <li class="mono f-xs light">{{ category.label|raw }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if object.get('has_links') is not empty %}
+            <ul class="list--plain column gap-xs">
+                {% for link in object.has_links %}
+                    <li class="mono f-xs light"><a
+                            class="text-underline"
+                            {% if link.get('title') is not empty %}title="{{ link.get('title')|striptags|raw|escape('html_attr') }}"{% endif %}
+                            href="{{ link.url|escape('html_attr') }}"
+                            target="_blank"
+                        >{{ link.title|default(link.url)|raw|striptags }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endif %}

@@ -1,2 +1,6 @@
 @import '@chialab/cdk/style';
 @import './variables.css';
+
+.description {
+    font-family: var(--font-sans);
+}

@@ -44,6 +44,7 @@ class AppController extends BaseController
                 'news' => ['include' => 'poster|1,has_media,see_also'],
                 'documents' => ['include' => 'poster|1,has_media,see_also'],
                 'galleries' => ['include' => 'poster|1,has_media'],
+                'events' => ['include' => 'poster|1,has_links'],
             ],
             'autoHydrateAssociations' => [
                 'has_media' => 2,
@@ -53,7 +54,7 @@ class AppController extends BaseController
         ]);
         $this->loadComponent('Chialab/FrontendKit.Menu');
         $this->loadComponent('Chialab/FrontendKit.Publication', [
-            'publication' => Configure::read('RootFolder', 'chialab-design-company'),
+            'publication' => Configure::read('RootFolder', 'chialab-open-source'),
             'publicationLoader' => [
                 'objectTypesConfig' => [
                     'folders' => ['include' => 'poster|1'],
