@@ -35,7 +35,7 @@
                                     {% for slide in item.has_media %}
                                         <div class="w-full slideshow-item">
                                             {% if Poster.exists(slide) %}
-                                                <img class="w-full h-4 poster {{ Poster.position(slide) }}" alt="{{ slide.title|striptags|raw|escape('html_attr') }}" src="{{ Poster.url(slide) }}"/>
+                                                <img class="w-full {{ Poster.position(slide) }}" alt="{{ slide.title|striptags|raw|escape('html_attr') }}" src="{{ Poster.url(slide) }}"/>
                                             {% endif %}
                                         </div>
                                     {% endfor %}
