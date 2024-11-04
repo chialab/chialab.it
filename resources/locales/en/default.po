@@ -44,9 +44,6 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-msgid "Projects"
-msgstr ""
-
 msgid "Published on"
 msgstr ""
 
