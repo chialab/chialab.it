@@ -49,7 +49,7 @@ class AppController extends BaseController
             ],
             'autoHydrateAssociations' => [
                 'featured' => 2,
-                'has_media' => 2,
+                'has_media' => 3,
                 'poster' => 2,
                 'see_also' => 2,
             ],
