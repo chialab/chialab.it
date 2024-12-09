@@ -60,4 +60,8 @@
     .f-9 {
         font-size: var(--font-size-6);
     }
+
+    .gallery_grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

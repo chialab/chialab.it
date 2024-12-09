@@ -39,12 +39,6 @@
     </div>
 {% endif %}
 
-{% set isUpdated = object.get('created') != object.get('modified') %}
-<div class="column gap-xs">
-    <span class="mono text-accent bold">{{ isUpdated ? __('Updated on') : __('Published on') }}</span>
-    <span class="mono light">{{ Time.format(isUpdated ? object.get('modified') : object.get('created'), 'd MMM yyyy') }}</span>
-</div>
-
 {% if object.get('see_also') is not empty %}
     <div class="mt-2 column w-full">
         <span class="link--section">{{ __('See also') }}</span>

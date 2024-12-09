@@ -1,5 +1,1 @@
 @import '@chialab/cdk/style';
-
-.bw {
-    filter: grayscale(1);
-}

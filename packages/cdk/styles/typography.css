@@ -115,7 +115,9 @@ article header {
     line-height: 1.5;
 }
 
-:is(.body, .description) > :is(p, ul, ol, [data-placeholder]) + :is(p, ul, ol, [data-placeholder]) {
+:is(.body, .description)
+    > :is(p, ul, ol, [data-placeholder], .gallery_container, .media_container)
+    + :is(p, ul, ol, [data-placeholder], .gallery_container, .media_container) {
     margin-top: var(--gap);
 }
 

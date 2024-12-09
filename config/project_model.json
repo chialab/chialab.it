@@ -340,6 +340,13 @@
         "type": "string",
         "enum": ["grid", "masonry", "list"]
       }
+    },
+    {
+      "name": "gallery_layout",
+      "params": {
+        "type": "string",
+        "enum": ["grid", "masonry", "slideshow"]
+      }
     }
   ],
   "properties": [
@@ -390,6 +397,30 @@
       "read_only": false,
       "object": "documents",
       "property": "datetime"
+    },
+    {
+      "name": "layout",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "galleries",
+      "property": "gallery_layout"
+    },
+    {
+      "name": "columns",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "galleries",
+      "property": "integer"
+    },
+    {
+      "name": "crop",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "galleries",
+      "property": "boolean"
     }
   ],
   "categories": []

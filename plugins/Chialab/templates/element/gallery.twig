@@ -1,0 +1,50 @@
+{% set title = object.get('title')|default(null) %}
+{% set description = object.get('description')|default(null) %}
+{% set layout = object.get('layout')|default(defaultLayout is defined ? defaultLayout : 'grid') %}
+{% set gallery_contents = object.get('has_media')|default([]) %}
+
+<div class="gallery_container w-full column gap-s">
+    {% if gallery_contents|length > 0 %}
+        {% if layout == 'slideshow' %}
+            <dna-slideshow class="w-full" controls carousel controlslist="noplayback nodots" autoplay="5000" {% if object.get('crop')|default(false) %}cover{% endif %}>
+                {% for content in gallery_contents %}
+                    <div class="w-full slideshow-item">
+                        {% if Poster.exists(content) %}
+                            <img class="w-full h-4 poster {{ Poster.position(content) }}" alt="{{ content.title|striptags|raw|escape('html_attr') }}"
+                                src="{{ Poster.url(content) }}"/>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </dna-slideshow>
+        {% elseif layout == 'masonry' %}
+            <dna-masonry class="gallery_grid" style="--gallery-columns: {{ object.get('columns')|default(4) }}; --gallery-aspect-ratio: {{ object.get('crop')|default(false) ? 1 : 'auto' }}">
+                {% for content in gallery_contents %}
+                    {{ element('Placeholders/media', {
+                        object: content,
+                        caption: false,
+                    }) }}
+                {% endfor %}
+            </dna-masonry>
+        {% else %}
+            <div class="gallery_grid" style="--gallery-columns: {{ object.get('columns')|default(4) }}; --gallery-aspect-ratio: {{ object.get('crop')|default(false) ? 1 : 'auto' }}">
+                {% for content in gallery_contents %}
+                    {{ element('Placeholders/media', {
+                        object: content,
+                        caption: false,
+                    }) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endif %}
+    {% if title is not null or description is not null %}
+        <div class="gallery_caption sans f-1 column gap-0">
+            {% if title is not null %}
+                <div class="gallery_title">{{ title|raw }}</div>
+            {% endif %}
+
+            {% if description is not null %}
+                <div class="gallery_description">{{ description|raw }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

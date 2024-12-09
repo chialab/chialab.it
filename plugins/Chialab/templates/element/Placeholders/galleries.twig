@@ -1,27 +1,3 @@
-{% set title = object.get('title')|default(null) %}
-{% set description = object.get('description')|default(null) %}
-{% set gallery_contents = object.get('has_media')|default([]) %}
-
-<div class="gallery_container column gap-s">
-    {% if gallery_contents|length > 0 %}
-        <div class="gallery_grid">
-            {% for content in gallery_contents %}
-                {{ element('Placeholders/media', {
-                    object: content,
-                    caption: false,
-                }) }}
-            {% endfor %}
-        </div>
-    {% endif %}
-    {% if title is not null or description is not null %}
-        <div class="gallery_caption sans f-1 column gap-0">
-            {% if title is not null %}
-                <div class="gallery_title">{{ title|raw }}</div>
-            {% endif %}
-
-            {% if description is not null %}
-                <div class="gallery_description">{{ description|raw }}</div>
-            {% endif %}
-        </div>
-    {% endif %}
-</div>
+{{ element('gallery', {
+    object: object,
+}) }}

@@ -51,3 +51,28 @@
 .flex-none {
     flex: none;
 }
+
+.ratio--16-9 {
+    aspect-ratio: 16 / 9;
+}
+
+.list--plain {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.list--comma {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.list--comma li {
+    display: inline;
+}
+
+.list--comma li:not(:last-of-type)::after {
+    content: ', ';
+}

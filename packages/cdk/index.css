@@ -12,6 +12,7 @@
 @import './styles/links.css';
 @import './styles/layout.css';
 @import './variables.css';
+@import './styles/custom.css';
 @import './styles/breakpoints/viewport-640.css';
 @import './styles/breakpoints/viewport-640-768.css';
 @import './styles/breakpoints/viewport-768-1024.css';
@@ -31,84 +32,4 @@ pre[class*='language-'] {
 ::selection {
     color: #fff;
     background-color: #000;
-}
-
-.list--plain {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.list--comma {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.list--comma li {
-    display: inline;
-}
-
-.list--comma li:not(:last-of-type)::after {
-    content: ', ';
-}
-
-.ratio--16-9 {
-    aspect-ratio: 16 / 9;
-}
-
-.gallery_grid {
-    display: grid;
-    grid-gap: var(--gap);
-    grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
-    width: 100%;
-}
-
-.gallery_grid > * {
-    width: 100%;
-}
-
-.media_body > embed,
-.media_body > iframe,
-.media_object {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-}
-
-[data-placeholder]:has(.media_body, .media_object) {
-    width: 100%;
-}
-
-dna-backdrop dna-slideshow {
-    width: calc(var(--viewport) - 2 * var(--gutter));
-    max-width: 100%;
-    height: 80vh;
-}
-
-dna-backdrop dna-slideshow:focus-visible {
-    outline: 0;
-}
-
-dna-backdrop dna-slides {
-    display: flex;
-    width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-}
-
-.avatar {
-    width: 10em;
-    height: 10em;
-    overflow: hidden;
-    border-radius: 50%;
-}
-
-.avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
 }
