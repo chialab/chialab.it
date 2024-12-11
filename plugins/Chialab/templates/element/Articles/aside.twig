@@ -12,13 +12,6 @@
     </div>
 {% endif %}
 
-{% if object.get('year') is not empty %}
-    <div class="column gap-xs">
-        <span class="mono text-accent bold">{{ __('Year') }}</span>
-        <span class="mono light">{{ object.year|raw }}</span>
-    </div>
-{% endif %}
-
 {% if object.get('categories') is not empty %}
     <div class="column gap-xs">
         <span class="mono text-accent bold">{{ __('Job categories') }}</span>
