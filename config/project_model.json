@@ -221,7 +221,7 @@
       "inverse_name": "author_of",
       "inverse_label": "Author of",
       "description": "Author of a document",
-      "left": ["documents"],
+      "left": ["documents", "links"],
       "right": ["profiles"]
     },
     {
