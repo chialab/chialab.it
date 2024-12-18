@@ -421,6 +421,14 @@
       "read_only": false,
       "object": "galleries",
       "property": "boolean"
+    },
+    {
+      "name": "color",
+      "description": null,
+      "is_nullable": true,
+      "read_only": false,
+      "object": "links",
+      "property": "string"
     }
   ],
   "categories": []
