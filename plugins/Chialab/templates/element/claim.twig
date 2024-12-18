@@ -1,6 +1,9 @@
 {% set main = object is defined ? object : publication %}
 {% if main.get('description') is not empty %}
+    <h1 class="hidden-title">{{ main.get('title')|default(publication.get('title')) }}</h1>
     <div class="w-full claim bt-1">
         {{ main.description|striptags|raw }}
     </div>
+{% else %}
+    <h1 class="w-full claim bt-1">{{ main.get('title')|default(publication.get('title')) }}</h1>
 {% endif %}
