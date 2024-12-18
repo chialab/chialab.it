@@ -5,6 +5,7 @@ import '@chialab/dna-qrcode';
 import '@chialab/dna-slideshow';
 import './Elements/Topbar/Topbar';
 import './Elements/CardDetails/CardDetails';
+import './Lib/cookieConsent';
 
 const updateViewportSize = () => {
     document.documentElement.style.setProperty('--window-width', `${document.body.clientWidth}px`);
