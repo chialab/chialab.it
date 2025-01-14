@@ -61,13 +61,13 @@ https://dev-api.chialab.dt.bedita.cloud, https://api.chialab.dt.bedita.cloud, ht
 https://dev-it.chialab.dt.bedita.cloud {
 	import common
 
-	import ./Caddyfile.redirects
+	import ./Caddyfile.d/redirects.it
 	import site "Chialab" "Chialab" "draft" "false"
 }
 https://www.chialab.it, https://it.chialab.dt.bedita.cloud {
 	import common
 
-	import ./Caddyfile.redirects
+	import ./Caddyfile.d/redirects.it
 	import site "Chialab" "Chialab" "on" "false"
 }
 
@@ -75,12 +75,19 @@ https://www.chialab.it, https://it.chialab.dt.bedita.cloud {
 https://dev-io.chialab.dt.bedita.cloud {
 	import common
 
+	import ./Caddyfile.d/redirects.io
 	import site "Chialab" "OpenSource" "draft" "false"
 }
 https://www.chialab.io, https://io.chialab.dt.bedita.cloud {
 	import common
 
+	import ./Caddyfile.d/redirects.io
 	import site "Chialab" "OpenSource" "on" "false"
+}
+
+# Chialab.dev
+https://chialab.dev, https://www.chialab.dev {
+	redir https://www.chialab.it{uri}
 }
 
 # Illustratorium

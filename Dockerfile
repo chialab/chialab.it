@@ -39,7 +39,8 @@ RUN yarn build
 ###
 FROM caddy:2-alpine AS web
 
-COPY ./deploy/Caddyfile ./deploy/Caddyfile.redirects /etc/caddy/
+COPY ./deploy/Caddyfile /etc/caddy/
+COPY ./deploy/Caddyfile.d /etc/caddy/Caddyfile.d
 COPY --from=npm /app/webroot/ /app/webroot/
 COPY --from=npm /app/plugins/Chialab/webroot/ /app/webroot/chialab/
 COPY --from=npm /app/plugins/Illustratorium/webroot/ /app/webroot/illustratorium/
