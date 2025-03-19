@@ -205,8 +205,19 @@ class TextHelper extends Helper
                 continue;
             }
 
-            $content = preg_replace('/[\s]+/mu', '', $element->textContent);
-            if (empty($content)) {
+            $children = $element->childNodes;
+
+            for ($j = $children->length - 1; $j >= 0; $j--) {
+                $child = $children->item($j);
+                if ($child->nodeType === XML_TEXT_NODE) {
+                    $content = preg_replace('/[\s]+/mu', '', $child->textContent);
+                    if (empty($content)) {
+                        $element->removeChild($child);
+                    }
+                }
+            }
+
+            if ($element->childNodes->length === 0) {
                 $element->parentNode->removeChild($element);
             }
         }
