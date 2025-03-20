@@ -20,6 +20,10 @@
     object-position: center;
 }
 
+.gallery_title {
+    display: none;
+}
+
 .media_body > embed,
 .media_body > iframe,
 .media_object {
