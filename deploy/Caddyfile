@@ -64,6 +64,10 @@ https://dev-it.chialab.dt.bedita.cloud {
 	import ./Caddyfile.d/redirects.it
 	import site "Chialab" "Chialab" "draft" "false"
 }
+https://chialab.it {
+	header -Server
+	redir https://www.chialab.it{uri} 308
+}
 https://www.chialab.it, https://it.chialab.dt.bedita.cloud {
 	import common
 
@@ -78,6 +82,10 @@ https://dev-io.chialab.dt.bedita.cloud {
 	import ./Caddyfile.d/redirects.io
 	import site "Chialab" "OpenSource" "draft" "false"
 }
+https://chialab.io {
+	header -Server
+	redir https://www.chialab.io{uri} 308
+}
 https://www.chialab.io, https://io.chialab.dt.bedita.cloud {
 	import common
 
@@ -86,7 +94,12 @@ https://www.chialab.io, https://io.chialab.dt.bedita.cloud {
 }
 
 # Chialab.dev
-https://chialab.dev, https://www.chialab.dev {
+https://chialab.dev {
+	header -Server
+	redir https://www.chialab.dev{uri} 308
+}
+https://www.chialab.dev {
+	header -Server
 	redir https://www.chialab.it{uri}
 }
 
@@ -95,6 +108,10 @@ https://dev-illustratorium.chialab.dt.bedita.cloud {
 	import common
 
 	import site "Chialab" "Illustratorium" "draft" "false"
+}
+https://illustratorium.it {
+	header -Server
+	redir https://www.illustratorium.it{uri} 308
 }
 https://www.illustratorium.it, https://illustratorium.chialab.dt.bedita.cloud {
 	import common
