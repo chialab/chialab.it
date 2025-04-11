@@ -74,6 +74,12 @@ https://www.chialab.it, https://it.chialab.dt.bedita.cloud {
 	import ./Caddyfile.d/redirects.it
 	import site "Chialab" "Chialab" "on" "false"
 }
+https://staging.chialab.it, https://staging-it.chialab.dt.bedita.cloud {
+	import common
+
+	import ./Caddyfile.d/redirects.it
+	import site "Chialab" "Chialab" "draft" "true"
+}
 
 # Chialab.io
 https://dev-io.chialab.dt.bedita.cloud {
@@ -91,6 +97,12 @@ https://www.chialab.io, https://io.chialab.dt.bedita.cloud {
 
 	import ./Caddyfile.d/redirects.io
 	import site "Chialab" "OpenSource" "on" "false"
+}
+https://staging.chialab.io, https://staging-io.chialab.dt.bedita.cloud {
+	import common
+
+	import ./Caddyfile.d/redirects.io
+	import site "Chialab" "OpenSource" "draft" "true"
 }
 
 # Chialab.dev
@@ -117,6 +129,11 @@ https://www.illustratorium.it, https://illustratorium.chialab.dt.bedita.cloud {
 	import common
 
 	import site "Chialab" "Illustratorium" "on" "false"
+}
+https://staging.illustratorium.it, https://staging-illustratorium.chialab.dt.bedita.cloud {
+	import common
+
+	import site "Chialab" "Illustratorium" "draft" "true"
 }
 
 # TODO: Tipografia
