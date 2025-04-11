@@ -18,16 +18,11 @@ use DOMElement;
 class TextHelper extends Helper
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @var array<array-key, mixed>
      */
     protected $helpers = ['Placeholders'];
-
-    /**
-     * Default error reporting.
-     *
-     * @var int
-     */
-    protected static int $_defaultErrorReporting = 1;
 
     /**
      * Convert all major XML entities in a string to the unicode form.
@@ -227,7 +222,7 @@ class TextHelper extends Helper
      *
      * @param \Cake\Datasource\EntityInterface $entity Entity.
      * @param string $field Field to be templated.
-     * @param array|null $options Render options.
+     * @param array{downgradeHeadings?: int}|null $options Render options.
      * @return string
      */
     public function renderBody(EntityInterface $entity, string $field, array|null $options = []): string

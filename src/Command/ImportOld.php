@@ -166,7 +166,7 @@ class ImportOld extends Command
      * Add relation between objects.
      *
      * @param int $leftId Left object ID
-     * @param array $rightIds Right object IDs
+     * @param array<int> $rightIds Right object IDs
      * @param string $relation Relation name
      * @return bool
      */

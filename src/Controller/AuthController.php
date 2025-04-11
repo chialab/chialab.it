@@ -15,7 +15,7 @@ class AuthController extends AppController
     /**
      * Return home route, where users will be redirected after logout or when they try to login to a non-staging site.
      *
-     * @return array
+     * @return array<array-key, mixed>
      */
     protected function getHomeRoute(): array
     {
