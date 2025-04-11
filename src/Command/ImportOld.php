@@ -126,7 +126,7 @@ class ImportOld extends Command
                     'Invalid connection type: expected "%s", got "%s"',
                     Connection::class,
                     get_debug_type($sourceConnection),
-                )
+                ),
             );
         }
 

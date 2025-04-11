@@ -69,8 +69,8 @@ trait ImportBe3Trait
                 '/',
                 array_map(
                     fn (string $segment): string => rawurlencode(rawurldecode($segment)),
-                    explode('/', $parts['path'])
-                )
+                    explode('/', $parts['path']),
+                ),
             );
         }
 

@@ -66,7 +66,7 @@ class Application extends BaseApplication
         if (PHP_SAPI !== 'cli') {
             FactoryLocator::add(
                 'Table',
-                (new TableLocator())->allowFallbackClass(false)
+                (new TableLocator())->allowFallbackClass(false),
             );
         }
 
@@ -171,7 +171,7 @@ class Application extends BaseApplication
                 BodyParserMiddleware::class,
                 new CsrfProtectionMiddleware([
                     'httponly' => true,
-                ])
+                ]),
             );
     }
 

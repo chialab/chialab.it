@@ -79,21 +79,20 @@ class TextHelper extends Helper
     /**
      * Disable error reporting.
      *
-     * @return void
+     * @template T
+     * @param callable(): T $cb Callback function.
+     * @return T
      */
-    protected static function disableErrorReporting(): void
+    protected static function withoutErrorReporting(callable $cb): mixed
     {
-        static::$_defaultErrorReporting = error_reporting();
-    }
-
-    /**
-     * Restore error reporting to previous state.
-     *
-     * @return void
-     */
-    protected static function restoreErrorReporting(): void
-    {
+        $errorReporting = error_reporting();
         error_reporting(0);
+
+        try {
+            return $cb();
+        } finally {
+            error_reporting($errorReporting);
+        }
     }
 
     /**
@@ -105,21 +104,19 @@ class TextHelper extends Helper
      */
     protected function parseHTML(string $text, bool $convertEntities = true): DOMDocument
     {
-        static::disableErrorReporting();
+        return static::withoutErrorReporting(function () use ($text, $convertEntities): DOMDocument {
+            if ($convertEntities) {
+                $text = static::convertXmlEntity(mb_encode_numericentity($text, [0x80, 0x10FFFF, 0, ~0], 'UTF-8'));
+            }
 
-        if ($convertEntities) {
-            $text = static::convertXmlEntity(mb_encode_numericentity($text, [0x80, 0x10FFFF, 0, ~0], 'UTF-8'));
-        }
+            $doc = new DOMDocument('1.0', 'UTF-8');
+            $doc->preserveWhiteSpace = true;
+            $doc->formatOutput = false;
+            $doc->recover = true;
+            $doc->loadHTML($text);
 
-        $doc = new DOMDocument('1.0', 'UTF-8');
-        $doc->preserveWhiteSpace = true;
-        $doc->formatOutput = false;
-        $doc->recover = true;
-        @$doc->loadHTML($text);
-
-        static::restoreErrorReporting();
-
-        return $doc;
+            return $doc;
+        });
     }
 
     /**
@@ -244,7 +241,7 @@ class TextHelper extends Helper
         $content = preg_replace(
             '/^<!DOCTYPE.+?>/',
             '',
-            str_replace(['<html>', '</html>', '<head>', '<meta http-equiv="Content-type" content="text/html; charset=UTF-8">', '</head>', '<body>', '</body>'], '', $content)
+            str_replace(['<html>', '</html>', '<head>', '<meta http-equiv="Content-type" content="text/html; charset=UTF-8">', '</head>', '<body>', '</body>'], '', $content),
         );
 
         return $content;
