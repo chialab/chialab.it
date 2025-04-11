@@ -64,17 +64,21 @@ https://dev-it.chialab.dt.bedita.cloud {
 	import ./Caddyfile.d/redirects.it
 	import site "Chialab" "Chialab" "draft" "false"
 }
-https://chialab.it {
+https://chialab.it, https://it.chialab.dt.bedita.cloud {
 	header -Server
 	redir https://www.chialab.it{uri} 308
 }
-https://www.chialab.it, https://it.chialab.dt.bedita.cloud {
+https://www.chialab.it {
 	import common
 
 	import ./Caddyfile.d/redirects.it
 	import site "Chialab" "Chialab" "on" "false"
 }
-https://staging.chialab.it, https://staging-it.chialab.dt.bedita.cloud {
+https://staging-it.chialab.dt.bedita.cloud {
+	header -Server
+	redir https://staging.chialab.it{uri} 308
+}
+https://staging.chialab.it {
 	import common
 
 	import ./Caddyfile.d/redirects.it
@@ -88,17 +92,21 @@ https://dev-io.chialab.dt.bedita.cloud {
 	import ./Caddyfile.d/redirects.io
 	import site "Chialab" "OpenSource" "draft" "false"
 }
-https://chialab.io {
+https://chialab.io, https://io.chialab.dt.bedita.cloud {
 	header -Server
 	redir https://www.chialab.io{uri} 308
 }
-https://www.chialab.io, https://io.chialab.dt.bedita.cloud {
+https://www.chialab.io {
 	import common
 
 	import ./Caddyfile.d/redirects.io
 	import site "Chialab" "OpenSource" "on" "false"
 }
-https://staging.chialab.io, https://staging-io.chialab.dt.bedita.cloud {
+https://staging-io.chialab.dt.bedita.cloud {
+	header -Server
+	redir https://staging.chialab.io{uri} 308
+}
+https://staging.chialab.io {
 	import common
 
 	import ./Caddyfile.d/redirects.io
@@ -121,16 +129,20 @@ https://dev-illustratorium.chialab.dt.bedita.cloud {
 
 	import site "Chialab" "Illustratorium" "draft" "false"
 }
-https://illustratorium.it {
+https://illustratorium.it, https://illustratorium.chialab.it, https://illustratorium.chialab.dt.bedita.cloud {
 	header -Server
 	redir https://www.illustratorium.it{uri} 308
 }
-https://www.illustratorium.it, https://illustratorium.chialab.dt.bedita.cloud {
+https://www.illustratorium.it {
 	import common
 
 	import site "Chialab" "Illustratorium" "on" "false"
 }
-https://staging.illustratorium.it, https://staging-illustratorium.chialab.dt.bedita.cloud {
+https://staging-illustratorium.chialab.dt.bedita.cloud {
+	header -Server
+	redir https://staging.illustratorium.it{uri} 308
+}
+https://staging.illustratorium.it {
 	import common
 
 	import site "Chialab" "Illustratorium" "draft" "true"
