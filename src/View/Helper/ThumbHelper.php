@@ -14,12 +14,15 @@ use Chialab\FrontendKit\View\Helper\ThumbHelper as BaseThumbHelper;
 class ThumbHelper extends BaseThumbHelper
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @param \BEdita\Core\Model\Entity\ObjectEntity|null $object Object entity.
+     * @param array<array-key, mixed>|string $thumbOptions Thumbnail options.
+     * @param array{allowPending?: bool, fallbackOriginal?: bool, fallbackStatic?: bool} $fallbackOptions Fallback options.
      */
     public function url(ObjectEntity|null $object, array|string $thumbOptions = 'default', array $fallbackOptions = []): string|null
     {
         if (
-            $object !== null &&
             $object instanceof Media &&
             $this->Media->getStream($object)?->mime_type === 'image/gif'
         ) {

@@ -16,66 +16,66 @@ return static function (RouteBuilder $routes): void {
                 $routes->connect(
                     '/',
                     ['controller' => 'Pages', 'action' => 'home'],
-                    ['_name' => 'pages:home']
+                    ['_name' => 'pages:home'],
                 );
 
                 $routes->connect(
                     '/login',
                     ['controller' => 'Auth', 'action' => 'login'],
-                    ['_name' => 'auth:login']
+                    ['_name' => 'auth:login'],
                 );
 
                 $routes->connect(
                     '/logout',
                     ['controller' => 'Auth', 'action' => 'logout'],
-                    ['_name' => 'auth:logout']
+                    ['_name' => 'auth:logout'],
                 );
 
                 $routes->connect(
                     '/link/{uname}',
                     ['controller' => 'Pages', 'action' => 'link', '_filters' => ['type' => 'links']],
-                    ['_name' => 'pages:links', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class]
+                    ['_name' => 'pages:links', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class],
                 );
 
                 $routes->connect(
                     '/objects/{uname}',
                     ['controller' => 'Pages', 'action' => 'object'],
-                    ['_name' => 'pages:objects', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class]
+                    ['_name' => 'pages:objects', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class],
                 );
 
                 $routes->connect(
                     '/works/*',
                     ['controller' => 'Pages', 'action' => 'works'],
-                    ['_name' => 'pages:works']
+                    ['_name' => 'pages:works'],
                 );
 
                 $routes->connect(
                     '/tatzebao/*',
                     ['controller' => 'Pages', 'action' => 'tatzebao'],
-                    ['_name' => 'pages:tatzebao']
+                    ['_name' => 'pages:tatzebao'],
                 );
 
                 $routes->connect(
                     '/cosacome/**',
                     ['controller' => 'Pages', 'action' => 'cosacome'],
-                    ['_name' => 'pages:cosacome']
+                    ['_name' => 'pages:cosacome'],
                 );
 
                 $routes->connect(
                     '/umani/**',
                     ['controller' => 'Pages', 'action' => 'umani'],
-                    ['_name' => 'pages:umani']
+                    ['_name' => 'pages:umani'],
                 );
 
                 $routes->connect(
                     '/**',
                     ['controller' => 'Pages', 'action' => 'fallback'],
-                    ['_name' => 'pages:fallback']
+                    ['_name' => 'pages:fallback'],
                 );
             };
 
             $routes->scope('/lang/{locale}', ['_namePrefix' => 'lang:'], $routeBuilder);
             $routeBuilder($routes);
-        }
+        },
     );
 };

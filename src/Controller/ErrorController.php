@@ -26,14 +26,18 @@ use Cake\Event\EventInterface;
 class ErrorController extends AppController
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @param \Cake\Event\EventInterface<\Cake\Controller\Controller> $event Dispatched event.
      */
     public function beforeFilter(EventInterface $event): void
     {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @param \Cake\Event\EventInterface<\Cake\Controller\Controller> $event Dispatched event.
      */
     public function beforeRender(EventInterface $event): void
     {
@@ -43,7 +47,9 @@ class ErrorController extends AppController
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @param \Cake\Event\EventInterface<\Cake\Controller\Controller> $event Dispatched event.
      */
     public function afterFilter(EventInterface $event): void
     {

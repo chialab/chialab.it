@@ -88,29 +88,23 @@ https://staging.chialab.it {
 # Chialab.io
 https://dev-io.chialab.dt.bedita.cloud {
 	import common
-
-	import ./Caddyfile.d/redirects.io
-	import site "Chialab" "OpenSource" "draft" "false"
+	redir https://dev-it.chialab.dt.bedita.cloud{uri} 308
 }
 https://chialab.io, https://io.chialab.dt.bedita.cloud {
 	header -Server
 	redir https://www.chialab.io{uri} 308
 }
 https://www.chialab.io {
-	import common
-
-	import ./Caddyfile.d/redirects.io
-	import site "Chialab" "OpenSource" "on" "false"
+	header -Server
+	redir https://www.chialab.it{uri} 308
 }
 https://staging-io.chialab.dt.bedita.cloud {
 	header -Server
 	redir https://staging.chialab.io{uri} 308
 }
 https://staging.chialab.io {
-	import common
-
-	import ./Caddyfile.d/redirects.io
-	import site "Chialab" "OpenSource" "draft" "true"
+	header -Server
+	redir https://staging.chialab.it{uri} 308
 }
 
 # Chialab.dev

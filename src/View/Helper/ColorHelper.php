@@ -15,7 +15,7 @@ class ColorHelper extends Helper
      * Example: '#d60000' -> [r => 214, g => 0, b => 0]
      *
      * @param string $hex The hex color code.
-     * @return array
+     * @return array{r: numeric, g: numeric, b: numeric}
      */
     public function hexToRgb(string $hex): array
     {

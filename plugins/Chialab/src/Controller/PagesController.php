@@ -49,7 +49,7 @@ class PagesController extends AppController
     /**
      * Load "works" section.
      *
-     * @param string|null $uname The uname of the requested entity.
+     * @param string|null $path Object path.
      * @return \Cake\Http\Response
      */
     public function works(string|null $path = null): Response
@@ -72,7 +72,7 @@ class PagesController extends AppController
     /**
      * Load "tatzebao" section.
      *
-     * @param string|null $uname The uname of the requested entity.
+     * @param string|null $path Object path.
      * @return \Cake\Http\Response
      */
     public function tatzebao(string|null $path = null): Response
@@ -90,7 +90,7 @@ class PagesController extends AppController
     /**
      * Load special section object "cosacome".
      *
-     * @param string $path Object path.
+     * @param string|null $path Object path.
      * @return \Cake\Http\Response
      */
     public function cosacome(string|null $path = null): Response
@@ -111,7 +111,7 @@ class PagesController extends AppController
     /**
      * Load special section object "umani".
      *
-     * @param string $path Object path.
+     * @param string|null $path Object path.
      * @return \Cake\Http\Response
      */
     public function umani(string|null $path = null): Response

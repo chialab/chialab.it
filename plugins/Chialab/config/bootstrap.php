@@ -8,8 +8,8 @@ Configure::write(
         (array)Configure::read('App.paths.templates'),
         [
             ROOT . DS . 'plugins' . DS . 'Chialab' . DS . 'templates' . DS,
-        ]
-    )
+        ],
+    ),
 );
 
 Configure::write(
@@ -18,8 +18,8 @@ Configure::write(
         (array)Configure::read('App.paths.locales'),
         [
             ROOT . DS . 'plugins' . DS . 'Chialab' . DS . 'resources' . DS . 'locales' . DS,
-        ]
-    )
+        ],
+    ),
 );
 
 Configure::write(
