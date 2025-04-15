@@ -74,7 +74,7 @@ class AppController extends BaseController
     /**
      * @inheritDoc
      */
-    public function beforeRender(EventInterface $event): Response|null
+    public function beforeRender(EventInterface $event): void
     {
         parent::beforeRender($event);
 
@@ -93,7 +93,5 @@ class AppController extends BaseController
         $locale = Configure::read('I18n.lang', I18n::getLocale());
 
         $this->set(compact('menu', 'footerChildren', 'analytics', 'locale', 'locales'));
-
-        return null;
     }
 }

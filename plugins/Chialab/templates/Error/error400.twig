@@ -1,0 +1,16 @@
+<main class="w-full column">
+{% if code == 404 %}
+    <h1 class="m-0 serif italic regular f-7">{{ __('Page not found') }}</h1>
+
+    <p class="m-0 sans column gap-xs f-3">
+        {{ __('The page you are looking for does not exist.')|raw }}
+        <a class="link--underline" href="{{ Url.build({ _name: 'pages:home' }) }}">{{ __('Back to home')|raw }}</a>
+    </p>
+{% else %}
+    <h1 class="m-0 serif italic regular f-7">{{ __('Error loading the page') }}</h1>
+
+    <p class="m-0 sans gap-xs f-3">
+        {{ __('Try to reload the page or')|raw }} <a class="sans link--underline" href="{{ Url.build({ _name: 'pages:home' }) }}">{{ __('Back to home')|raw }}</a>
+    </p>
+{% endif %}
+</main>
