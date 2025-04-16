@@ -1,16 +1,19 @@
-<main class="w-full column">
-{% if code == 404 %}
-    <h1 class="m-0 serif italic regular f-7">{{ __('Page not found') }}</h1>
-
-    <p class="m-0 sans column gap-xs f-3">
-        {{ __('The page you are looking for does not exist.')|raw }}
-        <a class="sans text-underline link--underline" href="{{ Url.build({ _name: 'pages:home' }) }}">{{ __('Back to home')|raw }}</a>
-    </p>
-{% else %}
-    <h1 class="m-0 serif italic regular f-7">{{ __('Error loading the page') }}</h1>
-
-    <p class="m-0 sans gap-xs f-3">
-        {{ __('Try to reload the page or')|raw }} <a class="sans text-underline link--underline" href="{{ Url.build({ _name: 'pages:home' }) }}">{{ __('Back to home')|raw }}</a>
-    </p>
+{% if debug is defined and debug and error is defined and error.params is not empty %}
+    {{ Debugger.dump(error.params)|raw }}
 {% endif %}
+<main class="w-full column">
+    {% if code == 404 %}
+        <h1 class="m-0 serif italic regular f-7">{{ __('Page not found') }}</h1>
+
+        <p class="m-0 sans column gap-xs f-3">
+            {{ __('The page you are looking for does not exist.')|raw }}
+            <a class="sans text-underline link--underline" href="{{ Url.build({ _name: 'pages:home' }) }}">{{ __('Back to home')|raw }}</a>
+        </p>
+    {% else %}
+        <h1 class="m-0 serif italic regular f-7">{{ __('Error loading the page') }}</h1>
+
+        <p class="m-0 sans gap-xs f-3">
+            {{ __('Try to reload the page or')|raw }} <a class="sans text-underline link--underline" href="{{ Url.build({ _name: 'pages:home' }) }}">{{ __('Back to home')|raw }}</a>
+        </p>
+    {% endif %}
 </main>

@@ -1,3 +1,6 @@
+{% if debug is defined and debug and error is defined and error.params is not empty %}
+    {{ Debugger.dump(error.params)|raw }}
+{% endif %}
 <main class="w-full column">
     <h1 class="m-0 serif italic regular f-7">{{ __('Error loading the page') }}</h1>
 

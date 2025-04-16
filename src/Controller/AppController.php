@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
+use Cake\Event\EventInterface;
 
 /**
  * Application Controller
@@ -35,5 +37,15 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function beforeRender(EventInterface $event): void
+    {
+        parent::beforeRender($event);
+
+        $this->set('debug', Configure::read('debug', false));
     }
 }
