@@ -28,7 +28,7 @@ class ErrorController extends AppController
     /**
      * {@inheritDoc}
      *
-     * @param \Cake\Event\EventInterface<\Cake\Controller\Controller> $event Dispatched event.
+     * @param \Cake\Event\EventInterface<static> $event Dispatched event.
      */
     public function beforeFilter(EventInterface $event): void
     {
@@ -37,7 +37,7 @@ class ErrorController extends AppController
     /**
      * {@inheritDoc}
      *
-     * @param \Cake\Event\EventInterface<\Cake\Controller\Controller> $event Dispatched event.
+     * @param \Cake\Event\EventInterface<static> $event Dispatched event.
      */
     public function beforeRender(EventInterface $event): void
     {
@@ -49,7 +49,7 @@ class ErrorController extends AppController
     /**
      * {@inheritDoc}
      *
-     * @param \Cake\Event\EventInterface<\Cake\Controller\Controller> $event Dispatched event.
+     * @param \Cake\Event\EventInterface<static> $event Dispatched event.
      */
     public function afterFilter(EventInterface $event): void
     {

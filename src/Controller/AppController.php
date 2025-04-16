@@ -40,7 +40,9 @@ class AppController extends Controller
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
+     * @param \Cake\Event\EventInterface<static> $event Dispatched event.
      */
     public function beforeRender(EventInterface $event): void
     {
