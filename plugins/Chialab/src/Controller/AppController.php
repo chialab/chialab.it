@@ -6,7 +6,6 @@ namespace Chialab\Controller;
 use App\Controller\AppController as BaseController;
 use Cake\Core\Configure;
 use Cake\Event\EventInterface;
-use Cake\Http\Response;
 use Cake\I18n\I18n;
 
 /**
