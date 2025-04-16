@@ -59,6 +59,18 @@ msgstr ""
 msgid "Year"
 msgstr "Anno"
 
+msgid "Page not found"
+msgstr "Pagina non trovata"
+
+msgid "Error loading the page"
+msgstr "Errore nel caricamento della pagina"
+
+msgid "The page you are looking for does not exist."
+msgstr "Questa pagina non esiste più, non è mai esistita o è stata spostata."
+
+msgid "Try to reload the page or"
+msgstr "Prova a ricaricare la pagina o"
+
 msgid "log in"
 msgstr "accedi"
 

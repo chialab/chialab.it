@@ -6,7 +6,6 @@ namespace Chialab\Controller;
 use App\Controller\AppController as BaseController;
 use Cake\Core\Configure;
 use Cake\Event\EventInterface;
-use Cake\Http\Response;
 use Cake\I18n\I18n;
 
 /**
@@ -74,7 +73,7 @@ class AppController extends BaseController
     /**
      * @inheritDoc
      */
-    public function beforeRender(EventInterface $event): Response|null
+    public function beforeRender(EventInterface $event): void
     {
         parent::beforeRender($event);
 
@@ -93,7 +92,5 @@ class AppController extends BaseController
         $locale = Configure::read('I18n.lang', I18n::getLocale());
 
         $this->set(compact('menu', 'footerChildren', 'analytics', 'locale', 'locales'));
-
-        return null;
     }
 }
