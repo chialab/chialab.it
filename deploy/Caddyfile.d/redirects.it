@@ -32,3 +32,7 @@ import redirect /10-in-leggibilita /buone-pratiche-per-l-accessibilita-del-testo
 import redirect /articles/augmented-reality/augmented-reality-on-the-web-with-model-viewer /objects/augmented-reality-on-the-web-with-model-viewer
 import redirect /articles/augmented-reality/realta-diminuita /objects/realta-diminuita
 import redirect /topics/non-chiamatela-accessibilita /objects/non-chiamatela-accessibilita
+
+# Old lang paths
+import redirect /lang/eng /lang/en$1
+import redirect /lang/ita /lang/it$1
