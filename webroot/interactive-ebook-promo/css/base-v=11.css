@@ -1,0 +1,1165 @@
+
+/*...........................................    
+
+    Reset
+
+...........................................*/
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,p,blockquote,th,td { margin:0;padding:0;outline:0}
+table {border-collapse:collapse;border-spacing:0;}
+fieldset,img {border:0;}
+ul {list-style:none;}
+caption,th {text-align:left;}
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal;}
+q:before,q:after {content:'';}
+abbr,acronym { border:0;}
+article, aside, figure, footer, header, hgroup, nav, section {display: block;}
+address {font-style:normal}
+A {outline:0; }
+:focus {outline: 0;} 
+
+/*...........................................    
+
+    General, elements
+
+...........................................*/
+
+BODY {
+	font-family: 'Titillium', 'Helvetica Neue', 'Helvetica', arial, sans-serif; 
+	font-size:14px;
+	color:#444;
+	margin:0px 0px 0px 5px;
+	text-rendering: optimizeLegibility;
+}
+
+A {
+	text-decoration:none;
+	color:#ff6600;	
+}
+
+A:hover {
+	color:#ff6600;	
+}
+
+A[target='_blank']:hover {
+	color:#33F;	
+}
+
+HR {
+	height:4px; border:0px; margin:10px 0px 10px 0px; 
+	/*border-top:1px solid #666;*/
+	background: transparent url('../img/sfo_line_03.png') top left repeat-x; 
+}
+
+sup, sub {
+	height: 0;
+	line-height: 1;
+	vertical-align: baseline;
+	_vertical-align: bottom;
+	position: relative;
+	font-size:0.8em;
+}
+
+sup {
+	bottom: 1ex;
+}
+
+sub {
+	top: .5ex;
+}
+
+
+OL {
+	margin:0.5em 0 1em 30px;
+	list-style-type:decimal-leading-zero;
+}
+
+UL {
+	margin:0.5em 0 0.8em 1em;
+	list-style-type:circle;
+}
+
+h4 + UL.plainlist, h4 + UL.dashlist  {
+	margin-top:0px;
+}
+
+UL.plainlist, UL.dashlist {
+	margin-left:0px;
+}
+
+.plainlist LI, .dashlist LI {
+	line-height:1.2em;
+	padding-bottom:0em;
+	list-style:none;
+	margin-left:0px;
+	
+}
+
+.dashlist LI:before {
+	content:"_"
+}
+
+.plainlist LI A {
+	font-size:0.9em;
+}
+
+H1 A {color:inherit}
+
+
+input {
+	padding:5px; 
+}
+
+/*...........................................    
+
+    columns
+
+...........................................*/
+
+.column {
+	/* non mobile */
+	float:left;
+	width:300px;
+	padding:0px;
+	margin:0px 10px 20px 0px;
+	background-color:#FFF;
+	-webkit-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+}
+
+
+
+.column:last-child {
+	margin:0px 0px 20px 0px;
+}
+
+/*...........................................    
+
+    columns headers + nav
+
+...........................................*/
+
+header {
+	padding:10px 5px 30px 5px;
+}
+
+header nav {
+	margin-top:10px;
+	color:#666;
+}
+
+header nav A.title {
+	color:#666;
+}
+
+header nav A.title:hover {
+	color:#339966;
+}
+
+header nav .info, footer .pages {
+	display:block;
+	float:right;
+	text-align:right;
+	font-size:0.8em; padding-top:0.3em; 
+	color:#999; 
+	letter-spacing:0.1em; 
+}
+
+header nav {
+	visibility:hidden;
+}
+
+header nav {
+	visibility:visible;
+}
+
+header H1 {
+	font-weight:600;
+	font-size:2em;
+}
+
+header .logo {
+	visibility:hidden;
+	cursor:pointer;
+	/*width:280px; height:20px;*/
+	font-weight:400;
+	font-size:2.65em;
+	line-height: 1em;
+}
+
+header .logo A {
+	display:block; 
+}
+
+header .logo {
+	visibility:visible;
+}
+
+header + article {
+	/*background:transparent url('../img/sfo_line_01.png') left top repeat-x;*/
+	background:none;
+}
+
+.pages {
+	clear:both; margin-top:10px; padding-left:10px; text-align:right;
+}
+
+.lang {
+	/*visibility:hidden;*/
+	font-size:14px;
+	white-space: nowrap;
+	padding:10px 5px 0px 5px;
+}
+
+.lang a {
+	color:inherit;
+}
+
+.lang a.on {
+	color:#FF6600;
+	pointer-events:none;
+}
+
+.lang a:hover {
+ 	color:#FF6600;
+}
+
+.column:first-child header .lang {
+	/*visibility:visible;*/
+}
+
+/*...........................................    
+
+   articles
+
+...........................................*/
+
+article {
+	margin:0px 5px 0px 5px;
+	padding:0 0 20px 0;
+	border-top:0px solid #dedede;
+	/*-webkit-transform: rotate(-2deg);	*/
+	/*background:transparent url('../img/sfo_line_02.png') left top repeat-x;*/
+}
+
+article H1 {
+	margin:10px 0px 10px 0px;
+	font-size:1.35em;
+	font-weight:500;
+	color:#333;
+}
+
+article H2 {
+	font-size:1.15em;
+	font-weight:500;
+}
+
+article H3 {
+	font-size:1em;
+	font-weight:500;
+}
+
+article H3:first-child {
+	margin-top:10px;
+}
+
+article P, article {
+	line-height:1.35em;
+	margin-bottom:10px;
+	text-indent:0em;
+}
+
+article cite {
+	margin-top:10px;
+	display:block;
+}
+
+/*...........................................    
+
+  document custom prop in home
+
+...........................................*/
+
+article.bigtext, article.introlist.description {
+	font-size:1.6em; color:#666; font-weight:100;
+}
+
+article.bigtext P, article.introlist.description {
+	text-align:left; 
+}
+
+article.giantext {
+	font-size:3em; font-weight:100;
+}
+
+article.giantext P {
+	text-align:left; 
+		line-height:1em;
+}
+
+article.giantext cite {
+	font-size:0.5em;
+	line-height:1.1em !important;
+}
+
+article.bigtext cite {
+	margin-top:20px;
+	font-size:0.65em;
+	line-height:1.35em;
+}
+
+.introlist .sectionlist UL {
+	margin-top:0px;
+}
+
+.introlist .sectionlist UL LI A:hover{
+	color:#FF6600;
+}
+
+.introlist article:first-of-type {
+	background: none;
+}
+
+.introlist article {
+	margin-bottom:0;
+}
+
+/*...........................................    
+
+	inside article
+
+...........................................*/
+
+.inside article {
+	font-size:1.1em; 
+	line-height:1.4em; 
+	font-weight:200;
+}
+
+.inside article strong {
+	font-weight:bold;
+}
+
+.inside article  H2 {
+	margin-top:25px;
+	margin-bottom:15px;
+}
+
+.inside article  H1 + H2 {
+	margin-top:20px;
+}
+
+.inside article p + p {
+	text-indent:10px;
+}
+
+.inside article p:first-child {
+	text-indent:0em;
+	margin-top:35px;
+}
+
+.inside article H1 + p {
+	
+}
+
+.inside article H3 {
+	margin-top:15px;
+	margin-bottom:5px;
+}
+
+.inside article H2 + H3 {
+	margin-top:10px;
+}
+
+
+
+/*...........................................    
+
+   figures e media
+
+...........................................*/
+
+figure {		
+	margin:0px 0px 0px 0px;	
+}
+
+figure {		
+	margin:0px 0px 0px 0px;	
+}
+
+figcaption {
+	display:block;
+	font-weight:200;
+	padding:5px 0 10px 0;
+}
+
+figcaption H4 {
+	display:none; /* multimedia title is hidden by default */
+}
+
+A figure:hover img {
+	/*opacity:0.75;*/
+}
+
+.embed {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+	width:100%;
+}
+
+.embed iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/*...........................................    
+
+   footer
+
+...........................................*/
+
+.column footer {
+	border-top:0px solid #dedede;
+	background:#fff url('../img/sfo_line_03.png') left top repeat-x;
+	margin:0px 5px 120px 5px !important;
+	line-height:1.35em;
+	color:#666;
+	/*display:none;*/
+	padding-top:40px;
+}
+
+
+.column footer .card {
+	float:left;
+	font-size:0.9em;
+}
+
+.column:first-child footer {
+	display:block;
+}
+
+.column:last-child footer {
+	display:block;
+}
+
+footer .logo {
+	margin-top:0px; float:right;	
+}
+
+
+/*...........................................    
+
+  publist
+
+...........................................*/
+
+.publist {
+	margin:0px 0 10px 0 !important; 
+	padding-top:20px;
+	text-transform:lowercase;
+	clear:both;
+	background:transparent url('../img/sfo_line_03.png') left top repeat-x;
+}
+.publist LI {
+	color:#666;
+	margin:0px; 
+	padding:0px;
+	list-style:none;
+	display:inline;
+	background:transparent none !important;
+}
+
+.publist LI:before {
+	content: "    _    "
+}
+
+.publist LI:first-child:before {
+	content: ""
+}
+
+
+.publist LI A {
+	color:#666;
+}
+
+.publist LI A:hover {
+	color:#ff6600;
+}
+
+.publist LI.on A {
+	color:#C30;
+}
+
+
+
+
+
+/*...........................................    
+
+  lista di sezioni in una sezione
+
+...........................................*/
+
+.sectionlist UL {
+	list-style:none;
+	margin-left:0px;
+}
+
+.sectionlist LI {
+	border-bottom:0px solid #ccc;
+	padding:20px 0 0px 0;
+	background:transparent url('../img/sfo_line_03.png') top repeat-x;
+}
+.sectionlist LI:first-child {
+	padding-top:0px;
+	background:transparent none top repeat-x;
+}
+.sectionlist LI A {
+	color:#666;
+}
+
+/*...........................................    
+
+  section simplelist custom prop in home
+
+...........................................*/
+
+.simplelist article, .introlist article {
+	border-bottom:0px solid #ccc;
+	padding:10px 0 5px 0;
+	background:transparent url('../img/sfo_line_03.png') top repeat-x;
+}
+
+.simplelist article:first-of-type {
+	padding-top:0px;
+}
+
+.homePage.simplelist article:first-of-type {
+	padding-top:10px;
+}
+
+.simplelist header + article, .introlist header + article  {
+	padding-top:35px;
+}
+
+.simplelist article H1, .introlist article H1 {
+	font-weight:normal;
+	font-size:1em;
+	margin:0px;
+	padding:0px;
+	color:#666;
+}
+
+.simplelist article figure, .simplelist article P {
+	display:none;
+}
+
+.simplelist article.description P {
+	display:block;
+}
+
+.simplelist UL {
+	margin:0px ;
+}
+
+.simplelist LI:first-child {
+	background:transparent none;
+}
+.simplelist LI {
+	list-style:none;
+	padding:10px 0 5px 0;
+	margin:0px;
+	background:transparent url('../img/sfo_line_03.png') top repeat-x;
+}
+
+.simplelist LI A {
+	color:#666;
+}
+
+.simplelist LI A:hover {
+	color:#ff6600;
+}
+
+.simplelist LI.on A {
+	color:#C30;
+}
+
+
+/*...........................................    
+
+  section mediumlist custom prop in home
+
+...........................................*/
+
+.mediumlist article {
+	border-bottom:0px solid #ccc;
+	padding:10px 0 5px 0;
+	background:transparent url('../img/sfo_line_03.png') top repeat-x;
+}
+
+.mediumlist header + article {
+	padding-top:35px;
+}
+.mediumlist article H1 {
+	font-weight:normal;
+	font-size:1em;
+	margin:0px;
+	padding:0px;
+	color:#333;
+}
+
+
+.mediumlist article.description P {
+	display:block;
+	color:#666;
+}
+
+.mediumlist P.description {
+	color:#777;
+	/*font-style:italic;*/
+}
+
+
+.mediumlist UL {
+	margin:0px ;
+}
+
+.mediumlist LI:first-child {
+	background:transparent none;
+}
+.mediumlist LI {
+	list-style:none;
+	padding:10px 0 5px 0;
+	margin:0px;
+	background:transparent url('../img/sfo_line_03.png') top repeat-x;
+}
+
+.mediumlist LI A {
+	color:#666;
+}
+
+.mediumlist LI A:hover {
+	color:#ff6600;
+}
+
+.mediumlist LI.on A {
+	color:#C30;
+}
+
+/*...........................................    
+
+  section coverlist custom prop in home
+
+...........................................*/
+
+.coverlist article {
+	border-bottom:0px solid #ccc;
+	padding:0px 0 0px 0;
+	background:transparent none;
+}
+
+.coverlist article:first-of-type {
+	padding:10px 0 0px 0;
+	background:transparent url('../img/sfo_line_03.png') top repeat-x;
+}
+/*
+.coverlist article:not([first-child]) {
+	background:transparent none !important;
+}
+*/
+.coverlist header + article {
+	padding-top:35px;
+	/*background:transparent url('../img/sfo_line_01.png') top repeat-x;*/
+	background:transparent url('../img/sfo_line_03.png') top repeat-x;
+}
+
+.coverlist article figure img {
+	margin-bottom:5px;
+}
+
+.coverlist footer {
+	margin-top:10px;
+}
+
+.coverlist A {
+	color:#666;
+}
+
+.coverlist LI A:hover {
+	color:#ff6600;
+}
+
+.homePage.double article hgroup {
+	font-size:2em;
+	font-weight:100;
+	color:#666;
+	margin:0px !important;
+	line-height: 1.3em;
+	padding:10px;
+}
+
+.homePage.double article hgroup a {
+	color:#666;
+}
+
+.homePage.double article h2, .homePage.double article h2 p, .homePage.double article h1 {
+	font-size:inherit;
+	font-weight:inherit;
+	color:inherit;
+	margin:0px !important;
+	line-height:inherit;
+	display: inline;
+}
+
+.homePage.column.double article img {
+	width:100%;
+	display: block;
+}
+
+/*...........................................    
+
+  section slideshow custom prop in home
+
+...........................................*/
+
+.slideshow article {
+	display:none;
+	/*background:transparent url('../img/sfo_line_01.png') left top repeat-x;*/
+	background:transparent url('../img/sfo_line_03.png') left top repeat-x;
+	padding-top:10px;
+}
+
+.slideshow article H1 {
+	display:none;
+}
+
+
+/*...........................................    
+
+   various
+
+...........................................*/
+
+
+.clear {
+	height:0px; 
+	clear:both;
+	line-height:0;
+	margin:0px; 
+	padding:0px;
+}
+
+A.close {
+	display:block;
+	padding:0px 10px 0px 10px;
+	color:#666;
+	text-align:right;
+	display:block;
+	float:left;
+	height:20px;
+}
+
+.commands {
+	padding: 0px;
+	display: block;
+	float:right;
+	font-size: 1.7em;
+	margin: -30px 0 10px 0;
+	background-color: white;
+	padding-left: 5px;
+}
+
+.commands .prec, .commands .pross {
+	cursor:pointer;
+	display:block;
+	float:left;
+	margin-top: 4px;
+	line-height: 1.1em;
+	height:20px;
+}
+
+.commands .prec {
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg); 
+	-webkit-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+}
+
+.toolbar {
+    padding: 10px 0 5px 0;
+    margin: 0px;
+    background: transparent url('../img/sfo_line_03.png') top repeat-x;
+}
+
+figure .pross {
+	position:absolute;
+	right:0;
+	z-index:100;
+	width:33%;
+	height:100%;
+	cursor:pointer;
+}
+
+figure .prec {
+	position:absolute;
+	left:0;
+	z-index:100;
+	width:33%;
+	height:100%;
+	cursor:pointer;
+}
+
+article.video figure .prec, article.video figure .pross {
+	display:none;
+}
+
+.hyphenate P {
+	/* to do restore justify when hypen works
+	text-align:justify;
+	webkit-hyphens: auto;
+ 	-moz-hyphens: auto;
+     hyphens: auto;*/
+	
+}
+
+
+.wrapper {
+
+}
+
+.start {
+
+}
+
+.swiperight, .swipeleft {
+	padding:0 10px 0 10px;
+}
+
+.shr_classic {border:1px solid silver; float:left; background-color: white; padding:8px 4px 4px 8px;}
+.shr-bookmarks-classic {margin:0px !important;}
+#shareform {position:absolute; z-index:100; margin-left:10px; display:none;}
+.share {cursor:pointer;}
+.shr_classic span {
+	display: inline
+}
+
+
+#annaffiatoio article h1{
+	margin-top:5px;
+}
+
+
+
+/*...........................................    
+
+   figures placeolder
+
+...........................................*/
+
+.current figure {
+	text-indent:0px;
+}
+
+.double .current figure {
+	overflow:auto;
+}
+
+.double .current figcaption {
+	width:49%;
+	float:right;
+}
+
+.current figcaption {
+	text-indent:0px;
+	font-size:0.9em;
+	line-height:1.3em; 
+	text-align:left;
+	clear:both;
+	color:#666;
+	padding-bottom:0px;
+}
+
+.double .current figcaption H4 {
+	margin-top:-5px;
+	margin-bottom:5px;
+}
+
+/*figure double dentro ad un double*/
+
+.column.double figure.double img {
+	/* non mobile */
+	width:600px;
+}
+
+.column.double figure.double figcaption {
+	float:none;
+	padding-left:10px;
+}
+
+.column.double figure.partial A {
+	/* non mobile */
+	height:200px;
+	overflow:hidden;
+	display:inline-block;
+	border-bottom:1px solid #666;
+}
+
+.current figure + P, .current figure + H3, .current figure + OL, .current figure + UL  {
+	margin-top:10px;
+}
+
+
+/*...........................................    
+
+   custom sections
+
+...........................................*/
+
+.quotes article H1 + P {
+	padding-top:20px;
+}
+
+.quotes article H1 {
+	display:none;
+}
+
+.unichar {
+	font-size:6em;
+	color:#CCC;
+}
+
+/*...........................................    
+
+   forms
+
+...........................................*/
+
+input, textarea {
+	border:1px solid silver;
+	font-size:14px;
+	color:#444
+}
+
+input {
+	margin-bottom:5px; 
+}
+
+input[type=password] {
+
+}
+
+input[type=submit], input[type=button] {
+	margin:10px 0px 10px 0px; 
+	cursor:pointer;
+	background-color:#dedede;
+} 
+
+.manage input[type=submit].on, input[type=submit]:hover, input[type=button]:hover {
+	background-color:orange;
+	color:white;
+}
+
+form table {
+	margin-top:10px;
+}
+
+form table TH, form table TD {
+	vertical-align:top;	
+	padding-top:5px;
+}
+
+form table TH {
+	padding-top:10px;
+	padding-right:10px;
+}
+
+form input, form textarea {	
+	padding:5px;
+	font-family:"Titillium", sans-serif;
+}
+
+form.manage input, form textarea {	
+	width:205px;
+}
+
+ form table textarea {	
+	width:270px;
+	height:270px;
+	font-size:1.25em;
+	font-weight:100;
+	color:#000
+}
+
+fieldset.attach input[type=text], fieldset.attach textarea {
+	font-size:0.9em;
+	padding:5px;
+	margin:0px;
+	width:150px;
+	font-family:"Titillium", sans-serif;
+	border:1px solid transparent; background-color:transparent;
+}
+
+ fieldset.attach textarea {
+
+ }
+ 
+ fieldset.attach input[type=button] {
+ 	padding:0px;
+	font-size:12px;
+	margin-top:0px;
+ }
+ 
+fieldset.attach input:focus {
+	border:1px solid silver; 
+	background-color:#FFF;
+}
+
+fieldset.attach textarea:focus {
+	border:1px solid silver; 
+	background-color:#FFF;
+}
+
+
+::-webkit-input-placeholder {
+   color: #999;
+   font-style:italic
+}
+
+:-moz-placeholder {
+   color: #999;
+   font-style:italic
+}
+
+.loadnext {
+    background-color: #666;
+    color: white;
+    padding: 10px 10px 5px 10px;
+    margin: 0 auto;
+    display: block;
+    width: 120px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    line-height: 1.6em;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    font-weight: 100;
+    text-align: center;
+    margin-bottom:20px;
+    cursor: pointer;
+}
+
+.loadnext:hover {
+	background-color: #ff6600;
+	color: white;
+}
+
+#loadMessage {
+  margin: 100px auto 0;
+  margin-bottom:50px;
+  width: 70px;
+  text-align: center;
+}
+
+#loadMessage > div {
+  width: 18px;
+  height: 18px;
+  background-color: #ff6600;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+#loadMessage .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+#loadMessage .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+/*...........................................    
+
+   staging BODY
+
+...........................................*/
+
+.bedev {
+	display:none;
+}
+
+.staging .bedev {
+	display:inline !important;
+	background-color:pink;
+}
+
+.staging .placeholder {
+	background-color:pink;
+}
+/*
+.staging a.placeholder:after {
+	content: " (" attr(href) ")";
+} 
+*/
+.staging a.placeholder:after {
+	content: " [x] ";
+}
+
+/*...........................................    
+
+   media queries
+
+...........................................*/
+
+@media screen and (max-width: 640px) {
+	.column.media, .column.media img {
+		width:100% !important;
+	}
+	header .logo {
+	   font-size: 1.8em;
+	}
+	.homePage.double article hgroup {
+    	font-size: 1.3em;
+	}
+}
+
+@media screen and (min-width: 640px) {
+	.column.double {
+		width:60%;
+	}
+}
+
+@media screen and (min-width: 960px) {
+	.column.double {
+		width:610px;
+	}
+}
+
+
