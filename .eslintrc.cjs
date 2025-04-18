@@ -6,5 +6,10 @@ module.exports = {
     env: {
         browser: true,
     },
-    ignorePatterns: ['vendor/**/*', 'webroot/build/**/*', 'plugins/*/webroot/build/**/*'],
+    ignorePatterns: [
+        'vendor/**/*',
+        'webroot/build/**/*',
+        'webroot/interactive-ebook-promo/**/*',
+        'plugins/*/webroot/build/**/*',
+    ],
 };

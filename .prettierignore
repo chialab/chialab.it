@@ -5,3 +5,4 @@ composer.lock
 *.php
 deploy
 manager
+webroot/interactive-ebook-promo
