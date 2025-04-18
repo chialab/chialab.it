@@ -34,5 +34,5 @@ import redirect /articles/augmented-reality/realta-diminuita /objects/realta-dim
 import redirect /topics/non-chiamatela-accessibilita /objects/non-chiamatela-accessibilita
 
 # Old lang paths
-import redirect /lang/eng /lang/en$1
-import redirect /lang/ita /lang/it$1
+import redirect /lang/eng /lang/en
+import redirect /lang/ita /lang/it
