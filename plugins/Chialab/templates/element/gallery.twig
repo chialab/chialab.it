@@ -1,4 +1,4 @@
-{% set _showTitle = showTitle is defined ? showTitle : false %}
+{% set _showTitle = showTitle is defined ? showTitle : true %}
 {% set _showDescription = showDescription is defined ? showDescription : true %}
 
 {% set title = _showTitle ? object.get('title')|default(null) : null %}
