@@ -4,6 +4,8 @@
             {{ element('gallery', {
                 object: item,
                 defaultLayout: 'slideshow',
+                showTitle: false,
+                showDescription: false,
             }) }}
         {% else %}
             {{ Thumb.image(item, 'default')|raw }}

@@ -1,6 +1,9 @@
+{% set _showTitle = showTitle is defined ? showTitle : false %}
+{% set _showDescription = showDescription is defined ? showDescription : true %}
+
 {% set stream = object.get('streams')|first %}
-{% set title = object.get('title')|default(null) %}
-{% set description = object.get('description')|default(null) %}
+{% set title = _showTitle ? object.get('title')|default(null) : null %}
+{% set description = _showDescription ? object.get('description')|default(null) : null %}
 {% set _caption = caption is defined ? caption : true %}
 
 <div class="media_container column gap-s">

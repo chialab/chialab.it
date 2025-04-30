@@ -20,14 +20,6 @@
     object-position: center;
 }
 
-.gallery_title {
-    display: none;
-}
-
-.gallery_caption:not(:has(.gallery_description)) {
-    display: none;
-}
-
 .media_body > embed,
 .media_body > iframe,
 .media_object {
