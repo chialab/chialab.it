@@ -1031,16 +1031,16 @@
         },
         {
             "name": "chialab/frontend-kit",
-            "version": "v3.5.1",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chialab/bedita-frontend-kit.git",
-                "reference": "89f404f1ce7fffaa6dd991f83158e651a35f0d3e"
+                "reference": "89a347b1eb2ba30e270c3373b3d71ab434d88c6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chialab/bedita-frontend-kit/zipball/89f404f1ce7fffaa6dd991f83158e651a35f0d3e",
-                "reference": "89f404f1ce7fffaa6dd991f83158e651a35f0d3e",
+                "url": "https://api.github.com/repos/chialab/bedita-frontend-kit/zipball/89a347b1eb2ba30e270c3373b3d71ab434d88c6c",
+                "reference": "89a347b1eb2ba30e270c3373b3d71ab434d88c6c",
                 "shasum": ""
             },
             "require": {
@@ -1077,9 +1077,9 @@
             "description": "BEdita 5 plugin to help with development of websites.",
             "support": {
                 "issues": "https://github.com/chialab/bedita-frontend-kit/issues",
-                "source": "https://github.com/chialab/bedita-frontend-kit/tree/v3.5.1"
+                "source": "https://github.com/chialab/bedita-frontend-kit/tree/v3.5.2"
             },
-            "time": "2025-07-09T08:50:57+00:00"
+            "time": "2025-07-09T10:21:17+00:00"
         },
         {
             "name": "chialab/ip",
