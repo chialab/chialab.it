@@ -27,8 +27,6 @@ class PagesController extends AppController
     {
         $loader = new ObjectsLoader([
             'objects' => ['include' => 'poster|1'],
-            'documents' => ['include' => 'poster|1,has_media,has_clients,see_also'],
-            'news' => ['include' => 'poster|1,has_media,see_also'],
             'folders' => ['include' => 'poster|1,featured'],
         ], [
             'featured' => 3,

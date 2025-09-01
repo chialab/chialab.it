@@ -11,7 +11,11 @@
                 </div>
             </div>
         {% else %}
-            {{ element('card-wide', { object: item, class: 'w-' ~ columns|default(4) })|raw }}
+            {{ cell('Chialab.Card::wide', { object: item }, {
+                cache: {
+                    key: 'card_wide_' ~ item.id,
+                },
+            }) }}
         {% endif %}
     {% endfor %}
 </div>
