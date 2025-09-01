@@ -53,7 +53,7 @@ class CardCell extends Cell
      * @param array|null $props The properties to pass to the view.
      * @return void
      */
-    public function display(ObjectEntity $object, ?array $props = []): void
+    public function display(ObjectEntity $object, array|null $props = []): void
     {
         switch ($object->get('type')) {
             case 'documents':
@@ -71,7 +71,7 @@ class CardCell extends Cell
      * @param array|null $props The properties to pass to the view.
      * @return void
      */
-    public function wide(ObjectEntity $object, ?array $props = []): void
+    public function wide(ObjectEntity $object, array|null $props = []): void
     {
         $this->display($object, $props);
     }
@@ -83,7 +83,7 @@ class CardCell extends Cell
      * @param array|null $props The properties to pass to the view.
      * @return void
      */
-    public function collapsable(ObjectEntity $object, ?array $props = []): void
+    public function collapsable(ObjectEntity $object, array|null $props = []): void
     {
         switch ($object->get('type')) {
             case 'documents':
