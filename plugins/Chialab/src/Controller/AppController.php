@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chialab\Controller;
 
 use App\Controller\AppController as BaseController;
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Event\EventInterface;
 use Cake\I18n\I18n;
@@ -57,6 +58,7 @@ class AppController extends BaseController
                     'links' => ['include' => 'poster|1'],
                 ],
             ],
+            'cache' => 'publication',
         ]);
 
         if (Configure::read('StagingSite')) {
@@ -72,14 +74,21 @@ class AppController extends BaseController
         parent::beforeRender($event);
 
         $root = $this->Publication->getPublication();
-        $menu = $this->Menu->load((string)$root->id);
+        $menu = Cache::remember(
+            'menu',
+            fn () => $this->Menu->load((string)$root->id),
+        );
 
-        $footerChildren = $this->Menu->load('footer')->children;
-        foreach ($footerChildren as $key => $child) {
-            if ($child->type === 'documents') {
-                $footerChildren[$key]->has_links = $this->Objects->loadRelatedObjects($child->uname, 'documents', 'has_links');
+        $footerChildren = Cache::remember('footer', function () {
+            $footerChildren = $this->Menu->load('footer')->children;
+            foreach ($footerChildren as $key => $child) {
+                if ($child->type === 'documents') {
+                    $footerChildren[$key]->has_links = $this->Objects->loadRelatedObjects($child->uname, 'documents', 'has_links')->toArray();
+                }
             }
-        }
+
+            return $footerChildren;
+        });
 
         $analytics = Configure::read('Analytics', '');
         $locales = Configure::read('I18n.locales', []);
