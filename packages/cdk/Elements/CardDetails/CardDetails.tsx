@@ -67,7 +67,10 @@ export class CardDetails extends Component {
     }
 
     @listen('click', '.card__cover, .card__title, .card__description .description, .card-details__toggle')
-    protected onToggleClick() {
+    protected onToggleClick(event: MouseEvent) {
+        if ((event.target as HTMLElement).closest('a')) {
+            return;
+        }
         this.expanded = !this.expanded;
     }
 }
