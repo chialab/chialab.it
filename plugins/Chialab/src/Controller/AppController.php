@@ -80,9 +80,10 @@ class AppController extends BaseController
         parent::beforeRender($event);
 
         $root = $this->Publication->getPublication();
-        $menu = Cache::remember('menu', function () use ($root) {
-            return $this->Menu->load((string)$root->id);
-        });
+        $menu = Cache::remember(
+            'menu',
+            fn () => $this->Menu->load((string)$root->id),
+        );
 
         $footerChildren = Cache::remember('footer', function () {
             $footerChildren = $this->Menu->load('footer')->children;
