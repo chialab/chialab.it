@@ -1,5 +1,10 @@
+{% set _columns = columns|default(4) %}
 <div class="w-full grid">
     {% for item in children %}
-        {{ element('card', { object: item, class: 'w-' ~ columns|default(4) })|raw }}
+        {{ cell('Chialab.Card', { object: item, props: { class: 'w-' ~ _columns } }, {
+            cache: {
+                key: 'card_' ~ item.id ~ '_class:w-' ~ _columns,
+            },
+        }) }}
     {% endfor %}
 </div>

@@ -1,5 +1,9 @@
 <dna-masonry class="w-full grid m-0">
     {% for item in children %}
-        {{ element('card-collapsable', { object: item })|raw }}
+        {{ cell('Chialab.Card::collapsable', { object: item }, {
+            cache: {
+                key: 'card_collapsable_' ~ item.id,
+            },
+        }) }}
     {% endfor %}
 </dna-masonry>

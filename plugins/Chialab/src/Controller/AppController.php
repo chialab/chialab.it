@@ -41,16 +41,10 @@ class AppController extends BaseController
             'objectTypesConfig' => [
                 'objects' => ['include' => 'poster|1'],
                 'folders' => ['include' => 'poster|1,featured'],
-                'news' => ['include' => 'poster|1,has_media,see_also'],
-                'documents' => ['include' => 'poster|1,has_media,see_also'],
-                'galleries' => ['include' => 'poster|1,has_media'],
-                'events' => ['include' => 'poster|1,has_links'],
             ],
             'autoHydrateAssociations' => [
                 'featured' => 2,
-                'has_media' => 3,
                 'poster' => 2,
-                'see_also' => 2,
             ],
         ]);
         $this->loadComponent('Chialab/FrontendKit.Menu');
