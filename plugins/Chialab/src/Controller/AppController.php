@@ -35,6 +35,8 @@ class AppController extends BaseController
     {
         parent::initialize();
 
+        $locale = Configure::read('I18n.lang', I18n::getLocale());
+
         $this->loadComponent('Chialab/FrontendKit.Filters');
         $this->loadComponent('Chialab/FrontendKit.Categories');
         $this->loadComponent('Chialab/FrontendKit.Tags');
@@ -58,7 +60,7 @@ class AppController extends BaseController
                     'links' => ['include' => 'poster|1'],
                 ],
             ],
-            'cache' => 'publication',
+            'cache' => sprintf('publication_%s', $locale),
         ]);
 
         if (Configure::read('StagingSite')) {
@@ -73,13 +75,16 @@ class AppController extends BaseController
     {
         parent::beforeRender($event);
 
+        $analytics = Configure::read('Analytics', '');
+        $locales = Configure::read('I18n.locales', []);
+        $locale = Configure::read('I18n.lang', I18n::getLocale());
         $root = $this->Publication->getPublication();
         $menu = Cache::remember(
-            'menu',
+            sprintf('menu_%s', $locale),
             fn () => $this->Menu->load((string)$root->id),
         );
 
-        $footerChildren = Cache::remember('footer', function () {
+        $footerChildren = Cache::remember(sprintf('footer_%s', $locale), function () {
             $footerChildren = $this->Menu->load('footer')->children;
             foreach ($footerChildren as $key => $child) {
                 if ($child->type === 'documents') {
@@ -89,10 +94,6 @@ class AppController extends BaseController
 
             return $footerChildren;
         });
-
-        $analytics = Configure::read('Analytics', '');
-        $locales = Configure::read('I18n.locales', []);
-        $locale = Configure::read('I18n.lang', I18n::getLocale());
 
         $this->set(compact('menu', 'footerChildren', 'analytics', 'locale', 'locales'));
     }
