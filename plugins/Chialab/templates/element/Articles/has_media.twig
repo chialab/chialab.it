@@ -1,11 +1,14 @@
 <div class="columns-2">
     {% for item in object.get('has_media') %}
         {% if item.type == 'galleries' %}
-            {{ element('gallery', {
-                object: item,
+            {{ cell('Chialab.Gallery', { object: item, props: {
                 defaultLayout: 'slideshow',
                 showTitle: false,
                 showDescription: false,
+            } }, {
+                cache: {
+                    key: 'gallery_' ~ locale ~ '_' ~ item.id ~ '_defaultLayout:slideshow_showTitle:false_showDescription:false',
+                },
             }) }}
         {% else %}
             {{ Thumb.image(item, 'default')|raw }}

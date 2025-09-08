@@ -1,4 +1,7 @@
-{{ element('gallery', {
-    object: object,
+{{ cell('Chialab.Gallery', { object, props: {
     showTitle: false,
+} }, {
+    cache: {
+        key: 'gallery_' ~ locale ~ '_' ~ object.id ~ '_showTitle:false',
+    },
 }) }}
