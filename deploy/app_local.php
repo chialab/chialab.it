@@ -42,7 +42,7 @@ return [
             'host' => env('CACHE_REDIS_HOST', null),
             'port' => env('CACHE_REDIS_PORT', 6379),
             'database' => 0,
-            'prefix' => 'chialab_cake_',
+            'prefix' => sprintf('chialab_%s_', env('CACHE_SCOPE', 'default')),
         ],
 
         'session' => [
@@ -50,7 +50,7 @@ return [
             'host' => env('CACHE_REDIS_HOST', null),
             'port' => env('CACHE_REDIS_PORT', 6379),
             'database' => 3,
-            'prefix' => 'chialab_cake_',
+            'prefix' => 'session_',
             'duration' => 'tomorrow 4:00',
         ],
 
@@ -114,7 +114,7 @@ return [
 
         '_twig_views_' => [
             'className' => FileEngine::class,
-            'prefix' => 'chialab_cake_',
+            'prefix' => 'twig_views_',
             'path' => CACHE . 'twigView/',
             'serialize' => true,
             'duration' => '+1 year',
