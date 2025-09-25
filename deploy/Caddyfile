@@ -39,6 +39,7 @@
 		env THEME "{args[1]}"
 		env STATUS_LEVEL "{args[2]}"
 		env STAGING "{args[3]}"
+		env CACHE_SCOPE "{args[4]}"
 	}
 }
 
@@ -54,7 +55,7 @@
 https://dev-api.chialab.dt.bedita.cloud, https://api.chialab.dt.bedita.cloud, https://api.chialab.it {
 	import common
 
-	import site "BEdita/API" "" "off" "false"
+	import site "BEdita/API" "" "off" "false" "api"
 }
 
 # Chialab.it
@@ -62,7 +63,7 @@ https://dev-it.chialab.dt.bedita.cloud {
 	import common
 
 	import ./Caddyfile.d/redirects.it
-	import site "Chialab" "Chialab" "draft" "false"
+	import site "Chialab" "Chialab" "draft" "false" "dev"
 }
 https://chialab.it, https://it.chialab.dt.bedita.cloud {
 	header -Server
@@ -72,7 +73,7 @@ https://www.chialab.it {
 	import common
 
 	import ./Caddyfile.d/redirects.it
-	import site "Chialab" "Chialab" "on" "false"
+	import site "Chialab" "Chialab" "on" "false" "www"
 }
 https://staging-it.chialab.dt.bedita.cloud {
 	header -Server
@@ -82,7 +83,7 @@ https://staging.chialab.it {
 	import common
 
 	import ./Caddyfile.d/redirects.it
-	import site "Chialab" "Chialab" "draft" "true"
+	import site "Chialab" "Chialab" "draft" "true" "staging"
 }
 
 # Chialab.io
@@ -121,7 +122,7 @@ https://www.chialab.dev {
 https://dev-illustratorium.chialab.dt.bedita.cloud {
 	import common
 
-	import site "Chialab" "Illustratorium" "draft" "false"
+	import site "Chialab" "Illustratorium" "draft" "false" "devillustratorium"
 }
 https://illustratorium.it, https://illustratorium.chialab.it, https://illustratorium.chialab.dt.bedita.cloud {
 	header -Server
@@ -130,7 +131,7 @@ https://illustratorium.it, https://illustratorium.chialab.it, https://illustrato
 https://www.illustratorium.it {
 	import common
 
-	import site "Chialab" "Illustratorium" "on" "false"
+	import site "Chialab" "Illustratorium" "on" "false" "illustratorium"
 }
 https://staging-illustratorium.chialab.dt.bedita.cloud {
 	header -Server
@@ -139,7 +140,7 @@ https://staging-illustratorium.chialab.dt.bedita.cloud {
 https://staging.illustratorium.it {
 	import common
 
-	import site "Chialab" "Illustratorium" "draft" "true"
+	import site "Chialab" "Illustratorium" "draft" "true" "stagingillustratorium"
 }
 
 # TODO: Tipografia
