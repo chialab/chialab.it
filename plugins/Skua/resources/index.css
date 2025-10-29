@@ -1,0 +1,13 @@
+@import '@chialab/cdk/style';
+@import '@chialab/dna-map-scroller/style';
+
+body {
+    font-family: var(--font-sans);
+}
+
+dna-map-scroller {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}

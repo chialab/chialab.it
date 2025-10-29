@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22960524e1275e27c9a28019574b380a",
+    "content-hash": "57d8a577efcb62757d2511e56b1ff560",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -432,6 +432,65 @@
                 "source": "https://github.com/bedita/placeholders/tree/v2.0.1"
             },
             "time": "2023-12-20T15:31:50+00:00"
+        },
+        {
+            "name": "brick/geo",
+            "version": "0.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brick/geo.git",
+                "reference": "725789f7c090235e230b9a666acf59e0fc7f8e24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brick/geo/zipball/725789f7c090235e230b9a666acf59e0fc7f8e24",
+                "reference": "725789f7c090235e230b9a666acf59e0fc7f8e24",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "brick/reflection": "~0.2.0 || ~0.3.0 || ~0.4.0",
+                "ext-json": "*",
+                "ext-pdo": "*",
+                "ext-sqlite3": "*",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^8.0 || ^9.0",
+                "vimeo/psalm": "4.3.1"
+            },
+            "suggest": {
+                "ext-json": "To read and write GeoJSON"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brick\\Geo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "GIS geometry library",
+            "keywords": [
+                "brick",
+                "geo",
+                "geography",
+                "geometry",
+                "gis"
+            ],
+            "support": {
+                "issues": "https://github.com/brick/geo/issues",
+                "source": "https://github.com/brick/geo/tree/0.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/BenMorel",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-10-09T22:30:24+00:00"
         },
         {
             "name": "brick/math",
@@ -1028,6 +1087,48 @@
                 "source": "https://github.com/cakephp/twig-view"
             },
             "time": "2024-10-11T06:25:59+00:00"
+        },
+        {
+            "name": "chialab/cakephp-geometry",
+            "version": "v0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chialab/cakephp-geometry.git",
+                "reference": "d2c40db1c0ebf9d6e4fed6e2d24e3e2ed5636f4d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chialab/cakephp-geometry/zipball/d2c40db1c0ebf9d6e4fed6e2d24e3e2ed5636f4d",
+                "reference": "d2c40db1c0ebf9d6e4fed6e2d24e3e2ed5636f4d",
+                "shasum": ""
+            },
+            "require": {
+                "brick/geo": "^0.7.1",
+                "cakephp/cakephp": "^4.2",
+                "ext-json": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "^5.1",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Chialab\\Geometry\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A CakePHP plugin to add geometry type.",
+            "support": {
+                "issues": "https://github.com/chialab/cakephp-geometry/issues",
+                "source": "https://github.com/chialab/cakephp-geometry/tree/v0.4.1"
+            },
+            "time": "2025-03-19T11:43:12+00:00"
         },
         {
             "name": "chialab/frontend-kit",
@@ -8972,5 +9073,5 @@
         "ext-pdo": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.6.0"
 }
