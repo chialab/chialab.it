@@ -1,17 +1,29 @@
-<dna-map-scroller access-token={{mapboxToken}} area="0, 0, 0, 50%">
-    {% for child in children %}
-        <dna-map-scroller-step center={{Map.getLocationCoords(child)|default()}} zoom="12">
-            <div class="map-scroller-item bg-surface">
-                <h2>{{child.title}}</h2>
-                <div>{{child.body|raw}}</div>
-                {% if child.has_media is defined and child.has_media|length %}
-                    <dna-slideshow carousel controls cover>
-                        {% for media in child.has_media %}
-                            <img src="{{ media.media_url }}" alt="" />
-                        {% endfor %}
-                    </dna-slideshow>
-                {% endif %}
-            </div>
-        </dna-map-scroller-step>
-    {% endfor %}
-</dna-map-scroller>
+<main>
+    <dna-map-scroller access-token={{mapboxToken}} area="0, 0, 0, 0" data="{{Map.geoJSON(children)|json_encode}}">
+        {% for child in children %}
+            <dna-map-scroller-step class="mb-8" center="{{Map.getObjectCoords(child)|default()}}" zoom="12">
+                <div class="map-scroller-item bg-surface p-2 radius-0">
+                    <div class="index">{{ loop.index }}</div>
+                    <h2 class="title mt-0 mb-2">{{child.title}}</h2>
+                    {% if child.description|default() %}
+                        <div class="description">{{child.description|raw}}</div>
+                    {% endif %}
+                    {% if child.body|default(null) %}
+                        <div class="body">{{child.body|raw}}</div>
+                    {% endif %}
+                    {% if child.has_media is defined and child.has_media|length %}
+                        <dna-slideshow class="w-full mt-2" carousel controls cover controlslist="nodots noplayback">
+                            {% for media in child.has_media %}
+                                {% if media.type == 'videos' %}
+                                    <video class="w-full" src="{{ media.media_url }}" controls></video>
+                                {% elseif media.type == 'images' %}
+                                    <img class="w-full" src="{{ media.media_url }}" alt=""/>
+                                {% endif %}
+                            {% endfor %}
+                        </dna-slideshow>
+                    {% endif %}
+                </div>
+            </dna-map-scroller-step>
+        {% endfor %}
+    </dna-map-scroller>
+</main>
