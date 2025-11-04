@@ -29,7 +29,11 @@ const config = {
             entrypointsPath: 'plugins/OpenSource/webroot/build/entrypoints.json',
         },
         {
-            input: ['./plugins/Skua/resources/index.ts', './plugins/Skua/resources/index.css'],
+            input: [
+                './plugins/Skua/resources/index.ts',
+                './plugins/Skua/resources/mapscroller.ts',
+                './plugins/Skua/resources/index.css',
+            ],
             publicPath: '/Skua/build/',
             output: 'plugins/Skua/webroot/build/',
             manifestPath: 'plugins/Skua/webroot/build/manifest.json',

@@ -59,6 +59,7 @@ class MapHelper extends Helper
                 'properties' => [
                     'marker-symbol' => 'marker-skua',
                     'marker-anchor' => 'bottom',
+                    'marker-class' => 'marker-' . $object['id'],
                 ],
             ];
             $geom = $coords->getGeometry();

@@ -914,19 +914,19 @@
   dependencies:
     "@chialab/dna" "^4.4.0"
 
-"@chialab/dna-map-scroller@^4.0.0-beta.0":
-  version "4.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-map-scroller/-/dna-map-scroller-4.0.0-beta.9.tgz#4ca0fe5fd07494b66bbc84ec6148d848bba6cd05"
-  integrity sha512-eQ7minLEGS5Ayxtw35F++3xecScgXn6K+bdimrokev3pGZIeYS9zPWiNDCWGXcwItB4vRPg/eabn+WC9cCHSEQ==
+"@chialab/dna-map-scroller@^4.0.0-beta.10":
+  version "4.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-map-scroller/-/dna-map-scroller-4.0.0-beta.10.tgz#c5a9d26e4d7047da08832add342cb921ed0f4380"
+  integrity sha512-SI4mN7wGqC6QDFpIBx8FUko41dqpdTbK31lT3fOvmDXajPbEcpIQEG7p5eEARgqVG7u2XYMuxKumSb+uU4y5eQ==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-map" "^4.0.0-beta.15"
-    "@chialab/dna-story-scroller" "^4.0.0-beta.10"
+    "@chialab/dna-map" "^4.0.0-beta.18"
+    "@chialab/dna-story-scroller" "^4.0.0-beta.11"
 
-"@chialab/dna-map@^4.0.0-beta.15":
-  version "4.0.0-beta.17"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-map/-/dna-map-4.0.0-beta.17.tgz#b913df9e41a9c2836ef6057bb991147355b02437"
-  integrity sha512-Bedmrks02+ASjgL8Wd1MZiVMAI3UUoHz9pexcmVja4JxTq0qLpIl/U+fM45dgMHeV/JsbVFBD1gThdiigo+tMw==
+"@chialab/dna-map@^4.0.0-beta.18":
+  version "4.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-map/-/dna-map-4.0.0-beta.18.tgz#b14080dc4161b197fa3ae7bb0a91db5cf0c34438"
+  integrity sha512-d3J7qhngmhu6bF2I62R5wwy2oB991NgMiKZmxHJEgkF4otTC1KeMHwhjKZYbmAYkzy+5IG5W3vCfJhuwZAVcvw==
   dependencies:
     "@chialab/dna" "^4.4.0"
     "@chialab/dna-button" "^4.0.0-beta.21"
@@ -971,10 +971,10 @@
     "@chialab/dna-gallery" "^4.0.0-beta.17"
     "@chialab/dna-slides" "^4.0.0-beta.16"
 
-"@chialab/dna-story-scroller@^4.0.0-beta.10":
-  version "4.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-story-scroller/-/dna-story-scroller-4.0.0-beta.10.tgz#a3ee43d527de71e4dd0ff311dbd3a936b65ab2bc"
-  integrity sha512-n4vHr2wjAKRXbRZnk5VCluLQsMQs6q2WxikKYnSer7FHsKNIMshXItOcWtQfVOFkBE7Ndx8QKjXEP+y9SNpgXg==
+"@chialab/dna-story-scroller@^4.0.0-beta.11":
+  version "4.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-story-scroller/-/dna-story-scroller-4.0.0-beta.11.tgz#1cb6f744da0a9eb9ce81c0e246630e0bbff966d0"
+  integrity sha512-IE0R+dsu8EfWqlbr1PnqTUmH86VNy1Ae7xspgJIOIoQr00b89zMoHB22rR9jiIvDx1dOOWdQDGb7nrhOEAQ7pw==
   dependencies:
     "@chialab/dna" "^4.4.0"
 

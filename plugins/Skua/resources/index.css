@@ -1,6 +1,10 @@
 @import '@chialab/cdk/style';
 @import '@chialab/dna-map-scroller/style';
 
+:root {
+    --color-accent: #ff0000;
+}
+
 body {
     font-family: var(--font-sans);
 }
@@ -10,30 +14,42 @@ dna-map-scroller {
     flex-direction: column;
     width: 100%;
     height: 100vh;
-}
 
-dna-map-scroller-step {
-    width: 35vw;
-    filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
-}
+    [marker-symbol] {
+        fill: black;
 
-.map-scroller-item {
-    .index {
-        color: #ff0000;
+        &[data-current] {
+            fill: var(--color-accent);
+        }
     }
 
-    .index,
-    .title {
-        font-family: var(--font-mono);
-        font-size: var(--font-size-3);
-        font-weight: 500;
+    dna-story-scroller .story-scroller__contents {
+        flex: none;
     }
 
-    .description {
-        font-size: var(--font-size-2);
-    }
+    dna-map-scroller-step {
+        width: 35vw;
+        filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
 
-    .body {
-        font-size: var(--font-size-3);
+        .map-scroller-item {
+            .index {
+                color: var(--color-accent);
+            }
+
+            .index,
+            .title {
+                font-family: var(--font-mono);
+                font-size: var(--font-size-3);
+                font-weight: 500;
+            }
+
+            .description {
+                font-size: var(--font-size-2);
+            }
+
+            .body {
+                font-size: var(--font-size-3);
+            }
+        }
     }
 }

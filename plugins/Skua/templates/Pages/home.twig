@@ -1,15 +1,15 @@
 <main>
-    <dna-map-scroller access-token={{mapboxToken}} area="0, 0, 0, 0" data="{{Map.geoJSON(children)|json_encode}}">
+    <dna-map-scroller access-token={{ mapboxToken }} area="0, 0, 0, 0" data="{{ Map.geoJSON(children)|json_encode }}" tile="mapbox://styles/qwerg/cl1xmlqwl007w14mq0nzh2gae">
         {% for child in children %}
-            <dna-map-scroller-step class="mb-8" center="{{Map.getObjectCoords(child)|default()}}" zoom="12">
+            <dna-map-scroller-step data-id="{{ child.id }}" class="mb-8" center="{{ Map.getObjectCoords(child)|default() }}" zoom="8">
                 <div class="map-scroller-item bg-surface p-2 radius-0">
                     <div class="index">{{ loop.index }}</div>
-                    <h2 class="title mt-0 mb-2">{{child.title}}</h2>
+                    <h2 class="title mt-0 mb-2">{{ child.title }}</h2>
                     {% if child.description|default() %}
-                        <div class="description">{{child.description|raw}}</div>
+                        <div class="description">{{ child.description|raw }}</div>
                     {% endif %}
                     {% if child.body|default(null) %}
-                        <div class="body">{{child.body|raw}}</div>
+                        <div class="body">{{ child.body|raw }}</div>
                     {% endif %}
                     {% if child.has_media is defined and child.has_media|length %}
                         <dna-slideshow class="w-full mt-2" carousel controls cover controlslist="nodots noplayback">
@@ -27,3 +27,4 @@
         {% endfor %}
     </dna-map-scroller>
 </main>
+{{ Rna.script("#{_view.theme}.mapscroller", { block: true })|raw }}
