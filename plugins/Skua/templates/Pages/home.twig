@@ -1,18 +1,10 @@
 <main>
-    <dna-map-scroller access-token={{ mapboxToken }} area="0, 0, 0, 0" data="{{ Map.geoJSON(children)|json_encode }}" tile="mapbox://styles/qwerg/cl1xmlqwl007w14mq0nzh2gae">
+    <skua-map-scroller access-token={{ mapboxToken }} data="{{ Map.geoJSON(children)|json_encode }}" tile="mapbox://styles/qwerg/cl1xmlqwl007w14mq0nzh2gae">
         {% for child in children %}
             <dna-map-scroller-step data-id="{{ child.id }}" class="mb-8" center="{{ Map.getObjectCoords(child)|default() }}" zoom="8">
-                <div class="map-scroller-item bg-surface p-2 radius-0">
-                    <div class="index">{{ loop.index }}</div>
-                    <h2 class="title mt-0 mb-2">{{ child.title }}</h2>
-                    {% if child.description|default() %}
-                        <div class="description">{{ child.description|raw }}</div>
-                    {% endif %}
-                    {% if child.body|default(null) %}
-                        <div class="body">{{ child.body|raw }}</div>
-                    {% endif %}
+                <div class="map-scroller-item bg-surface radius-0">
                     {% if child.has_media is defined and child.has_media|length %}
-                        <dna-slideshow class="w-full mt-2" carousel controls cover controlslist="nodots noplayback">
+                        <dna-slideshow class="w-full mt-2" carousel controls cover controlslist="nodots noplayback nocounter">
                             {% for media in child.has_media %}
                                 {% if media.type == 'videos' %}
                                     <video class="w-full" src="{{ media.media_url }}" controls></video>
@@ -22,9 +14,19 @@
                             {% endfor %}
                         </dna-slideshow>
                     {% endif %}
+                    <div class="item-content p-2">
+                        <div class="index">{{ loop.index }}</div>
+                        <h2 class="title mt-0 mb-2">{{ child.title }}</h2>
+                        {% if child.description|default() %}
+                            <div class="description">{{ child.description|raw }}</div>
+                        {% endif %}
+                        {% if child.body|default(null) %}
+                            <div class="body">{{ child.body|raw }}</div>
+                        {% endif %}
+                    </div>
                 </div>
             </dna-map-scroller-step>
         {% endfor %}
-    </dna-map-scroller>
+    </skua-map-scroller>
 </main>
 {{ Rna.script("#{_view.theme}.mapscroller", { block: true })|raw }}

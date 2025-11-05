@@ -31,7 +31,7 @@ const config = {
         {
             input: [
                 './plugins/Skua/resources/index.ts',
-                './plugins/Skua/resources/mapscroller.ts',
+                './plugins/Skua/resources/mapscroller.tsx',
                 './plugins/Skua/resources/index.css',
             ],
             publicPath: '/Skua/build/',

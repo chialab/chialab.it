@@ -30,7 +30,7 @@ class MapHelper extends Helper
             return null;
         }
 
-        return implode(',', [number_format($geom->y(), 6, '.', ''), number_format($geom->x(), 6, '.', '')]);
+        return sprintf('%f,%f', $geom->y(), $geom->x());
     }
 
     /**
@@ -51,15 +51,13 @@ class MapHelper extends Helper
 
             $object['marker-symbol'] = 'marker-skua';
             $coords = Geometry::parse($object['coords']);
-            $geometry = json_encode($coords);
             $jsonObject['features'][] = [
-                'geometry' => json_decode($geometry, true),
                 'geometry' => $coords,
                 'type' => 'Feature',
                 'properties' => [
                     'marker-symbol' => 'marker-skua',
                     'marker-anchor' => 'bottom',
-                    'marker-class' => 'marker-' . $object['id'],
+                    'id' => $object['id'],
                 ],
             ];
             $geom = $coords->getGeometry();

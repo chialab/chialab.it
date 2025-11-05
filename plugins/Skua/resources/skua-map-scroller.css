@@ -1,0 +1,70 @@
+@import '@chialab/dna-map/style';
+@import '@chialab/dna-map-scroller/style';
+@import '@chialab/dna-story-scroller/style';
+
+skua-map-scroller {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+
+    .map-scroller__map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+
+        dna-map {
+            width: 100%;
+            height: 100%;
+
+            [marker-symbol] {
+                fill: black;
+
+                &.current {
+                    fill: var(--color-accent);
+                }
+            }
+        }
+    }
+
+    dna-story-scroller {
+        position: relative;
+        z-index: 2;
+        width: fit-content;
+        height: 100%;
+        overflow: auto;
+
+        .story-scroller__contents {
+            dna-map-scroller-step {
+                width: 35vw;
+                filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
+
+                .map-scroller-item {
+                    .index {
+                        color: var(--color-accent);
+                    }
+
+                    .index,
+                    .title {
+                        font-family: var(--font-mono);
+                        font-size: var(--font-size-3);
+                        font-weight: 500;
+                    }
+
+                    .description {
+                        font-size: var(--font-size-2);
+                    }
+
+                    .body {
+                        font-size: var(--font-size-3);
+                    }
+                }
+            }
+        }
+    }
+}
