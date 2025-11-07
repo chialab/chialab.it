@@ -11,17 +11,27 @@
       "essential": true,
       "memory": 128,
       "environment": [
-        {"name": "DEBUG", "value": "0"},
-        {"name": "APP_DEFAULT_LOCALE", "value": "it_IT"},
-        {"name": "APP_DEFAULT_TIMEZONE", "value": "Europe/Rome"},
-        {"name": "CACHE_REDIS_HOST", "value": "dev-redis.dreamteam.local"},
-        {"name": "BEDITA_API", "value": "https://dev-api.chialab.dt.bedita.cloud"},
-        {"name": "ALERT_TEXT", "value": "Ambiente di DEV"},
-        {"name": "ALERT_COLOR", "value": "#498fde"}
+        { "name": "DEBUG", "value": "0" },
+        { "name": "APP_DEFAULT_LOCALE", "value": "it_IT" },
+        { "name": "APP_DEFAULT_TIMEZONE", "value": "Europe/Rome" },
+        { "name": "CACHE_REDIS_HOST", "value": "dev-redis.dreamteam.local" },
+        { "name": "BEDITA_API", "value": "https://dev-api.chialab.dt.bedita.cloud" },
+        { "name": "ALERT_TEXT", "value": "Ambiente di DEV" },
+        { "name": "ALERT_COLOR", "value": "#498fde" }
       ],
       "secrets": [
-        {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-manager-chialab/security-salt"},
-        {"name": "BEDITA_API_KEY", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-manager-chialab/bedita-api-key"}
+        {
+          "name": "SECURITY_SALT",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-manager-chialab/security-salt"
+        },
+        {
+          "name": "BEDITA_API_KEY",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-manager-chialab/bedita-api-key"
+        },
+        {
+          "name": "MAPBOX_TOKEN",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-manager-chialab/mapbox-token"
+        }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",
@@ -38,9 +48,7 @@
       "image": "",
       "essential": true,
       "memory": 64,
-      "environment": [
-        {"name": "PHPFPM_HOST", "value": "app:9000"}
-      ],
+      "environment": [{ "name": "PHPFPM_HOST", "value": "app:9000" }],
       "portMappings": [
         {
           "containerPort": 443,

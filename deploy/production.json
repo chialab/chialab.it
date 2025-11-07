@@ -14,16 +14,29 @@
       "cpu": 512,
       "memory": 768,
       "environment": [
-        {"name": "CACHE_REDIS_HOST", "value": "prod-redis.dreamteam.local"},
-        {"name": "S3_BUCKET_NAME", "value": "prod-bedita-chialab-assets"},
-        {"name": "CDN_DISTRIBUTION_ID", "value": "E3Q2CJHCPGZBEU"},
-        {"name": "CDN_DISTRIBUTION_URL", "value": "https://d32x3x0le505gt.cloudfront.net"},
-        {"name": "MANAGER_URL", "value": "https://manage.chialab.it"}
+        { "name": "CACHE_REDIS_HOST", "value": "prod-redis.dreamteam.local" },
+        { "name": "S3_BUCKET_NAME", "value": "prod-bedita-chialab-assets" },
+        { "name": "CDN_DISTRIBUTION_ID", "value": "E3Q2CJHCPGZBEU" },
+        { "name": "CDN_DISTRIBUTION_URL", "value": "https://d32x3x0le505gt.cloudfront.net" },
+        { "name": "MANAGER_URL", "value": "https://manage.chialab.it" }
       ],
       "secrets": [
-        {"name": "DATABASE_URL", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/database-url"},
-        {"name": "DATABASE_IMPORT_URL", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/database-import-url"},
-        {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/security-salt"}
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/database-url"
+        },
+        {
+          "name": "DATABASE_IMPORT_URL",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/database-import-url"
+        },
+        {
+          "name": "SECURITY_SALT",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/security-salt"
+        },
+        {
+          "name": "MAPBOX_TOKEN",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/mapbox-token"
+        }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",

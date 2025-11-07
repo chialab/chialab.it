@@ -103,4 +103,13 @@ return [
      * Enable or disable staging site.
      */
     'StagingSite' => filter_var(env('STAGING', true), FILTER_VALIDATE_BOOLEAN),
+
+    /**
+     * Mapbox Token
+     */
+    'Maps' => [
+        'mapbox' => [
+            'token' => env('MAPBOX_TOKEN', 'pk.EXAMPLE'),
+        ],
+    ],
 ];

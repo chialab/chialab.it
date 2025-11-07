@@ -544,4 +544,13 @@ return [
     'Publish' => [
         'checkDate' => true,
     ],
+
+    /**
+     * Mapbox Token
+     */
+    'Maps' => [
+        'mapbox' => [
+            'token' => env('MAPBOX_TOKEN'),
+        ],
+    ],
 ];
