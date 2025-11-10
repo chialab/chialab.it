@@ -4,7 +4,7 @@
             <dna-map-scroller-step data-id="{{ child.id }}" center="{{ Map.getObjectCoords(child)|default() }}" zoom="10">
                 <div class="map-scroller-item bg-surface radius-0">
                     {% if child.has_media is defined and child.has_media|length %}
-                        <dna-slideshow class="w-full mt-2" carousel controls cover controlslist="nodots noplayback nocounter">
+                        <dna-slideshow class="w-full" carousel controls cover controlslist="nodots noplayback nocounter">
                             {% for media in child.has_media %}
                                 {% if media.type == 'videos' %}
                                     <video class="w-full" src="{{ media.media_url }}" controls></video>

@@ -48,34 +48,32 @@ skua-map-scroller {
         direction: rtl; /* per mettere la scrollbar a sinistra */
         text-align: left;
 
-        .story-scroller__contents {
-            dna-map-scroller-step {
-                width: 25vw;
-                margin-bottom: 35vh;
-                filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
+        .story-scroller__contents dna-map-scroller-step {
+            width: 40vw;
+            margin-bottom: 35vh;
+            filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
 
-                .map-scroller-item {
-                    .item-content {
-                        padding: calc(var(--padding) * 3.25) calc(var(--padding) * 6);
+            .map-scroller-item {
+                .item-content {
+                    padding: calc(var(--padding) * 3.25) calc(var(--padding) * 6);
 
-                        .index {
-                            color: var(--color-accent);
-                        }
+                    .index {
+                        color: var(--color-accent);
+                    }
 
-                        .index,
-                        .title {
-                            font-family: var(--font-mono);
-                            font-size: var(--font-size-3);
-                            font-weight: 500;
-                        }
+                    .index,
+                    .title {
+                        font-family: var(--font-mono);
+                        font-size: var(--font-size-3);
+                        font-weight: 500;
+                    }
 
-                        .description {
-                            font-size: var(--font-size-2);
-                        }
+                    .description {
+                        font-size: var(--font-size-2);
+                    }
 
-                        .body {
-                            font-size: var(--font-size-3);
-                        }
+                    .body {
+                        font-size: var(--font-size-3);
                     }
                 }
             }
