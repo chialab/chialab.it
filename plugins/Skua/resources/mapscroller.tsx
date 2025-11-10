@@ -161,6 +161,7 @@ export class SkuaMapScroller extends Component {
 
             this.updateMarkersIndex();
         });
+        this.mapElement.area = { top: 0, right: 0, bottom: 0, left: '40%' };
     }
 
     @listen('click', '[marker-symbol="marker-skua"]')
