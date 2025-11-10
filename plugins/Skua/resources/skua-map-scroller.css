@@ -4,8 +4,7 @@
 
 skua-map-scroller {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: block;
     width: 100%;
     height: 100vh;
     overflow: auto;
@@ -28,6 +27,14 @@ skua-map-scroller {
                 &.current {
                     fill: var(--color-accent);
                 }
+
+                text.marker-index {
+                    font-family: var(--font-mono);
+                    font-size: var(--font-size-3);
+                    font-weight: var(--weight-bold);
+                    fill: black;
+                    dominant-baseline: text-before-edge;
+                }
             }
         }
     }
@@ -38,30 +45,37 @@ skua-map-scroller {
         width: fit-content;
         height: 100%;
         overflow: auto;
+        direction: rtl; /* per mettere la scrollbar a sinistra */
+        text-align: left;
 
         .story-scroller__contents {
             dna-map-scroller-step {
-                width: 35vw;
+                width: 25vw;
+                margin-bottom: 35vh;
                 filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
 
                 .map-scroller-item {
-                    .index {
-                        color: var(--color-accent);
-                    }
+                    .item-content {
+                        padding: calc(var(--padding) * 3.25) calc(var(--padding) * 6);
 
-                    .index,
-                    .title {
-                        font-family: var(--font-mono);
-                        font-size: var(--font-size-3);
-                        font-weight: 500;
-                    }
+                        .index {
+                            color: var(--color-accent);
+                        }
 
-                    .description {
-                        font-size: var(--font-size-2);
-                    }
+                        .index,
+                        .title {
+                            font-family: var(--font-mono);
+                            font-size: var(--font-size-3);
+                            font-weight: 500;
+                        }
 
-                    .body {
-                        font-size: var(--font-size-3);
+                        .description {
+                            font-size: var(--font-size-2);
+                        }
+
+                        .body {
+                            font-size: var(--font-size-3);
+                        }
                     }
                 }
             }

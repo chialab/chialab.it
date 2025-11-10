@@ -1,7 +1,7 @@
 <main>
     <skua-map-scroller access-token={{ mapboxToken }} data="{{ Map.geoJSON(children)|json_encode }}" tile="mapbox://styles/qwerg/cl1xmlqwl007w14mq0nzh2gae">
         {% for child in children %}
-            <dna-map-scroller-step data-id="{{ child.id }}" class="mb-8" center="{{ Map.getObjectCoords(child)|default() }}" zoom="8">
+            <dna-map-scroller-step data-id="{{ child.id }}" center="{{ Map.getObjectCoords(child)|default() }}" zoom="10">
                 <div class="map-scroller-item bg-surface radius-0">
                     {% if child.has_media is defined and child.has_media|length %}
                         <dna-slideshow class="w-full mt-2" carousel controls cover controlslist="nodots noplayback nocounter">
@@ -14,7 +14,7 @@
                             {% endfor %}
                         </dna-slideshow>
                     {% endif %}
-                    <div class="item-content p-2">
+                    <div class="item-content">
                         <div class="index">{{ loop.index }}</div>
                         <h2 class="title mt-0 mb-2">{{ child.title }}</h2>
                         {% if child.description|default() %}

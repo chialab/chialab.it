@@ -34,6 +34,9 @@ export class SkuaMapScroller extends Component {
     @state()
     currentStep: MapScrollerStep | null = null;
 
+    /** Whether all markers have been processed to put the index number above the icon. */
+    private _allMarkersIndexed = false;
+
     /**
      * The interactive area of the map.
      * @returns The current area value.
@@ -111,19 +114,66 @@ export class SkuaMapScroller extends Component {
         );
     }
 
-    @listen('click', '.mapboxgl-marker')
+    /** Whether two points have the same coordinates within a small tolerance (1e-6). */
+    private isSamePoint(a: GeoJSON.Point['coordinates'], b: GeoJSON.Point['coordinates']): boolean {
+        return Math.abs(a[0] - b[0]) <= 1e-6 && Math.abs(a[1] - b[1]) <= 1e-6;
+    }
+
+    /** Add index numbers to markers based on their position in the data. */
+    private updateMarkersIndex() {
+        /*
+            `mapElement.markers` non dà l'elenco di tutti i marker ma solo quelli attualmente visibili sulla mappa quindi non si può
+            fare un semplice ciclo con indice.
+            Deduciamo l'indice dai dati passati a dna-map in `data` confrontando i `Point` con le coordinate del marker
+        */
+        const points = this.data?.features.filter(
+            (f): f is GeoJSON.Feature<GeoJSON.Point> => f.geometry.type === 'Point'
+        );
+        if (!points) {
+            return;
+        }
+
+        let processedMarkersCount = 0;
+        this.mapElement.markers.forEach((marker) => {
+            const markerElement = marker.getElement();
+            const markerCoords = marker.getLngLat();
+            const index = points.findIndex((feature) => {
+                const [lng, lat] = feature.geometry.coordinates;
+                return this.isSamePoint([lng, lat], [markerCoords.lng, markerCoords.lat]);
+            });
+            if (index && index >= 0) {
+                markerElement.querySelector('.marker-index')!.textContent = (index + 1).toString();
+                processedMarkersCount++;
+            }
+        });
+
+        if (processedMarkersCount === points.length) {
+            this._allMarkersIndexed = true;
+        }
+    }
+
+    @listen('load', 'dna-map')
+    private onMapLoad() {
+        this.mapElement.map.on('render', () => {
+            if (this._allMarkersIndexed) {
+                return;
+            }
+
+            this.updateMarkersIndex();
+        });
+    }
+
+    @listen('click', '[marker-symbol="marker-skua"]')
     private onMarkerClick(event: MouseEvent) {
-        const markerElement = (event.target as HTMLElement).closest('.mapboxgl-marker');
+        const markerElement = (event.target as HTMLElement).closest('[marker-symbol="marker-skua"]');
         const marker = this.mapElement.markers.find((marker) => marker.getElement() === markerElement);
         const markerCoords = marker?.getLngLat();
         if (markerCoords) {
             Array.from(this.querySelectorAll('dna-map-scroller-step'))
-                .find(
-                    (step) =>
-                        Math.abs(step.center.lng - markerCoords.lng) <= 1e-6 &&
-                        Math.abs(step.center.lat - markerCoords.lat) <= 1e-6
+                .find((step) =>
+                    this.isSamePoint([step.center.lng, step.center.lat], [markerCoords.lng, markerCoords.lat])
                 )
-                ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
@@ -150,17 +200,19 @@ export class SkuaMapScroller extends Component {
 
     @observe('currentStep')
     private onCurrentStepChange() {
-        if (this.currentStep) {
-            if (this.mapElement?.loaded) {
-                this.mapElement.updateCamera(this.currentStep.center, this.currentStep.zoom, this.currentStep.pitch);
-            } else {
-                this.mapElement.center = this.currentStep.center;
-                if (this.currentStep.zoom) {
-                    this.mapElement.zoom = this.currentStep.zoom;
-                }
-                if (this.currentStep.pitch) {
-                    this.mapElement.pitch = this.currentStep.pitch;
-                }
+        if (!this.currentStep) {
+            return;
+        }
+
+        if (this.mapElement?.loaded) {
+            this.mapElement.updateCamera(this.currentStep.center, this.currentStep.zoom, this.currentStep.pitch);
+        } else {
+            this.mapElement.center = this.currentStep.center;
+            if (this.currentStep.zoom) {
+                this.mapElement.zoom = this.currentStep.zoom;
+            }
+            if (this.currentStep.pitch) {
+                this.mapElement.pitch = this.currentStep.pitch;
             }
         }
     }

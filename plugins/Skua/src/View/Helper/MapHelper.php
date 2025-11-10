@@ -30,7 +30,7 @@ class MapHelper extends Helper
             return null;
         }
 
-        return sprintf('%f,%f', $geom->y(), $geom->x());
+        return sprintf('%.15f,%.15f', $geom->y(), $geom->x());
     }
 
     /**
