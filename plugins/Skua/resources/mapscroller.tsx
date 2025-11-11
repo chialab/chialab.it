@@ -1,4 +1,4 @@
-import { Component, customElement, listen, observe, property, state, Template } from '@chialab/dna';
+import { Component, customElement, listen, observe, property, state, type Template } from '@chialab/dna';
 import { Map as MapElement, type Area } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
 import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
@@ -191,7 +191,7 @@ export class SkuaMapScroller extends Component {
                 return;
             }
 
-            this.data.features.forEach((feature, index) => {
+            this.data.features.forEach((feature) => {
                 feature.properties!['marker-class'] =
                     feature.properties?.id == this.currentStep?.dataset.id ? 'current' : '';
             });
