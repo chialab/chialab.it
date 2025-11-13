@@ -1,8 +1,8 @@
 import { Component, customElement, listen, observe, property, state, type Template } from '@chialab/dna';
-import { Dialog } from '@chialab/dna-dialog';
 import { Map as MapElement, type Area } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
 import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
+import { AppDialog } from './app-dialog';
 
 @customElement('skua-map-scroller')
 export class SkuaMapScroller extends Component {
@@ -212,7 +212,7 @@ export class SkuaMapScroller extends Component {
         }
 
         const mediaItemParent = mediaItem.getAttribute('data-parent');
-        const dialog = document.querySelector(`dna-dialog[data-for="${mediaItemParent}"]`) as Dialog;
+        const dialog = document.querySelector(`app-dialog[data-for="${mediaItemParent}"]`) as AppDialog;
         if (!dialog) {
             return;
         }
@@ -224,7 +224,7 @@ export class SkuaMapScroller extends Component {
         }
 
         dialogSlideshow.current = stepSlideshow.current;
-        dialog?.show();
+        dialog.show();
     }
 
     @observe('currentStep')

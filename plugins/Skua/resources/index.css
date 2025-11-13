@@ -64,6 +64,31 @@ dna-dialog .dialog__container {
     width: 90vw;
 }
 
+dna-dialog .dialog__content {
+    position: relative;
+}
+
+dna-dialog .dialog__content .close-btn {
+    position: absolute;
+    top: var(--padding);
+    right: var(--padding);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-surface);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+dna-dialog .dialog__content .close-btn dna-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
 dna-dialog dna-slideshow {
     max-height: 100%;
 }
