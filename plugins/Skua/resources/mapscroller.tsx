@@ -1,4 +1,5 @@
 import { Component, customElement, listen, observe, property, state, type Template } from '@chialab/dna';
+import { Dialog } from '@chialab/dna-dialog';
 import { Map as MapElement, type Area } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
 import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
@@ -197,6 +198,33 @@ export class SkuaMapScroller extends Component {
             });
             this.data = { ...this.data };
         }
+    }
+
+    /**
+     * Opens the related dialog when an image inside a step's slideshow is clicked.
+     */
+    @listen('click', '.map-scroller-item > dna-slideshow img')
+    private onMediaItemClick(event: MouseEvent) {
+        const mediaItem = event.target as HTMLImageElement;
+        const mapScrollerItem = mediaItem?.closest('.map-scroller-item');
+        if (!mapScrollerItem) {
+            return;
+        }
+
+        const mediaItemParent = mediaItem.getAttribute('data-parent');
+        const dialog = document.querySelector(`dna-dialog[data-for="${mediaItemParent}"]`) as Dialog;
+        if (!dialog) {
+            return;
+        }
+
+        const dialogSlideshow = dialog.querySelector('dna-slideshow');
+        const stepSlideshow = mapScrollerItem.querySelector('dna-slideshow');
+        if (!stepSlideshow || !dialogSlideshow) {
+            return;
+        }
+
+        dialogSlideshow.current = stepSlideshow.current;
+        dialog?.show();
     }
 
     @observe('currentStep')

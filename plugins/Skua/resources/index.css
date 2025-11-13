@@ -50,3 +50,20 @@ body .topnav a strong {
 body .topnav a span {
     font-weight: var(--weight-light);
 }
+
+body .topnav + * {
+    margin-top: calc(4.5rem + var(--padding) * 4);
+}
+
+body main {
+    padding: calc(var(--padding) * 4);
+    padding-top: calc(var(--padding) * 2);
+}
+
+dna-dialog .dialog__container {
+    width: 90vw;
+}
+
+dna-dialog dna-slideshow {
+    max-height: 100%;
+}

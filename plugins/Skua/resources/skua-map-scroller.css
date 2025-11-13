@@ -1,6 +1,13 @@
-@import '@chialab/dna-map/style';
+@import '@chialab/dna-dialog/style';
 @import '@chialab/dna-map-scroller/style';
+@import '@chialab/dna-map/style';
 @import '@chialab/dna-story-scroller/style';
+@import '@chialab/dna-zoom-panel/style';
+
+.topnav + main.map-page {
+    margin: 0;
+    padding: 0;
+}
 
 skua-map-scroller {
     position: relative;
@@ -75,19 +82,16 @@ skua-map-scroller dna-story-scroller::-webkit-scrollbar-thumb:hover {
     filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
 }
 
+.story-scroller__contents dna-map-scroller-step .map-scroller-item > dna-slideshow img {
+    cursor: pointer;
+}
+
 .story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content {
     padding: calc(var(--padding) * 3.25) calc(var(--padding) * 6);
 }
 
 .story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .index {
     color: var(--color-accent);
-}
-
-.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .index,
-.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .title {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-3);
-    font-weight: 500;
 }
 
 .story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .description {
