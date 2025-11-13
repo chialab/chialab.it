@@ -45,6 +45,7 @@ COPY --from=npm /app/webroot/ /app/webroot/
 COPY --from=npm /app/plugins/Chialab/webroot/ /app/webroot/chialab/
 COPY --from=npm /app/plugins/Illustratorium/webroot/ /app/webroot/illustratorium/
 COPY --from=npm /app/plugins/OpenSource/webroot/ /app/webroot/open_source/
+COPY --from=npm /app/plugins/Skua/webroot/ /app/webroot/skua/
 
 ###
 # PHP final image
@@ -76,4 +77,5 @@ COPY --chown=www-data:www-data --from=npm /app/plugins/OpenSource/webroot/ /app/
 COPY --from=npm /app/plugins/Chialab/webroot/build/entrypoints.json /app/plugins/Chialab/webroot/build/entrypoints.json
 COPY --from=npm /app/plugins/Illustratorium/webroot/build/entrypoints.json /app/plugins/Illustratorium/webroot/build/entrypoints.json
 COPY --from=npm /app/plugins/OpenSource/webroot/build/entrypoints.json /app/plugins/OpenSource/webroot/build/entrypoints.json
+COPY --from=npm /app/plugins/Skua/webroot/build/entrypoints.json /app/plugins/Skua/webroot/build/entrypoints.json
 RUN composer run post-install-cmd --no-interaction

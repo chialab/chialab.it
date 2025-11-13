@@ -11,42 +11,42 @@
 
 body {
     font-family: var(--font-sans);
+}
 
-    .topnav {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 3;
-        width: fit-content;
-        padding-top: calc(var(--padding) * 3);
-        padding-left: calc(var(--padding) * 10.75);
+body .topnav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: fit-content;
+    padding-top: calc(var(--padding) * 3);
+    padding-left: calc(var(--padding) * 10.75);
+}
 
-        a {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            transition: color 0.3s ease;
+body .topnav a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: color 0.3s ease;
+}
 
-            svg {
-                position: absolute;
-                top: calc(var(--padding) * 4);
-                left: calc(var(--padding) * 4);
-                width: 107px;
-                height: 87px;
-            }
+body .topnav a svg {
+    position: absolute;
+    top: calc(var(--padding) * 4);
+    left: calc(var(--padding) * 4);
+    width: 107px;
+    height: 87px;
+}
 
-            span,
-            strong {
-                font-size: var(--font-size-7);
-            }
+body .topnav a span,
+body .topnav a strong {
+    font-size: var(--font-size-7);
+}
 
-            strong {
-                font-weight: var(--weight-bold);
-            }
+body .topnav a strong {
+    font-weight: var(--weight-bold);
+}
 
-            span {
-                font-weight: var(--weight-light);
-            }
-        }
-    }
+body .topnav a span {
+    font-weight: var(--weight-light);
 }

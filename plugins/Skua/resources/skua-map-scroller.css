@@ -8,94 +8,92 @@ skua-map-scroller {
     width: 100%;
     height: 100vh;
     overflow: auto;
+}
 
-    .map-scroller__map {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
+skua-map-scroller .map-scroller__map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
 
-        dna-map {
-            width: 100%;
-            height: 100%;
+skua-map-scroller .map-scroller__map dna-map {
+    width: 100%;
+    height: 100%;
+}
 
-            [marker-symbol] {
-                fill: black;
+skua-map-scroller .map-scroller__map dna-map [marker-symbol] {
+    fill: black;
+}
 
-                &.current {
-                    fill: var(--color-accent);
-                }
+skua-map-scroller .map-scroller__map dna-map [marker-symbol].current {
+    fill: var(--color-accent);
+}
 
-                text.marker-index {
-                    font-family: var(--font-mono);
-                    font-size: var(--font-size-3);
-                    font-weight: var(--weight-bold);
-                    fill: black;
-                    dominant-baseline: text-before-edge;
-                }
-            }
-        }
+skua-map-scroller .map-scroller__map dna-map [marker-symbol] text.marker-index {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-3);
+    font-weight: var(--weight-bold);
+    fill: black;
+    dominant-baseline: text-before-edge;
+}
+
+skua-map-scroller dna-story-scroller {
+    position: relative;
+    z-index: 2;
+    width: fit-content;
+    height: 100%;
+    overflow: auto;
+    direction: rtl; /* per mettere la scrollbar a sinistra */
+    text-align: left;
+}
+
+skua-map-scroller dna-story-scroller::-webkit-scrollbar {
+    width: 12px;
+    background: linear-gradient(to right, transparent 0 3px, #ddd 3px 9px, transparent 9px 12px);
+}
+
+skua-map-scroller dna-story-scroller::-webkit-scrollbar-thumb {
+    background-color: black;
+}
+
+skua-map-scroller dna-story-scroller::-webkit-scrollbar-thumb:hover {
+    background-color: #333;
+}
+
+@supports not selector(.z-scrollbar::-webkit-scrollbar-track) {
+    skua-map-scroller dna-story-scroller {
+        scrollbar-color: black transparent;
     }
+}
 
-    dna-story-scroller {
-        position: relative;
-        z-index: 2;
-        width: fit-content;
-        height: 100%;
-        overflow: auto;
-        direction: rtl; /* per mettere la scrollbar a sinistra */
-        text-align: left;
+.story-scroller__contents dna-map-scroller-step {
+    width: 40vw;
+    margin-bottom: 35vh;
+    filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
+}
 
-        &::-webkit-scrollbar {
-            width: 12px;
-            background: linear-gradient(to right, transparent 0 3px, #ddd 3px 9px, transparent 9px 12px);
-        }
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content {
+    padding: calc(var(--padding) * 3.25) calc(var(--padding) * 6);
+}
 
-        &::-webkit-scrollbar-thumb {
-            background-color: black;
-        }
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .index {
+    color: var(--color-accent);
+}
 
-        &::-webkit-scrollbar-thumb:hover {
-            background-color: #333;
-        }
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .index,
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .title {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-3);
+    font-weight: 500;
+}
 
-        @supports not selector(.z-scrollbar::-webkit-scrollbar-track) {
-            & {
-                scrollbar-color: black transparent;
-            }
-        }
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .description {
+    font-size: var(--font-size-2);
+}
 
-        .story-scroller__contents dna-map-scroller-step {
-            width: 40vw;
-            margin-bottom: 35vh;
-            filter: drop-shadow(0 16px 16px rgba(0, 0, 0, 0.25));
-
-            .map-scroller-item {
-                .item-content {
-                    padding: calc(var(--padding) * 3.25) calc(var(--padding) * 6);
-
-                    .index {
-                        color: var(--color-accent);
-                    }
-
-                    .index,
-                    .title {
-                        font-family: var(--font-mono);
-                        font-size: var(--font-size-3);
-                        font-weight: 500;
-                    }
-
-                    .description {
-                        font-size: var(--font-size-2);
-                    }
-
-                    .body {
-                        font-size: var(--font-size-3);
-                    }
-                }
-            }
-        }
-    }
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .body {
+    font-size: var(--font-size-3);
 }
