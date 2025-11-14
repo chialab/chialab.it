@@ -147,7 +147,7 @@ https://staging.illustratorium.it {
 https://dev-skua.chialab.dt.bedita.cloud {
 	import common
 
-	import site "Chialab" "Skua" "draft" "false" "devskua"
+	import site "Skua" "Skua" "draft" "false" "devskua"
 }
 https://skua.it, https://skua.chialab.dt.bedita.cloud {
 	header -Server
@@ -156,7 +156,7 @@ https://skua.it, https://skua.chialab.dt.bedita.cloud {
 https://www.skua.it {
 	import common
 
-	import site "Chialab" "Skua" "on" "false" "skua"
+	import site "Skua" "Skua" "on" "false" "skua"
 }
 https://staging-skua.chialab.dt.bedita.cloud {
 	header -Server
@@ -165,7 +165,7 @@ https://staging-skua.chialab.dt.bedita.cloud {
 https://staging.skua.it {
 	import common
 
-	import site "Chialab" "Skua" "draft" "true" "stagingskua"
+	import site "Skua" "Skua" "draft" "true" "stagingskua"
 }
 
 # TODO: Tipografia
