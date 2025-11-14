@@ -171,6 +171,10 @@ article header {
     text-transform: lowercase;
 }
 
+.medium {
+    font-weight: 500;
+}
+
 .text-underline {
     text-decoration: underline;
 }

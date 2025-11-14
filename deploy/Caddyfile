@@ -108,12 +108,12 @@ https://staging.chialab.io {
 	redir https://staging.chialab.it{uri} 308
 }
 
-# Chialab.dev
-https://chialab.dev {
+# chialab.dev, chialab.eu, chialab.info, chialab.net, chialab.srl
+https://chialab.dev, https://chialab.eu, https://chialab.info, https://chialab.net, https://chialab.srl {
 	header -Server
-	redir https://www.chialab.dev{uri} 308
+	redir https://www.{host}{uri} 308
 }
-https://www.chialab.dev {
+https://www.chialab.dev, https://www.chialab.eu, https://www.chialab.info, https://www.chialab.net, https://www.chialab.srl {
 	header -Server
 	redir https://www.chialab.it{uri}
 }
@@ -141,6 +141,31 @@ https://staging.illustratorium.it {
 	import common
 
 	import site "Chialab" "Illustratorium" "draft" "true" "stagingillustratorium"
+}
+
+# SKUA
+https://dev-skua.chialab.dt.bedita.cloud {
+	import common
+
+	import site "Skua" "Skua" "draft" "false" "devskua"
+}
+https://skua.it, https://skua.chialab.dt.bedita.cloud {
+	header -Server
+	redir https://www.skua.it{uri} 308
+}
+https://www.skua.it {
+	import common
+
+	import site "Skua" "Skua" "on" "false" "skua"
+}
+https://staging-skua.chialab.dt.bedita.cloud {
+	header -Server
+	redir https://staging.skua.it{uri} 308
+}
+https://staging.skua.it {
+	import common
+
+	import site "Skua" "Skua" "draft" "true" "stagingskua"
 }
 
 # TODO: Tipografia

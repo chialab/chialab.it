@@ -1,0 +1,94 @@
+@import '@chialab/cdk/style';
+@import 'skua-map-scroller.css';
+
+:root {
+    --color-accent: #ff0000;
+}
+
+*:focus-visible {
+    outline-color: black;
+}
+
+body {
+    font-family: var(--font-sans);
+}
+
+body .topnav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: fit-content;
+    padding-top: calc(var(--padding) * 3);
+    padding-left: calc(var(--padding) * 10.75);
+}
+
+body .topnav a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+body .topnav a svg {
+    position: absolute;
+    top: calc(var(--padding) * 4);
+    left: calc(var(--padding) * 4);
+    width: 107px;
+    height: 87px;
+}
+
+body .topnav a span,
+body .topnav a strong {
+    font-size: var(--font-size-7);
+}
+
+body .topnav a strong {
+    font-weight: var(--weight-bold);
+}
+
+body .topnav a span {
+    font-weight: var(--weight-light);
+}
+
+body .topnav + * {
+    margin-top: calc(4.5rem + var(--padding) * 4);
+}
+
+body main {
+    padding: calc(var(--padding) * 4);
+    padding-top: calc(var(--padding) * 2);
+}
+
+dna-dialog .dialog__container {
+    width: 90vw;
+}
+
+dna-dialog .dialog__content {
+    position: relative;
+}
+
+dna-dialog .dialog__content .close-btn {
+    position: absolute;
+    top: var(--padding);
+    right: var(--padding);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-surface);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+dna-dialog .dialog__content .close-btn dna-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+dna-dialog dna-slideshow {
+    max-height: 100%;
+}

@@ -14,16 +14,29 @@
       "cpu": 512,
       "memory": 768,
       "environment": [
-        {"name": "CACHE_REDIS_HOST", "value": "dev-redis.dreamteam.local"},
-        {"name": "S3_BUCKET_NAME", "value": "dev-bedita-chialab-assets"},
-        {"name": "CDN_DISTRIBUTION_ID", "value": "E16400QPVDJ8WM"},
-        {"name": "CDN_DISTRIBUTION_URL", "value": "https://da7liyf9y4drw.cloudfront.net"},
-        {"name": "MANAGER_URL", "value": "https://dev-manage.chialab.dt.bedita.cloud"}
+        { "name": "CACHE_REDIS_HOST", "value": "dev-redis.dreamteam.local" },
+        { "name": "S3_BUCKET_NAME", "value": "dev-bedita-chialab-assets" },
+        { "name": "CDN_DISTRIBUTION_ID", "value": "E16400QPVDJ8WM" },
+        { "name": "CDN_DISTRIBUTION_URL", "value": "https://da7liyf9y4drw.cloudfront.net" },
+        { "name": "MANAGER_URL", "value": "https://dev-manage.chialab.dt.bedita.cloud" }
       ],
       "secrets": [
-        {"name": "DATABASE_URL", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/database-url"},
-        {"name": "DATABASE_IMPORT_URL", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/database-import-url"},
-        {"name": "SECURITY_SALT", "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/security-salt"}
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/database-url"
+        },
+        {
+          "name": "DATABASE_IMPORT_URL",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/database-import-url"
+        },
+        {
+          "name": "SECURITY_SALT",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/security-salt"
+        },
+        {
+          "name": "MAPBOX_TOKEN",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/dev-bedita-chialab/mapbox-token"
+        }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",

@@ -1,0 +1,15 @@
+{
+  "name": "chialab/skua",
+  "description": "Skua plugin for CakePHP",
+  "type": "cakephp-plugin",
+  "license": "MIT",
+  "require": {
+    "cakephp/cakephp": "^4.0"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "Skua\\": "src/"
+    }
+  }
+}

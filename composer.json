@@ -19,6 +19,7 @@
     "cakephp/cakephp": "^4.0",
     "cakephp/migrations": "^3.0.0",
     "cakephp/plugin-installer": "^1.3",
+    "chialab/cakephp-geometry": "^0.4.1",
     "chialab/frontend-kit": "^3.4.0",
     "chialab/rna-cakephp": "^0.3.0",
     "mobiledetect/mobiledetectlib": "2.*"
@@ -42,7 +43,8 @@
       "App\\": "src/",
       "Chialab\\": "./plugins/Chialab/src/",
       "OpenSource\\": "./plugins/OpenSource/src/",
-      "Illustratorium\\": "plugins/Illustratorium/src/"
+      "Illustratorium\\": "plugins/Illustratorium/src/",
+      "Skua\\": "plugins/Skua/src/"
     }
   },
   "autoload-dev": {

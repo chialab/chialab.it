@@ -28,6 +28,18 @@ const config = {
             manifestPath: 'plugins/OpenSource/webroot/build/manifest.json',
             entrypointsPath: 'plugins/OpenSource/webroot/build/entrypoints.json',
         },
+        {
+            input: [
+                './plugins/Skua/resources/index.ts',
+                './plugins/Skua/resources/mapscroller.tsx',
+                './plugins/Skua/resources/app-dialog.tsx',
+                './plugins/Skua/resources/index.css',
+            ],
+            publicPath: '/skua/build/',
+            output: 'plugins/Skua/webroot/build/',
+            manifestPath: 'plugins/Skua/webroot/build/manifest.json',
+            entrypointsPath: 'plugins/Skua/webroot/build/entrypoints.json',
+        },
     ],
     clean: true,
     sourcemap: !isProduction,
