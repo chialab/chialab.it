@@ -3,6 +3,8 @@
 
 :root {
     --color-accent: #ff0000;
+    --color-neutral: #7f7f7f;
+    --map-scroller-steps-width: 40vw;
 }
 
 *:focus-visible {
@@ -15,12 +17,13 @@ body {
 
 body .topnav {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: calc(var(--padding) * 3);
+    left: calc(
+        var(--map-scroller-steps-width) + 24px + 24px + calc(var(--padding) * 2.5)
+    ); /* larghezza cards + scrollbar + padding + margin + distacco dagli steps */
     z-index: 3;
     width: fit-content;
-    padding-top: calc(var(--padding) * 3);
-    padding-left: calc(var(--padding) * 10.75);
+    padding-left: 53px;
 }
 
 body .topnav a {
@@ -32,8 +35,8 @@ body .topnav a {
 
 body .topnav a svg {
     position: absolute;
-    top: calc(var(--padding) * 4);
-    left: calc(var(--padding) * 4);
+    top: 6px;
+    left: 0;
     width: 107px;
     height: 87px;
 }
@@ -62,6 +65,7 @@ body main {
 
 dna-dialog .dialog__container {
     width: 90vw;
+    background: transparent;
 }
 
 dna-dialog .dialog__content {
@@ -91,4 +95,19 @@ dna-dialog .dialog__content .close-btn dna-icon {
 
 dna-dialog dna-slideshow {
     max-height: 100%;
+}
+
+dna-slideshow button[data-action] {
+    color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+dna-slideshow button[data-action]:hover svg path {
+    stroke: var(--color-neutral);
+}
+
+dna-slideshow button[data-action] dna-icon {
+    width: 2rem !important;
+    height: 2rem !important;
 }

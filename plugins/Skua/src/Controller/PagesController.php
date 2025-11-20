@@ -8,6 +8,7 @@ use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
+use Exception;
 
 /**
  * Pages Controller
@@ -25,16 +26,41 @@ class PagesController extends AppController
      */
     public function home(): void
     {
-        $loader = new ObjectsLoader(['objects' => ['include' => 'poster|1']]);
+        $loader = new ObjectsLoader();
         $root = $this->Publication->getPublication();
-        $children = $loader->loadObjects(['parent' => $root->uname], 'locations', [
-            'include' => 'has_media',
-        ], ['has_media' => 2]);
+        $journeys = $loader->loadObjects(['parent' => $root->uname], 'folders');
+        if ($journeys->isEmpty()) {
+            throw new Exception('No journeys found');
+        }
 
-        $mapboxToken = Configure::read('Maps.mapbox.token');
+        // rimando al primo viaggio dentro la root folder
+        $firstJourney = $journeys->firstOrFail();
+        $this->redirect(['_name' => 'pages:journey', 'uname' => $firstJourney->uname]);
+    }
 
+    /**
+     * Journey folder page.
+     *
+     * @param string $uname Journey folder uname.
+     * @return void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When journey is not found.
+     */
+    public function journey(string $uname): void
+    {
+        $loader = new ObjectsLoader();
+        $journey = $loader->loadObject($uname, 'folders');
+        if (!$journey) {
+            throw new RecordNotFoundException(sprintf("Journey folder %s not found", $uname));
+        }
+
+        $children = $loader->loadObjects(
+            ['parent' => $journey->uname],
+            'locations',
+            ['include' => 'has_media'],
+            ['has_media' => 2]
+        );
+        $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
         $this->viewBuilder()->addHelpers(['Skua.Map']);
-        $this->set(compact('mapboxToken'));
         $this->set('children', $children);
     }
 

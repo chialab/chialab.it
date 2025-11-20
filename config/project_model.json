@@ -114,7 +114,7 @@
       "singular": "location",
       "name": "locations",
       "description": "Location model with coords",
-      "associations": ["Categories", "Tags"],
+      "associations": ["Categories", "Tags", "DateRanges"],
       "hidden": null,
       "enabled": true,
       "translation_rules": null,
@@ -431,5 +431,40 @@
       "property": "string"
     }
   ],
-  "categories": []
+  "categories": [],
+  "config": [
+    {
+      "name": "Properties",
+      "application": "manager",
+      "context": "app",
+      "content": {
+        "locations": {
+          "fastCreate": {
+            "required": ["coords", "status"],
+            "all": [
+              "status",
+              "coords",
+              {
+                "title": "string"
+              },
+              "description"
+            ]
+          },
+          "index": ["title", "coords", "status"],
+          "view": {
+            "core": ["title", "description", "body", "coords"]
+          }
+        },
+        "documents": {
+          "view": {
+            "core": ["title", "description", "body"]
+          },
+          "fastCreate": {
+            "required": ["status", "title"],
+            "all": ["status", "title", "description", "body"]
+          }
+        }
+      }
+    }
+  ]
 }

@@ -32,9 +32,9 @@ return static function (RouteBuilder $routes): void {
                 );
 
                 $routes->connect(
-                    '/objects/{uname}',
-                    ['controller' => 'Pages', 'action' => 'object'],
-                    ['_name' => 'pages:objects', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class],
+                    '/{uname}',
+                    ['controller' => 'Pages', 'action' => 'journey'],
+                    ['_name' => 'pages:journey', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class],
                 );
 
                 $routes->connect(

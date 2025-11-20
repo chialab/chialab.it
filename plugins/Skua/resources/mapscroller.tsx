@@ -115,6 +115,24 @@ export class SkuaMapScroller extends Component {
         );
     }
 
+    /**
+     * @inheritdoc
+     * @internal
+     */
+    connectedCallback(): void {
+        super.connectedCallback();
+        // scroll allo step indicato nell'hash dell'url
+        const hash = window.location.hash.slice(1);
+        if (hash) {
+            const step = this.querySelector(`dna-map-scroller-step[data-uname="${hash}"]`);
+            if (step) {
+                setTimeout(() => {
+                    step.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 0);
+            }
+        }
+    }
+
     /** Whether two points have the same coordinates within a small tolerance (1e-6). */
     private isSamePoint(a: GeoJSON.Point['coordinates'], b: GeoJSON.Point['coordinates']): boolean {
         return Math.abs(a[0] - b[0]) <= 1e-6 && Math.abs(a[1] - b[1]) <= 1e-6;
@@ -194,7 +212,7 @@ export class SkuaMapScroller extends Component {
 
             this.data.features.forEach((feature) => {
                 feature.properties!['marker-class'] =
-                    feature.properties?.id == this.currentStep?.dataset.id ? 'current' : '';
+                    feature.properties?.uname == this.currentStep?.dataset.uname ? 'current' : '';
             });
             this.data = { ...this.data };
         }
@@ -203,7 +221,7 @@ export class SkuaMapScroller extends Component {
     /**
      * Opens the related dialog when an image inside a step's slideshow is clicked.
      */
-    @listen('click', '.map-scroller-item > dna-slideshow img')
+    @listen('click', '.map-scroller-item img')
     private onMediaItemClick(event: MouseEvent) {
         const mediaItem = event.target as HTMLImageElement;
         const mapScrollerItem = mediaItem?.closest('.map-scroller-item');
@@ -231,6 +249,12 @@ export class SkuaMapScroller extends Component {
     private onCurrentStepChange() {
         if (!this.currentStep) {
             return;
+        }
+
+        // aggiorno l'hash dell'url
+        const stepUname = this.currentStep.dataset.uname;
+        if (stepUname) {
+            history.replaceState(null, '', `#${stepUname}`);
         }
 
         if (this.mapElement?.loaded) {

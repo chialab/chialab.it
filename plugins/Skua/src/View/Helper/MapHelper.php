@@ -58,6 +58,7 @@ class MapHelper extends Helper
                     'marker-symbol' => 'marker-skua',
                     'marker-anchor' => 'bottom',
                     'id' => $object['id'],
+                    'uname' => $object['uname'],
                 ],
             ];
             $geom = $coords->getGeometry();
@@ -77,7 +78,7 @@ class MapHelper extends Helper
                     'type' => 'line',
                     'line-color' => '#ff0000',
                     'line-width' => 2,
-                    'line-dasharray' => [8, 8],
+                    'line-dasharray' => [4, 4],
                 ],
             ]
         ];
