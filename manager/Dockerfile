@@ -7,7 +7,7 @@ ARG NODE_VERSION=lts
 FROM --platform=$BUILDPLATFORM alpine:3 AS clone
 WORKDIR /app
 
-ARG BEDITA_MANAGER_REFSPEC=v5.12.1
+ARG BEDITA_MANAGER_REFSPEC=v5.17.2
 RUN apk add --no-cache git \
     && git clone --depth=1 --branch="${BEDITA_MANAGER_REFSPEC}" https://github.com/bedita/manager.git .
 
