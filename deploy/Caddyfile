@@ -5,6 +5,17 @@
 	default_sni chialab
 }
 
+(security-headers) {
+	header -Server
+	header -X-Powered-By
+	header X-Content-Type-Options nosniff
+	header X-Frame-Options SAMEORIGIN
+	header X-XSS-Protection "1; mode=block"
+	header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	header Referrer-Policy "strict-origin-when-cross-origin"
+	header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()"
+}
+
 (common) {
 	root * /app/webroot
 
@@ -12,7 +23,7 @@
 	push
 
 	header /build/* ?Cache-Control "public, max-age=604800, immutable"
-	header -Server
+	import security-headers
 
 	file_server {
 		hide .*
@@ -66,7 +77,7 @@ https://dev-it.chialab.dt.bedita.cloud {
 	import site "Chialab" "Chialab" "draft" "false" "dev"
 }
 https://chialab.it, https://it.chialab.dt.bedita.cloud {
-	header -Server
+	import security-headers
 	redir https://www.chialab.it{uri} 308
 }
 https://www.chialab.it {
@@ -76,7 +87,7 @@ https://www.chialab.it {
 	import site "Chialab" "Chialab" "on" "false" "www"
 }
 https://staging-it.chialab.dt.bedita.cloud {
-	header -Server
+	import security-headers
 	redir https://staging.chialab.it{uri} 308
 }
 https://staging.chialab.it {
@@ -92,29 +103,29 @@ https://dev-io.chialab.dt.bedita.cloud {
 	redir https://dev-it.chialab.dt.bedita.cloud{uri} 308
 }
 https://chialab.io, https://io.chialab.dt.bedita.cloud {
-	header -Server
+	import security-headers
 	redir https://www.chialab.io{uri} 308
 }
 https://www.chialab.io {
-	header -Server
+	import security-headers
 	redir https://www.chialab.it{uri} 308
 }
 https://staging-io.chialab.dt.bedita.cloud {
-	header -Server
+	import security-headers
 	redir https://staging.chialab.io{uri} 308
 }
 https://staging.chialab.io {
-	header -Server
+	import security-headers
 	redir https://staging.chialab.it{uri} 308
 }
 
 # chialab.dev, chialab.eu, chialab.info, chialab.net, chialab.srl
 https://chialab.dev, https://chialab.eu, https://chialab.info, https://chialab.net, https://chialab.srl {
-	header -Server
+	import security-headers
 	redir https://www.{host}{uri} 308
 }
 https://www.chialab.dev, https://www.chialab.eu, https://www.chialab.info, https://www.chialab.net, https://www.chialab.srl {
-	header -Server
+	import security-headers
 	redir https://www.chialab.it{uri}
 }
 
@@ -125,7 +136,7 @@ https://dev-illustratorium.chialab.dt.bedita.cloud {
 	import site "Chialab" "Illustratorium" "draft" "false" "devillustratorium"
 }
 https://illustratorium.it, https://illustratorium.chialab.it, https://illustratorium.chialab.dt.bedita.cloud {
-	header -Server
+	import security-headers
 	redir https://www.illustratorium.it{uri} 308
 }
 https://www.illustratorium.it {
@@ -134,7 +145,7 @@ https://www.illustratorium.it {
 	import site "Chialab" "Illustratorium" "on" "false" "illustratorium"
 }
 https://staging-illustratorium.chialab.dt.bedita.cloud {
-	header -Server
+	import security-headers
 	redir https://staging.illustratorium.it{uri} 308
 }
 https://staging.illustratorium.it {
@@ -150,7 +161,7 @@ https://dev-skua.chialab.dt.bedita.cloud {
 	import site "Skua" "Skua" "draft" "false" "devskua"
 }
 https://skua.it, https://skua.chialab.dt.bedita.cloud {
-	header -Server
+	import security-headers
 	redir https://www.skua.it{uri} 308
 }
 https://www.skua.it {
@@ -159,7 +170,7 @@ https://www.skua.it {
 	import site "Skua" "Skua" "on" "false" "skua"
 }
 https://staging-skua.chialab.dt.bedita.cloud {
-	header -Server
+	import security-headers
 	redir https://staging.skua.it{uri} 308
 }
 https://staging.skua.it {
