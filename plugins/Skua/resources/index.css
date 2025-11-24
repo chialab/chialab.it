@@ -1,5 +1,4 @@
 @import '@chialab/cdk/style';
-@import 'skua-map-scroller.css';
 
 :root {
     --color-accent: #ff0000;
@@ -18,32 +17,31 @@ body {
     font-family: var(--font-sans);
 }
 
-body .topnav {
-    --left-offset: calc(var(--map-scroller-left-offset) + var(--map-scroller-steps-width));
+.topnav {
     position: absolute;
     top: calc(var(--padding) * 3);
-    left: var(--left-offset);
+    left: 0;
     z-index: 3;
     width: 100%;
-    max-width: calc(100% - var(--left-offset));
-    padding-right: 48px;
-    padding-left: 53px;
+    padding: 0 48px 0 20px;
 }
 
-body .topnav nav {
+.topnav nav {
     display: flex;
     justify-content: space-between;
     gap: calc(var(--padding) * 2);
 }
 
-body .topnav a.logo {
+.topnav a.logo {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     height: fit-content;
+    padding-left: 53px;
 }
 
-body .topnav a.logo svg {
+.topnav a.logo svg {
     position: absolute;
     top: 6px;
     left: 0;
@@ -51,24 +49,27 @@ body .topnav a.logo svg {
     height: 87px;
 }
 
-body .topnav a.logo span,
-body .topnav a.logo strong {
+.topnav a.logo span,
+.topnav a.logo strong {
     font-size: var(--font-size-7);
 }
 
-body .topnav a.logo strong {
+.topnav a.logo strong {
     font-weight: var(--weight-bold);
 }
 
-body .topnav a.logo span {
+.topnav a.logo span {
     font-weight: var(--weight-light);
 }
+/*
+.topnav + * {
+    --topnav-height: calc(4.5rem + var(--padding) * 4);
 
-body .topnav + * {
-    margin-top: calc(4.5rem + var(--padding) * 4);
-}
+    max-height: calc(100vh - var(--topnav-height));
+    margin-top: var(--topnav-height);
+} */
 
-body .topnav .menu {
+.topnav .menu {
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -78,22 +79,35 @@ body .topnav .menu {
     background-color: white;
 }
 
-body .topnav .menu li {
+.topnav .menu li {
+    padding: var(--base) 0;
     border-top: 1px solid black;
 }
 
-body .topnav .menu li a {
+.topnav .menu li a {
     font-size: var(--font-size-4);
     font-weight: 700;
 }
 
-body .topnav .menu li a.active {
+.topnav .menu li a.tracking {
+    color: var(--color-neutral);
+}
+
+.topnav .menu li a.active {
     color: var(--color-accent);
 }
 
 body main {
-    padding: calc(var(--padding) * 4);
-    padding-top: calc(var(--padding) * 2);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+dna-map [marker-symbol] {
+    width: 2.5rem;
+    height: auto;
+    fill: black;
 }
 
 dna-dialog .dialog__container {

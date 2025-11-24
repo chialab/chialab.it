@@ -30,7 +30,7 @@
 
 {% set locations = children|filter(child => child.title|default(null) or child.body|default(null) or child.description|default(null)) %}
 
-<main class="map-page">
+<main class="journey-page">
     {% if locations|length > 0 %}
         <skua-map-scroller
             access-token={{ mapboxToken }}
@@ -69,3 +69,4 @@
 
 {{ Rna.script("#{_view.theme}.mapscroller", { block: true })|raw }}
 {{ Rna.script("#{_view.theme}.app-dialog", { block: true })|raw }}
+{{ Rna.css("#{_view.theme}.journey-page", { block: true })|raw }}

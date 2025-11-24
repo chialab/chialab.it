@@ -32,6 +32,12 @@ return static function (RouteBuilder $routes): void {
                 );
 
                 $routes->connect(
+                    '/tracking',
+                    ['controller' => 'Pages', 'action' => 'tracking'],
+                    ['_name' => 'pages:tracking', 'routeClass' => ObjectRoute::class],
+                );
+
+                $routes->connect(
                     '/{uname}',
                     ['controller' => 'Pages', 'action' => 'journey'],
                     ['_name' => 'pages:journey', 'pass' => ['uname'], 'routeClass' => ObjectRoute::class],

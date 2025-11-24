@@ -4,9 +4,12 @@
 @import '@chialab/dna-story-scroller/style';
 @import '@chialab/dna-zoom-panel/style';
 
-.topnav + main.map-page {
-    margin: 0;
-    padding: 0;
+.topnav {
+    --left-offset: calc(var(--map-scroller-left-offset) + var(--map-scroller-steps-width));
+
+    left: var(--left-offset) !important;
+    max-width: calc(100% - var(--left-offset)) !important;
+    padding-left: 0 !important;
 }
 
 skua-map-scroller {
@@ -31,12 +34,6 @@ skua-map-scroller .map-scroller__map {
 skua-map-scroller .map-scroller__map dna-map {
     width: 100%;
     height: 100%;
-}
-
-skua-map-scroller .map-scroller__map dna-map [marker-symbol] {
-    width: 2.5rem;
-    height: auto;
-    fill: black;
 }
 
 skua-map-scroller .map-scroller__map dna-map [marker-symbol].current {

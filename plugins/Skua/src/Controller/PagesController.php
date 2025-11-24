@@ -5,6 +5,7 @@ namespace Skua\Controller;
 
 use Cake\Core\Configure;
 use Cake\Datasource\Exception\RecordNotFoundException;
+use Cake\Http\Client;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
@@ -60,6 +61,47 @@ class PagesController extends AppController
         $this->viewBuilder()->addHelpers(['Skua.Map']);
         $this->set(compact('children'));
         $this->set('currentJourney', $journey);
+    }
+
+    /**
+     * Live SKUA tracking page.
+     *
+     * @return void
+     */
+    public function tracking(): void
+    {
+        $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
+        $this->viewBuilder()->addHelpers(['Skua.Map']);
+
+        // call live tracking
+        $http = new Client();
+        $response = $http->get('https://skua.le0m.net?ship=8178410', [], [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Basic bGUwbTpQYjdrVHFWamdZdWdnUDlIcmo3dmpuOUg='
+            ]
+        ]);
+        $response = $response->getJson(); // ['latitude' => ..., 'longitude' => ...]
+        $center = sprintf('%.15f,%.15f', $response['latitude'], $response['longitude']);
+
+        $data = [
+            'type' => 'FeatureCollection',
+            'features' => [
+                [
+                    'type' => 'Feature',
+                    'geometry' => [
+                        'type' => 'Point',
+                        'coordinates' => [$response['longitude'], $response['latitude']],
+                    ],
+                    'properties' => [
+                        'marker-symbol' => 'marker-skua',
+                        'marker-anchor' => 'bottom',
+                    ],
+                ],
+            ],
+        ];
+
+        $this->set(compact('data', 'center'));
     }
 
     /**

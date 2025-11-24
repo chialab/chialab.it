@@ -11,13 +11,22 @@
                     <li>
                         <a
                             href="{{ Url.build({'_name': 'pages:journey', 'uname': journey.uname}) }}"
-                            class="{% if currentJourney and journey.uname == currentJourney.uname %}active{% endif %}"
+                            class="{% if currentJourney is defined and journey.uname == currentJourney.uname %}active{% endif %}"
                             role="menuitem"
                         >
                         {{ journey.title|default(journey.uname) }}
                         </a>
                     </li>
                 {% endfor %}
+                <li>
+                    <a
+                        href="{{ Url.build({'_name': 'pages:tracking'}) }}"
+                        class="tracking {% if _view.getRequest().getPath() == '/tracking' %}active{% endif %}"
+                        role="menuitem"
+                    >
+                    Tracking
+                    </a>
+                </li>
             </ul>
         {% endif %}
     </nav>
