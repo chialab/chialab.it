@@ -49,8 +49,18 @@ class MapHelper extends Helper
                 continue;
             }
 
-            $object['marker-symbol'] = 'marker-skua';
             $coords = Geometry::parse($object['coords']);
+            $geom = $coords->getGeometry();
+            if ($geom instanceof Point) {
+                $lineCoords[] = [$geom->x(), $geom->y()];
+            }
+
+            // le location senza titolo, descrizione e body servono solo per la lineString e non devono creare marker
+            if (!$object['title'] && !$object['description'] && !$object['body']) {
+                continue;
+            }
+
+            $object['marker-symbol'] = 'marker-skua';
             $jsonObject['features'][] = [
                 'geometry' => $coords,
                 'type' => 'Feature',
@@ -61,10 +71,6 @@ class MapHelper extends Helper
                     'uname' => $object['uname'],
                 ],
             ];
-            $geom = $coords->getGeometry();
-            if ($geom instanceof Point) {
-                $lineCoords[] = [$geom->x(), $geom->y()];
-            }
         }
 
         $jsonObject['features'][] = [

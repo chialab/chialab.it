@@ -7,6 +7,7 @@ use App\Controller\AppController as BaseController;
 use Cake\Core\Configure;
 use Cake\Event\EventInterface;
 use Cake\I18n\I18n;
+use Chialab\FrontendKit\Model\ObjectsLoader;
 
 /**
  * App Controller.
@@ -21,6 +22,13 @@ use Cake\I18n\I18n;
  */
 class AppController extends BaseController
 {
+    /**
+     * Journeys list. The folders inside the root publication.
+     *
+     * @var array
+     */
+    public $journeys;
+
     /**
      * Initialization hook method.
      *
@@ -37,21 +45,12 @@ class AppController extends BaseController
         $locale = Configure::read('I18n.lang', I18n::getLocale());
 
         $this->loadComponent('Chialab/FrontendKit.Filters');
-        $this->loadComponent('Chialab/FrontendKit.Categories');
-        $this->loadComponent('Chialab/FrontendKit.Tags');
-        $this->loadComponent('Chialab/FrontendKit.Objects', [
-            'objectTypesConfig' => [
-                'objects' => ['include' => 'poster|1'],
-            ],
-            'autoHydrateAssociations' => [
-                'poster' => 2,
-            ],
-        ]);
+        $this->loadComponent('Chialab/FrontendKit.Objects');
         $this->loadComponent('Chialab/FrontendKit.Publication', [
             'publication' => Configure::read('RootFolder', 'skua'),
             'publicationLoader' => [
                 'objectTypesConfig' => [
-                    'folders' => ['include' => 'poster|1'],
+                    'folders' => ['include' => 'children'],
                 ],
             ],
             'cache' => sprintf('publication_%s', $locale),
@@ -71,8 +70,11 @@ class AppController extends BaseController
 
         $locales = Configure::read('I18n.locales', []);
         $locale = Configure::read('I18n.lang', I18n::getLocale());
+        $loader = new ObjectsLoader();
         $root = $this->Publication->getPublication();
+        $this->journeys = $loader->loadObjects(['parent' => $root->uname], 'folders')->toList();
 
+        $this->set('journeys', $this->journeys);
         $this->set(compact('locale', 'locales'));
     }
 }

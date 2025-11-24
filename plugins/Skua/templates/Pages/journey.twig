@@ -28,37 +28,39 @@
     {% endif %}
 {% endmacro %}
 
+{% set locations = children|filter(child => child.title|default(null) or child.body|default(null) or child.description|default(null)) %}
+
 <main class="map-page">
-    {% if children is defined and children|length > 0 %}
+    {% if locations|length > 0 %}
         <skua-map-scroller
             access-token={{ mapboxToken }}
             data="{{ Map.geoJSON(children)|json_encode|default('{}') }}"
             tile="mapbox://styles/qwerg/cmi4s3awf004601s3gie977fn/draft"
         >
-            {% for child in children %}
-                <dna-map-scroller-step id="{{ child.uname }}" data-uname="{{ child.uname }}" center="{{ Map.getObjectCoords(child)|default() }}" zoom="10">
+            {% for location in locations %}
+                <dna-map-scroller-step id="{{ location.uname }}" data-uname="{{ location.uname }}" center="{{ Map.getObjectCoords(location)|default() }}" zoom="10">
                     <div class="map-scroller-item bg-surface radius-0">
                         <div class="item-content">
                             <div class="index mono f-3 bold">{{ loop.index }}</div>
-                            <h2 class="title mono f-3 mt-0 mb-2 medium">{{ child.title }}</h2>
-                            {% if child.description|default() %}
-                                <div class="description">{{ child.description|raw }}</div>
+                            <h2 class="title mono f-3 mt-0 mb-2 medium">{{ location.title|default('') }}</h2>
+                            {% if location.description|default() %}
+                                <div class="description">{{ location.description|raw }}</div>
                             {% endif %}
-                            {% if child.body|default(null) %}
-                                <div class="body">{{ child.body|raw }}</div>
+                            {% if location.body|default(null) %}
+                                <div class="body">{{ location.body|raw }}</div>
                             {% endif %}
                         </div>
 
-                        {{ _self.renderMediaItems(child.has_media, child.uname) }}
+                        {{ _self.renderMediaItems(location.has_media, location.uname) }}
                     </div>
                 </dna-map-scroller-step>
             {% endfor %}
         </skua-map-scroller>
 
-        {% for child in children %}
-            {% if child.has_media is defined and child.has_media|length %}
-                <app-dialog data-for="{{ child.uname }}">
-                    {{ _self.renderMediaItems(child.has_media, true) }}
+        {% for location in locations %}
+            {% if location.has_media|default(null) and location.has_media|length > 0 %}
+                <app-dialog data-for="{{ location.uname }}">
+                    {{ _self.renderMediaItems(location.has_media, true) }}
                 </app-dialog>
             {% endif %}
         {% endfor %}

@@ -26,15 +26,12 @@ class PagesController extends AppController
      */
     public function home(): void
     {
-        $loader = new ObjectsLoader();
-        $root = $this->Publication->getPublication();
-        $journeys = $loader->loadObjects(['parent' => $root->uname], 'folders');
-        if ($journeys->isEmpty()) {
+        if (empty($this->journeys)) {
             throw new Exception('No journeys found');
         }
 
         // rimando al primo viaggio dentro la root folder
-        $firstJourney = $journeys->firstOrFail();
+        $firstJourney = $this->journeys[0];
         $this->redirect(['_name' => 'pages:journey', 'uname' => $firstJourney->uname]);
     }
 
@@ -61,7 +58,8 @@ class PagesController extends AppController
         );
         $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
         $this->viewBuilder()->addHelpers(['Skua.Map']);
-        $this->set('children', $children);
+        $this->set(compact('children'));
+        $this->set('currentJourney', $journey);
     }
 
     /**
