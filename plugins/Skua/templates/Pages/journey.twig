@@ -28,6 +28,7 @@
     {% endif %}
 {% endmacro %}
 
+{# filtro le location per le card, escludendo quelle solo per la lineString #}
 {% set locations = children|filter(child => child.title|default(null) or child.body|default(null) or child.description|default(null)) %}
 
 <main class="journey-page">
@@ -41,13 +42,16 @@
                 <dna-map-scroller-step id="{{ location.uname }}" data-uname="{{ location.uname }}" center="{{ Map.getObjectCoords(location)|default() }}" zoom="10">
                     <div class="map-scroller-item bg-surface radius-0">
                         <div class="item-content">
-                            <div class="index mono f-3 bold">{{ loop.index }}</div>
-                            <h2 class="title mono f-3 mt-0 mb-2 medium">{{ location.title|default('') }}</h2>
-                            {% if location.description|default() %}
-                                <div class="description">{{ location.description|raw }}</div>
+                            {% if loop.index == 1 %}
+                                <h1 class="journey-title f-7 medium mt-0">{{currentJourney.title}}</h1>
                             {% endif %}
-                            {% if location.body|default(null) %}
-                                <div class="body">{{ location.body|raw }}</div>
+                            <div class="index mono f-3 bold mb-1 ml-3">{{ loop.index }}</div>
+                            <h2 class="title f-4 mt-0 mb-2">{{ location.title|default('') }}</h2>
+                            {% if location.description|default() %}
+                                <div class="description">{{ Placeholders.template(location, 'description')|raw }}</div>
+                            {% endif %}
+                            {% if location.body|default() %}
+                                <div class="body">{{ Placeholders.template(location, 'body')|raw }}</div>
                             {% endif %}
                         </div>
 
@@ -58,7 +62,7 @@
         </skua-map-scroller>
 
         {% for location in locations %}
-            {% if location.has_media|default(null) and location.has_media|length > 0 %}
+            {% if location.has_media|default() and location.has_media|length > 0 %}
                 <app-dialog data-for="{{ location.uname }}">
                     {{ _self.renderMediaItems(location.has_media, true) }}
                 </app-dialog>

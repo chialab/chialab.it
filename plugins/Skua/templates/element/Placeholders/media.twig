@@ -1,0 +1,11 @@
+{% if object.type == 'videos' %}
+    <video class="w-full" src="{{ object.media_url }}" controls/>
+{% elseif object.type == 'images' %}
+    <img class="w-full" src="{{ object.media_url }}" alt="" role="button" data-parent="{{ parent.uname }}"/>
+{% endif %}
+
+<app-dialog data-for="{{ parent.uname }}">
+    <dna-zoom-panel>
+        <img class="w-full" src="{{ object.media_url }}" alt=""/>
+    </dna-zoom-panel>
+</app-dialog>

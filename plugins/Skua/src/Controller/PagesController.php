@@ -6,6 +6,7 @@ namespace Skua\Controller;
 use Cake\Core\Configure;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Client;
+use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
@@ -54,8 +55,8 @@ class PagesController extends AppController
         $children = $loader->loadObjects(
             ['parent' => $journey->uname],
             'locations',
-            ['include' => 'has_media'],
-            ['has_media' => 2]
+            ['include' => 'has_media,placeholder'],
+            ['has_media' => 2, 'placeholder' => 2]
         );
         $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
         $this->viewBuilder()->addHelpers(['Skua.Map']);
@@ -82,6 +83,10 @@ class PagesController extends AppController
             ]
         ]);
         $response = $response->getJson(); // ['latitude' => ..., 'longitude' => ...]
+        if (empty($response['latitude']) || empty($response['longitude'])) {
+            throw new NotFoundException('Unable to get live tracking data');
+        }
+
         $center = sprintf('%.15f,%.15f', $response['latitude'], $response['longitude']);
 
         $data = [

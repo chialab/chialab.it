@@ -21,7 +21,7 @@ body {
     position: absolute;
     top: calc(var(--padding) * 3);
     left: 0;
-    z-index: 3;
+    z-index: 2;
     width: 100%;
     padding: 0 48px 0 20px;
 }
@@ -61,13 +61,6 @@ body {
 .topnav a.logo span {
     font-weight: var(--weight-light);
 }
-/*
-.topnav + * {
-    --topnav-height: calc(4.5rem + var(--padding) * 4);
-
-    max-height: calc(100vh - var(--topnav-height));
-    margin-top: var(--topnav-height);
-} */
 
 .topnav .menu {
     display: flex;

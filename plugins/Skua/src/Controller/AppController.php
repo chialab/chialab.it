@@ -27,7 +27,7 @@ class AppController extends BaseController
      *
      * @var array
      */
-    public $journeys;
+    public array $journeys;
 
     /**
      * Initialization hook method.
@@ -55,6 +55,11 @@ class AppController extends BaseController
             ],
             'cache' => sprintf('publication_%s', $locale),
         ]);
+        $loader = new ObjectsLoader();
+        $root = $this->Publication->getPublication();
+        $this->journeys = $loader->loadObjects(['parent' => $root->uname], 'folders')->toList();
+
+        $this->set('journeys', $this->journeys);
 
         if (Configure::read('StagingSite')) {
             $this->loadComponent('Chialab/FrontendKit.Staging');
@@ -70,11 +75,7 @@ class AppController extends BaseController
 
         $locales = Configure::read('I18n.locales', []);
         $locale = Configure::read('I18n.lang', I18n::getLocale());
-        $loader = new ObjectsLoader();
-        $root = $this->Publication->getPublication();
-        $this->journeys = $loader->loadObjects(['parent' => $root->uname], 'folders')->toList();
 
-        $this->set('journeys', $this->journeys);
         $this->set(compact('locale', 'locales'));
     }
 }

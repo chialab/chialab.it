@@ -104,6 +104,7 @@ export class SkuaMapScroller extends Component {
                         area={this.area}
                         data={this.data}
                         controls
+                        minZoom={5}
                     />
                 </div>
                 <dna-story-scroller
@@ -221,7 +222,7 @@ export class SkuaMapScroller extends Component {
     /**
      * Opens the related dialog when an image inside a step's slideshow is clicked.
      */
-    @listen('click', '.map-scroller-item img')
+    @listen('click', '.map-scroller-item img[role="button"]')
     private onMediaItemClick(event: MouseEvent) {
         const mediaItem = event.target as HTMLImageElement;
         const mapScrollerItem = mediaItem?.closest('.map-scroller-item');
@@ -237,11 +238,10 @@ export class SkuaMapScroller extends Component {
 
         const dialogSlideshow = dialog.querySelector('dna-slideshow');
         const stepSlideshow = mapScrollerItem.querySelector('dna-slideshow');
-        if (!stepSlideshow || !dialogSlideshow) {
-            return;
+        if (stepSlideshow && dialogSlideshow) {
+            dialogSlideshow.current = stepSlideshow.current;
         }
 
-        dialogSlideshow.current = stepSlideshow.current;
         dialog.show();
     }
 
