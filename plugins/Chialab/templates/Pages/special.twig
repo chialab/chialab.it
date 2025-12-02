@@ -31,15 +31,18 @@
                                         {{ item.get('description')|raw }}
                                     </div>
                                 {% endif %}
-                                <dna-slideshow class="w-full" controls carousel controlslist="noplayback nodots" autoplay="5000">
-                                    {% for slide in item.has_media %}
-                                        <div class="w-full slideshow-item">
-                                            {% if Poster.exists(slide) %}
-                                                <img class="w-full {{ Poster.position(slide) }}" alt="{{ slide.title|striptags|raw|escape('html_attr') }}" src="{{ Poster.url(slide) }}"/>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
-                                </dna-slideshow>
+                                {{ cell('Chialab.Gallery', {
+                                    object: item,
+                                    props: {
+                                        defaultLayout: 'slideshow',
+                                        showTitle: false,
+                                        showDescription: false,
+                                    },
+                                }, {
+                                    cache: {
+                                        key: 'gallery_' ~ locale ~ '_' ~ item.id ~ '_defaultLayout:slideshow_showTitle:false_showDescription:false',
+                                    }
+                                }) }}
                                 {# We should model the old BE3 text multimedia as the body of the whole gallery, as it it does not change from slide to slide #}
                                 {% if item.get('body') is not empty %}
                                     <div class="mt-2 serif light italic f-4">
