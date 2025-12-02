@@ -19,7 +19,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 use Cake\Routing\Route\DashedRoute;
-use Cake\Routing\Router;
+use Cake\Routing\RouteBuilder;
 
 /*
  * The default class to use for all routes
@@ -42,16 +42,13 @@ use Cake\Routing\Router;
  * constructor in your `src/Application.php` file to change this behavior.
  *
  */
-Router::defaultRouteClass(DashedRoute::class);
+return static function (RouteBuilder $routes): void {
+    $routes->setRouteClass(DashedRoute::class);
 
-/*
- * If you need a different set of middleware or none at all,
- * open new scope and define routes there.
- *
- * ```
- * Router::scope('/api', function (RouteBuilder $routes) {
- *     // No $routes->applyMiddleware() here.
- *     // Connect API actions here.
- * });
- * ```
- */
+    $routes->scope('/_staging', function (RouteBuilder $builder) {
+        $builder->connect('/clear-cache', [
+            'controller' => 'Staging',
+            'action' => 'clearCache',
+        ], ['_name' => 'staging:clearCache']);
+    });
+};

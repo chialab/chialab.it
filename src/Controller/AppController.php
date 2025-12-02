@@ -10,12 +10,6 @@ use Cake\Event\EventInterface;
 /**
  * Application Controller
  *
- * @property \Chialab\FrontendKit\Controller\Component\FiltersComponent $Filters
- * @property \Chialab\FrontendKit\Controller\Component\CategoriesComponent $Categories
- * @property \Chialab\FrontendKit\Controller\Component\TagsComponent $Tags
- * @property \Chialab\FrontendKit\Controller\Component\ObjectsComponent $Objects
- * @property \Chialab\FrontendKit\Controller\Component\PublicationComponent $Publication
- * @property \Chialab\FrontendKit\Controller\Component\MenuComponent $Menu
  * @property \Chialab\FrontendKit\Controller\Component\StagingComponent $Staging
  */
 class AppController extends Controller
@@ -37,6 +31,10 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
+
+        if (Configure::read('StagingSite')) {
+            $this->loadComponent('Chialab/FrontendKit.Staging');
+        }
     }
 
     /**

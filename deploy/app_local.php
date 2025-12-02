@@ -75,7 +75,7 @@ return [
                 'className' => RedisEngine::class,
                 'host' => env('CACHE_REDIS_HOST', null),
                 'port' => env('CACHE_REDIS_PORT', 6379),
-                'database' => 1,
+                'database' => 0,
                 'prefix' => 'bedita_object_types_',
             ],
             'prefix' => 'bedita_object_types_',
@@ -97,7 +97,7 @@ return [
             'className' => RedisEngine::class,
             'host' => env('CACHE_REDIS_HOST', null),
             'port' => env('CACHE_REDIS_PORT', 6379),
-            'database' => 2,
+            'database' => 0,
             'prefix' => 'cake_model_',
             'serialize' => true,
             'duration' => '+1 years',
@@ -118,6 +118,13 @@ return [
             'path' => CACHE . 'twigView/',
             'serialize' => true,
             'duration' => '+1 year',
+        ],
+
+        '_clear_cache_' => [
+            'className' => RedisEngine::class,
+            'host' => env('CACHE_REDIS_HOST', null),
+            'port' => env('CACHE_REDIS_PORT', 6379),
+            'database' => 0,
         ],
     ],
 

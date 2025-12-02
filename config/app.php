@@ -182,6 +182,13 @@ return [
             'serialize' => true,
             'duration' => '+1 year',
         ],
+
+        '_clear_cache_' => [
+            'className' => FileEngine::class,
+            'path' => CACHE,
+            'serialize' => true,
+            'duration' => '+1 year',
+        ],
     ],
 
     /*

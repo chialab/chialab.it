@@ -62,10 +62,6 @@ class AppController extends BaseController
             ],
             'cache' => sprintf('publication_%s', $locale),
         ]);
-
-        if (Configure::read('StagingSite')) {
-            $this->loadComponent('Chialab/FrontendKit.Staging');
-        }
     }
 
     /**
