@@ -1,9 +1,15 @@
-<main>
-    {{ Form.create(null)|raw }}
-        {{ Form.label('usarname', __('Username'), { class: 'bold' })|raw }}
-        {{ Form.input('username', { type: 'text' })|raw }}
-        {{ Form.label('usarname', __('Password'), { class: 'bold' })|raw }}
-        {{ Form.input('password', { type: 'password' })|raw }}
-        <button type="submit">{{ __('log in')|capitalize|raw }}</button>
+<main class="sans">
+    {{ Form.create(null, {
+        class: 'column gap-s',
+    })|raw }}
+        <div class="field">
+            {{ Form.label('usarname', __('Username'), { class: 'bold' })|raw }}
+            {{ Form.input('username', { type: 'text', class: 'f-2' })|raw }}
+        </div>
+        <div class="field">
+            {{ Form.label('usarname', __('Password'), { class: 'bold' })|raw }}
+            {{ Form.input('password', { type: 'password', class: 'f-2' })|raw }}
+        </div>
+        <button is="dna-button" variant="primary" type="submit">{{ __('log in')|capitalize|raw }}</button>
     {{ Form.end()|raw }}
 </main>
