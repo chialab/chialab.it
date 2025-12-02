@@ -1,10 +1,11 @@
 @import '@chialab/cdk/style';
-@import 'skua-map-scroller.css';
 
 :root {
     --color-accent: #ff0000;
-    --color-neutral: #7f7f7f;
+    --color-neutral: #797676;
     --map-scroller-steps-width: 40vw;
+    --map-scroller-right-padding: 30px;
+    --map-scroller-left-offset: calc(24px + 12px + 12px); /* scrollbar + padding-left + margin-left */
 }
 
 *:focus-visible {
@@ -15,25 +16,31 @@ body {
     font-family: var(--font-sans);
 }
 
-body .topnav {
+.topnav {
     position: absolute;
     top: calc(var(--padding) * 3);
-    left: calc(
-        var(--map-scroller-steps-width) + 24px + 24px + calc(var(--padding) * 2.5)
-    ); /* larghezza cards + scrollbar + padding + margin + distacco dagli steps */
+    left: 0;
     z-index: 3;
-    width: fit-content;
-    padding-left: 53px;
+    width: 100%;
+    padding: 0 48px 0 20px;
 }
 
-body .topnav a {
+.topnav nav {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--padding) * 2);
+}
+
+.topnav a.logo {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    transition: color 0.3s ease;
+    height: fit-content;
+    padding-left: 53px;
 }
 
-body .topnav a svg {
+.topnav a.logo svg {
     position: absolute;
     top: 6px;
     left: 0;
@@ -41,26 +48,65 @@ body .topnav a svg {
     height: 87px;
 }
 
-body .topnav a span,
-body .topnav a strong {
+.topnav a.logo span,
+.topnav a.logo strong {
     font-size: var(--font-size-7);
 }
 
-body .topnav a strong {
+.topnav a.logo strong {
     font-weight: var(--weight-bold);
 }
 
-body .topnav a span {
+.topnav a.logo span {
     font-weight: var(--weight-light);
 }
 
-body .topnav + * {
-    margin-top: calc(4.5rem + var(--padding) * 4);
+.topnav .menu {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: calc(var(--padding) * 2);
+    padding-top: calc(var(--padding) * 4);
+    list-style: none;
+    background-color: white;
+}
+
+.topnav .menu li {
+    padding: var(--base) 0;
+    border-top: 1px solid black;
+}
+
+.topnav .menu li a {
+    font-size: var(--font-size-4);
+    font-weight: 700;
+}
+
+.topnav .menu li a.tracking {
+    color: var(--color-neutral);
+}
+
+.topnav .menu li a.active {
+    color: var(--color-accent);
 }
 
 body main {
-    padding: calc(var(--padding) * 4);
-    padding-top: calc(var(--padding) * 2);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+dna-map [marker-symbol] {
+    fill: black;
+}
+
+dna-map [marker-symbol='marker-skua'] {
+    width: 2.5rem;
+    height: auto;
+}
+
+dna-map [marker-symbol='marker-point'] {
+    overflow: visible;
 }
 
 dna-dialog .dialog__container {

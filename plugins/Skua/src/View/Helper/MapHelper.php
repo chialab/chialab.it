@@ -49,22 +49,31 @@ class MapHelper extends Helper
                 continue;
             }
 
-            $object['marker-symbol'] = 'marker-skua';
             $coords = Geometry::parse($object['coords']);
-            $jsonObject['features'][] = [
-                'geometry' => $coords,
-                'type' => 'Feature',
-                'properties' => [
-                    'marker-symbol' => 'marker-skua',
-                    'marker-anchor' => 'bottom',
-                    'id' => $object['id'],
-                    'uname' => $object['uname'],
-                ],
-            ];
             $geom = $coords->getGeometry();
             if ($geom instanceof Point) {
                 $lineCoords[] = [$geom->x(), $geom->y()];
             }
+
+            // le location senza titolo, descrizione e body servono solo per la lineString e non devono creare marker
+            if (!$object['title'] && !$object['description'] && !$object['body']) {
+                continue;
+            }
+
+            // $object['marker-symbol'] = 'marker-skua';
+            $object['marker-symbol'] = 'marker-point';
+            $jsonObject['features'][] = [
+                'geometry' => $coords,
+                'type' => 'Feature',
+                'properties' => [
+                    'marker-symbol' => 'marker-point',
+                    // 'marker-symbol' => 'marker-skua',
+                    // 'marker-anchor' => 'bottom',
+                    'marker-anchor' => 'center',
+                    'id' => $object['id'],
+                    'uname' => $object['uname'],
+                ],
+            ];
         }
 
         $jsonObject['features'][] = [
@@ -78,7 +87,7 @@ class MapHelper extends Helper
                     'type' => 'line',
                     'line-color' => '#ff0000',
                     'line-width' => 2,
-                    'line-dasharray' => [4, 4],
+                    // 'line-dasharray' => [4, 4],
                 ],
             ]
         ];

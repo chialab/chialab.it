@@ -1,0 +1,12 @@
+<main class="tracking-page">
+    <dna-map
+        center="{{ center|default('') }}"
+        data="{{ data|default('{}')|json_encode }}"
+        access-token={{ mapboxToken }}
+        tile="mapbox://styles/qwerg/cmi4s3awf004601s3gie977fn/draft"
+        zoom="10"
+        controls
+    />
+</main>
+
+{{ Rna.css("#{_view.theme}.tracking-page", { block: true })|raw }}

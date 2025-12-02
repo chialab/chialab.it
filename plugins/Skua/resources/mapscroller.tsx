@@ -1,4 +1,4 @@
-import { Component, customElement, listen, observe, property, state, type Template } from '@chialab/dna';
+import { Component, customElement, listen, observe, property, render, state, type Template } from '@chialab/dna';
 import { Map as MapElement, type Area } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
 import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
@@ -89,6 +89,9 @@ export class SkuaMapScroller extends Component {
      */
     readonly storyScrollerElement: StoryScroller = new StoryScroller();
 
+    /** The resize handle element. */
+    readonly resizeHandle: HTMLButtonElement = document.createElement('button');
+
     /**
      * @inheritdoc
      * @internal
@@ -104,6 +107,7 @@ export class SkuaMapScroller extends Component {
                         area={this.area}
                         data={this.data}
                         controls
+                        minZoom={5}
                     />
                 </div>
                 <dna-story-scroller
@@ -111,6 +115,17 @@ export class SkuaMapScroller extends Component {
                     class="map-scroller__stories">
                     <slot />
                 </dna-story-scroller>
+                <button
+                    class="resize-handle"
+                    aria-label="Clicca e trascina per ridimensionare il pannello di testo"
+                    ref={this.resizeHandle}>
+                    <dna-icon
+                        name="arrow-previous-full"
+                        class="resize-handle__bar"></dna-icon>
+                    <dna-icon
+                        name="arrow-next-full"
+                        class="resize-handle__bar"></dna-icon>
+                </button>
             </>
         );
     }
@@ -154,14 +169,19 @@ export class SkuaMapScroller extends Component {
 
         let processedMarkersCount = 0;
         this.mapElement.markers.forEach((marker) => {
-            const markerElement = marker.getElement();
+            const markerElement = marker.getElement() as HTMLElement;
             const markerCoords = marker.getLngLat();
             const index = points.findIndex((feature) => {
                 const [lng, lat] = feature.geometry.coordinates;
                 return this.isSamePoint([lng, lat], [markerCoords.lng, markerCoords.lat]);
             });
             if (index && index >= 0) {
-                markerElement.querySelector('.marker-index')!.textContent = (index + 1).toString();
+                let indexElement = markerElement.querySelector('.marker-index');
+                if (!indexElement) {
+                    return;
+                }
+
+                indexElement.textContent = (index + 1).toString();
                 processedMarkersCount++;
             }
         });
@@ -183,9 +203,9 @@ export class SkuaMapScroller extends Component {
         this.mapElement.area = { top: 0, right: 0, bottom: 0, left: '40%' };
     }
 
-    @listen('click', '[marker-symbol="marker-skua"]')
+    @listen('click', '[marker-symbol]')
     private onMarkerClick(event: MouseEvent) {
-        const markerElement = (event.target as HTMLElement).closest('[marker-symbol="marker-skua"]');
+        const markerElement = (event.target as HTMLElement).closest('[marker-symbol]');
         const marker = this.mapElement.markers.find((marker) => marker.getElement() === markerElement);
         const markerCoords = marker?.getLngLat();
         if (markerCoords) {
@@ -221,29 +241,49 @@ export class SkuaMapScroller extends Component {
     /**
      * Opens the related dialog when an image inside a step's slideshow is clicked.
      */
-    @listen('click', '.map-scroller-item img')
+    @listen('click', '.map-scroller-item img[role="button"]')
     private onMediaItemClick(event: MouseEvent) {
         const mediaItem = event.target as HTMLImageElement;
-        const mapScrollerItem = mediaItem?.closest('.map-scroller-item');
-        if (!mapScrollerItem) {
-            return;
-        }
-
-        const mediaItemParent = mediaItem.getAttribute('data-parent');
-        const dialog = document.querySelector(`app-dialog[data-for="${mediaItemParent}"]`) as AppDialog;
-        if (!dialog) {
-            return;
-        }
-
-        const dialogSlideshow = dialog.querySelector('dna-slideshow');
-        const stepSlideshow = mapScrollerItem.querySelector('dna-slideshow');
-        if (!stepSlideshow || !dialogSlideshow) {
-            return;
-        }
-
-        dialogSlideshow.current = stepSlideshow.current;
+        const dialog = this.ownerDocument.createElement('app-dialog') as AppDialog;
+        const imgClone = mediaItem.cloneNode(true) as HTMLImageElement;
+        this.ownerDocument.body.appendChild(
+            render(
+                <app-dialog ref={dialog}>
+                    <dna-zoom-panel>{imgClone}</dna-zoom-panel>
+                </app-dialog>
+            ) as Node
+        );
         dialog.show();
+        dialog.addEventListener('close', () => {
+            dialog.remove();
+        });
     }
+
+    @listen('mousedown', '.resize-handle')
+    private onResizeHandleMouseDown(event: MouseEvent) {
+        event.preventDefault();
+        event.stopPropagation();
+        // consento il ridimensionamento solo con il tasto principale (sinistro) del mouse
+        if (event.button != 0) {
+            return;
+        }
+
+        document.addEventListener('mousemove', this.onResizeHandleMove);
+        document.addEventListener('mouseup', this.onResizeHandleRelease);
+    }
+
+    private onResizeHandleMove = (event: MouseEvent) => {
+        this.style.setProperty(
+            '--steps-resized-width',
+            // imposto larghezza minima e massima per evitare che il pannello diventi più piccolo della larghezza iniziale o più grande della finestra
+            `min(max(var(--map-scroller-steps-width), calc(${event.pageX}px - var(--map-scroller-left-offset))), var(--steps-max-width))`
+        );
+    };
+
+    private onResizeHandleRelease = () => {
+        document.removeEventListener('mousemove', this.onResizeHandleMove);
+        document.removeEventListener('mouseup', this.onResizeHandleRelease);
+    };
 
     @observe('currentStep')
     private onCurrentStepChange() {

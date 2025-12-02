@@ -770,7 +770,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/runtime@^7.23.2", "@babel/runtime@^7.27.6":
+"@babel/runtime@^7.23.2", "@babel/runtime@^7.28.4":
   version "7.28.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.28.4.tgz#a70226016fabe25c5783b2f22d3e1c9bc5ca3326"
   integrity sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==
@@ -841,147 +841,139 @@
   dependencies:
     "@chialab/estransform" "^0.17.3"
 
-"@chialab/dna-backdrop@^4.0.0-beta.0", "@chialab/dna-backdrop@^4.0.0-beta.19":
-  version "4.0.0-beta.20"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-backdrop/-/dna-backdrop-4.0.0-beta.20.tgz#66cbd62f3285405f51cc811ce458a8c7d5555e0a"
-  integrity sha512-aJZTjn59ZHDSeQOpKBV9R/Skk/CeCuriop1/LeYKrQcZxOg3N3Wy15rInOfpeOxgsB+1YH63nmUT9qIyg9NaNA==
+"@chialab/dna-backdrop@^4.0.0-beta.0", "@chialab/dna-backdrop@^4.0.0-beta.21":
+  version "4.0.0-beta.21"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-backdrop/-/dna-backdrop-4.0.0-beta.21.tgz#320c496b6fa65969a30525508b59baf2c8504886"
+  integrity sha512-nj5a0zd6QZjWiY4MlgQkU7fRxQjpvjXS5FO6mN4b0lsGiH6/tjINsRGjkAOIxKgKX5qyLicfpSQTLha8c+F77Q==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-button" "^4.0.0-beta.21"
-    "@chialab/dna-floating" "^4.0.0-beta.37"
-    "@chialab/dna-i18n" "^4.0.0-beta.9"
-    "@chialab/dna-icons" "^4.0.0-beta.10"
+    "@chialab/dna-button" "^4.0.0-beta.22"
+    "@chialab/dna-floating" "^4.0.0-beta.38"
+    "@chialab/dna-i18n" "^4.0.0-beta.10"
+    "@chialab/dna-icons" "^4.0.0-beta.11"
     "@chialab/loock" "^4.5.2"
 
-"@chialab/dna-button@^4.0.0-beta.0", "@chialab/dna-button@^4.0.0-beta.21":
-  version "4.0.0-beta.21"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-button/-/dna-button-4.0.0-beta.21.tgz#e6d82a00900dced19e101d20a4aa7ff859f80056"
-  integrity sha512-vxsZHG0mgwLGpEYHp/iIVgh6PG1X6vFteZc4Bx4LyWMcfhUiuMCZF6Q0RqFU+c+8w3Pi+ySvaB6HBcPjlAUknw==
+"@chialab/dna-button@^4.0.0-beta.0", "@chialab/dna-button@^4.0.0-beta.22":
+  version "4.0.0-beta.22"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-button/-/dna-button-4.0.0-beta.22.tgz#243a3b753ff7741b05cfdb253c08b84fa7cac85e"
+  integrity sha512-M7RytGtZxfhV3cTMos7M6ANAtI1rBU5T/U1v3RdbCuy8VrX1q0DLsXRTGTdA6+3WvmsJuMhhUmN/fuSfankGIQ==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-icons" "^4.0.0-beta.10"
-    "@chialab/dna-tooltip" "^4.0.0-beta.20"
+    "@chialab/dna-icons" "^4.0.0-beta.11"
+    "@chialab/dna-tooltip" "^4.0.0-beta.23"
 
 "@chialab/dna-code@^4.0.0-beta.0":
-  version "4.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-code/-/dna-code-4.0.0-beta.9.tgz#919ad6958f1697edbc6d0e18f41c67db21db0c2e"
-  integrity sha512-Ntmoq2S9wIT2hPgZjwslRcqzq1DMex2v2YNow76zflgVRoRJT0BjcOTnRs90+3dZjE7CoDQ3EOSMT+CmDjhJvQ==
+  version "4.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-code/-/dna-code-4.0.0-beta.10.tgz#e2c27626324f04d55e9745b90475e89817c807d2"
+  integrity sha512-JwCHZoKPodlIVkb0/s7eYvUXuHpmtnaB6NdUh1nENHLOd84z4RJjaV/sCI8iuvr77ImrwG0viNc3W1Duh4aOLA==
   dependencies:
     "@chialab/dna" "^4.4.0"
     "@types/prismjs" "^1.26.1"
     prismjs "^1.22.0"
 
 "@chialab/dna-dialog@^4.0.0-beta.0":
-  version "4.0.0-beta.15"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-dialog/-/dna-dialog-4.0.0-beta.15.tgz#37745d3dba9d6d8cf235a02ed2b624c9cd35dbf3"
-  integrity sha512-63IWauvUtI+zUFpOu83bGVk5YekDCl+hj0IAHm6ay3gtvHYgxOjSI3CmxPjM2O0z6CRhI1nZif1JMMkCJ126ag==
+  version "4.0.0-beta.16"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-dialog/-/dna-dialog-4.0.0-beta.16.tgz#e18d9899fdcc0973cc04123d9ed22399d8d4bd71"
+  integrity sha512-uXkE3v9m95q3RxFayLC5laeDJVBIGN0qAPRd2pKOd698lKCafMcjcTKxW2+En+G4zIiWA0pg1FNXOkzGvVb2WA==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-backdrop" "^4.0.0-beta.19"
+    "@chialab/dna-backdrop" "^4.0.0-beta.21"
 
-"@chialab/dna-floating@^4.0.0-beta.36", "@chialab/dna-floating@^4.0.0-beta.37":
-  version "4.0.0-beta.37"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-floating/-/dna-floating-4.0.0-beta.37.tgz#ad9a264ed2c01f34599292ccacd6b45fcabf35b0"
-  integrity sha512-ni5EgbPkRda+fzMO/Dn042fFxfyena8Sw0l1r2Is0a8O8xGa3jUTuL4NDq0V8wZ3oxHGZ/Qsx1xaT7ogA4ekZw==
+"@chialab/dna-floating@^4.0.0-beta.38":
+  version "4.0.0-beta.38"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-floating/-/dna-floating-4.0.0-beta.38.tgz#cacb564e03350bf5983f5e98893a6b0e0e799f73"
+  integrity sha512-eA2UN0o8HljjR70QZrKuZU3EZn9aFxljOYR9S49spaf3IfS/dw2uZJMNXLWqqAvViQQ4I8V51l4mJnE67UzOsQ==
   dependencies:
     "@chialab/dna" "^4.4.0"
     "@chialab/loock" "^4.5.2"
 
-"@chialab/dna-gallery@^4.0.0-beta.17":
-  version "4.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-gallery/-/dna-gallery-4.0.0-beta.18.tgz#9a31b01c4160e6b3f88898b7f3e2227246d5b872"
-  integrity sha512-otcc5lZegrYanKemX+GRYUgYVOmuJCPzyMogr7/yPmQ8lCeYYA5l4y9V5jiLLMLi83KrxmLE0gbhFlgXyobA8w==
+"@chialab/dna-gallery@^4.0.0-beta.19":
+  version "4.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-gallery/-/dna-gallery-4.0.0-beta.19.tgz#198021a21ab202d0aa2e3c662e81951bc70045a6"
+  integrity sha512-JsoJf8TSNYerDki9gWYj5WUi+5p1PsvyuP2mSp6Iiv0wEplgddfK4wouf6nyrIHbzoZ18E/1eMG8grQUTYedKA==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-button" "^4.0.0-beta.21"
-    "@chialab/dna-i18n" "^4.0.0-beta.9"
-    "@chialab/dna-icons" "^4.0.0-beta.10"
+    "@chialab/dna-button" "^4.0.0-beta.22"
+    "@chialab/dna-i18n" "^4.0.0-beta.10"
+    "@chialab/dna-icons" "^4.0.0-beta.11"
     "@react-aria/live-announcer" "^3.3.1"
 
-"@chialab/dna-i18n@^4.0.0-beta.0":
-  version "4.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-i18n/-/dna-i18n-4.0.0-beta.8.tgz#37ce3773579219bd65ee93493c508dd9088b7ab2"
-  integrity sha512-puzf35QzO9oncF3C/vZtlT2AblhjPoXh3Vi2NUWEZDaH97jOOewudwP4uIJe3Hs6tZ9+4hx5LFRSYfMa7wgRAw==
-  dependencies:
-    i18next "^25.3.0"
-    i18next-browser-languagedetector "^8.2.0"
-
-"@chialab/dna-i18n@^4.0.0-beta.9":
-  version "4.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-i18n/-/dna-i18n-4.0.0-beta.9.tgz#9f3c161a11bf608b6ff39441b4f0ba6f19fb2953"
-  integrity sha512-jSrJkyNcL1ZDaOxzW9Vw87laSdEvAAQx9K+JSHzZF4/NzK4gnwGey7jugeC/jVSsQNPam9Gj/6B/qH9mMlHHRg==
-  dependencies:
-    i18next "^25.3.0"
-    i18next-browser-languagedetector "^8.2.0"
-
-"@chialab/dna-icons@^4.0.0-beta.0", "@chialab/dna-icons@^4.0.0-beta.10":
+"@chialab/dna-i18n@^4.0.0-beta.0", "@chialab/dna-i18n@^4.0.0-beta.10":
   version "4.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-icons/-/dna-icons-4.0.0-beta.10.tgz#1ced5679b646e7d29657c1f55b721a0874fa8361"
-  integrity sha512-kdAkoFP7WGkb4Y3HPAs7wVAhHtL4s1YeNM9kZ/duuXRLM4PTaiDx0mDNIPTU1JtOH6yexFxUyZ7zOT3to6aY3g==
+  resolved "https://registry.yarnpkg.com/@chialab/dna-i18n/-/dna-i18n-4.0.0-beta.10.tgz#ab666223974bc9552cc57c07505257e6020cef97"
+  integrity sha512-Ib0qumQnJZ54SnRqw72BgbUaoad01KsLVO3nA0eoqfXbD+w896+4hPCKGJ5uTDU2PAI8KxjkynFP5KLl1+XlQA==
+  dependencies:
+    i18next "^25.3.0"
+    i18next-browser-languagedetector "^8.2.0"
+
+"@chialab/dna-icons@^4.0.0-beta.0", "@chialab/dna-icons@^4.0.0-beta.11":
+  version "4.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-icons/-/dna-icons-4.0.0-beta.11.tgz#8e7a2669dd98b7c24c34a4df7d079675cad2aa8e"
+  integrity sha512-FVNpKNM0IRDIiQyx0ndYYQlDPYy/nMexJ7wbN7m7P9Nwjws7PE+c5iwHJDfIDl8Zv4M1+Fd3fgm1jtq/Ym7WfA==
   dependencies:
     "@chialab/dna" "^4.4.0"
 
 "@chialab/dna-map-scroller@^4.0.0-beta.0":
-  version "4.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-map-scroller/-/dna-map-scroller-4.0.0-beta.10.tgz#c5a9d26e4d7047da08832add342cb921ed0f4380"
-  integrity sha512-SI4mN7wGqC6QDFpIBx8FUko41dqpdTbK31lT3fOvmDXajPbEcpIQEG7p5eEARgqVG7u2XYMuxKumSb+uU4y5eQ==
+  version "4.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-map-scroller/-/dna-map-scroller-4.0.0-beta.11.tgz#b2b6e41ad04a6854f55f918bedbb7d123aad78fc"
+  integrity sha512-sQg/WKSn4MARyEsDq+FK2NsxQIRMJItcj+VhNmn3wbaERL9rIg5DxlmsCv0BdP9V0Co8SIo8PQCPaHi/3yQqAg==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-map" "^4.0.0-beta.18"
-    "@chialab/dna-story-scroller" "^4.0.0-beta.11"
+    "@chialab/dna-map" "^4.0.0-beta.19"
+    "@chialab/dna-story-scroller" "^4.0.0-beta.12"
 
-"@chialab/dna-map@^4.0.0-beta.0", "@chialab/dna-map@^4.0.0-beta.18":
-  version "4.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-map/-/dna-map-4.0.0-beta.18.tgz#b14080dc4161b197fa3ae7bb0a91db5cf0c34438"
-  integrity sha512-d3J7qhngmhu6bF2I62R5wwy2oB991NgMiKZmxHJEgkF4otTC1KeMHwhjKZYbmAYkzy+5IG5W3vCfJhuwZAVcvw==
+"@chialab/dna-map@^4.0.0-beta.0", "@chialab/dna-map@^4.0.0-beta.19":
+  version "4.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-map/-/dna-map-4.0.0-beta.19.tgz#377232af916ab61047591022031601afbd727c84"
+  integrity sha512-agWmePj+bEG6MSu/xOT2+Uyk/D5u9acJ81WbQfGW7ayYVq8hgkeF7DqCO3aWhf6p4rfQgoGu6PqA4BgjWVOp9g==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-button" "^4.0.0-beta.21"
-    "@chialab/dna-i18n" "^4.0.0-beta.9"
-    "@chialab/dna-icons" "^4.0.0-beta.10"
+    "@chialab/dna-button" "^4.0.0-beta.22"
+    "@chialab/dna-i18n" "^4.0.0-beta.10"
+    "@chialab/dna-icons" "^4.0.0-beta.11"
     mapbox-gl "^3.7.0"
 
 "@chialab/dna-masonry@^4.0.0-beta.0":
-  version "4.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-masonry/-/dna-masonry-4.0.0-beta.9.tgz#25e4e2713d44ad419d19648a2b9255c6cc29c856"
-  integrity sha512-OxcmRqUjAP1lYnTLaDGodK+/oeJnf9zfwQQjPEgoNT+uN7J6pZABody4JUqGGuZHeTcLyX+Jlf0J8NWi8VWFIw==
+  version "4.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-masonry/-/dna-masonry-4.0.0-beta.10.tgz#e0d32f555f076886c25ad03ee42abfd53dbdfa07"
+  integrity sha512-Aq2WPFImJu1tLs7/62ACMKvNoSrSZGNBVkeab6PChk0tjbytMXfHfqX4lsLNS8/m6p5gh3TxATtFFzwzes4KeA==
   dependencies:
     "@chialab/dna" "^4.4.0"
 
 "@chialab/dna-qrcode@^4.0.0-beta.0":
-  version "4.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-qrcode/-/dna-qrcode-4.0.0-beta.7.tgz#2d045cb4feb2cf08141b84de5e6be96da4c71e27"
-  integrity sha512-4WP3SG1hNV9GBBWF5Cxq18Daz2P8H+1FnnTyEgmckAQhU+aj54u4BkE9eRmro6kJvTVSK6rNj7tZuGcyBbb/sQ==
+  version "4.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-qrcode/-/dna-qrcode-4.0.0-beta.8.tgz#2b9a989899898cb6cbcd04a42c8da717eefe64a8"
+  integrity sha512-wLCFynHsFuyPgR2+xwZ2IXfPg57PbFCIiFMEMzPIdBwEMIgXGb5ori0cHymwuE81SSAQIg5du5uubDodqbqoVw==
   dependencies:
     "@chialab/dna" "^4.4.0"
     "@types/qrcode" "^1.5.5"
     qrcode "^1.5.3"
 
-"@chialab/dna-slides@^4.0.0-beta.16":
-  version "4.0.0-beta.17"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-slides/-/dna-slides-4.0.0-beta.17.tgz#9b96b4b416276f336958525b6ce76768f0a91a82"
-  integrity sha512-hXxQ8Q13Egr2q74lJ1VkNkQSFLYpWeF9Ojd5iaH3IlOy3Y88bEQ1APpoLZpjsimNrAr4u0t7s7z1u4quPfhUXA==
+"@chialab/dna-slides@^4.0.0-beta.18":
+  version "4.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-slides/-/dna-slides-4.0.0-beta.18.tgz#9c20b20ecfe939c749d094b8897d9fb0fd7a2f12"
+  integrity sha512-ERavqNjBbkDKQmw3nP2LhTQqsBLU0mmxjdDPkkXj+TzwhwPJrA4qy+oQ7wJptcJWZnQwn28XlkoLelRZAEMmCg==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-button" "^4.0.0-beta.21"
-    "@chialab/dna-i18n" "^4.0.0-beta.9"
-    "@chialab/dna-icons" "^4.0.0-beta.10"
+    "@chialab/dna-button" "^4.0.0-beta.22"
+    "@chialab/dna-i18n" "^4.0.0-beta.10"
+    "@chialab/dna-icons" "^4.0.0-beta.11"
     scroll-behavior-polyfill "^2.0.0"
 
 "@chialab/dna-slideshow@^4.0.0-beta.0":
-  version "4.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-slideshow/-/dna-slideshow-4.0.0-beta.11.tgz#25496afec85259da01a357e011bfe61e7c65a838"
-  integrity sha512-1Z/Vrq1p2ELzQVfzSpMtxy7qgtws2WQKzf/DweIDfESkM3I/bToOhkctw6ORc3IVigtlLaSkEkS948yc4cb3gg==
+  version "4.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-slideshow/-/dna-slideshow-4.0.0-beta.12.tgz#b8a0c12e12374559b31840757805602ce81ba077"
+  integrity sha512-jWgXfIiPpEZmabjeIAcPuGymF7PqMOLTY7vJdURpKTshTSgecRi4zdQ+RJoyU3IXyK+6ditI/mIhK1Xsx/FpJg==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-button" "^4.0.0-beta.21"
-    "@chialab/dna-gallery" "^4.0.0-beta.17"
-    "@chialab/dna-slides" "^4.0.0-beta.16"
+    "@chialab/dna-button" "^4.0.0-beta.22"
+    "@chialab/dna-gallery" "^4.0.0-beta.19"
+    "@chialab/dna-slides" "^4.0.0-beta.18"
 
-"@chialab/dna-story-scroller@^4.0.0-beta.0", "@chialab/dna-story-scroller@^4.0.0-beta.11":
-  version "4.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-story-scroller/-/dna-story-scroller-4.0.0-beta.11.tgz#1cb6f744da0a9eb9ce81c0e246630e0bbff966d0"
-  integrity sha512-IE0R+dsu8EfWqlbr1PnqTUmH86VNy1Ae7xspgJIOIoQr00b89zMoHB22rR9jiIvDx1dOOWdQDGb7nrhOEAQ7pw==
+"@chialab/dna-story-scroller@^4.0.0-beta.0", "@chialab/dna-story-scroller@^4.0.0-beta.12":
+  version "4.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-story-scroller/-/dna-story-scroller-4.0.0-beta.12.tgz#b3874909c4fbf423db3a84f7b63353007501fd65"
+  integrity sha512-klJrcR4cJ0z6adcAVOgcFY3imE0Xos3zUogAQiMAsDz++H0H/dBqEv5qUqHP2eGwgJWyCWRG+IQ7DjoweHIqmQ==
   dependencies:
     "@chialab/dna" "^4.4.0"
 
@@ -992,18 +984,18 @@
   dependencies:
     "@chialab/cells" "^1.0.0"
 
-"@chialab/dna-tooltip@^4.0.0-beta.20":
-  version "4.0.0-beta.22"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-tooltip/-/dna-tooltip-4.0.0-beta.22.tgz#5476dc0a20a29863926500661d6d5bbdb632b831"
-  integrity sha512-YiFp/ZgGspGnYVBWTljXwUuS1JHmIxGkceoAHPOQ5UhCzFGIKdJZ1Ev3uiNiaisXKY3SpeiInwnQw6GZq7h+Kw==
+"@chialab/dna-tooltip@^4.0.0-beta.23":
+  version "4.0.0-beta.23"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-tooltip/-/dna-tooltip-4.0.0-beta.23.tgz#88c5471273e7f5b1cd710e44eb765d50ccd6ce9d"
+  integrity sha512-nr+sV6IBOMfhpTMxO24GrPsZMhJHex26G+ykOHwbSCYx8yTpDs/Z+KZFppgKgbcr9C2SHzU4B/LiMUEmW0n7xA==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-floating" "^4.0.0-beta.36"
+    "@chialab/dna-floating" "^4.0.0-beta.38"
 
 "@chialab/dna-zoom-panel@^4.0.0-beta.0":
-  version "4.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-zoom-panel/-/dna-zoom-panel-4.0.0-beta.10.tgz#7ccbe68bb41802ec9a89366ace6fdc8829e9cb41"
-  integrity sha512-ChUOvrEczWJYb2WlCHctBEkR5Xo8KMWr/DR4aBGI4PCjDveSodAWnCtIRxYCt9vQntL0pczUULqcBgS+pA7oXA==
+  version "4.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-zoom-panel/-/dna-zoom-panel-4.0.0-beta.11.tgz#49ab8cbcca75a07e1b3072eb502d57da6dbb8148"
+  integrity sha512-/mhGz83IFGhWhjcmLPO/l0DoYqsMfPe2MUwb0dCmEXLV+YhUg0WYLIkGAjfxjsrs4gBKqb2bZDgsSYKH9YTWTg==
   dependencies:
     "@chialab/dna" "^4.4.0"
 
@@ -3537,11 +3529,11 @@ i18next-browser-languagedetector@^8.2.0:
     "@babel/runtime" "^7.23.2"
 
 i18next@^25.3.0:
-  version "25.6.2"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.6.2.tgz#d6de1a4be58242c7f0f1436ab2fa66c8f87b2e29"
-  integrity sha512-0GawNyVUw0yvJoOEBq1VHMAsqdM23XrHkMtl2gKEjviJQSLVXsrPqsoYAxBEugW5AB96I2pZkwRxyl8WZVoWdw==
+  version "25.7.0"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.7.0.tgz#16b41186e2da38b44e8bd14c9b0ef4c0fee6ca49"
+  integrity sha512-cpUOqkVTQe3/uCVtpfpC3J1Ejn1y8KiVbqVEW4WW6Yr8wMYw+Wvb2/+lL4e1sM9AbzKTYXyYkn8zCRlTf5XTcA==
   dependencies:
-    "@babel/runtime" "^7.27.6"
+    "@babel/runtime" "^7.28.4"
 
 ignore@^5.2.0, ignore@^5.2.4:
   version "5.3.2"

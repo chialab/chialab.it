@@ -1,69 +1,41 @@
-{% macro renderMedia(media, parentUname, hasZoom = false) %}
-    {% if media is defined %}
-        {% if media.type == 'videos' %}
-            <video class="w-full" src="{{ media.media_url }}" controls/>
-        {% elseif media.type == 'images' %}
-            {% if hasZoom %}
-                <dna-zoom-panel>
-                    <img class="w-full" src="{{ media.media_url }}" alt=""/>
-                </dna-zoom-panel>
-            {% else %}
-                <img class="w-full" src="{{ media.media_url }}" alt="" role="button" data-parent="{{ parentUname }}"/>
-            {% endif %}
-        {% endif %}
-    {% endif %}
-{% endmacro %}
+{# filtro le location per le card, escludendo quelle solo per la lineString #}
+{% set locations = children|filter(child => child.title|default(null) or child.body|default(null) or child.description|default(null)) %}
 
-{% macro renderMediaItems(items, parentUname, hasZoom = false) %}
-    {% if items is defined and items|length %}
-        {% if items|length == 1 %}
-            {{ _self.renderMedia(items|first, hasZoom) }}
-        {% else %}
-            <dna-slideshow class="w-full" carousel controls cover controlslist="nodots noplayback nocounter">
-                {% for media in items %}
-                    {{ _self.renderMedia(media, parentUname, hasZoom) }}
-                {% endfor %}
-            </dna-slideshow>
-        {% endif %}
-    {% endif %}
-{% endmacro %}
-
-<main class="map-page">
-    {% if children is defined and children|length > 0 %}
+<main class="journey-page">
+    {% if locations|length > 0 %}
         <skua-map-scroller
             access-token={{ mapboxToken }}
             data="{{ Map.geoJSON(children)|json_encode|default('{}') }}"
             tile="mapbox://styles/qwerg/cmi4s3awf004601s3gie977fn/draft"
         >
-            {% for child in children %}
-                <dna-map-scroller-step id="{{ child.uname }}" data-uname="{{ child.uname }}" center="{{ Map.getObjectCoords(child)|default() }}" zoom="10">
+            {% for location in locations %}
+                <dna-map-scroller-step
+                    id="{{ location.uname }}"
+                    data-uname="{{ location.uname }}"
+                    center="{{ Map.getObjectCoords(location)|default() }}"
+                    zoom="10"
+                >
                     <div class="map-scroller-item bg-surface radius-0">
                         <div class="item-content">
-                            <div class="index mono f-3 bold">{{ loop.index }}</div>
-                            <h2 class="title mono f-3 mt-0 mb-2 medium">{{ child.title }}</h2>
-                            {% if child.description|default() %}
-                                <div class="description">{{ child.description|raw }}</div>
+                            {% if loop.index == 1 %}
+                                <h1 class="journey-title f-7 medium mt-0">{{currentJourney.title}}</h1>
                             {% endif %}
-                            {% if child.body|default(null) %}
-                                <div class="body">{{ child.body|raw }}</div>
+                            <div class="index mono f-3 bold mb-1 ml-3">{{ loop.index }}</div>
+                            <h2 class="title f-4 mt-0 mb-3">{{ location.title|default('') }}</h2>
+                            {% if location.description|default() %}
+                                <div class="description f-2">{{ Placeholders.template(location, 'description')|raw }}</div>
+                            {% endif %}
+                            {% if location.body|default() %}
+                                <div class="body f-2">{{ Placeholders.template(location, 'body')|raw }}</div>
                             {% endif %}
                         </div>
-
-                        {{ _self.renderMediaItems(child.has_media, child.uname) }}
                     </div>
                 </dna-map-scroller-step>
             {% endfor %}
         </skua-map-scroller>
-
-        {% for child in children %}
-            {% if child.has_media is defined and child.has_media|length %}
-                <app-dialog data-for="{{ child.uname }}">
-                    {{ _self.renderMediaItems(child.has_media, true) }}
-                </app-dialog>
-            {% endif %}
-        {% endfor %}
     {% endif %}
 </main>
 
 {{ Rna.script("#{_view.theme}.mapscroller", { block: true })|raw }}
 {{ Rna.script("#{_view.theme}.app-dialog", { block: true })|raw }}
+{{ Rna.css("#{_view.theme}.journey-page", { block: true })|raw }}
