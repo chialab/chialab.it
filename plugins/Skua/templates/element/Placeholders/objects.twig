@@ -1,0 +1,6 @@
+{% if object.description|default() %}
+    <div class="description f-2">{{ object.description|raw }}</div>
+{% endif %}
+{% if object.body|default() %}
+    <div class="body f-2">{{ object.body|raw }}</div>
+{% endif %}

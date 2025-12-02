@@ -8,6 +8,7 @@ export class AppDialog extends Component {
     @listen('click', '.close-btn')
     hide() {
         this.dialog?.hide();
+        this.dispatchEvent('close');
     }
 
     show() {

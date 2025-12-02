@@ -4,9 +4,8 @@
     --color-accent: #ff0000;
     --color-neutral: #797676;
     --map-scroller-steps-width: 40vw;
-    --map-scroller-left-offset: calc(
-        24px + 12px + 12px + 16px
-    ); /* scrollbar + padding-left + margin-left + padding-right */
+    --map-scroller-right-padding: 30px;
+    --map-scroller-left-offset: calc(24px + 12px + 12px); /* scrollbar + padding-left + margin-left */
 }
 
 *:focus-visible {
@@ -21,7 +20,7 @@ body {
     position: absolute;
     top: calc(var(--padding) * 3);
     left: 0;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     padding: 0 48px 0 20px;
 }

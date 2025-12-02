@@ -46,7 +46,7 @@ class PagesController extends AppController
      */
     public function journey(string $uname): void
     {
-        $loader = new ObjectsLoader();
+        $loader = new ObjectsLoader(['galleries' => ['include' => 'has_media']], ['has_media' => 3]);
         $journey = $loader->loadObject($uname, 'folders');
         if (!$journey) {
             throw new RecordNotFoundException(sprintf("Journey folder %s not found", $uname));
@@ -55,8 +55,8 @@ class PagesController extends AppController
         $children = $loader->loadObjects(
             ['parent' => $journey->uname],
             'locations',
-            ['include' => 'has_media,placeholder'],
-            ['has_media' => 2, 'placeholder' => 2]
+            ['include' => 'placeholder'],
+            ['placeholder' => 2]
         );
         $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
         $this->viewBuilder()->addHelpers(['Skua.Map']);
