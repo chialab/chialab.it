@@ -2,7 +2,7 @@ import { Component, customElement, listen, observe, property, render, state, typ
 import { Map as MapElement, type Area } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
 import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
-import { AppDialog } from './app-dialog';
+import type { AppDialog } from './app-dialog';
 
 @customElement('skua-map-scroller')
 export class SkuaMapScroller extends Component {
@@ -176,7 +176,7 @@ export class SkuaMapScroller extends Component {
                 return this.isSamePoint([lng, lat], [markerCoords.lng, markerCoords.lat]);
             });
             if (index && index >= 0) {
-                let indexElement = markerElement.querySelector('.marker-index');
+                const indexElement = markerElement.querySelector('.marker-index');
                 if (!indexElement) {
                     return;
                 }
