@@ -40,8 +40,12 @@ skua-map-scroller .map-scroller__map dna-map {
     height: 100%;
 }
 
+skua-map-scroller .map-scroller__map dna-map [marker-symbol] {
+    fill: var(--marker-primary-fill, black);
+}
+
 skua-map-scroller .map-scroller__map dna-map [marker-symbol].current {
-    fill: var(--color-accent);
+    --marker-primary-fill: var(--color-accent);
 }
 
 skua-map-scroller .map-scroller__map dna-map [marker-symbol] text.marker-index {

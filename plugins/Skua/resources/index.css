@@ -97,9 +97,16 @@ body main {
 }
 
 dna-map [marker-symbol] {
+    fill: black;
+}
+
+dna-map [marker-symbol='marker-skua'] {
     width: 2.5rem;
     height: auto;
-    fill: black;
+}
+
+dna-map [marker-symbol='marker-point'] {
+    overflow: visible;
 }
 
 dna-dialog .dialog__container {

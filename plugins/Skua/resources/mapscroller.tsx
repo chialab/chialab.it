@@ -169,14 +169,19 @@ export class SkuaMapScroller extends Component {
 
         let processedMarkersCount = 0;
         this.mapElement.markers.forEach((marker) => {
-            const markerElement = marker.getElement();
+            const markerElement = marker.getElement() as HTMLElement;
             const markerCoords = marker.getLngLat();
             const index = points.findIndex((feature) => {
                 const [lng, lat] = feature.geometry.coordinates;
                 return this.isSamePoint([lng, lat], [markerCoords.lng, markerCoords.lat]);
             });
             if (index && index >= 0) {
-                markerElement.querySelector('.marker-index')!.textContent = (index + 1).toString();
+                let indexElement = markerElement.querySelector('.marker-index');
+                if (!indexElement) {
+                    return;
+                }
+
+                indexElement.textContent = (index + 1).toString();
                 processedMarkersCount++;
             }
         });
@@ -198,9 +203,9 @@ export class SkuaMapScroller extends Component {
         this.mapElement.area = { top: 0, right: 0, bottom: 0, left: '40%' };
     }
 
-    @listen('click', '[marker-symbol="marker-skua"]')
+    @listen('click', '[marker-symbol]')
     private onMarkerClick(event: MouseEvent) {
-        const markerElement = (event.target as HTMLElement).closest('[marker-symbol="marker-skua"]');
+        const markerElement = (event.target as HTMLElement).closest('[marker-symbol]');
         const marker = this.mapElement.markers.find((marker) => marker.getElement() === markerElement);
         const markerCoords = marker?.getLngLat();
         if (markerCoords) {

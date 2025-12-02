@@ -60,13 +60,16 @@ class MapHelper extends Helper
                 continue;
             }
 
-            $object['marker-symbol'] = 'marker-skua';
+            // $object['marker-symbol'] = 'marker-skua';
+            $object['marker-symbol'] = 'marker-point';
             $jsonObject['features'][] = [
                 'geometry' => $coords,
                 'type' => 'Feature',
                 'properties' => [
-                    'marker-symbol' => 'marker-skua',
-                    'marker-anchor' => 'bottom',
+                    'marker-symbol' => 'marker-point',
+                    // 'marker-symbol' => 'marker-skua',
+                    // 'marker-anchor' => 'bottom',
+                    'marker-anchor' => 'center',
                     'id' => $object['id'],
                     'uname' => $object['uname'],
                 ],
