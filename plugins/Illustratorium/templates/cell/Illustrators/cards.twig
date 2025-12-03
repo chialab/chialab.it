@@ -1,0 +1,11 @@
+{% if illustrators|length > 0 %}
+    <section class="w-full column">
+        <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">In primo piano /</h2>
+
+        <dna-masonry class="w-full grid m-0">
+            {% for illustrator in illustrators %}
+                {{ element('card-collapsable', { object: illustrator })|raw }}
+            {% endfor %}
+        </dna-masonry>
+    </section>
+{% endif %}

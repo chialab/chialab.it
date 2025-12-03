@@ -1,2 +1,42 @@
 @import '@chialab/cdk/style';
 @import './variables.css';
+
+.illustrators {
+    display: block;
+    columns: 13rem;
+    column-fill: balance;
+}
+
+.illustrators .illustrators-list {
+    display: flex;
+    flex-direction: column;
+    width: 14rem;
+    overflow: hidden;
+    page-break-inside: avoid;
+    list-style: none;
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.illustrators .illustrators-list ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.illustrators .illustrators-list ul li {
+    margin-bottom: 0.25rem;
+}
+
+.illustrators .illustrators-list ul li a {
+    text-decoration: none;
+}
+
+.illustrators .illustrators-list ul li a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+}
+
+.illustrators .illustrators-list h4 {
+    margin-bottom: 0.25rem;
+}
