@@ -462,7 +462,8 @@
           "fastCreate": {
             "required": ["status", "title"],
             "all": ["status", "title", "description", "body"]
-          }
+          },
+          "filter": ["status", "parent"]
         }
       }
     }
