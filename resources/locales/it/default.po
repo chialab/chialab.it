@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BEdita 4 \n"
-"POT-Creation-Date: 2024-10-31 11:03:16 \n"
+"POT-Creation-Date: 2025-12-04 10:25:00 \n"
 "PO-Revision-Date:  \n"
 "Last-Translator:  \n"
 "Language-Team: BEdita I18N & I10N Team \n"
@@ -35,41 +35,32 @@ msgstr "Connessioni"
 msgid "Download VCard"
 msgstr "Download Vcard"
 
+msgid "Error loading the page"
+msgstr "Errore nel caricamento della pagina"
+
 msgid "Job categories"
 msgstr "Attività"
 
 msgid "Links"
 msgstr "Collegamenti"
 
-msgid "Password"
-msgstr ""
-
-msgid "Published on"
-msgstr "Pubblicato il"
-
-msgid "See also"
-msgstr "Vedi anche"
-
-msgid "Updated on"
-msgstr "Aggiornato il"
-
-msgid "Username"
-msgstr ""
-
-msgid "Year"
-msgstr "Anno"
-
 msgid "Page not found"
 msgstr "Pagina non trovata"
 
-msgid "Error loading the page"
-msgstr "Errore nel caricamento della pagina"
+msgid "Password"
+msgstr ""
+
+msgid "See also"
+msgstr "Vedi anche"
 
 msgid "The page you are looking for does not exist."
 msgstr "Questa pagina non esiste più, non è mai esistita o è stata spostata."
 
 msgid "Try to reload the page or"
 msgstr "Prova a ricaricare la pagina o"
+
+msgid "Username"
+msgstr ""
 
 msgid "log in"
 msgstr "accedi"
@@ -92,8 +83,20 @@ msgstr "precendente"
 msgid "privacy policy"
 msgstr ""
 
+msgid "see all"
+msgstr "vedi tutti"
+
 msgid "signup"
 msgstr "iscriviti"
 
 msgid "{0} logo"
 msgstr ""
+
+#~ msgid "Published on"
+#~ msgstr "Pubblicato il"
+
+#~ msgid "Updated on"
+#~ msgstr "Aggiornato il"
+
+#~ msgid "Year"
+#~ msgstr "Anno"
