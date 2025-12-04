@@ -45,7 +45,7 @@ use Cake\Routing\RouteBuilder;
 return static function (RouteBuilder $routes): void {
     $routes->setRouteClass(DashedRoute::class);
 
-    $routes->scope('/_staging', function (RouteBuilder $builder) {
+    $routes->scope('/_staging', function (RouteBuilder $builder): void {
         $builder->connect('/clear-cache', [
             'controller' => 'Staging',
             'action' => 'clearCache',
