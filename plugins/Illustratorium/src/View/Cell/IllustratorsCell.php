@@ -31,9 +31,10 @@ class IllustratorsCell extends Cell
 
         $this->loader = new ObjectsLoader([
             'objects' => ['include' => 'poster|1'],
-            'profiles' => ['include' => 'poster|1,see_also'],
+            'profiles' => ['include' => 'poster|1,see_also,has_media'],
         ], [
             'see_also' => 2,
+            'has_media' => 2,
         ]);
     }
 
@@ -43,7 +44,7 @@ class IllustratorsCell extends Cell
      *
      * @return string Clean surname.
      */
-    private function getCleanSurname(ObjectEntity $obj): string
+    protected function getCleanSurname(ObjectEntity $obj): string
     {
         $surname = (string)($obj->get('surname')
             ?? $obj->get('name')
@@ -58,35 +59,15 @@ class IllustratorsCell extends Cell
 
     /**
      * Sort illustrators by surname initial.
-     * @param array<\BEdita\Core\Model\Entity\ObjectEntity> $illustrators Illustrators to sort.
      *
+     * @param iterable<\BEdita\Core\Model\Entity\ObjectEntity> $illustrators Illustrators to sort.
      * @return array<\BEdita\Core\Model\Entity\ObjectEntity> Sorted illustrators.
      */
-    private function sortBySurnameInitial(array $illustrators): array
+    protected function sortBySurnameInitial(iterable $illustrators): array
     {
-        usort($illustrators, function (ObjectEntity $a, ObjectEntity $b) {
-            $aSurname = $this->getCleanSurname($a);
-            $bSurname = $this->getCleanSurname($b);
-            return strcasecmp($aSurname, $bSurname);
-        });
+        $illustrators = is_array($illustrators) ? $illustrators : collection($illustrators)->toArray();
+        usort($illustrators, fn (ObjectEntity $a, ObjectEntity $b) => strcasecmp($this->getCleanSurname($a), $this->getCleanSurname($b)));
         return $illustrators;
-    }
-
-    /**
-     * Display cards view for illustrators.
-     *
-     * @return void
-     */
-    public function cards(array $illustrators = null): void
-    {
-        if (empty($illustrators)) {
-            $paginator = new NumericPaginator();
-            $illustrators = $paginator->paginate($this->loader
-                ->loadRelatedObjects('illustrators', 'folders', 'children')
-                )->toArray();
-            $illustrators = $this->sortBySurnameInitial($illustrators);
-        }
-        $this->set(compact('illustrators'));
     }
 
     /**
@@ -94,32 +75,34 @@ class IllustratorsCell extends Cell
      *
      * @return void
      */
-    public function display(): void
+    protected function loadIllustratorsData(int|null $limit = 6, bool $randomize = true): void
     {
         $folder = $this->loader->loadObject('illustrators', 'folders');
-        $randomIllustrators = $this->loader
-            ->loadRelatedObjects('illustrators', 'folders', 'children')
-            ->order(new FunctionExpression('RAND', returnType: 'double'), true)
-            ->limit(6)
-            ->toArray();
-        $this->set(compact('folder', 'randomIllustrators'));
-        // per qualche motivo la Cell non riesce a trovare il template se chiamo la funzione `home`
-        $this->viewBuilder()->setTemplate('home');
+
+        $illustrators = $this->loader->loadRelatedObjects('illustrators', 'folders', 'children');
+        $index = $this->index($illustrators->all());
+
+        if ($randomize) {
+            $illustrators = $illustrators->order(new FunctionExpression('RAND', returnType: 'double'), true);
+        } else {
+            $illustrators = $illustrators->formatResults(fn (iterable $illustrators): iterable => collection($this->sortBySurnameInitial($illustrators)));
+        }
+        if ($limit !== null) {
+            $illustrators = $illustrators->limit($limit);
+        }
+
+        $this->set(['folder' => $folder, 'illustrators' => $illustrators, 'index' => $index]);
     }
 
     /**
      * Display all illustrators from `illustrators` folder grouped by surname's initial letter.
      *
-     * @return void
+     * @return array Grouped illustrators.
      */
-    public function index(): void
+    protected function index(iterable $illustrators): array
     {
-        $folder = $this->loader->loadObject('illustrators', 'folders');
-        $illustrators = $this->loader
-            ->loadRelatedObjects('illustrators', 'folders', 'children');
-
         // Group illustrators by surname's initial letter
-        $illustratorsByLetter = $illustrators
+        $illustratorsByLetter = collection($illustrators)
             ->reduce(function ($grouped, $illustrator) {
                 $cleanSurname = $this->getCleanSurname($illustrator);
                 if ($cleanSurname === '') {
@@ -139,6 +122,24 @@ class IllustratorsCell extends Cell
         foreach ($illustratorsByLetter as $letter => $list) {
             $illustratorsByLetter[$letter] = $this->sortBySurnameInitial($list);
         }
-        $this->set(compact('folder', 'illustratorsByLetter'));
+
+        return $illustratorsByLetter;
     }
+
+    /**
+     * Load data for homepage.
+     */
+    public function display(): void
+    {
+        $this->loadIllustratorsData(6, true);
+    }
+
+    /**
+     * Load all illustrators.
+     */
+    public function all(): void
+    {
+        $this->loadIllustratorsData(null, false);
+    }
+
 }

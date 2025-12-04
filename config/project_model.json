@@ -429,6 +429,14 @@
       "read_only": false,
       "object": "links",
       "property": "string"
+    },
+    {
+      "name": "short_title",
+      "description": "Short title for presentation purposes",
+      "is_nullable": true,
+      "read_only": false,
+      "object": "objects",
+      "property": "string"
     }
   ],
   "categories": [],

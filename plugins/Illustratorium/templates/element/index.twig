@@ -1,6 +1,6 @@
-{% if illustratorsByLetter|length > 0 %}
+{% if index|length > 0 %}
     <div class="illustrators w-full">
-        {% for letter, illustrators in illustratorsByLetter %}
+        {% for letter, illustrators in index %}
             <div class="illustrators-list">
                 <h4 class="text-accent mono bold my-1">{{ letter }}</h4>
                 <ul>

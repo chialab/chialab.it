@@ -1,18 +1,17 @@
 {% if Poster.exists(object) %}
     <header class="w-full">
-        <img class="w-full mb-3 h-3 cover" alt="" src="{{ Poster.url(object) }}" draggable="false"/>
+        <img class="w-full h-3 block cover" alt="" src="{{ Poster.url(object) }}" draggable="false"/>
     </header>
 {% endif %}
 
-<main class="column w-full">
-    <h1 class="f-8 italic regular serif my-0">{{ object.title }}</h1>
-
-    <article class="column w-8 gap-xs body">
+<main class="grid w-full">
+    <article class="column w-8 gap-xs">
+        <h1 class="f-8 italic regular serif my-0">{{ object.title }}</h1>
         {% if object.get('email') %}
-            <a class="link--underline text-underline f-4 sans medium" href="mailto:{{ object.email }}">{{ object.email }}</a>
+            <a class="underline-accent f-4 sans" href="mailto:{{ object.email }}">{{ object.email }}</a>
         {% endif %}
         {% if object.get('website') %}
-            <a class="link--underline text-underline f-4 sans medium" href="{{ object.website }}">{{ object.website }}</a>
+            <a class="underline-accent f-4 sans" href="{{ object.website }}">{{ object.website }}</a>
         {% endif %}
 
         {% if object.get('has_media') is not empty %}
@@ -29,4 +28,19 @@
             </div>
         {% endif %}
     </article>
+
+    <aside class="column w-4 gap-s">
+        {% if object.get('see_also') is not empty %}
+            <div class="mt-2 column f-s">
+                <span class="link--section">{{ __('See also') }}</span>
+                <div class="columns-2 w-full">
+                    {% for item in object.see_also %}
+                        {{ element('card-small', {
+                            object: item,
+                        })|raw }}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </aside>
 </main>

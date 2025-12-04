@@ -1,17 +1,3 @@
-<main class="w-full column gap-row-2">
-    {{ cell('Illustratorium.Illustrators::index') }}
-
-    {{ element('folder-layout', { folder: object })|raw }}
-
-    {% if Paginator.total() > 1 %}
-        <div class="pagination w-full mono row gap-s end">
-            {% if Paginator.hasPrev() %}
-                {{ Paginator.prev(__('previous'))|raw }}
-            {% endif %}
-            <span class="link--section">{{ Paginator.counter(__('page {{page}} of {{pages}}'))|raw }}</span>
-            {% if Paginator.hasNext() %}
-                {{ Paginator.next(__('next'))|raw }}
-            {% endif %}
-        </div>
-    {% endif %}
+<main class="w-full column gap-row-2 section">
+    {{ cell('Illustratorium.Illustrators::all') }}
 </main>

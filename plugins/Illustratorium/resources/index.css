@@ -1,6 +1,11 @@
 @import '@chialab/cdk/style';
 @import './variables.css';
 
+.underline-accent {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+}
+
 .illustrators {
     display: block;
     columns: 13rem;
