@@ -25,7 +25,7 @@
 }
 
 .illustrators .illustrators-list ul li {
-    margin-bottom: 0.25rem;
+    margin-bottom: var(--base);
 }
 
 .illustrators .illustrators-list ul li a {
@@ -38,5 +38,13 @@
 }
 
 .illustrators .illustrators-list h4 {
-    margin-bottom: 0.25rem;
+    margin-bottom: var(--base);
+}
+
+.img-modal-trigger {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }

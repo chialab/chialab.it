@@ -1,9 +1,8 @@
-{% if illustrators|length > 0 %}
-    <dna-masonry class="w-full grid m-0">
-        {% for illustrator in illustrators %}
-            {{ element('card-collapsable', { object: illustrator })|raw }}
-        {% endfor %}
-    </dna-masonry>
+<main class="w-full column gap-row-2">
+    {{ cell('Illustratorium.Illustrators::index') }}
+
+    {{ element('folder-layout', { folder: object })|raw }}
+
     {% if Paginator.total() > 1 %}
         <div class="pagination w-full mono row gap-s end">
             {% if Paginator.hasPrev() %}
@@ -15,4 +14,4 @@
             {% endif %}
         </div>
     {% endif %}
-{% endif %}
+</main>

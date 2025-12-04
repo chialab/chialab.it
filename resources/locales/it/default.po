@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BEdita 4 \n"
-"POT-Creation-Date: 2025-12-04 10:25:00 \n"
+"POT-Creation-Date: 2025-12-04 16:48:04 \n"
 "PO-Revision-Date:  \n"
 "Last-Translator:  \n"
 "Language-Team: BEdita I18N & I10N Team \n"
@@ -61,6 +61,9 @@ msgstr "Prova a ricaricare la pagina o"
 
 msgid "Username"
 msgstr ""
+
+msgid "Zoom image gallery"
+msgstr "Ingrandisci galleria immagini"
 
 msgid "log in"
 msgstr "accedi"

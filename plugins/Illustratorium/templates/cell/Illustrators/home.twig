@@ -1,0 +1,16 @@
+<section class="w-full column">
+    <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">In primo piano /</h2>
+    {{ cell('Illustratorium.Illustrators::cards', { illustrators: randomIllustrators }) }}
+</section>
+
+<section class="w-full column">
+    <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ folder.title }} /</h2>
+
+    {{ cell('Illustratorium.Illustrators::index') }}
+
+    <div class="w-full row end mt-2">
+        <a class="link--section" href="{{ Url.build({ _name: 'pages:objects', _entity: folder }) }}">
+            {{ __('see all') }}
+        </a>
+    </div>
+</section>

@@ -1,0 +1,32 @@
+{% if illustratorsByLetter|length > 0 %}
+    <div class="illustrators w-full">
+        {% for letter, illustrators in illustratorsByLetter %}
+            <div class="illustrators-list">
+                <h4 class="text-accent mono bold my-1">{{ letter }}</h4>
+                <ul>
+                    {% for illustrator in illustrators %}
+                        <li>
+                            <a class="mono" href="{{ Url.build({ _name: 'pages:objects', _entity: illustrator }) }}">
+                                {% if illustrator.get('name') %}
+                                    {{ illustrator.get('name') }}
+                                {% endif %}
+                                {% if illustrator.get('surname') %}
+                                    <span class="bold">{{ illustrator.get('surname') }}</span>
+                                {% endif %}
+                                {% if illustrator.get('pseudonym') %}
+                                    ({{ illustrator.get('pseudonym') }})
+                                {% endif %}
+                                {% if illustrator.get('name') is empty
+                                    and illustrator.get('surname') is empty
+                                    and illustrator.get('pseudonym') is empty
+                                %}
+                                    {{ illustrator.get('title') }}
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,32 @@
+{% if Poster.exists(object) %}
+    <header class="w-full">
+        <img class="w-full mb-3 h-3 cover" alt="" src="{{ Poster.url(object) }}" draggable="false"/>
+    </header>
+{% endif %}
+
+<main class="column w-full">
+    <h1 class="f-8 italic regular serif my-0">{{ object.title }}</h1>
+
+    <article class="column w-8 gap-xs body">
+        {% if object.get('email') %}
+            <a class="link--underline text-underline f-4 sans medium" href="mailto:{{ object.email }}">{{ object.email }}</a>
+        {% endif %}
+        {% if object.get('website') %}
+            <a class="link--underline text-underline f-4 sans medium" href="{{ object.website }}">{{ object.website }}</a>
+        {% endif %}
+
+        {% if object.get('has_media') is not empty %}
+            <div class="illustrator-gallery mt-2 grid">
+                {% for img in object.get('has_media') %}
+                    <button class="img-modal-trigger" aria-label="{{ __('Zoom image gallery') }}">
+                        <img class="w-2 h-2 cover b-1"
+                            src="{{ img.media_url }}"
+                            alt="{{ img.title }}"
+                            data-modal="{{ object.uname }}"
+                        />
+                    </button>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </article>
+</main>

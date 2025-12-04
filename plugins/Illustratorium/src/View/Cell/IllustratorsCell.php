@@ -6,6 +6,7 @@ namespace Illustratorium\View\Cell;
 
 use BEdita\Core\Model\Entity\ObjectEntity;
 use Cake\Database\Expression\FunctionExpression;
+use Cake\Datasource\Paging\NumericPaginator;
 use Cake\View\Cell;
 use Chialab\FrontendKit\Model\ObjectsLoader;
 
@@ -38,6 +39,9 @@ class IllustratorsCell extends Cell
 
     /**
      * Get clean surname from a given profile object or the best available full name part.
+     * @param \BEdita\Core\Model\Entity\ObjectEntity $obj Profile object.
+     *
+     * @return string Clean surname.
      */
     private function getCleanSurname(ObjectEntity $obj): string
     {
@@ -53,27 +57,54 @@ class IllustratorsCell extends Cell
     }
 
     /**
-     * Get uppercase initial from a cleaned surname.
+     * Sort illustrators by surname initial.
+     * @param array<\BEdita\Core\Model\Entity\ObjectEntity> $illustrators Illustrators to sort.
+     *
+     * @return array<\BEdita\Core\Model\Entity\ObjectEntity> Sorted illustrators.
      */
-    private function surnameInitial(string $cleanSurname): string
+    private function sortBySurnameInitial(array $illustrators): array
     {
-        return strtoupper(mb_substr($cleanSurname, 0, 1));
+        usort($illustrators, function (ObjectEntity $a, ObjectEntity $b) {
+            $aSurname = $this->getCleanSurname($a);
+            $bSurname = $this->getCleanSurname($b);
+            return strcasecmp($aSurname, $bSurname);
+        });
+        return $illustrators;
     }
 
     /**
-     * Display 6 random illustrators from `illustrators` folder.
+     * Display cards view for illustrators.
      *
      * @return void
      */
-    public function cards(): void
+    public function cards(array $illustrators = null): void
     {
-        $illustrators = $this->loader
+        if (empty($illustrators)) {
+            $paginator = new NumericPaginator();
+            $illustrators = $paginator->paginate($this->loader
+                ->loadRelatedObjects('illustrators', 'folders', 'children')
+                )->toArray();
+            $illustrators = $this->sortBySurnameInitial($illustrators);
+        }
+        $this->set(compact('illustrators'));
+    }
+
+    /**
+     * Display home illustrators section.
+     *
+     * @return void
+     */
+    public function display(): void
+    {
+        $folder = $this->loader->loadObject('illustrators', 'folders');
+        $randomIllustrators = $this->loader
             ->loadRelatedObjects('illustrators', 'folders', 'children')
             ->order(new FunctionExpression('RAND', returnType: 'double'), true)
             ->limit(6)
             ->toArray();
-
-        $this->set(compact('illustrators'));
+        $this->set(compact('folder', 'randomIllustrators'));
+        // per qualche motivo la Cell non riesce a trovare il template se chiamo la funzione `home`
+        $this->viewBuilder()->setTemplate('home');
     }
 
     /**
@@ -81,7 +112,7 @@ class IllustratorsCell extends Cell
      *
      * @return void
      */
-    public function display(): void
+    public function index(): void
     {
         $folder = $this->loader->loadObject('illustrators', 'folders');
         $illustrators = $this->loader
@@ -94,7 +125,7 @@ class IllustratorsCell extends Cell
                 if ($cleanSurname === '') {
                     return $grouped;
                 }
-                $initial = $this->surnameInitial($cleanSurname);
+                $initial = strtoupper(mb_substr($cleanSurname, 0, 1));
                 if (!isset($grouped[$initial])) {
                     $grouped[$initial] = [];
                 }
@@ -106,12 +137,7 @@ class IllustratorsCell extends Cell
         // Sort by letter and by surname within each letter
         ksort($illustratorsByLetter);
         foreach ($illustratorsByLetter as $letter => $list) {
-            usort($list, function ($a, $b) {
-                $aSurname = $this->getCleanSurname($a);
-                $bSurname = $this->getCleanSurname($b);
-                return strcasecmp($aSurname, $bSurname);
-            });
-            $illustratorsByLetter[$letter] = $list;
+            $illustratorsByLetter[$letter] = $this->sortBySurnameInitial($list);
         }
         $this->set(compact('folder', 'illustratorsByLetter'));
     }
