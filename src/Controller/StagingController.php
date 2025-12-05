@@ -14,11 +14,6 @@ use Cake\Http\Response;
 class StagingController extends AppController
 {
     /**
-     * @inheritDoc
-     */
-    protected $defaultTable = null;
-
-    /**
      * Clear application cache.
      *
      * @return \Cake\Http\Response

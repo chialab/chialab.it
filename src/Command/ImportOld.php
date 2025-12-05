@@ -579,6 +579,13 @@ class ImportOld extends Command
             return false;
         }
 
+        $profile = $this->importRelation('attached_to', 'has_media', $data['original_id'], $profile, true);
+        if ($profile === false) {
+            $this->io->warning(sprintf('One or more attaches of profile "%s" had an error, skipping import of the profile', $data['original_uname']));
+
+            return false;
+        }
+
         return $this->importTranslations($data['original_id'], $profile);
     }
 
