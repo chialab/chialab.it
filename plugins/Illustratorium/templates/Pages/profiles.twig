@@ -17,8 +17,8 @@
         {% if object.get('has_media') is not empty %}
             <div class="illustrator-gallery mt-2 grid">
                 {% for img in object.get('has_media') %}
-                    <button class="img-modal-trigger" aria-label="{{ __('Zoom image gallery') }}">
-                        <img class="w-2 h-2 cover b-1"
+                    <button class="img-modal-trigger w-2 h-2" aria-label="{{ __('Zoom image gallery') }}">
+                        <img class="block cover w-full h-full"
                             src="{{ img.media_url }}"
                             alt="{{ img.title }}"
                             data-modal="{{ object.uname }}"

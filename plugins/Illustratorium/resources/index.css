@@ -46,10 +46,10 @@
     margin-bottom: var(--base);
 }
 
-.img-modal-trigger {
+button.img-modal-trigger {
     margin: 0;
     padding: 0;
     background-color: transparent;
-    border: none;
+    border: solid 1px var(--color-grey-200);
     cursor: pointer;
 }
