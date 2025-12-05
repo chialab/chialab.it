@@ -13,8 +13,6 @@ use Cake\Http\Response;
  */
 class StagingController extends AppController
 {
-    protected $defaultTable = false;
-
     /**
      * Clear application cache.
      *
