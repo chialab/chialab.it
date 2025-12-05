@@ -6,9 +6,10 @@ namespace Illustratorium\View\Cell;
 
 use BEdita\Core\Model\Entity\ObjectEntity;
 use Cake\Database\Expression\FunctionExpression;
-use Cake\Datasource\Paging\NumericPaginator;
 use Cake\View\Cell;
 use Chialab\FrontendKit\Model\ObjectsLoader;
+
+use function Cake\Collection\collection;
 
 /**
  * Illustrators cell
@@ -54,6 +55,7 @@ class IllustratorsCell extends Cell
         if ($surname === '') {
             return '';
         }
+
         return preg_replace('/^[^\p{L}]+/u', '', $surname) ?? '';
     }
 
@@ -67,36 +69,40 @@ class IllustratorsCell extends Cell
     {
         $illustrators = is_array($illustrators) ? $illustrators : collection($illustrators)->toArray();
         usort($illustrators, fn (ObjectEntity $a, ObjectEntity $b) => strcasecmp($this->getCleanSurname($a), $this->getCleanSurname($b)));
+
         return $illustrators;
     }
 
     /**
-     * Display home illustrators section.
+     * Load illustrators data for the index and cards view.
      *
+     * @param int|null $limit Number of illustrators to load.
+     * @param bool $randomize Whether to randomize the illustrators order.
      * @return void
      */
     protected function loadIllustratorsData(int|null $limit = 6, bool $randomize = true): void
     {
         $folder = $this->loader->loadObject('illustrators', 'folders');
-
         $illustrators = $this->loader->loadRelatedObjects('illustrators', 'folders', 'children');
-        $index = $this->index($illustrators->all());
 
         if ($randomize) {
             $illustrators = $illustrators->order(new FunctionExpression('RAND', returnType: 'double'), true);
         } else {
             $illustrators = $illustrators->formatResults(fn (iterable $illustrators): iterable => collection($this->sortBySurnameInitial($illustrators)));
         }
+        $illustrators = $illustrators->all();
+        $index = $this->index($illustrators);
         if ($limit !== null) {
-            $illustrators = $illustrators->limit($limit);
+            $illustrators = collection($illustrators)->chunk($limit)->first() ?? [];
         }
 
-        $this->set(['folder' => $folder, 'illustrators' => $illustrators, 'index' => $index]);
+        $this->set(compact('folder', 'illustrators', 'index'));
     }
 
     /**
-     * Display all illustrators from `illustrators` folder grouped by surname's initial letter.
+     * Group illustrators by surname's initial letter and sort by surname within each group.
      *
+     * @param iterable<\BEdita\Core\Model\Entity\ObjectEntity> $illustrators Illustrators to index.
      * @return array Grouped illustrators.
      */
     protected function index(iterable $illustrators): array
