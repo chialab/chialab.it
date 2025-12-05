@@ -1,0 +1,7 @@
+{% if illustrators|length > 0 %}
+    <dna-masonry class="w-full grid m-0">
+        {% for illustrator in illustrators %}
+            {{ element('card-collapsable', { object: illustrator })|raw }}
+        {% endfor %}
+    </dna-masonry>
+{% endif %}

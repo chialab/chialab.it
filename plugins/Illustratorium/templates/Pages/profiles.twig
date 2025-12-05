@@ -1,0 +1,46 @@
+{% if Poster.exists(object) %}
+    <header class="w-full">
+        <img class="w-full h-3 block cover" alt="" src="{{ Poster.url(object) }}" draggable="false"/>
+    </header>
+{% endif %}
+
+<main class="grid w-full">
+    <article class="column w-8 gap-xs">
+        <h1 class="f-8 italic regular serif my-0">{{ object.title }}</h1>
+        {% if object.get('email') %}
+            <a class="underline-accent f-4 sans" href="mailto:{{ object.email }}">{{ object.email }}</a>
+        {% endif %}
+        {% if object.get('website') %}
+            <a class="underline-accent f-4 sans" href="{{ object.website }}">{{ object.website }}</a>
+        {% endif %}
+
+        {% if object.get('has_media') is not empty %}
+            <div class="illustrator-gallery mt-2 grid">
+                {% for img in object.get('has_media') %}
+                    <button class="img-modal-trigger" aria-label="{{ __('Zoom image gallery') }}">
+                        <img class="w-2 h-2 cover b-1"
+                            src="{{ img.media_url }}"
+                            alt="{{ img.title }}"
+                            data-modal="{{ object.uname }}"
+                        />
+                    </button>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </article>
+
+    <aside class="column w-4 gap-s">
+        {% if object.get('see_also') is not empty %}
+            <div class="mt-2 column f-s">
+                <span class="link--section">{{ __('See also') }}</span>
+                <div class="columns-2 w-full">
+                    {% for item in object.see_also %}
+                        {{ element('card-small', {
+                            object: item,
+                        })|raw }}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </aside>
+</main>

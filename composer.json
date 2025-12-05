@@ -11,7 +11,7 @@
     "ext-intl": "*",
     "ext-json": "*",
     "ext-pdo": "*",
-    "bedita/api": "^5.41",
+    "bedita/api": "^5.45.1",
     "bedita/aws": "^3.0",
     "bedita/core": "^5.41",
     "bedita/i18n": "^4.0",
