@@ -1,6 +1,33 @@
 <header class="topnav mono">
-    <a href="/">
-        {{ element('skua-logo')|raw }}
-        <strong>SKUA</strong><span>1852</span>
-    </a>
+    <nav>
+        <a class="logo" href="/">
+            {{ element('skua-logo')|raw }}
+            <strong>SKUA</strong>
+            <span>1852</span>
+        </a>
+        {% if journeys is defined and journeys|length > 0 %}
+            <ul class="menu" role="menu">
+                {% for journey in journeys %}
+                    <li>
+                        <a
+                            href="{{ Url.build({'_name': 'pages:journey', 'uname': journey.uname}) }}"
+                            class="{% if currentJourney is defined and journey.uname == currentJourney.uname %}active{% endif %}"
+                            role="menuitem"
+                        >
+                        {{ journey.title|default(journey.uname) }}
+                        </a>
+                    </li>
+                {% endfor %}
+                <li>
+                    <a
+                        href="{{ Url.build({'_name': 'pages:tracking'}) }}"
+                        class="tracking {% if _view.getRequest().getPath() == '/tracking' %}active{% endif %}"
+                        role="menuitem"
+                    >
+                    Tracking
+                    </a>
+                </li>
+            </ul>
+        {% endif %}
+    </nav>
 </header>

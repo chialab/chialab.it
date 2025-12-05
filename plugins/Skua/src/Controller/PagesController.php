@@ -5,6 +5,8 @@ namespace Skua\Controller;
 
 use Cake\Core\Configure;
 use Cake\Datasource\Exception\RecordNotFoundException;
+use Cake\Http\Client;
+use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
@@ -26,15 +28,12 @@ class PagesController extends AppController
      */
     public function home(): void
     {
-        $loader = new ObjectsLoader();
-        $root = $this->Publication->getPublication();
-        $journeys = $loader->loadObjects(['parent' => $root->uname], 'folders');
-        if ($journeys->isEmpty()) {
+        if (empty($this->journeys)) {
             throw new Exception('No journeys found');
         }
 
         // rimando al primo viaggio dentro la root folder
-        $firstJourney = $journeys->firstOrFail();
+        $firstJourney = $this->journeys[0];
         $this->redirect(['_name' => 'pages:journey', 'uname' => $firstJourney->uname]);
     }
 
@@ -47,7 +46,7 @@ class PagesController extends AppController
      */
     public function journey(string $uname): void
     {
-        $loader = new ObjectsLoader();
+        $loader = new ObjectsLoader(['galleries' => ['include' => 'has_media']], ['has_media' => 3]);
         $journey = $loader->loadObject($uname, 'folders');
         if (!$journey) {
             throw new RecordNotFoundException(sprintf("Journey folder %s not found", $uname));
@@ -56,12 +55,58 @@ class PagesController extends AppController
         $children = $loader->loadObjects(
             ['parent' => $journey->uname],
             'locations',
-            ['include' => 'has_media'],
-            ['has_media' => 2]
+            ['include' => 'placeholder'],
+            ['placeholder' => 2]
         );
         $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
         $this->viewBuilder()->addHelpers(['Skua.Map']);
-        $this->set('children', $children);
+        $this->set(compact('children'));
+        $this->set('currentJourney', $journey);
+    }
+
+    /**
+     * Live SKUA tracking page.
+     *
+     * @return void
+     */
+    public function tracking(): void
+    {
+        $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
+        $this->viewBuilder()->addHelpers(['Skua.Map']);
+
+        // call live tracking
+        $http = new Client();
+        $response = $http->get('https://skua.le0m.net?ship=8178410', [], [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Basic bGUwbTpQYjdrVHFWamdZdWdnUDlIcmo3dmpuOUg='
+            ]
+        ]);
+        $response = $response->getJson(); // ['latitude' => ..., 'longitude' => ...]
+        if (empty($response['latitude']) || empty($response['longitude'])) {
+            throw new NotFoundException('Unable to get live tracking data');
+        }
+
+        $center = sprintf('%.15f,%.15f', $response['latitude'], $response['longitude']);
+
+        $data = [
+            'type' => 'FeatureCollection',
+            'features' => [
+                [
+                    'type' => 'Feature',
+                    'geometry' => [
+                        'type' => 'Point',
+                        'coordinates' => [$response['longitude'], $response['latitude']],
+                    ],
+                    'properties' => [
+                        'marker-symbol' => 'marker-skua',
+                        'marker-anchor' => 'bottom',
+                    ],
+                ],
+            ],
+        ];
+
+        $this->set(compact('data', 'center'));
     }
 
     /**

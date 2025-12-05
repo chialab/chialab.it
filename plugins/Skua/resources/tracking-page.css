@@ -1,0 +1,14 @@
+@import '@chialab/dna-map/style';
+
+.tracking-page {
+    height: 100vh;
+}
+
+.tracking-page dna-map {
+    width: 100%;
+    height: 100%;
+}
+
+.tracking-page dna-map [marker-symbol] {
+    width: 4rem;
+}

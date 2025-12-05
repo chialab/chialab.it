@@ -34,6 +34,8 @@ const config = {
                 './plugins/Skua/resources/mapscroller.tsx',
                 './plugins/Skua/resources/app-dialog.tsx',
                 './plugins/Skua/resources/index.css',
+                './plugins/Skua/resources/journey-page.css',
+                './plugins/Skua/resources/tracking-page.css',
             ],
             publicPath: '/skua/build/',
             output: 'plugins/Skua/webroot/build/',

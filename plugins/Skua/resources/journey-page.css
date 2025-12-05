@@ -1,0 +1,175 @@
+@import '@chialab/dna-dialog/style';
+@import '@chialab/dna-map-scroller/style';
+@import '@chialab/dna-map/style';
+@import '@chialab/dna-story-scroller/style';
+@import '@chialab/dna-zoom-panel/style';
+
+.topnav {
+    --left-offset: calc(
+        var(--map-scroller-left-offset) + var(--map-scroller-steps-width) + var(--map-scroller-right-padding)
+    );
+
+    left: var(--left-offset) !important;
+    max-width: calc(100% - var(--left-offset)) !important;
+    padding-left: 0 !important;
+}
+
+skua-map-scroller {
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --steps-resized-width: var(--map-scroller-steps-width);
+    --steps-max-width: calc(100vw - var(--map-scroller-left-offset) - var(--map-scroller-right-padding));
+
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+}
+
+skua-map-scroller .map-scroller__map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+}
+
+skua-map-scroller .map-scroller__map dna-map {
+    width: 100%;
+    height: 100%;
+}
+
+skua-map-scroller .map-scroller__map dna-map [marker-symbol] {
+    fill: var(--marker-primary-fill, black);
+}
+
+skua-map-scroller .map-scroller__map dna-map [marker-symbol].current {
+    --marker-primary-fill: var(--color-accent);
+}
+
+skua-map-scroller .map-scroller__map dna-map [marker-symbol] text.marker-index {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-3);
+    font-weight: var(--weight-bold);
+    fill: black;
+    dominant-baseline: text-before-edge;
+}
+
+skua-map-scroller dna-story-scroller {
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    height: 100%;
+    margin-left: 12px;
+    padding-right: 30px;
+    padding-left: 12px;
+    overflow: auto;
+    direction: rtl; /* per mettere la scrollbar a sinistra */
+    text-align: left;
+}
+
+skua-map-scroller dna-story-scroller::-webkit-scrollbar {
+    width: 24px;
+}
+
+skua-map-scroller dna-story-scroller::-webkit-scrollbar-thumb {
+    --scrollbar-thumb-bg: black;
+
+    background: repeating-linear-gradient(transparent, transparent 0 6px, var(--scrollbar-thumb-bg) 7px 10px);
+}
+
+skua-map-scroller dna-story-scroller::-webkit-scrollbar-thumb:hover {
+    --scrollbar-thumb-bg: var(--color-neutral);
+
+    cursor: pointer;
+}
+
+@supports not selector(.z-scrollbar::-webkit-scrollbar-track) {
+    skua-map-scroller dna-story-scroller {
+        scrollbar-color: black transparent;
+    }
+}
+
+skua-map-scroller .story-scroller__contents {
+    position: relative;
+    direction: ltr; /* per rimettere il contenuto in direzione normale */
+}
+
+.story-scroller__contents dna-map-scroller-step {
+    width: var(--steps-resized-width, var(--map-scroller-steps-width));
+    min-width: var(--map-scroller-steps-width);
+    max-width: var(--steps-max-width);
+    margin-bottom: 15vh;
+    box-shadow: 0 16px 16px 0 var(--shadow-color);
+    resize: horizontal;
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item dna-slideshow {
+    width: 100%;
+    max-height: var(--map-scroller-steps-width);
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item :is(img, video) {
+    display: block;
+    width: 100%;
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item img[role='button'] {
+    cursor: pointer;
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content {
+    --block-padding: 44px;
+    --padding-left: 65px;
+    --padding-right: 35px;
+
+    padding: var(--block-padding) var(--padding-right) var(--block-padding) var(--padding-left);
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .journey-title {
+    margin-bottom: 128px;
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content [data-placeholder] {
+    /* placeholder a filo coi bordi della card */
+    margin-right: calc(var(--padding-right) * -1);
+    margin-left: calc(var(--padding-left) * -1);
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .index {
+    color: var(--color-accent);
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content .title {
+    font-weight: 600;
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content :is(.description, .body) p {
+    font-family: var(--font-serif);
+}
+
+.story-scroller__contents dna-map-scroller-step .map-scroller-item .item-content :is(.description, .body) :is(h1, h2) {
+    font-size: var(--font-size-3);
+}
+
+skua-map-scroller .resize-handle {
+    content: '';
+    position: fixed;
+    top: 230px;
+    left: calc(var(--map-scroller-left-offset) + var(--steps-resized-width));
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    border: none;
+    transform: translateX(-50%);
+    cursor: col-resize;
+}
+
+skua-map-scroller .resize-handle dna-icon {
+    display: block;
+    width: 30px;
+    height: 50px;
+}

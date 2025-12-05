@@ -1,0 +1,20 @@
+{% set items = object.has_media|default([]) %}
+{% if items|length %}
+    {% if items|length == 1 %}
+        {{ element('Placeholders/media', { object: items|first }) }}
+    {% else %}
+        {% if object.layout|default('') == 'masonry' %}
+            <dna-masonry>
+                {% for media in items %}
+                    {{ element('Placeholders/media', { object: media }) }}
+                {% endfor %}
+            </dna-masonry>
+        {% else %}
+            <dna-slideshow carousel controls cover controlslist="nodots noplayback nocounter">
+                {% for media in items %}
+                    {{ element('Placeholders/media', { object: media }) }}
+                {% endfor %}
+            </dna-slideshow>
+        {% endif %}
+    {% endif %}
+{% endif %}
