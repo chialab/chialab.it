@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BEdita 4 \n"
-"POT-Creation-Date: 2024-10-31 11:03:16 \n"
+"POT-Creation-Date: 2025-12-04 16:48:04 \n"
 "PO-Revision-Date:  \n"
 "Last-Translator:  \n"
 "Language-Team: BEdita I18N & I10N Team \n"
@@ -35,40 +35,34 @@ msgstr ""
 msgid "Download VCard"
 msgstr ""
 
+msgid "Error loading the page"
+msgstr ""
+
 msgid "Job categories"
 msgstr ""
 
 msgid "Links"
 msgstr ""
 
-msgid "Password"
-msgstr ""
-
-msgid "Published on"
-msgstr ""
-
-msgid "See also"
-msgstr ""
-
-msgid "Updated on"
-msgstr ""
-
-msgid "Username"
-msgstr ""
-
-msgid "Year"
-msgstr ""
-
 msgid "Page not found"
 msgstr ""
 
-msgid "Error loading the page"
+msgid "Password"
+msgstr ""
+
+msgid "See also"
 msgstr ""
 
 msgid "The page you are looking for does not exist."
 msgstr "This page no longer exists, never existed, or has moved."
 
 msgid "Try to reload the page or"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Zoom image gallery"
 msgstr ""
 
 msgid "log in"
@@ -90,6 +84,9 @@ msgid "previous"
 msgstr ""
 
 msgid "privacy policy"
+msgstr ""
+
+msgid "see all"
 msgstr ""
 
 msgid "signup"

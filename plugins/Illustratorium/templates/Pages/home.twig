@@ -1,0 +1,29 @@
+<header class="w-full">
+    {{ element('claim')|raw }}
+</header>
+
+{{ cell('Illustratorium.Illustrators') }}
+
+{% if publication.get('see_also') is not empty %}
+    <div class="w-full column section">
+        <h2 class="m-0 mono bold f-1 bb-1 py-2 w-full">{{ __('Connections')|raw }} /</h2>
+
+        <div class="w-full grid">
+            {% for item in publication.see_also %}
+                <a class="w-6 h-3"
+                    style="background-size: cover; background-position: center; background-image: url('{{ Poster.url(item)|escape('html_attr') }}')"
+                    href="{{ item.type == 'links' and item.url|default() ? item.url : Url.build({ _name: 'pages:objects', _entity: item, }) }}"
+                    title="{{ item.title|escape('html_attr')|raw }}"
+                    target="_blank"
+                >
+                    <div class="w-4 bg-accent p-2 sans">
+                        <span class="f-5">{{ item.title|raw }}</span>
+                        {% if item.get('description') is not empty %}
+                            <div class="f-3 description">{{ item.description|raw }}</div>
+                        {% endif %}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

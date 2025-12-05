@@ -38,10 +38,11 @@
 
         <div class="w-full grid">
             {% for item in publication.see_also %}
-                <a class="w-6 h-3" style="background-size: cover; background-position: center; background-image: url('{{ Poster.url(item)|escape('html_attr') }}')" href="{{ Url.build({
-                    _name: 'pages:objects',
-                    _entity: item,
-                }) }}" title="{{ item.title|escape('html_attr')|raw }}" target="_blank">
+                <a class="w-6 h-3"
+                    style="background-size: cover; background-position: center; background-image: url('{{ Poster.url(item)|escape('html_attr') }}')"
+                    href="{{ item.type == 'links' and item.url|default() ? item.url : Url.build({ _name: 'pages:objects', _entity: item, }) }}"
+                    title="{{ item.title|escape('html_attr')|raw }}" target="_blank"
+                >
                     <div class="w-4 bg-accent p-2 sans">
                         <span class="f-5">{{ item.title|raw }}</span>
                         {% if item.get('description') is not empty %}

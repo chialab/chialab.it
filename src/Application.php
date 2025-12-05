@@ -102,6 +102,9 @@ class Application extends BaseApplication
 
         $this->addOptionalPlugin('Cake/Repl');
         $this->addOptionalPlugin('Chialab', ['routes' => false]);
+        $this->addOptionalPlugin('Illustratorium');
+        $this->addOptionalPlugin('OpenSource');
+        $this->addOptionalPlugin('Skua', ['routes' => false]);
     }
 
     /**
