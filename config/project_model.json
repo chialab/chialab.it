@@ -475,7 +475,10 @@
           "filter": ["status", "parent"]
         },
         "media": { "filter": ["status", "parent"] },
-        "images": { "filter": ["status", "parent"] },
+        "images": {
+          "index": ["title", "extra.rights"],
+          "filter": ["status", "parent"]
+        },
         "videos": { "filter": ["status", "parent"] },
         "audio": { "filter": ["status", "parent"] },
         "files": { "filter": ["status", "parent"] },
