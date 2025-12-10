@@ -13,7 +13,7 @@ on:
     secrets:
       AWS_CD_ROLE:
         required: true
-      NPMRC:
+      NPM_TOKEN:
         required: true
 
 jobs:
@@ -69,7 +69,7 @@ jobs:
           cache-to: type=registry,mode=max,image-manifest=true,oci-mediatypes=true,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
           cache-from: type=registry,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
           secrets: |
-            "npm=${{ secrets.NPMRC }}"
+            "npm=//${{ vars.NPM_REGISTRY }}/:_authToken=${{ secrets.NPM_TOKEN }}"
 
       - name: Build and push "web" image
         uses: docker/build-push-action@v5
@@ -82,7 +82,7 @@ jobs:
           cache-to: type=registry,mode=max,image-manifest=true,oci-mediatypes=true,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
           cache-from: type=registry,ref=${{ steps.login-ecr.outputs.registry }}/chialab/bedita/app:cache-${{ steps.meta.outputs.version }}
           secrets: |
-            "npm=${{ secrets.NPMRC }}"
+            "npm=//${{ vars.NPM_REGISTRY }}/:_authToken=${{ secrets.NPM_TOKEN }}"
 
       - name: Fill in the "app" container definition in the Amazon ECS task definition
         id: render-app-container
