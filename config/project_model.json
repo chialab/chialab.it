@@ -461,7 +461,8 @@
           "index": ["title", "coords", "status"],
           "view": {
             "core": ["title", "description", "body", "coords"]
-          }
+          },
+          "filter": ["status", "parent"]
         },
         "documents": {
           "view": {
@@ -472,7 +473,19 @@
             "all": ["status", "title", "description", "body"]
           },
           "filter": ["status", "parent"]
-        }
+        },
+        "media": { "filter": ["status", "parent"] },
+        "images": { "filter": ["status", "parent"] },
+        "videos": { "filter": ["status", "parent"] },
+        "audio": { "filter": ["status", "parent"] },
+        "files": { "filter": ["status", "parent"] },
+        "events": { "filter": ["status", "parent"] },
+        "news": { "filter": ["status", "parent"] },
+        "profiles": { "filter": ["status", "parent"] },
+        "users": { "filter": ["status", "parent", "roles"] },
+        "galleries": { "filter": ["status", "parent"] },
+        "links": { "filter": ["status", "parent"] },
+        "objects": { "filter": ["status", "parent"] }
       }
     }
   ]
