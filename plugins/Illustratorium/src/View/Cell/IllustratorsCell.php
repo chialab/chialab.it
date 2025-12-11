@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Illustratorium\View\Cell;
 
 use BEdita\Core\Model\Entity\ObjectEntity;
+use Cake\Cache\Cache;
 use Cake\Database\Expression\FunctionExpression;
 use Cake\View\Cell;
 use Chialab\FrontendKit\Model\ObjectsLoader;
@@ -83,7 +84,10 @@ class IllustratorsCell extends Cell
     protected function loadIllustratorsData(int|null $limit = 6, bool $randomize = true): void
     {
         $folder = $this->loader->loadObject('illustrators', 'folders');
-        $illustrators = $this->loader->loadRelatedObjects('illustrators', 'folders', 'children');
+        $illustrators = Cache::remember(
+            'illustrators_children',
+            fn () => $this->loader->loadRelatedObjects('illustrators', 'folders', 'children')
+        );
 
         if ($randomize) {
             $illustrators = $illustrators->order(new FunctionExpression('RAND', returnType: 'double'), true);
@@ -125,9 +129,6 @@ class IllustratorsCell extends Cell
 
         // Sort by letter and by surname within each letter
         ksort($illustratorsByLetter);
-        foreach ($illustratorsByLetter as $letter => $list) {
-            $illustratorsByLetter[$letter] = $this->sortBySurnameInitial($list);
-        }
 
         return $illustratorsByLetter;
     }
