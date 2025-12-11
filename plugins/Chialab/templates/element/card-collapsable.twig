@@ -51,6 +51,7 @@
     <div slot="footer">
         {{ element('card-footer', {
             object: object,
+            showCategories: object.type != 'profiles',
         }) }}
     </div>
 </cl-card-details>

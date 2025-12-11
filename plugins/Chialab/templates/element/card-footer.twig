@@ -1,13 +1,15 @@
-{% if object.get('categories') is not empty or object.get('has_links') is not empty %}
+{% set _showCategories = object.get('categories') is not empty and (showCategories is defined ? showCategories : true)  %}
+{% set _showLinks = object.get('has_links') is not empty and (showLinks is defined ? showLinks : true) %}
+{% if _showCategories or _showLinks %}
     <div class="column gap-xs">
-        {% if object.get('categories') is not empty %}
+        {% if _showCategories %}
             <ul class="list--comma">
                 {% for category in object.categories %}
                     <li class="mono f-xs light">{{ category.label|raw }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
-        {% if object.get('has_links') is not empty %}
+        {% if _showLinks %}
             <ul class="list--plain column gap-xs">
                 {% for link in object.has_links %}
                     <li class="mono f-xs light"><a

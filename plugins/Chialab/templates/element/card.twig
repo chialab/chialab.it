@@ -19,6 +19,7 @@
         {% endif %}
         {{ element('card-footer', {
             object: object,
+            showCategories: object.type != 'profiles',
         }) }}
     </div>
 </a>
