@@ -86,15 +86,14 @@ class IllustratorsCell extends Cell
         $folder = $this->loader->loadObject('illustrators', 'folders');
         $illustrators = Cache::remember(
             'illustrators_children',
-            fn () => $this->loader->loadRelatedObjects('illustrators', 'folders', 'children')
+            fn () => $this->loader->loadRelatedObjects('illustrators', 'folders', 'children')->toArray(),
         );
 
         if ($randomize) {
-            $illustrators = $illustrators->order(new FunctionExpression('RAND', returnType: 'double'), true);
+            shuffle($illustrators);
         } else {
-            $illustrators = $illustrators->formatResults(fn (iterable $illustrators): iterable => collection($this->sortBySurnameInitial($illustrators)));
+            $illustrators = $this->sortBySurnameInitial($illustrators);
         }
-        $illustrators = $illustrators->all();
         $index = $this->index($illustrators);
         if ($limit !== null) {
             $illustrators = collection($illustrators)->chunk($limit)->first() ?? [];
