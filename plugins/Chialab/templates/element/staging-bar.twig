@@ -1,6 +1,6 @@
 {% if Manager.isEnabled() and Identity.isLoggedIn() %}
     {% set url = Manager.getViewUrl() %}
-    <div class="staging-bar p-2 row align-center">
+    <div class="staging-bar p-2 sans row align-center">
         {% set name = Identity.get('name') ? Identity.get('name') ~ ' ' ~ Identity.get('surname') : Identity.get('username') %}
         <span>Accesso effettuato come: {{ name }}</span>
         {% if object is defined %}
