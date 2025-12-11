@@ -78,13 +78,11 @@ class IllustratorsCell extends Cell
             'illustrators_children',
             fn () => $this->loader->loadRelatedObjects('illustrators', 'folders', 'children')->toArray(),
         );
-
+        $illustrators = $this->sortBySurnameInitial($illustrators);
+        $index = $this->index($illustrators);
         if ($randomize) {
             shuffle($illustrators);
-        } else {
-            $illustrators = $this->sortBySurnameInitial($illustrators);
         }
-        $index = $this->index($illustrators);
         if ($limit !== null) {
             $illustrators = collection($illustrators)->chunk($limit)->first() ?? [];
         }
