@@ -74,6 +74,7 @@ class IllustratorsCell extends Cell
      */
     protected function loadIllustratorsData(int|null $limit = 6, bool $randomize = true): void
     {
+        $folder = $this->loader->loadObject('illustrators', 'folders');
         $illustrators = Cache::remember(
             'illustrators_children',
             fn () => $this->loader->loadRelatedObjects('illustrators', 'folders', 'children')->toArray(),
@@ -87,7 +88,7 @@ class IllustratorsCell extends Cell
             $illustrators = collection($illustrators)->chunk($limit)->first() ?? [];
         }
 
-        $this->set(compact('illustrators', 'index'));
+        $this->set(compact('folder', 'illustrators', 'index'));
     }
 
     /**
