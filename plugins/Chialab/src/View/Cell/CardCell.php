@@ -41,6 +41,9 @@ class CardCell extends Cell
     protected function loadRelated(ObjectEntity $object, array $relations): void
     {
         foreach ($relations as $relationName) {
+            if ($object->has($relationName)) {
+                continue;
+            }
             $data = $this->loader->loadRelatedObjects((string)$object->id, $object->type, $relationName);
             $object->set($relationName, $data);
         }
@@ -89,10 +92,10 @@ class CardCell extends Cell
             case 'documents':
             case 'news':
             case 'profiles':
-                $this->loadRelated($object, ['has_media', 'see_also']);
+                $this->loadRelated($object, ['poster', 'has_media', 'see_also']);
                 break;
             case 'events':
-                $this->loadRelated($object, ['has_links']);
+                $this->loadRelated($object, ['poster', 'has_links']);
                 break;
         }
 
