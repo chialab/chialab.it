@@ -26,7 +26,7 @@
                 <a class="sans f-4 link--underline" href="mailto:{{ object.email }}">{{ object.email }}</a>
             {% endif %}
             {% if object.get('website') is not empty %}
-                <a class="sans f-4 link--underline" href="{{ object.website }}">{{ object.website }}</a>
+                <a class="sans f-4 link--underline" href="{{ object.website }}" target="_blank" rel="noopener noreferrer">{{ object.website }}</a>
             {% endif %}
             {% if object.get('has_links') is not empty %}
                 <div class="links row gap-s my-xs">
