@@ -1,6 +1,4 @@
-{% if object.type == 'profiles' and object.has('email') is not empty %}
-    <span class="mono f-s text-accent">{{ object.email|raw }}</span>
-{% elseif object.get('has_clients') is not empty %}
+{% if object.get('has_clients') is not empty %}
     <span class="mono f-s text-accent bold">{{ (object.has_clients|first).title|raw }}</span>
 {% elseif object.type == 'events' %}
     <span class="mono f-s text-accent bold">
