@@ -11,7 +11,7 @@
             <a class="underline-accent f-4 sans" href="mailto:{{ object.email }}">{{ object.email }}</a>
         {% endif %}
         {% if object.get('website') %}
-            <a class="underline-accent f-4 sans" href="{{ object.website }}">{{ object.website }}</a>
+            <a class="underline-accent f-4 sans" href="{{ object.website }}" target="_blank" rel="noopener noreferrer">{{ object.website }}</a>
         {% endif %}
 
         {% if object.get('has_media') is not empty %}
