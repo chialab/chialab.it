@@ -1,7 +1,11 @@
 {% if illustrators|length > 0 %}
     <dna-masonry class="w-full grid m-0">
         {% for illustrator in illustrators %}
-            {{ element('card-collapsable', { object: illustrator })|raw }}
+            {{ cell('Chialab.Card::collapsable', { object: illustrator }, {
+                cache: {
+                    key: 'card_collapsable_' ~ locale ~ '_' ~ illustrator.id,
+                },
+            }) }}
         {% endfor %}
     </dna-masonry>
 {% endif %}

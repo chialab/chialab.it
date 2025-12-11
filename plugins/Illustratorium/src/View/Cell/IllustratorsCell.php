@@ -6,11 +6,8 @@ namespace Illustratorium\View\Cell;
 
 use BEdita\Core\Model\Entity\ObjectEntity;
 use Cake\Cache\Cache;
-use Cake\Database\Expression\FunctionExpression;
 use Cake\View\Cell;
 use Chialab\FrontendKit\Model\ObjectsLoader;
-
-use function Cake\Collection\collection;
 
 /**
  * Illustrators cell
@@ -31,13 +28,7 @@ class IllustratorsCell extends Cell
     {
         parent::initialize();
 
-        $this->loader = new ObjectsLoader([
-            'objects' => ['include' => 'poster|1'],
-            'profiles' => ['include' => 'poster|1,see_also,has_media'],
-        ], [
-            'see_also' => 2,
-            'has_media' => 2,
-        ]);
+        $this->loader = new ObjectsLoader();
     }
 
     /**
@@ -83,7 +74,6 @@ class IllustratorsCell extends Cell
      */
     protected function loadIllustratorsData(int|null $limit = 6, bool $randomize = true): void
     {
-        $folder = $this->loader->loadObject('illustrators', 'folders');
         $illustrators = Cache::remember(
             'illustrators_children',
             fn () => $this->loader->loadRelatedObjects('illustrators', 'folders', 'children')->toArray(),
@@ -99,7 +89,7 @@ class IllustratorsCell extends Cell
             $illustrators = collection($illustrators)->chunk($limit)->first() ?? [];
         }
 
-        $this->set(compact('folder', 'illustrators', 'index'));
+        $this->set(compact('illustrators', 'index'));
     }
 
     /**

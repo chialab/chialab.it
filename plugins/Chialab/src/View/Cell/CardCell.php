@@ -88,6 +88,7 @@ class CardCell extends Cell
         switch ($object->get('type')) {
             case 'documents':
             case 'news':
+            case 'profiles':
                 $this->loadRelated($object, ['has_media', 'see_also']);
                 break;
             case 'events':
