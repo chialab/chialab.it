@@ -135,7 +135,7 @@ https://dev-illustratorium.chialab.dt.bedita.cloud {
 
 	import site "Chialab" "Illustratorium" "draft" "false" "devillustratorium"
 }
-https://illustratorium.it, https://illustratorium.chialab.it, https://illustratorium.chialab.dt.bedita.cloud {
+https://illustratorium.it, https://illustratori.chialab.it, https://illustratorium.chialab.dt.bedita.cloud {
 	import security-headers
 	redir https://www.illustratorium.it{uri} 308
 }
