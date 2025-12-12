@@ -3,6 +3,7 @@
 :root {
     --color-accent: #ff0000;
     --color-neutral: #797676;
+    --color-text-neutral: #666565;
     --map-scroller-steps-width: 40vw;
     --map-scroller-right-padding: 30px;
     --map-scroller-left-offset: calc(24px + 12px + 12px); /* scrollbar + padding-left + margin-left */
@@ -18,7 +19,7 @@ body {
 
 .topnav {
     position: absolute;
-    top: calc(var(--padding) * 3);
+    top: 0;
     left: 0;
     z-index: 3;
     width: 100%;
@@ -37,6 +38,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     height: fit-content;
+    margin-top: calc(var(--padding) * 3);
     padding-left: 53px;
 }
 
@@ -77,7 +79,7 @@ body {
 }
 
 .topnav .menu li a {
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-2);
     font-weight: 700;
 }
 
@@ -106,16 +108,44 @@ dna-map [marker-symbol='marker-skua'] {
 }
 
 dna-map [marker-symbol='marker-point'] {
+    width: 1rem;
+    height: 1rem;
     overflow: visible;
 }
 
+dna-dialog {
+    --color-overlay: rgba(255, 255, 255, 0.8);
+
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
 dna-dialog .dialog__container {
-    width: 90vw;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
     background: transparent;
+    border-radius: 0;
 }
 
 dna-dialog .dialog__content {
     position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+dna-dialog .dialog__content:focus:focus-visible {
+    outline: none;
+}
+
+dna-dialog .dialog__content img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 dna-dialog .dialog__content .close-btn {

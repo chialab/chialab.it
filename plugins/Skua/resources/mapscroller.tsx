@@ -246,13 +246,7 @@ export class SkuaMapScroller extends Component {
         const mediaItem = event.target as HTMLImageElement;
         const dialog = this.ownerDocument.createElement('app-dialog') as AppDialog;
         const imgClone = mediaItem.cloneNode(true) as HTMLImageElement;
-        this.ownerDocument.body.appendChild(
-            render(
-                <app-dialog ref={dialog}>
-                    <dna-zoom-panel>{imgClone}</dna-zoom-panel>
-                </app-dialog>
-            ) as Node
-        );
+        this.ownerDocument.body.appendChild(render(<app-dialog ref={dialog}>{imgClone}</app-dialog>) as Node);
         dialog.show();
         dialog.addEventListener('close', () => {
             dialog.remove();

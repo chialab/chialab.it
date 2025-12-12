@@ -86,8 +86,7 @@ class MapHelper extends Helper
                 'style' => [
                     'type' => 'line',
                     'line-color' => '#ff0000',
-                    'line-width' => 2,
-                    // 'line-dasharray' => [4, 4],
+                    'line-width' => 1,
                 ],
             ]
         ];

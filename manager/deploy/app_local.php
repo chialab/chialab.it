@@ -137,11 +137,11 @@ return [
         'locations' => [
             'color' => '#6A6256',
             'categories' => [
-                    '_element' => 'Modules/locations_categories',
-                ],
-                'sidebar' => [
-                    '_element' => 'Modules/locations_sidebar',
-                ],
+                '_element' => 'Modules/locations_categories',
+            ],
+            'sidebar' => [
+                '_element' => 'Modules/locations_sidebar',
+            ],
         ],
         'users' => [
             'color' => '#000000',
@@ -159,5 +159,30 @@ return [
             'color' => '#230637',
             'sort' => '-modified',
         ],
+    ],
+
+    /**
+     * Add custom style formats to Richeditor
+     */
+    'Richeditor' => [
+        'style_formats' => [
+            [
+                'title' => 'Stili',
+                'items' => [
+                    ['title' => 'Autore citazione', 'inline' => 'b', 'classes' => 'quote-author'],
+                    ['title' => 'Fonte citazione', 'inline' => 'cite'],
+                ],
+            ],
+            [
+                'title' => 'Blocchi personalizzati',
+                'items' => [
+                    ['title' => 'Citazione breve', 'block' => 'blockquote', 'classes' => 'short-quote'],
+                ],
+            ]
+        ],
+        'content_style' => '.quote-author, cite { font-weight: 400; font-style: italic; }' .
+            '.short-quote { padding: 0; margin-left: 20px; font-style: italic; border: none; border-top: 1px solid black; border-bottom: 1px solid black; }' .
+            '.short-quote .quote-author { font-style: normal; font-size: 12px; margin-top: 12px; }',
+        'style_formats_merge' => true,
     ],
 ];
