@@ -80,7 +80,7 @@ body {
 
 .topnav .menu li a {
     font-size: var(--font-size-2);
-    font-weight: 700;
+    font-weight: var(--weight-bold);
 }
 
 .topnav .menu li a.tracking {
@@ -186,4 +186,8 @@ dna-slideshow button[data-action]:hover svg path {
 dna-slideshow button[data-action] dna-icon {
     width: 2rem !important;
     height: 2rem !important;
+}
+
+.gallery_grid > * {
+    border: none;
 }

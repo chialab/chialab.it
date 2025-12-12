@@ -241,7 +241,7 @@ export class SkuaMapScroller extends Component {
     /**
      * Opens the related dialog when an image inside a step's slideshow is clicked.
      */
-    @listen('click', '.map-scroller-item img[role="button"]')
+    @listen('click', '.map-scroller-item img.clickable')
     private onMediaItemClick(event: MouseEvent) {
         const mediaItem = event.target as HTMLImageElement;
         const dialog = this.ownerDocument.createElement('app-dialog') as AppDialog;

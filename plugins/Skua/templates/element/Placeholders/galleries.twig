@@ -4,17 +4,23 @@
         {{ element('Placeholders/media', { object: items|first }) }}
     {% else %}
         {% if object.layout|default('') == 'masonry' %}
-            <dna-masonry>
+            <dna-masonry class="gallery_grid" style="--gallery-columns: {{ object.get('columns')|default(4) }}; --gallery-aspect-ratio: {{ object.get('crop')|default(false) ? 1 : 'auto' }}">
                 {% for media in items %}
                     {{ element('Placeholders/media', { object: media }) }}
                 {% endfor %}
             </dna-masonry>
-        {% else %}
+        {% elseif object.layout|default('') == 'slideshow' %}
             <dna-slideshow carousel controls cover controlslist="nodots noplayback nocounter">
                 {% for media in items %}
                     {{ element('Placeholders/media', { object: media }) }}
                 {% endfor %}
             </dna-slideshow>
+        {% else %}
+            <div class="w-full gallery_grid" style="--gallery-columns: {{ object.get('columns')|default(4) }}; --gallery-aspect-ratio: {{ object.get('crop')|default(false) ? 1 : 'auto' }}">
+                {% for media in items %}
+                    {{ element('Placeholders/media', { object: media }) }}
+                {% endfor %}
+            </div>
         {% endif %}
     {% endif %}
 {% endif %}

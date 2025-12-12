@@ -115,7 +115,7 @@ skua-map-scroller .story-scroller__contents {
     width: 100%;
 }
 
-.story-scroller__contents dna-map-scroller-step .map-scroller-item img[role='button'] {
+.story-scroller__contents dna-map-scroller-step .map-scroller-item img.clickable {
     cursor: pointer;
 }
 
@@ -200,7 +200,7 @@ dna-map-scroller-step .item-content :is(.description, .body) blockquote:not(.sho
 /* titolo citazione */
 dna-map-scroller-step .item-content :is(.description, .body) blockquote:not(.short-quote) strong {
     margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-weight: var(--weight-bold);
 }
 
 skua-map-scroller .resize-handle {

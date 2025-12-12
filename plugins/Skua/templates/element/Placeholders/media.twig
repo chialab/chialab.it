@@ -2,6 +2,8 @@
     {% if object.type == 'videos' %}
         <video src="{{ object.media_url }}" controls/>
     {% elseif object.type == 'images' %}
-        <img src="{{ object.media_url }}" alt="" role="button"/>
+        {{ Thumb.image(object, 'default', {
+            class: 'clickable',
+        })|raw }}
     {% endif %}
 {% endif %}
