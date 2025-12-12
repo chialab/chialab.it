@@ -189,6 +189,14 @@ return [
             'serialize' => true,
             'duration' => '+1 year',
         ],
+
+        'canonical_urls' => [
+            'className' => FileEngine::class,
+            'prefix' => 'canonical_urls_',
+            'path' => CACHE . 'canonical_urls/',
+            'serialize' => true,
+            'duration' => '+30 seconds',
+        ],
     ],
 
     /*

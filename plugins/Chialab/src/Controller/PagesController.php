@@ -164,6 +164,19 @@ class PagesController extends AppController
                 $object = $this->Objects->loadObject($object);
 
                 // If we reach this point, the object does exist, but the path at which it was being accessed was wrong.
+                // Check if the object is in the current publication's tree.
+                $paths = $this->Publication->getViablePaths($object->id);
+                if (empty($paths)) {
+                    // the object isn't in the current publication. try to get its canonical URL
+                    $url = $this->CanonicalUrl->buildCanonicalUrl($object);
+
+                    if ($url !== null) {
+                        return $this->redirect($url);
+                    }
+
+                    throw $e;
+                }
+
                 // Try to redirect to `/objects/{object}` to see if we can display it somehow.
                 return $this->redirect(['_name' => 'pages:objects', 'uname' => $object->uname]);
             } catch (RecordNotFoundException $err) {

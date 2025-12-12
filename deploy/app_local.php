@@ -126,6 +126,16 @@ return [
             'port' => env('CACHE_REDIS_PORT', 6379),
             'database' => 0,
         ],
+
+        'canonical_urls' => [
+            'className' => RedisEngine::class,
+            'host' => env('CACHE_REDIS_HOST', null),
+            'port' => env('CACHE_REDIS_PORT', 6379),
+            'database' => 0,
+            'prefix' => 'canonical_urls_',
+            'serialize' => true,
+            'duration' => '+1 day',
+        ],
     ],
 
     'Session' => [

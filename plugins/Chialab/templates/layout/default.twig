@@ -19,6 +19,10 @@
             'link': "#{_view.theme}.apple-touch-icon.png"
         })|raw }}
 
+        {% if canonicalUrl is defined -%}
+            <link rel="canonical" href="{{ canonicalUrl }}" />
+        {% endif %}
+
         {{ Rna.devServer(_view.theme)|raw }}
         {{ Rna.css("#{_view.theme}.index", { block: true })|raw }}
         {{ Rna.script("#{_view.theme}.index", { block: true })|raw }}

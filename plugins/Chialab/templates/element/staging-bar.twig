@@ -4,7 +4,23 @@
         {% set name = Identity.get('name') ? Identity.get('name') ~ ' ' ~ Identity.get('surname') : Identity.get('username') %}
         <span>Accesso effettuato come: {{ name }}</span>
         {% if object is defined %}
-            <a is="dna-button-link" variant="secondary" title="edit this {{ object.type }}" class="sans" target="_blank" href="{{ url }}">Vedi in BEdita</a>
+            <a is="dna-button-link"
+                variant="secondary"
+                title="edit this {{ object.type }}"
+                class="sans"
+                target="_blank"
+                href="{{ url }}">
+                Vedi in BEdita
+            </a>
+        {% endif %}
+        {% if canonicalUrl is defined %}
+            <a is="dna-button-link"
+                variant="secondary"
+                class="sans"
+                href="{{ canonicalUrl|escape('html_attr') }}"
+                target="_blank">
+                URL canonico
+            </a>
         {% endif %}
         {{ Form.postLink('Clear cache', { _name: 'staging:clearCache' }, {
             class: 'sans',
