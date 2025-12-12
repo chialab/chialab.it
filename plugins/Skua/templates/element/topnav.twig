@@ -5,29 +5,20 @@
             <strong>SKUA</strong>
             <span>1852</span>
         </a>
-        {% if journeys is defined and journeys|length > 0 %}
-            <ul class="menu" role="menu">
+        {% if journeys|default([])|length > 0 %}
+            <skua-menu>
                 {% for journey in journeys %}
-                    <li>
-                        <a
-                            href="{{ Url.build({'_name': 'pages:journey', 'uname': journey.uname}) }}"
-                            class="{% if currentJourney is defined and journey.uname == currentJourney.uname %}active{% endif %}"
-                            role="menuitem"
-                        >
-                        {{ journey.title|default(journey.uname) }}
-                        </a>
-                    </li>
+                    <a href="{{ Url.build({'_name': 'pages:journey', 'uname': journey.uname}) }}"
+                        aria-current="{{ currentJourney is defined and journey.uname == currentJourney.uname ? 'page' : 'false' }}"
+                        slot="item"
+                    >{{ journey.title|default(journey.uname) }}</a>
                 {% endfor %}
-                <li>
-                    <a
-                        href="{{ Url.build({'_name': 'pages:tracking'}) }}"
-                        class="tracking {% if _view.getRequest().getPath() == '/tracking' %}active{% endif %}"
-                        role="menuitem"
-                    >
-                    Tracking
-                    </a>
-                </li>
-            </ul>
+                <a href="{{ Url.build({'_name': 'pages:tracking'}) }}"
+                    class="tracking"
+                    aria-current="{{ _view.getRequest().getPath() == '/tracking' ? 'page' : 'false' }}"
+                    slot="item"
+                >Tracking</a>
+            </skua-menu>
         {% endif %}
     </nav>
 </header>

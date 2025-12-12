@@ -25,4 +25,7 @@ globalIconset.registerIcons({
     'arrow-next-full': `<svg width="29" height="45" viewBox="0 0 29 45" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M27.5368 25.2358L6.62712 43.4474C4.03888 45.7017 -4.68238e-07 43.8634 -7.68301e-07 40.4311L-3.95253e-06 4.00778C-4.25259e-06 0.575457 4.03887 -1.26283 6.62712 0.99145L27.5368 19.2031C29.3673 20.7974 29.3673 23.6415 27.5368 25.2358Z" fill="white"/>
     </svg>`,
+    'menu': `<svg viewBox="0 0 62 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M57 1H4L58 13H4L58 25H5" stroke="black" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
 });
