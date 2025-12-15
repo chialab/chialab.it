@@ -6,7 +6,9 @@ namespace Chialab\Controller;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
+use Cake\Routing\Router;
 use Chialab\FrontendKit\Model\ObjectsLoader;
+use Chialab\FrontendKit\Routing\Route\ObjectRoute;
 use Chialab\FrontendKit\Traits\GenericActionsTrait;
 
 /**
@@ -16,6 +18,7 @@ class PagesController extends AppController
 {
     use GenericActionsTrait {
         fallback as private _fallback;
+        renderObject as private _renderObject;
     }
 
     /**
@@ -142,6 +145,42 @@ class PagesController extends AppController
         }
 
         return $this->redirect($object->get('url'));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function object(string $uname): Response|null
+    {
+        $entity = $this->Objects->loadObject($uname, 'objects', [], []);
+        $currentRoute = $this->getRequest()->getParam('_matchedRoute');
+        $locale = $this->getRequest()->getParam('locale', null);
+        $params = array_filter(compact('locale'));
+
+        foreach (Router::routes() as $route) {
+            if (!$route instanceof ObjectRoute || $currentRoute === $route->template) {
+                continue;
+            }
+
+            $out = $route->match(['_entity' => $entity] + $route->defaults + $params, []);
+            if ($out !== null) {
+                return $this->redirect($out);
+            }
+        }
+
+        $paths = $this->Publication->getViablePaths($entity->id);
+        if (!empty($paths)) {
+            return $this->redirect(['action' => 'fallback', $paths[0]['path']] + $params);
+        }
+
+        $url = $this->CanonicalUrl->buildCanonicalUrl($entity);
+        if ($url !== null) {
+            return $this->redirect($url);
+        }
+
+        throw new RecordNotFoundException();
+
+        return $this->_renderObject($entity);
     }
 
     /**
