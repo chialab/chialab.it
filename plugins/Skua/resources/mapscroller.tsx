@@ -35,6 +35,9 @@ export class SkuaMapScroller extends Component {
     @state()
     currentStep: MapScrollerStep | null = null;
 
+    /** Whether the viewport is mobile-sized. */
+    private isMobile = false;
+
     /** Whether all markers have been processed to put the index number above the icon. */
     private _allMarkersIndexed = false;
 
@@ -136,6 +139,13 @@ export class SkuaMapScroller extends Component {
      */
     connectedCallback(): void {
         super.connectedCallback();
+
+        const mql = window.matchMedia('(width < 768px)');
+        this.isMobile = mql.matches;
+        mql.addEventListener('change', (e) => {
+            this.isMobile = e.matches;
+        });
+
         // scroll allo step indicato nell'hash dell'url
         const hash = window.location.hash.slice(1);
         if (hash) {
@@ -200,6 +210,11 @@ export class SkuaMapScroller extends Component {
 
             this.updateMarkersIndex();
         });
+
+        if (this.isMobile) {
+            this.mapElement.area = { top: '100%', right: 0, bottom: 0, left: 0 };
+            return;
+        }
         this.mapElement.area = { top: 0, right: 0, bottom: 0, left: '40%' };
     }
 
@@ -266,10 +281,19 @@ export class SkuaMapScroller extends Component {
         document.addEventListener('mouseup', this.onResizeHandleRelease);
     }
 
+    /**
+     * Gestisce il movimento del mouse durante il ridimensionamento del pannello degli step.
+     * In base alla larghezza della viewport, ridimensiona in altezza (mobile) o in larghezza (desktop).
+     * Imposta una dimensione minima e massima per evitare che il pannello diventi più piccolo della dimensione iniziale o più grande della finestra.
+     */
     private onResizeHandleMove = (event: MouseEvent) => {
+        if (this.isMobile) {
+            this.style.setProperty('--steps-resized-height', `min(max(20vh, ${event.pageY}px), 100vh)`);
+            return;
+        }
+
         this.style.setProperty(
             '--steps-resized-width',
-            // imposto larghezza minima e massima per evitare che il pannello diventi più piccolo della larghezza iniziale o più grande della finestra
             `min(max(var(--map-scroller-steps-width), calc(${event.pageX}px - var(--map-scroller-left-offset))), var(--steps-max-width))`
         );
     };

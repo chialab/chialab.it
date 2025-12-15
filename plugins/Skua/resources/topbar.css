@@ -1,0 +1,138 @@
+skua-topbar {
+    --left-offset: 0;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    padding-left: var(--left-offset);
+}
+
+skua-topbar header {
+    width: 100%;
+    height: 100%;
+}
+
+skua-topbar nav {
+    --logo-font-size: var(--font-size-7);
+    --logo-line-height: 1.2;
+    --logo-width: 107px;
+    --logo-height: 87px;
+    --logo-top-padding: calc(var(--padding) * 4);
+
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--padding) * 2);
+    padding: 0 48px 0 20px;
+}
+
+skua-topbar a.logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: fit-content;
+    padding-top: var(--logo-top-padding);
+}
+
+skua-topbar a.logo svg {
+    width: var(--logo-width);
+    height: var(--logo-height);
+    margin-right: calc(var(--logo-width) / -2);
+}
+
+skua-topbar a.logo span,
+skua-topbar a.logo strong {
+    font-size: var(--logo-font-size);
+    line-height: var(--logo-line-height);
+}
+
+skua-topbar a.logo strong {
+    font-weight: var(--weight-bold);
+}
+
+skua-topbar a.logo span {
+    font-weight: var(--weight-light);
+}
+
+skua-topbar[\:sticky] {
+    box-shadow: 0 2px 4px 0 var(--shadow-color);
+}
+
+skua-topbar .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: fit-content;
+    margin: 0;
+    padding: calc(var(--padding) * 2);
+    padding-top: var(--logo-top-padding);
+    background-color: white;
+}
+
+skua-topbar .trigger-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--logo-font-size) * var(--logo-line-height));
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+skua-topbar .trigger-btn dna-icon {
+    width: auto;
+    height: var(--logo-font-size);
+}
+
+skua-topbar .trigger-btn dna-icon svg {
+    fill: transparent;
+}
+
+skua-topbar .menu-items {
+    display: flex;
+    flex-direction: column;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+skua-topbar[\:expanded] .menu-items {
+    height: auto;
+    margin-top: 20px;
+}
+
+skua-topbar [role='menuitem'] {
+    padding: var(--base) 2px;
+    font-size: var(--font-size-2);
+    font-weight: var(--weight-bold);
+    border-top: 1px solid black;
+    outline-offset: -1px;
+}
+
+skua-topbar [role='menuitem'].tracking {
+    color: var(--color-neutral);
+}
+
+skua-topbar [role='menuitem'][aria-current='page'] {
+    color: var(--color-accent);
+}
+
+@media (width < 768px) {
+    skua-topbar nav {
+        --logo-width: 64px;
+        --logo-height: 52px;
+        --logo-font-size: var(--font-size-4);
+        --logo-top-padding: 0;
+
+        padding: calc(var(--padding) * 1.5) calc(var(--padding) * 3);
+        background: white;
+    }
+
+    skua-topbar .menu {
+        align-items: flex-end;
+        padding: 0;
+    }
+}

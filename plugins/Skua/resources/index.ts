@@ -4,5 +4,6 @@ import '@chialab/dna-map-scroller';
 import '@chialab/dna-slideshow';
 import '@chialab/dna-story-scroller';
 import '@chialab/dna-zoom-panel';
-import './menu';
 import './theme';
+import './topbar';
+import './app-dialog';

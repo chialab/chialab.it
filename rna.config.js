@@ -32,7 +32,7 @@ const config = {
             input: [
                 './plugins/Skua/resources/index.ts',
                 './plugins/Skua/resources/mapscroller.tsx',
-                './plugins/Skua/resources/menu.tsx',
+                './plugins/Skua/resources/topbar.tsx',
                 './plugins/Skua/resources/app-dialog.tsx',
                 './plugins/Skua/resources/index.css',
                 './plugins/Skua/resources/journey-page.css',

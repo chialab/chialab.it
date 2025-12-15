@@ -4,16 +4,6 @@
 @import '@chialab/dna-story-scroller/style';
 @import '@chialab/dna-zoom-panel/style';
 
-.topnav {
-    --left-offset: calc(
-        var(--map-scroller-left-offset) + var(--map-scroller-steps-width) + var(--map-scroller-right-padding)
-    );
-
-    left: var(--left-offset) !important;
-    max-width: calc(100% - var(--left-offset)) !important;
-    padding-left: 0 !important;
-}
-
 skua-map-scroller {
     --shadow-color: rgba(0, 0, 0, 0.5);
     --steps-resized-width: var(--map-scroller-steps-width);
@@ -220,28 +210,24 @@ skua-map-scroller .resize-handle {
 skua-map-scroller .resize-handle dna-icon {
     display: block;
     width: 30px;
-    height: 50px;
+    height: auto;
 }
 
 @media (width < 768px) {
-    .topnav {
-        left: 0 !important;
-        max-width: 100% !important;
-        padding: 12px 24px !important;
-        background: white;
-    }
-
     skua-map-scroller {
         --steps-max-width: 100vw;
+        --map-scroller-steps-height: 75vh;
+        --steps-resized-height: var(--map-scroller-steps-height);
     }
 
     skua-map-scroller dna-story-scroller {
         width: 100%;
-        height: 75vh;
+        height: var(--steps-resized-height, var(--map-scroller-steps-height));
         margin-left: 0;
         padding-right: 0;
         padding-left: 0;
         direction: ltr;
+        box-shadow: 0 16px 16px 0 var(--shadow-color);
     }
 
     skua-map-scroller dna-story-scroller::-webkit-scrollbar {
@@ -256,5 +242,38 @@ skua-map-scroller .resize-handle dna-icon {
 
     .story-scroller__contents dna-map-scroller-step:last-of-type {
         margin-bottom: 0;
+    }
+
+    dna-map-scroller-step .item-content {
+        --block-padding: 24px;
+        --padding-left: 24px;
+        --padding-right: 24px;
+
+        padding: 66px var(--padding-right) var(--block-padding) var(--padding-left);
+    }
+
+    dna-map-scroller-step:first-of-type .item-content {
+        padding-top: 142px;
+    }
+
+    dna-map-scroller-step .item-content .journey-title {
+        margin-bottom: 24px;
+    }
+
+    skua-map-scroller .resize-handle {
+        top: var(--steps-resized-height);
+        right: 2rem;
+        left: auto;
+        transform: rotateZ(90deg);
+        transform-origin: top;
+        cursor: row-resize;
+    }
+}
+
+@media (width >= 768px) {
+    skua-topbar {
+        --left-offset: calc(
+            var(--map-scroller-left-offset) + var(--map-scroller-steps-width) + var(--map-scroller-right-padding)
+        ) !important;
     }
 }
