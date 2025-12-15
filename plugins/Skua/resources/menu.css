@@ -40,10 +40,11 @@ skua-menu[\:open] .menu-items {
 }
 
 skua-menu [role='menuitem'] {
-    padding: var(--base) 0;
+    padding: var(--base) 2px;
     font-size: var(--font-size-2);
     font-weight: var(--weight-bold);
     border-top: 1px solid black;
+    outline-offset: -1px;
 }
 
 skua-menu [role='menuitem'].tracking {
@@ -52,4 +53,11 @@ skua-menu [role='menuitem'].tracking {
 
 skua-menu [role='menuitem'][aria-current='page'] {
     color: var(--color-accent);
+}
+
+@media (width < 768px) {
+    skua-menu {
+        align-items: flex-end;
+        padding: 0;
+    }
 }

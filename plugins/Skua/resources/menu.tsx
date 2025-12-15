@@ -48,6 +48,7 @@ export class SkuaMenu extends Component {
                     class="trigger-btn"
                     type="button"
                     aria-label={this._open ? 'Chiudi menu' : 'Apri menu'}
+                    title={this._open ? 'Chiudi menu' : 'Apri menu'}
                     aria-haspopup="menu">
                     <dna-icon name="menu" />
                 </button>

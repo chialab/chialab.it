@@ -164,3 +164,28 @@ dna-slideshow button[data-action] dna-icon {
 .gallery_grid > * {
     border: none;
 }
+
+@media (width < 768px) {
+    :root {
+        --map-scroller-steps-width: 100vw;
+    }
+
+    .topnav a.logo {
+        align-items: flex-start;
+        margin-top: 0;
+        padding-left: 0;
+    }
+
+    .topnav a.logo svg {
+        position: relative;
+        top: 0;
+        width: 64px;
+        height: 52px;
+        margin-right: -32px;
+    }
+
+    .topnav a.logo span,
+    .topnav a.logo strong {
+        font-size: var(--font-size-4);
+    }
+}
