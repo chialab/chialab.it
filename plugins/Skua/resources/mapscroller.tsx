@@ -204,7 +204,8 @@ export class SkuaMapScroller extends Component {
 
     @listen('load', 'dna-map')
     private onMapLoad() {
-        this.mapElement.map.on('render', () => {
+        this.mapElement.map?.setProjection('mercator');
+        this.mapElement.map?.on('render', () => {
             if (this._allMarkersIndexed) {
                 return;
             }

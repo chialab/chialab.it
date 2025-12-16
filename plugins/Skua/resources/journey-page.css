@@ -109,10 +109,14 @@ skua-map-scroller .story-scroller__contents {
 
 dna-map-scroller-step .item-content {
     --block-padding: 44px;
-    --padding-left: 65px;
-    --padding-right: 35px;
+    --padding-left: 66px;
+    --padding-right: 34px;
 
     padding: var(--block-padding) var(--padding-right) var(--block-padding) var(--padding-left);
+}
+
+dna-map-scroller-step .item-content .post-link:hover {
+    text-decoration: underline;
 }
 
 dna-map-scroller-step .item-content .journey-title {
@@ -129,6 +133,7 @@ dna-map-scroller-step .item-content [data-placeholder] {
 
 dna-map-scroller-step .item-content .index {
     color: var(--color-accent);
+    text-decoration-color: var(--color-accent);
 }
 
 dna-map-scroller-step .item-content .title {

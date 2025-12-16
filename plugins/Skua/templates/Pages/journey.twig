@@ -20,8 +20,10 @@
                             {% if loop.index == 1 %}
                                 <h1 class="journey-title f-7 medium mt-0">{{currentJourney.title}}</h1>
                             {% endif %}
-                            <div class="index mono f-3 bold mb-1 ml-3">{{ loop.index }}</div>
-                            <h2 class="title f-4 mt-0 mb-3">{{ location.title|default('') }}</h2>
+                            <a class="post-link" href="{{ Url.build({ '_name': 'pages:journey', 'uname': currentJourney.uname, '#': location.uname }) }}">
+                                <div class="index mono f-3 bold mb-1 ml-3">{{ loop.index }}</div>
+                                <h2 class="title f-4 mt-0 mb-3">{{ location.title|default('') }}</h2>
+                            </a>
                             {% if location.description|default() %}
                                 <div class="description f-2">{{ Placeholders.template(location, 'description')|raw }}</div>
                             {% endif %}

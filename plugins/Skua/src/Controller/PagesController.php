@@ -22,54 +22,11 @@ class PagesController extends AppController
     }
 
     /**
-     * Load home objects.
+     * Homepage with live SKUA tracking.
      *
      * @return void
      */
     public function home(): void
-    {
-        if (empty($this->journeys)) {
-            throw new Exception('No journeys found');
-        }
-
-        // rimando al primo viaggio dentro la root folder
-        $firstJourney = $this->journeys[0];
-        $this->redirect(['_name' => 'pages:journey', 'uname' => $firstJourney->uname]);
-    }
-
-    /**
-     * Journey folder page.
-     *
-     * @param string $uname Journey folder uname.
-     * @return void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When journey is not found.
-     */
-    public function journey(string $uname): void
-    {
-        $loader = new ObjectsLoader(['galleries' => ['include' => 'has_media']], ['has_media' => 3]);
-        $journey = $loader->loadObject($uname, 'folders');
-        if (!$journey) {
-            throw new RecordNotFoundException(sprintf("Journey folder %s not found", $uname));
-        }
-
-        $children = $loader->loadObjects(
-            ['parent' => $journey->uname],
-            'locations',
-            ['include' => 'placeholder'],
-            ['placeholder' => 2]
-        );
-        $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
-        $this->viewBuilder()->addHelpers(['Skua.Map']);
-        $this->set(compact('children'));
-        $this->set('currentJourney', $journey);
-    }
-
-    /**
-     * Live SKUA tracking page.
-     *
-     * @return void
-     */
-    public function tracking(): void
     {
         $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
         $this->viewBuilder()->addHelpers(['Skua.Map']);
@@ -110,6 +67,33 @@ class PagesController extends AppController
         ];
 
         $this->set(compact('data', 'center'));
+    }
+
+    /**
+     * Journey folder page.
+     *
+     * @param string $uname Journey folder uname.
+     * @return void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When journey is not found.
+     */
+    public function journey(string $uname): void
+    {
+        $loader = new ObjectsLoader(['galleries' => ['include' => 'has_media']], ['has_media' => 3]);
+        $journey = $loader->loadObject($uname, 'folders');
+        if (!$journey) {
+            throw new RecordNotFoundException(sprintf("Journey folder %s not found", $uname));
+        }
+
+        $children = $loader->loadObjects(
+            ['parent' => $journey->uname],
+            'locations',
+            ['include' => 'placeholder'],
+            ['placeholder' => 2]
+        );
+        $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
+        $this->viewBuilder()->addHelpers(['Skua.Map']);
+        $this->set(compact('children'));
+        $this->set('currentJourney', $journey);
     }
 
     /**

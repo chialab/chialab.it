@@ -16,7 +16,7 @@ return static function (RouteBuilder $routes): void {
                 $routes->connect(
                     '/',
                     ['controller' => 'Pages', 'action' => 'home'],
-                    ['_name' => 'pages:home'],
+                    ['_name' => 'pages:home', 'routeClass' => ObjectRoute::class],
                 );
 
                 $routes->connect(
@@ -29,12 +29,6 @@ return static function (RouteBuilder $routes): void {
                     '/logout',
                     ['controller' => 'Auth', 'action' => 'logout'],
                     ['_name' => 'auth:logout'],
-                );
-
-                $routes->connect(
-                    '/tracking',
-                    ['controller' => 'Pages', 'action' => 'tracking'],
-                    ['_name' => 'pages:tracking', 'routeClass' => ObjectRoute::class],
                 );
 
                 $routes->connect(
