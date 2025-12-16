@@ -112,4 +112,11 @@ return [
             'token' => env('MAPBOX_TOKEN', 'pk.EXAMPLE'),
         ],
     ],
+
+    /*
+     * Track my Beppe
+     */
+    'Skua' => [
+        'apiKey' => env('SKUA_API_KEY', 'SKUA_API_KEY_EXAMPLE'),
+    ],
 ];

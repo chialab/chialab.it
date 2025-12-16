@@ -75,13 +75,16 @@ class PagesController extends AppController
         $this->viewBuilder()->addHelpers(['Skua.Map']);
 
         // call live tracking
-        $http = new Client();
-        $response = $http->get('https://skua.le0m.net?ship=8178410', [], [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Basic bGUwbTpQYjdrVHFWamdZdWdnUDlIcmo3dmpuOUg='
-            ]
-        ]);
+        $response = (new Client())->get(
+            sprintf('%s?ship=%s', Configure::read('Skua.apiUrl'), Configure::read('Skua.shipId')),
+            [],
+            [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => sprintf('Basic %s', Configure::read('Skua.apiKey'))
+                ],
+            ],
+        );
         $response = $response->getJson(); // ['latitude' => ..., 'longitude' => ...]
         if (empty($response['latitude']) || empty($response['longitude'])) {
             throw new NotFoundException('Unable to get live tracking data');

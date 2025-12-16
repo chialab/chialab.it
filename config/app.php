@@ -560,4 +560,13 @@ return [
             'token' => env('MAPBOX_TOKEN'),
         ],
     ],
+
+    /*
+     * Track my Beppe
+     */
+    'Skua' => [
+        'apiUrl' => env('SKUA_API_URL', 'https://skua.le0m.net/'),
+        'apiKey' => env('SKUA_API_KEY'),
+        'shipId' => env('SKUA_SHIP_ID', '8178410'),
+    ],
 ];

@@ -36,6 +36,10 @@
         {
           "name": "MAPBOX_TOKEN",
           "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/mapbox-token"
+        },
+        {
+          "name": "SKUA_API_KEY",
+          "valueFrom": "arn:aws:ssm:eu-south-1:515626109584:parameter/ecs/dreamteam/prod-bedita-chialab/skua-api-key"
         }
       ],
       "logConfiguration": {
