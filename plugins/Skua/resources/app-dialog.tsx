@@ -15,17 +15,14 @@ export class AppDialog extends Component {
         this.dialog?.show();
     }
 
-    /** Close the dialog on content click. */
-    @listen('click', '.dialog__content')
-    onContentClick(event: MouseEvent) {
-        event.stopPropagation();
-        event.preventDefault();
-        this.hide();
-    }
-
     render() {
         return (
             <dna-dialog ref={this.dialog}>
+                <button
+                    class="close-btn"
+                    aria-label="chiudi pannello">
+                    <dna-icon name="close-filled" />
+                </button>
                 <slot />
             </dna-dialog>
         );

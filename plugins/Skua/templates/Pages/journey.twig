@@ -1,4 +1,4 @@
-{# filtro le location per le card, escludendo quelle solo per la lineString #}
+{# filtro le location per le card, escludendo quelle che servono solo per la lineString #}
 {% set locations = children|filter(child => child.title|default(null) or child.body|default(null) or child.description|default(null)) %}
 
 <main class="journey-page">

@@ -1,4 +1,5 @@
 @import '@chialab/cdk/style';
+@import '@chialab/dna-dialog/style';
 @import 'topbar.css';
 
 :root {
@@ -40,14 +41,14 @@ dna-map [marker-symbol='marker-point'] {
     overflow: visible;
 }
 
-dna-dialog {
+app-dialog dna-dialog {
     --color-overlay: rgba(255, 255, 255, 0.8);
 
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-dna-dialog .dialog__container {
+app-dialog dna-dialog .dialog__container {
     width: 100%;
     max-width: 100%;
     height: 100%;
@@ -56,18 +57,18 @@ dna-dialog .dialog__container {
     border-radius: 0;
 }
 
-dna-dialog .dialog__content {
+app-dialog dna-dialog .dialog__content {
     position: relative;
     width: 100%;
     height: 100%;
     padding: 0;
 }
 
-dna-dialog .dialog__content:focus:focus-visible {
+app-dialog dna-dialog .dialog__content:focus:focus-visible {
     outline: none;
 }
 
-dna-dialog .dialog__content img {
+app-dialog dna-dialog .dialog__content img {
     display: block;
     width: 100%;
     max-width: 100%;
@@ -75,7 +76,7 @@ dna-dialog .dialog__content img {
     object-fit: contain;
 }
 
-dna-dialog .dialog__content .close-btn {
+app-dialog dna-dialog .dialog__content .close-btn {
     position: absolute;
     top: var(--padding);
     right: var(--padding);
@@ -91,13 +92,19 @@ dna-dialog .dialog__content .close-btn {
     cursor: pointer;
 }
 
-dna-dialog .dialog__content .close-btn dna-icon {
+app-dialog dna-dialog .dialog__content .close-btn dna-icon {
     width: 2rem;
     height: 2rem;
 }
 
-dna-dialog dna-slideshow {
-    max-height: 100%;
+app-dialog dna-dialog dna-slideshow {
+    width: 100%;
+    height: 100%;
+}
+
+app-dialog dna-dialog .dialog__content dna-slideshow[cover] :is(img, video) {
+    display: block;
+    object-fit: contain;
 }
 
 dna-slideshow button[data-action] {

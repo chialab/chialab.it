@@ -1,6 +1,7 @@
 import { Component, customElement, listen, observe, property, render, state, type Template } from '@chialab/dna';
 import { Map as MapElement, type Area } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
+import { ControlsList, Slideshow } from '@chialab/dna-slideshow';
 import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
 import type { AppDialog } from './app-dialog';
 
@@ -254,14 +255,33 @@ export class SkuaMapScroller extends Component {
     }
 
     /**
-     * Opens the related dialog when an image inside a step's slideshow is clicked.
+     * Opens a full screen dialog when an image inside a step's slideshow is clicked.
      */
     @listen('click', '.map-scroller-item img.clickable')
     private onMediaItemClick(event: MouseEvent) {
         const mediaItem = event.target as HTMLImageElement;
         const dialog = this.ownerDocument.createElement('app-dialog') as AppDialog;
         const imgClone = mediaItem.cloneNode(true) as HTMLImageElement;
-        this.ownerDocument.body.appendChild(render(<app-dialog ref={dialog}>{imgClone}</app-dialog>) as Node);
+        let dialogContent: HTMLElement = imgClone;
+
+        const slideshow = mediaItem.closest('dna-slideshow') as Slideshow | null;
+        if (slideshow) {
+            // se l'immagine fa parte di uno slideshow, lo mostro nella dialog
+            const slideshowMedias = slideshow.querySelectorAll('img, video');
+            const clonedSlideshow = (
+                <dna-slideshow
+                    carousel
+                    controls
+                    cover
+                    current={slideshow.current}
+                    controlsList={[ControlsList.nodots, ControlsList.noplayback, ControlsList.nocounter]}>
+                    {[...slideshowMedias].map((media) => media.cloneNode(true))}
+                </dna-slideshow>
+            );
+            dialogContent = clonedSlideshow;
+        }
+
+        this.ownerDocument.body.appendChild(render(<app-dialog ref={dialog}>{dialogContent}</app-dialog>) as Node);
         dialog.show();
         dialog.addEventListener('close', () => {
             dialog.remove();
