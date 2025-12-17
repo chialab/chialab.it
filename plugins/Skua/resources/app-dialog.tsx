@@ -21,7 +21,7 @@ export class AppDialog extends Component {
                 <button
                     class="close-btn"
                     aria-label="chiudi pannello">
-                    <dna-icon name="close-filled" />
+                    <dna-icon name="close-large" />
                 </button>
                 <slot />
             </dna-dialog>

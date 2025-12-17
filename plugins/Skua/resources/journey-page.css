@@ -249,19 +249,19 @@ skua-map-scroller .resize-handle dna-icon {
     }
 
     dna-map-scroller-step .item-content {
-        --block-padding: 24px;
-        --padding-left: 24px;
-        --padding-right: 24px;
+        --block-padding: calc(var(--padding) * 4);
+        --padding-left: calc(var(--padding) * 3);
+        --padding-right: calc(var(--padding) * 3);
 
-        padding: 66px var(--padding-right) var(--block-padding) var(--padding-left);
+        padding: var(--padding-right) var(--block-padding) var(--padding-left);
     }
 
     dna-map-scroller-step:first-of-type .item-content {
-        padding-top: 142px;
+        padding-top: 142px; /* fixed header height (76) + greater padding top */
     }
 
     dna-map-scroller-step .item-content .journey-title {
-        margin-bottom: 24px;
+        margin-bottom: calc(var(--padding) * 3);
     }
 
     skua-map-scroller .resize-handle {

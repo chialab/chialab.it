@@ -7,17 +7,13 @@ import type { AppDialog } from './app-dialog';
 
 @customElement('skua-map-scroller')
 export class SkuaMapScroller extends Component {
-    /**
-     * The tile configuration for the map.
-     */
+    /** The tile configuration for the map. */
     @property({
         type: String,
     })
     tile = 'mapbox://styles/mapbox/streets-v9';
 
-    /**
-     * Mapbox access token.
-     */
+    /** Mapbox access token. */
     @property({
         type: String,
         attribute: 'access-token',
@@ -30,14 +26,13 @@ export class SkuaMapScroller extends Component {
     })
     data?: GeoJSON.FeatureCollection<GeoJSON.Geometry>;
 
-    /**
-     * The current map step.
-     */
+    /** The current map step. */
     @state()
     currentStep: MapScrollerStep | null = null;
 
     /** Whether the viewport is mobile-sized. */
-    private isMobile = false;
+    @state()
+    isMobile = false;
 
     /** Whether all markers have been processed to put the index number above the icon. */
     private _allMarkersIndexed = false;
@@ -83,14 +78,10 @@ export class SkuaMapScroller extends Component {
         this.setInnerPropertyValue('area', newArea);
     }
 
-    /**
-     * The map element.
-     */
+    /** The map element. */
     readonly mapElement: MapElement = new MapElement();
 
-    /**
-     * The story scroller element.
-     */
+    /** The story scroller element. */
     readonly storyScrollerElement: StoryScroller = new StoryScroller();
 
     /** The resize handle element. */
@@ -205,6 +196,7 @@ export class SkuaMapScroller extends Component {
     @listen('load', 'dna-map')
     private onMapLoad() {
         this.mapElement.map?.setProjection('mercator');
+        this.setupArea();
         this.mapElement.map?.on('render', () => {
             if (this._allMarkersIndexed) {
                 return;
@@ -212,14 +204,13 @@ export class SkuaMapScroller extends Component {
 
             this.updateMarkersIndex();
         });
-
-        if (this.isMobile) {
-            this.mapElement.area = { top: '100%', right: 0, bottom: 0, left: 0 };
-            return;
-        }
-        this.mapElement.area = { top: 0, right: 0, bottom: 0, left: '40%' };
     }
 
+    /**
+     * Handles clicks on map markers to scroll to the corresponding step.
+     * @internal
+     * @param event The click event.
+     */
     @listen('click', '[marker-symbol]')
     private onMarkerClick(event: MouseEvent) {
         const markerElement = (event.target as HTMLElement).closest('[marker-symbol]');
@@ -255,9 +246,32 @@ export class SkuaMapScroller extends Component {
         }
     }
 
-    /**
-     * Opens a full screen dialog when an image inside a step's slideshow is clicked.
-     */
+    @observe('currentStep')
+    private onCurrentStepChange() {
+        if (!this.currentStep) {
+            return;
+        }
+
+        // aggiorno l'hash dell'url
+        const stepUname = this.currentStep.dataset.uname;
+        if (stepUname) {
+            history.replaceState(null, '', `#${stepUname}`);
+        }
+
+        if (this.mapElement?.loaded) {
+            this.mapElement.updateCamera(this.currentStep.center, this.currentStep.zoom, this.currentStep.pitch);
+        } else {
+            this.mapElement.center = this.currentStep.center;
+            if (this.currentStep.zoom) {
+                this.mapElement.zoom = this.currentStep.zoom;
+            }
+            if (this.currentStep.pitch) {
+                this.mapElement.pitch = this.currentStep.pitch;
+            }
+        }
+    }
+
+    /** Opens a full screen dialog when an image inside a step's slideshow is clicked. */
     @listen('click', '.map-scroller-item img.clickable')
     private onMediaItemClick(event: MouseEvent) {
         const mediaItem = event.target as HTMLImageElement;
@@ -287,6 +301,20 @@ export class SkuaMapScroller extends Component {
         dialog.addEventListener('close', () => {
             dialog.remove();
         });
+    }
+
+    /** Set the correct area based on current viewport size. */
+    @observe('isMobile')
+    private setupArea() {
+        if (this.isMobile) {
+            // the height of the story scroller in mobile view is 75vh so we want the interactive area to start from there
+            const top = this.clientHeight * 0.75;
+            this.mapElement.area = { top, right: 0, bottom: 0, left: 0 };
+            return;
+        }
+        // the width of the story scroller in desktop view is 40vw so we want the interactive area to end before that
+        const left = this.clientWidth * 0.4;
+        this.mapElement.area = { top: 0, right: 0, bottom: 0, left };
     }
 
     @listen('mousedown', '.resize-handle')
@@ -323,29 +351,4 @@ export class SkuaMapScroller extends Component {
         document.removeEventListener('mousemove', this.onResizeHandleMove);
         document.removeEventListener('mouseup', this.onResizeHandleRelease);
     };
-
-    @observe('currentStep')
-    private onCurrentStepChange() {
-        if (!this.currentStep) {
-            return;
-        }
-
-        // aggiorno l'hash dell'url
-        const stepUname = this.currentStep.dataset.uname;
-        if (stepUname) {
-            history.replaceState(null, '', `#${stepUname}`);
-        }
-
-        if (this.mapElement?.loaded) {
-            this.mapElement.updateCamera(this.currentStep.center, this.currentStep.zoom, this.currentStep.pitch);
-        } else {
-            this.mapElement.center = this.currentStep.center;
-            if (this.currentStep.zoom) {
-                this.mapElement.zoom = this.currentStep.zoom;
-            }
-            if (this.currentStep.pitch) {
-                this.mapElement.pitch = this.currentStep.pitch;
-            }
-        }
-    }
 }

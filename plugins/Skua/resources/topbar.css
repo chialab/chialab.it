@@ -15,16 +15,16 @@ skua-topbar header {
 }
 
 skua-topbar nav {
-    --logo-font-size: var(--font-size-7);
+    --logo-font-size: var(--font-size-6);
     --logo-line-height: 1.2;
-    --logo-width: 107px;
-    --logo-height: 87px;
+    --logo-width: 80px;
+    --logo-height: 67px;
     --logo-top-padding: calc(var(--padding) * 4);
 
     display: flex;
     justify-content: space-between;
     gap: calc(var(--padding) * 2);
-    padding: 0 48px 0 20px;
+    padding: 0 48px 0 0;
 }
 
 skua-topbar a.logo {

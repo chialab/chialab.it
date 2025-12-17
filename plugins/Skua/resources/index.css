@@ -87,15 +87,22 @@ app-dialog dna-dialog .dialog__content .close-btn {
     align-items: center;
     margin: 0;
     padding: 0;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-surface);
-    border-radius: 50%;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
 }
 
 app-dialog dna-dialog .dialog__content .close-btn dna-icon {
     width: 2rem;
     height: 2rem;
+}
+
+app-dialog dna-dialog .dialog__content .close-btn dna-icon svg {
+    fill: var(--color-surface);
+}
+
+app-dialog dna-dialog dna-icon {
+    filter: drop-shadow(0 0 4px black);
 }
 
 app-dialog dna-dialog dna-slideshow {
@@ -107,6 +114,7 @@ app-dialog dna-dialog .dialog__content dna-slideshow[cover] :is(img, video) {
     display: block;
     object-fit: contain;
     object-position: top;
+    align-self: flex-start;
 }
 
 app-dialog dna-dialog .dialog__content dna-slideshow[cover] video {
