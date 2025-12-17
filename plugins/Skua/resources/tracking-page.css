@@ -2,6 +2,7 @@
 
 .tracking-page {
     height: 100vh;
+    margin: 0;
 }
 
 .tracking-page dna-map {

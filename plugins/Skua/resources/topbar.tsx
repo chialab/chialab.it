@@ -57,6 +57,8 @@ export class SkuaTopbar extends Component {
                         <div
                             class="menu-items"
                             role="menu"
+                            /* @ts-ignore */
+                            inert={!this.expanded}
                             aria-hidden={this.expanded ? 'false' : 'true'}>
                             {this.items.map((node) => (
                                 <div

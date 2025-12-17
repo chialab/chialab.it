@@ -1,12 +1,21 @@
 skua-topbar {
-    --left-offset: 0;
+    --left-offset: calc(var(--padding) * 2.5);
+    --logo-font-size: var(--font-size-6);
+    --logo-line-height: 1.2;
+    --logo-width: 80px;
+    --logo-height: 67px;
+    --logo-top-padding: calc(var(--padding) * 4);
 
     position: fixed;
     top: 0;
     left: 0;
     z-index: 3;
     width: 100%;
-    padding-left: var(--left-offset);
+    padding: 0 calc(var(--padding) * 6) 0 var(--left-offset);
+}
+
+skua-topbar + * {
+    margin-top: 100px;
 }
 
 skua-topbar header {
@@ -15,16 +24,9 @@ skua-topbar header {
 }
 
 skua-topbar nav {
-    --logo-font-size: var(--font-size-6);
-    --logo-line-height: 1.2;
-    --logo-width: 80px;
-    --logo-height: 67px;
-    --logo-top-padding: calc(var(--padding) * 4);
-
     display: flex;
     justify-content: space-between;
     gap: calc(var(--padding) * 2);
-    padding: 0 48px 0 0;
 }
 
 skua-topbar a.logo {
@@ -63,7 +65,6 @@ skua-topbar .menu {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: fit-content;
     margin: 0;
     padding: calc(var(--padding) * 2);
     padding-top: var(--logo-top-padding);
@@ -121,7 +122,8 @@ skua-topbar [role='menuitem'][aria-current='page'] {
 }
 
 @media (width < 768px) {
-    skua-topbar nav {
+    skua-topbar {
+        --left-padding: calc(var(--padding) * 3);
         --logo-width: 64px;
         --logo-height: 52px;
         --logo-font-size: var(--font-size-4);

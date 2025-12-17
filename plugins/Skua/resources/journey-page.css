@@ -3,6 +3,10 @@
 @import '@chialab/dna-story-scroller/style';
 @import '@chialab/dna-zoom-panel/style';
 
+.journey-page {
+    margin-top: 0;
+}
+
 skua-map-scroller {
     --shadow-color: rgba(0, 0, 0, 0.5);
     --steps-resized-width: var(--map-scroller-steps-width);
