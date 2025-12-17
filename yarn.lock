@@ -994,9 +994,9 @@
     "@chialab/dna" "^4.4.0"
 
 "@chialab/dna@^4.0.0", "@chialab/dna@^4.4.0":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@chialab/dna/-/dna-4.4.5.tgz#f92ee4d49a9b12babdd331fd7b330b5314d98dff"
-  integrity sha512-WFF1+W62CgOiQtpAoULnNSOzoWZj1owV1AgQI/+NnD8i6P90sgwYYxgbY6OnFpV3g7YPgPT+LIpPzC8QO70oEA==
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/@chialab/dna/-/dna-4.4.6.tgz#c26fc533731cf2827678b419b26bb63449115712"
+  integrity sha512-sYGRwpRk0uBJG1kwx+MJk+G7NXw7C/e0F+zvoZufw+MVpFVYi3wrSxyu9DanpqAt9PYNrZDBiyYN15y7aRJ6IQ==
 
 "@chialab/es-dev-server@^0.17.0", "@chialab/es-dev-server@^0.17.1":
   version "0.17.2"
