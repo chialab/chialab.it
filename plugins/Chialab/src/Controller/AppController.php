@@ -19,7 +19,8 @@ use Cake\I18n\I18n;
  * @property \Chialab\FrontendKit\Controller\Component\ObjectsComponent $Objects
  * @property \Chialab\FrontendKit\Controller\Component\MenuComponent $Menu
  * @property \Chialab\FrontendKit\Controller\Component\PublicationComponent $Publication
- * @property \Authentication\Controller\Component\AuthenticationComponent|null $Authentication
+ * @property \App\Controller\Component\CanonicalUrlComponent $CanonicalUrl
+ * @property \Authentication\Controller\Component\AuthenticationComponent|null
  */
 class AppController extends BaseController
 {
