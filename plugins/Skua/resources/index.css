@@ -8,7 +8,12 @@
     --color-text-neutral: #666565;
     --map-scroller-steps-width: 40vw;
     --map-scroller-right-padding: 30px;
-    --map-scroller-left-offset: calc(24px + 12px + 12px); /* scrollbar + padding-left + margin-left */
+    --map-scroller-left-margin: 12px;
+    --map-scroller-left-padding: 12px;
+    --scrollbar-width: 24px;
+    --map-scroller-left-offset: calc(
+        var(--scrollbar-width) + var(--map-scroller-left-padding) + var(--map-scroller-left-margin)
+    );
 }
 
 *:focus-visible {
@@ -100,7 +105,7 @@ app-dialog dna-dialog .dialog__content .close-btn dna-icon svg {
 }
 
 app-dialog dna-dialog dna-icon {
-    filter: drop-shadow(0 0 4px black);
+    filter: drop-shadow(0 0 3px black);
 }
 
 app-dialog dna-dialog dna-slideshow {
@@ -142,5 +147,8 @@ dna-slideshow button[data-action] dna-icon {
 @media (width < 768px) {
     :root {
         --map-scroller-steps-width: 100vw;
+        --scrollbar-width: 0;
+        --map-scroller-left-margin: 0;
+        --map-scroller-left-padding: 0;
     }
 }

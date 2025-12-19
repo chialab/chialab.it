@@ -54,16 +54,16 @@ skua-map-scroller dna-story-scroller {
     z-index: 1;
     width: fit-content;
     height: 100%;
-    margin-left: 12px;
-    padding-right: 30px;
-    padding-left: 12px;
+    margin-left: var(--map-scroller-left-margin);
+    padding-right: var(--map-scroller-right-padding);
+    padding-left: var(--map-scroller-left-padding);
     overflow: auto;
     direction: rtl; /* per mettere la scrollbar a sinistra */
     text-align: left;
 }
 
 skua-map-scroller dna-story-scroller::-webkit-scrollbar {
-    width: 24px;
+    width: var(--scrollbar-width);
 }
 
 skua-map-scroller dna-story-scroller::-webkit-scrollbar-thumb {
@@ -102,6 +102,11 @@ skua-map-scroller .story-scroller__contents {
     max-height: var(--map-scroller-steps-width);
 }
 
+.story-scroller__contents dna-map-scroller-step .map-scroller-item app-dialog dna-slideshow {
+    height: 100%;
+    max-height: 100%;
+}
+
 .story-scroller__contents dna-map-scroller-step .map-scroller-item :is(img, video) {
     display: block;
     width: 100%;
@@ -112,9 +117,9 @@ skua-map-scroller .story-scroller__contents {
 }
 
 dna-map-scroller-step .item-content {
-    --block-padding: 44px;
-    --padding-left: 66px;
-    --padding-right: 34px;
+    --block-padding: calc(var(--padding) * 5);
+    --padding-left: calc(var(--padding) * 8);
+    --padding-right: calc(var(--padding) * 4);
 
     padding: var(--block-padding) var(--padding-right) var(--block-padding) var(--padding-left);
 }
@@ -144,25 +149,27 @@ dna-map-scroller-step .item-content .title {
     font-weight: 600;
 }
 
-dna-map-scroller-step .item-content :is(.description, .body) {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) {
     font-family: var(--font-serif);
+    line-height: 1.5;
 }
 
-dna-map-scroller-step .item-content :is(.description, .body) :is(h1, h2, h3, h4, h5, h6) {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) :is(h1, h2, h3, h4, h5, h6) {
     font-family: var(--font-sans);
+    font-weight: 600;
 }
 
-dna-map-scroller-step .item-content :is(.description, .body) :is(h1, h2) {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) :is(h1, h2) {
     font-size: var(--font-size-3);
 }
 
-dna-map-scroller-step .item-content :is(.description, .body) blockquote {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) blockquote {
     width: fit-content;
     margin: 1.5rem 0;
     margin-left: 4.5rem;
 }
 
-dna-map-scroller-step .item-content :is(.description, .body) blockquote.short-quote {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) blockquote.short-quote {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     font-style: italic;
@@ -170,7 +177,11 @@ dna-map-scroller-step .item-content :is(.description, .body) blockquote.short-qu
     border-bottom: 1px solid currentcolor;
 }
 
-dna-map-scroller-step .item-content :is(.description, .body) blockquote .quote-author {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) blockquote :is(h2, h3, h4, h5, h6) {
+    font-size: var(--font-size-2);
+}
+
+dna-map-scroller-step .item-content :is(.item-description, .item-body) blockquote .quote-author {
     display: block;
     margin-top: 1.5rem;
     font-family: var(--font-sans);
@@ -178,13 +189,13 @@ dna-map-scroller-step .item-content :is(.description, .body) blockquote .quote-a
     font-style: normal;
 }
 
-dna-map-scroller-step .item-content :is(.description, .body) blockquote:not(.short-quote) {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) blockquote:not(.short-quote) {
     position: relative;
     color: var(--color-text-neutral);
     font-family: var(--font-sans);
 }
 
-dna-map-scroller-step .item-content :is(.description, .body) blockquote:not(.short-quote)::before {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) blockquote:not(.short-quote)::before {
     content: '';
     position: absolute;
     top: 0;
@@ -195,7 +206,7 @@ dna-map-scroller-step .item-content :is(.description, .body) blockquote:not(.sho
 }
 
 /* titolo citazione */
-dna-map-scroller-step .item-content :is(.description, .body) blockquote:not(.short-quote) strong {
+dna-map-scroller-step .item-content :is(.item-description, .item-body) blockquote:not(.short-quote) strong {
     margin-bottom: 0.5rem;
     font-weight: var(--weight-bold);
 }
@@ -213,6 +224,11 @@ skua-map-scroller .resize-handle {
     border: none;
     transform: translateX(-50%);
     cursor: col-resize;
+    touch-action: none;
+}
+
+body:has(app-dialog dna-dialog[open]) skua-map-scroller .resize-handle {
+    z-index: 0;
 }
 
 skua-map-scroller .resize-handle dna-icon {
@@ -278,10 +294,18 @@ skua-map-scroller .resize-handle dna-icon {
     }
 }
 
+@media (width >= 768px) and (width < 1024px) {
+    dna-map-scroller-step .item-content {
+        --padding-left: calc(var(--padding) * 4);
+    }
+}
+
 @media (width >= 768px) {
     skua-topbar {
-        --left-offset: calc(
-            var(--map-scroller-left-offset) + var(--map-scroller-steps-width) + var(--map-scroller-right-padding)
-        ) !important;
+        --left-offset: calc(var(--map-scroller-left-offset) + var(--map-scroller-steps-width)) !important;
+    }
+
+    skua-map-scroller dna-story-scroller dna-map-scroller-step:last-of-type {
+        margin-bottom: 50vh;
     }
 }

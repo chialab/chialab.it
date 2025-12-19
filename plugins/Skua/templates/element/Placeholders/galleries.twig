@@ -6,21 +6,29 @@
         {% if object.layout|default('') == 'masonry' %}
             <dna-masonry class="gallery_grid" style="--gallery-columns: {{ object.get('columns')|default(4) }}; --gallery-aspect-ratio: {{ object.get('crop')|default(false) ? 1 : 'auto' }}">
                 {% for media in items %}
-                    {{ element('Placeholders/media', { object: media }) }}
+                    {{ element('Placeholders/media', { object: media, mediaOf: object.uname }) }}
                 {% endfor %}
             </dna-masonry>
         {% elseif object.layout|default('') == 'slideshow' %}
             <dna-slideshow carousel controls cover controlslist="nodots noplayback nocounter">
                 {% for media in items %}
-                    {{ element('Placeholders/media', { object: media }) }}
+                    {{ element('Placeholders/media', { object: media, mediaOf: object.uname }) }}
                 {% endfor %}
             </dna-slideshow>
         {% else %}
             <div class="w-full gallery_grid" style="--gallery-columns: {{ object.get('columns')|default(4) }}; --gallery-aspect-ratio: {{ object.get('crop')|default(false) ? 1 : 'auto' }}">
                 {% for media in items %}
-                    {{ element('Placeholders/media', { object: media }) }}
+                    {{ element('Placeholders/media', { object: media, mediaOf: object.uname }) }}
                 {% endfor %}
             </div>
         {% endif %}
     {% endif %}
 {% endif %}
+
+<app-dialog data-for="{{ object.uname }}">
+    <dna-slideshow carousel controls cover controlslist="nodots noplayback nocounter">
+        {% for media in items %}
+            {{ element('Placeholders/media', { object: media, thumbnail: false }) }}
+        {% endfor %}
+    </dna-slideshow>
+</app-dialog>

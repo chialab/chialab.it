@@ -33,6 +33,7 @@ export class SkuaTopbar extends Component {
                 <nav class="mono">
                     <a
                         class="logo"
+                        aria-label="Vai alla homepage"
                         href="/">
                         <svg
                             width="70"

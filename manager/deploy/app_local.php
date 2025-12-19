@@ -184,5 +184,6 @@ return [
             '.short-quote { padding: 0; margin-left: 20px; font-style: italic; border: none; border-top: 1px solid black; border-bottom: 1px solid black; }' .
             '.short-quote .quote-author { font-style: normal; font-size: 12px; margin-top: 12px; }',
         'style_formats_merge' => true,
+        'max_height' => 1500
     ],
 ];

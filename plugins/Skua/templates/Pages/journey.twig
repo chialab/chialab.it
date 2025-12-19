@@ -6,7 +6,7 @@
         <skua-map-scroller
             access-token={{ mapboxToken }}
             data="{{ Map.geoJSON(children)|json_encode|default('{}') }}"
-            tile="mapbox://styles/qwerg/cmi4s3awf004601s3gie977fn/draft"
+            tile="mapbox://styles/qwerg/cmjcp8ix4001401qug569gbyt"
         >
             {% for location in locations %}
                 <dna-map-scroller-step
@@ -25,10 +25,10 @@
                                 <h2 class="title f-4 mt-0 mb-3">{{ location.title|default('') }}</h2>
                             </a>
                             {% if location.description|default() %}
-                                <div class="description f-2">{{ Placeholders.template(location, 'description')|raw }}</div>
+                                <div class="item-description f-2">{{ Placeholders.template(location, 'description')|raw }}</div>
                             {% endif %}
                             {% if location.body|default() %}
-                                <div class="body f-2">{{ Placeholders.template(location, 'body')|raw }}</div>
+                                <div class="item-body f-2">{{ Placeholders.template(location, 'body')|raw }}</div>
                             {% endif %}
                         </div>
                     </div>

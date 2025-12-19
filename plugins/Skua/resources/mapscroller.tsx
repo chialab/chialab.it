@@ -1,7 +1,6 @@
-import { Component, customElement, listen, observe, property, render, state, type Template } from '@chialab/dna';
+import { Component, customElement, listen, observe, property, state, type Template } from '@chialab/dna';
 import { Map as MapElement, type Area } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
-import { ControlsList, Slideshow } from '@chialab/dna-slideshow';
 import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
 import type { AppDialog } from './app-dialog';
 
@@ -271,36 +270,44 @@ export class SkuaMapScroller extends Component {
         }
     }
 
-    /** Opens a full screen dialog when an image inside a step's slideshow is clicked. */
+    /** Opens a full screen dialog when an image inside a step's gallery is clicked. */
     @listen('click', '.map-scroller-item img.clickable')
     private onMediaItemClick(event: MouseEvent) {
         const mediaItem = event.target as HTMLImageElement;
-        const dialog = this.ownerDocument.createElement('app-dialog') as AppDialog;
-        const imgClone = mediaItem.cloneNode(true) as HTMLImageElement;
-        let dialogContent: HTMLElement = imgClone;
+        const dialog = this.ownerDocument.querySelector(
+            `app-dialog[data-for="${mediaItem.dataset.mediaOf}"]`
+        ) as AppDialog | null;
+        dialog?.show();
 
-        const slideshow = mediaItem.closest('dna-slideshow') as Slideshow | null;
-        if (slideshow) {
-            // se l'immagine fa parte di uno slideshow, lo mostro nella dialog
-            const slideshowMedias = slideshow.querySelectorAll('img, video');
-            const clonedSlideshow = (
-                <dna-slideshow
-                    carousel
-                    controls
-                    cover
-                    current={slideshow.current}
-                    controlsList={[ControlsList.nodots, ControlsList.noplayback, ControlsList.nocounter]}>
-                    {[...slideshowMedias].map((media) => media.cloneNode(true))}
-                </dna-slideshow>
-            );
-            dialogContent = clonedSlideshow;
-        }
+        /* questo codice apriva le immagini singole in una dialog creata al volo,
+        per averla come figlia diretta del body e non avere problemi di z-index.
+        Può servire di nuovo, non si sa mai... "For those who come after" */
 
-        this.ownerDocument.body.appendChild(render(<app-dialog ref={dialog}>{dialogContent}</app-dialog>) as Node);
-        dialog.show();
-        dialog.addEventListener('close', () => {
-            dialog.remove();
-        });
+        // const dialog = this.ownerDocument.createElement('app-dialog') as AppDialog;
+        // const imgClone = mediaItem.cloneNode(true) as HTMLImageElement;
+        // let dialogContent: HTMLElement = imgClone;
+
+        // const slideshow = mediaItem.closest('dna-slideshow') as Slideshow | null;
+        // if (slideshow) {
+        //     // se l'immagine fa parte di uno slideshow, lo mostro nella dialog
+        //     const slideshowMedias = slideshow.querySelectorAll('img, video');
+        //     const clonedSlideshow = (
+        //         <dna-slideshow
+        //             carousel
+        //             controls
+        //             cover
+        //             current={slideshow.current}
+        //             controlsList={[ControlsList.nodots, ControlsList.noplayback, ControlsList.nocounter]}>
+        //             {[...slideshowMedias].map((media) => media.cloneNode(true))}
+        //         </dna-slideshow>
+        //     );
+        //     dialogContent = clonedSlideshow;
+        // }
+        // this.ownerDocument.body.appendChild(render(<app-dialog ref={dialog}>{dialogContent}</app-dialog>) as Node);
+        // dialog.show();
+        // dialog.addEventListener('close', () => {
+        //     dialog.remove();
+        // });
     }
 
     /** Set the correct area based on current viewport size. */
@@ -317,7 +324,7 @@ export class SkuaMapScroller extends Component {
         this.mapElement.area = { top: 0, right: 0, bottom: 0, left };
     }
 
-    @listen('mousedown', '.resize-handle')
+    @listen('pointerdown', '.resize-handle')
     private onResizeHandleMouseDown(event: MouseEvent) {
         event.preventDefault();
         event.stopPropagation();
@@ -326,8 +333,8 @@ export class SkuaMapScroller extends Component {
             return;
         }
 
-        document.addEventListener('mousemove', this.onResizeHandleMove);
-        document.addEventListener('mouseup', this.onResizeHandleRelease);
+        document.addEventListener('pointermove', this.onResizeHandleMove);
+        document.addEventListener('pointerup', this.onResizeHandleRelease);
     }
 
     /**
@@ -348,7 +355,7 @@ export class SkuaMapScroller extends Component {
     };
 
     private onResizeHandleRelease = () => {
-        document.removeEventListener('mousemove', this.onResizeHandleMove);
-        document.removeEventListener('mouseup', this.onResizeHandleRelease);
+        document.removeEventListener('pointermove', this.onResizeHandleMove);
+        document.removeEventListener('pointerup', this.onResizeHandleRelease);
     };
 }

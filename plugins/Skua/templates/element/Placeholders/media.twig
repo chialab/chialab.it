@@ -1,9 +1,16 @@
+{% set thumbnail = thumbnail ?? true %}
+
 {% if object.get('media_url')|default() %}
     {% if object.type == 'videos' %}
         <video src="{{ object.media_url }}" controls/>
     {% elseif object.type == 'images' %}
-        {{ Thumb.image(object, 'default', {
-            class: 'clickable',
-        })|raw }}
+        {% if thumbnail %}
+            {{ Thumb.image(object, 'default', {
+                class: mediaOf|default() ? 'clickable' : '',
+                'data-media-of': mediaOf|default(null),
+            })|raw }}
+        {% else %}
+            <img src="{{ object.media_url }}" alt="" class="clickable" data-media-of="{{ mediaOf|default(null) }}"/>
+        {% endif %}
     {% endif %}
 {% endif %}
