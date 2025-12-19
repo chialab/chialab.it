@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chialab\Controller;
 
 use App\Controller\AppController as BaseController;
+use BEdita\Core\Model\Entity\ObjectEntity;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Event\EventInterface;
@@ -18,7 +19,8 @@ use Cake\I18n\I18n;
  * @property \Chialab\FrontendKit\Controller\Component\ObjectsComponent $Objects
  * @property \Chialab\FrontendKit\Controller\Component\MenuComponent $Menu
  * @property \Chialab\FrontendKit\Controller\Component\PublicationComponent $Publication
- * @property \Authentication\Controller\Component\AuthenticationComponent|null $Authentication
+ * @property \App\Controller\Component\CanonicalUrlComponent $CanonicalUrl
+ * @property \Authentication\Controller\Component\AuthenticationComponent|null
  */
 class AppController extends BaseController
 {
@@ -62,6 +64,11 @@ class AppController extends BaseController
             ],
             'cache' => sprintf('publication_%s', $locale),
         ]);
+
+        $isStaging = Configure::read('StagingSite', false);
+        $this->loadComponent('CanonicalUrl', [
+            'propertyName' => $isStaging ? 'staging_url' : 'public_url',
+        ]);
     }
 
     /**
@@ -92,5 +99,14 @@ class AppController extends BaseController
         });
 
         $this->set(compact('menu', 'footerChildren', 'analytics', 'locale', 'locales'));
+
+        // Find main object's canonical URL
+        $object = $this->viewBuilder()->getVar('object');
+        if ($object instanceof ObjectEntity) {
+            $canonicalFrontendUrl = $this->CanonicalUrl->buildCanonicalUrl($object);
+            if ($canonicalFrontendUrl !== null) {
+                $this->set('canonicalUrl', $canonicalFrontendUrl);
+            }
+        }
     }
 }

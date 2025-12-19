@@ -21,6 +21,10 @@ class IllustratorsCell extends Cell
      */
     protected ObjectsLoader $loader;
 
+    protected $_validCellOptions = ['locale'];
+
+    protected $locale;
+
     /**
      * @inheritDoc
      */
@@ -29,6 +33,7 @@ class IllustratorsCell extends Cell
         parent::initialize();
 
         $this->loader = new ObjectsLoader();
+        $this->set(['locale' => $this->locale]);
     }
 
     /**
@@ -136,5 +141,4 @@ class IllustratorsCell extends Cell
     {
         $this->loadIllustratorsData(null, false);
     }
-
 }
