@@ -37,46 +37,12 @@ export class SkuaMapScroller extends Component {
     /** Whether all markers have been processed to put the index number above the icon. */
     private _allMarkersIndexed = false;
 
-    /**
-     * The interactive area of the map.
-     * @returns The current area value.
-     */
-    @property({
+    /** * The interactive area of the map. */
+    @state({
         type: Object,
         defaultValue: { top: 0, left: 0, right: 0, bottom: 0 },
-        fromAttribute(value) {
-            if (!value) {
-                return undefined;
-            }
-            const [top, right, bottom, left] = value.trim().split(/\s*,\s*/);
-            return {
-                top: Number.parseFloat(top),
-                right: Number.parseFloat(right),
-                bottom: Number.parseFloat(bottom),
-                left: Number.parseFloat(left),
-            };
-        },
-        toAttribute(value: Area) {
-            return [value.top, value.right, value.bottom, value.left].join(', ');
-        },
     })
-    get area() {
-        return this.getInnerPropertyValue('area');
-    }
-    set area(area: Area) {
-        const oldArea = this.area || { top: 0, left: 0, right: 0, bottom: 0 };
-        const newArea = area || { top: 0, left: 0, right: 0, bottom: 0 };
-        if (
-            oldArea.top === newArea.top &&
-            oldArea.left === newArea.left &&
-            oldArea.right === newArea.right &&
-            oldArea.bottom === newArea.bottom
-        ) {
-            return;
-        }
-
-        this.setInnerPropertyValue('area', newArea);
-    }
+    area: Area;
 
     /** The map element. */
     readonly mapElement: MapElement = new MapElement();
@@ -102,7 +68,6 @@ export class SkuaMapScroller extends Component {
                         area={this.area}
                         data={this.data}
                         controls
-                        zoom={8}
                         minZoom={5}
                     />
                 </div>
@@ -149,6 +114,16 @@ export class SkuaMapScroller extends Component {
                 }, 0);
             }
         }
+
+        // mantiene sugli step lo zoom attuale della mappa impostato dall'utente, anziché riportarlo allo zoom iniziale dello step
+        this.mapElement.addEventListener('zoom', this.setStepsZoom.bind(this));
+        this.setupArea();
+    }
+
+    private setStepsZoom() {
+        this.storyScrollerElement.querySelectorAll('dna-map-scroller-step').forEach((step) => {
+            step.zoom = this.mapElement.zoom;
+        });
     }
 
     /** Whether two points have the same coordinates within a small tolerance (1e-6). */
@@ -197,7 +172,7 @@ export class SkuaMapScroller extends Component {
     @listen('load', 'dna-map')
     private onMapLoad() {
         this.mapElement.map?.setProjection('mercator');
-        this.setupArea();
+        this.setStepsZoom();
         this.mapElement.map?.on('render', () => {
             if (this._allMarkersIndexed) {
                 return;
@@ -318,15 +293,12 @@ export class SkuaMapScroller extends Component {
     /** Set the correct area based on current viewport size. */
     @observe('isMobile')
     private setupArea() {
+        const storyScrollerRect = this.storyScrollerElement.getBoundingClientRect();
         if (this.isMobile) {
-            // the height of the story scroller in mobile view is 75vh so we want the interactive area to start from there
-            const top = this.clientHeight * 0.75;
-            this.mapElement.area = { top, right: 0, bottom: 0, left: 0 };
+            this.area = { top: storyScrollerRect.bottom, right: 0, bottom: 0, left: 0 };
             return;
         }
-        // the width of the story scroller in desktop view is 40vw so we want the interactive area to end before that
-        const left = this.clientWidth * 0.4;
-        this.mapElement.area = { top: 0, right: 0, bottom: 0, left };
+        this.area = { top: 0, right: 0, bottom: 0, left: storyScrollerRect.right };
     }
 
     @listen('pointerdown', '.resize-handle')

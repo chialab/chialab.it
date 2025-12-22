@@ -1,4 +1,4 @@
-import { globalIconset, IconCloseLarge } from '@chialab/dna-icons';
+import { globalIconset, IconAddLarge, IconCloseLarge, IconSubtractLarge } from '@chialab/dna-icons';
 
 globalIconset.registerIcons({
     'marker-skua': `<svg width="70" height="57" viewBox="0 0 70 57" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,6 +12,8 @@ globalIconset.registerIcons({
         <circle cx="12" cy="12" r="7" fill="white"/>
         <circle cx="12" cy="12" r="3" fill="var(--marker-primary-fill, black)"/>
     </svg>`,
+    'Map.zoomIn': IconAddLarge,
+    'Map.zoomOut': IconSubtractLarge,
     'close-large': IconCloseLarge,
     'Slides.arrowNext': `<svg width="18" height="33" viewBox="0 0 18 33" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 32L16 16.5L0.999997 1" stroke="white" stroke-width="2" stroke-linecap="round"/>
