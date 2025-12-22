@@ -227,10 +227,6 @@ skua-map-scroller .resize-handle {
     touch-action: none;
 }
 
-body:has(app-dialog dna-dialog[open]) skua-map-scroller .resize-handle {
-    z-index: 0;
-}
-
 skua-map-scroller .resize-handle dna-icon {
     display: block;
     width: 30px;

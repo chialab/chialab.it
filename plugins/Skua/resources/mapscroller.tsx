@@ -1,6 +1,7 @@
-import { Component, customElement, listen, observe, property, state, type Template } from '@chialab/dna';
+import { Component, customElement, listen, observe, property, render, state, type Template } from '@chialab/dna';
 import { Map as MapElement, type Area } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
+import { ControlsList, Slideshow } from '@chialab/dna-slideshow';
 import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
 import type { AppDialog } from './app-dialog';
 
@@ -101,6 +102,7 @@ export class SkuaMapScroller extends Component {
                         area={this.area}
                         data={this.data}
                         controls
+                        zoom={8}
                         minZoom={5}
                     />
                 </div>
@@ -270,44 +272,47 @@ export class SkuaMapScroller extends Component {
         }
     }
 
-    /** Opens a full screen dialog when an image inside a step's gallery is clicked. */
+    /**
+     * Opens a full screen dialog when an image inside a step is clicked.
+     * If the image is part of a gallery, opens a slideshow in the dialog.
+     * The images will be shown using the URL in the `data-original-url` attribute, if available,
+     * to load the full resolution version instead of the thumbnail eventually shown in the step's card.
+     */
     @listen('click', '.map-scroller-item img.clickable')
     private onMediaItemClick(event: MouseEvent) {
         const mediaItem = event.target as HTMLImageElement;
-        const dialog = this.ownerDocument.querySelector(
-            `app-dialog[data-for="${mediaItem.dataset.mediaOf}"]`
-        ) as AppDialog | null;
-        dialog?.show();
+        const dialog = this.ownerDocument.createElement('app-dialog') as AppDialog;
+        const imgClone = mediaItem.cloneNode(true) as HTMLImageElement;
+        let dialogContent: HTMLElement = imgClone;
+        imgClone.src = mediaItem.dataset.originalUrl || imgClone.src;
 
-        /* questo codice apriva le immagini singole in una dialog creata al volo,
-        per averla come figlia diretta del body e non avere problemi di z-index.
-        Può servire di nuovo, non si sa mai... "For those who come after" */
+        const slideshow = mediaItem.closest('dna-slideshow, dna-masonry, .gallery_grid') as Slideshow | null;
+        let clonedSlideshow: Slideshow | null = null;
+        if (slideshow) {
+            const slideshowMedias = slideshow.querySelectorAll<HTMLImageElement | HTMLVideoElement>('img, video');
+            const index = Array.from(slideshowMedias).indexOf(mediaItem);
+            clonedSlideshow = (
+                <dna-slideshow
+                    carousel
+                    controls
+                    cover
+                    current={index}
+                    controlsList={[ControlsList.nodots, ControlsList.noplayback, ControlsList.nocounter]}>
+                    {[...slideshowMedias].map((media) => {
+                        const cloned = media.cloneNode(true) as HTMLImageElement | HTMLVideoElement;
+                        cloned.src = media.dataset.originalUrl || cloned.src;
+                        return cloned;
+                    })}
+                </dna-slideshow>
+            );
+            dialogContent = clonedSlideshow;
+        }
 
-        // const dialog = this.ownerDocument.createElement('app-dialog') as AppDialog;
-        // const imgClone = mediaItem.cloneNode(true) as HTMLImageElement;
-        // let dialogContent: HTMLElement = imgClone;
-
-        // const slideshow = mediaItem.closest('dna-slideshow') as Slideshow | null;
-        // if (slideshow) {
-        //     // se l'immagine fa parte di uno slideshow, lo mostro nella dialog
-        //     const slideshowMedias = slideshow.querySelectorAll('img, video');
-        //     const clonedSlideshow = (
-        //         <dna-slideshow
-        //             carousel
-        //             controls
-        //             cover
-        //             current={slideshow.current}
-        //             controlsList={[ControlsList.nodots, ControlsList.noplayback, ControlsList.nocounter]}>
-        //             {[...slideshowMedias].map((media) => media.cloneNode(true))}
-        //         </dna-slideshow>
-        //     );
-        //     dialogContent = clonedSlideshow;
-        // }
-        // this.ownerDocument.body.appendChild(render(<app-dialog ref={dialog}>{dialogContent}</app-dialog>) as Node);
-        // dialog.show();
-        // dialog.addEventListener('close', () => {
-        //     dialog.remove();
-        // });
+        this.ownerDocument.body.appendChild(render(<app-dialog ref={dialog}>{dialogContent}</app-dialog>) as Node);
+        dialog.show();
+        dialog.addEventListener('close', () => {
+            dialog.remove();
+        });
     }
 
     /** Set the correct area based on current viewport size. */

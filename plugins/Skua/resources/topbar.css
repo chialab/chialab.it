@@ -14,10 +14,6 @@ skua-topbar {
     padding: 0 calc(var(--padding) * 6) 0 calc(var(--padding) * 2.5);
 }
 
-body:has(app-dialog dna-dialog[open]) skua-topbar {
-    z-index: 0;
-}
-
 skua-topbar + * {
     margin-top: 100px;
 }
