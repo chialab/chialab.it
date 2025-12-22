@@ -65,7 +65,7 @@ article header {
     text-rendering: optimizelegibility;
 }
 
-.body > *:empty {
+.body > *:not(hr):empty {
     display: none;
 }
 
