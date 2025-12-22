@@ -78,6 +78,12 @@ article header {
     font-style: italic;
 }
 
+.body hr {
+    margin: var(--gap) 0;
+    border: none;
+    border-top: 1px solid currentcolor;
+}
+
 .claim {
     margin: 0;
     font-family: var(--font-serif);
