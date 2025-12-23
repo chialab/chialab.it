@@ -7,7 +7,7 @@
                 showDescription: false,
             } }, {
                 cache: {
-                    key: 'gallery_' ~ locale ~ '_' ~ item.id ~ '_defaultLayout:slideshow_showTitle:false_showDescription:false',
+                    key: 'gallery_' ~ locale ~ '_' ~ item.id ~ '_' ~ item.modified.toUnixString() ~ '_defaultLayout:slideshow_showTitle:false_showDescription:false',
                 },
             }) }}
         {% else %}

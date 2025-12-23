@@ -2,6 +2,6 @@
     showTitle: false,
 } }, {
     cache: {
-        key: 'gallery_' ~ locale ~ '_' ~ object.id ~ '_showTitle:false',
+        key: 'gallery_' ~ locale ~ '_' ~ object.id ~ '_' ~ object.modified.toUnixString() ~ '_showTitle:false',
     },
 }) }}

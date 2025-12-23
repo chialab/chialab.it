@@ -13,7 +13,7 @@
         {% else %}
             {{ cell('Chialab.Card::wide', { object: item }, {
                 cache: {
-                    key: 'card_wide_' ~ locale ~ '_' ~ item.id,
+                    key: 'card_wide_' ~ locale ~ '_' ~ item.id ~ '_' ~ item.modified.toUnixString(),
                 },
             }) }}
         {% endif %}

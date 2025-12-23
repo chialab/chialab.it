@@ -3,7 +3,7 @@
     {% for item in children %}
         {{ cell('Chialab.Card', { object: item, props: { class: 'w-' ~ _columns } }, {
             cache: {
-                key: 'card_' ~ locale ~ '_' ~ item.id ~ '_class:w-' ~ _columns,
+                key: 'card_' ~ locale ~ '_' ~ item.id ~ '_' ~ item.modified.toUnixString() ~ '_class:w-' ~ _columns,
             },
         }) }}
     {% endfor %}

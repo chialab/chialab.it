@@ -2,7 +2,7 @@
     {% for item in children %}
         {{ cell('Chialab.Card::collapsable', { object: item }, {
             cache: {
-                key: 'card_collapsable_' ~ locale ~ '_' ~ item.id,
+                key: 'card_collapsable_' ~ locale ~ '_' ~ item.id ~ '_' ~ item.modified.toUnixString(),
             },
         }) }}
     {% endfor %}

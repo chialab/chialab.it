@@ -3,7 +3,7 @@
         {% for illustrator in illustrators %}
             {{ cell('Chialab.Card::collapsable', { object: illustrator }, {
                 cache: {
-                    key: 'card_collapsable_' ~ locale ~ '_' ~ illustrator.id,
+                    key: 'card_collapsable_' ~ locale ~ '_' ~ illustrator.id ~ '_' ~ illustrator.modified.toUnixString(),
                 },
             }) }}
         {% endfor %}
