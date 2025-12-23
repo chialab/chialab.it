@@ -874,9 +874,9 @@
     "@chialab/dna-backdrop" "^4.0.0-beta.21"
 
 "@chialab/dna-floating@^4.0.0-beta.38":
-  version "4.0.0-beta.38"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-floating/-/dna-floating-4.0.0-beta.38.tgz#cacb564e03350bf5983f5e98893a6b0e0e799f73"
-  integrity sha512-eA2UN0o8HljjR70QZrKuZU3EZn9aFxljOYR9S49spaf3IfS/dw2uZJMNXLWqqAvViQQ4I8V51l4mJnE67UzOsQ==
+  version "4.0.0-beta.39"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-floating/-/dna-floating-4.0.0-beta.39.tgz#5fb64540d3da0563ef3cd48ba3d72201725d0f9b"
+  integrity sha512-/P41uuu7sFGEWmxLz15fHP/bj3cUdS/qCoVenvchK/1kn0PkkrLbJOqJkkNIiRcckk9sBmiKzmrXI3aLMjyKXQ==
   dependencies:
     "@chialab/dna" "^4.4.0"
     "@chialab/loock" "^4.5.2"
@@ -917,9 +917,9 @@
     "@chialab/dna-story-scroller" "^4.0.0-beta.12"
 
 "@chialab/dna-map@^4.0.0-beta.0", "@chialab/dna-map@^4.0.0-beta.19":
-  version "4.0.0-beta.20"
-  resolved "https://registry.yarnpkg.com/@chialab/dna-map/-/dna-map-4.0.0-beta.20.tgz#81b476aa6eee159a7c2232dc04a53db41260fd63"
-  integrity sha512-BEIJYVC5xnN1ZeZUEDtYFOqTPff8USfzOYWkOxVwa5blds8hrjtyamlRJK5XrEHLu6uD0/1h80PiAJwsDayxHA==
+  version "4.0.0-beta.22"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-map/-/dna-map-4.0.0-beta.22.tgz#c0f4df9dc022bf9b6657e001019e1a47404602b8"
+  integrity sha512-tHdRa6wHr+KCszorgSiNnuuv1rDxIhb91KOUewLIibxDUoeCU/WraDMPWX8hUIBwo/q0rUZRaLkaW3RFsfhi5Q==
   dependencies:
     "@chialab/dna" "^4.4.0"
     "@chialab/dna-button" "^4.0.0-beta.22"
@@ -1243,9 +1243,9 @@
   integrity sha512-DaDeUkXZKjdGhgYaHNJTV9pV7Y9B3b644jCLs9Upc3VeNGg6LWARAT6O+Q+/COo+2gg/bM5rhpMAtf70WqfBdQ==
 
 "@csstools/css-syntax-patches-for-csstree@^1.0.19":
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/@csstools/css-syntax-patches-for-csstree/-/css-syntax-patches-for-csstree-1.0.21.tgz#1671e2d9d7c800c5c5f65f8c7ab6722c5233b0b9"
-  integrity sha512-plP8N8zKfEZ26figX4Nvajx8DuzfuRpLTqglQ5d0chfnt35Qt3X+m6ASZ+rG0D0kxe/upDVNwSIVJP5n4FuNfw==
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@csstools/css-syntax-patches-for-csstree/-/css-syntax-patches-for-csstree-1.0.22.tgz#7a14209eee004598dae61310e180f9826821d6c9"
+  integrity sha512-qBcx6zYlhleiFfdtzkRgwNC7VVoAwfK76Vmsw5t+PbvtdknO9StgRk7ROvq9so1iqbdW4uLIDAsXRsTfUrIoOw==
 
 "@csstools/css-tokenizer@^3.0.4":
   version "3.0.4"
@@ -2170,9 +2170,9 @@ balanced-match@^2.0.0:
   integrity sha512-1ugUSr8BHXRnK23KfuYS+gVMC3LB8QGH9W1iGtDPsNWoQbgtXSExkBu2aDR4epiGWZOjZsj6lDl/N/AqqTC3UA==
 
 baseline-browser-mapping@^2.9.0:
-  version "2.9.8"
-  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.9.8.tgz#04fb5c10ff9c7a1b04ac08cfdfc3b10942a8ac72"
-  integrity sha512-Y1fOuNDowLfgKOypdc9SPABfoWXuZHBOyCS4cD52IeZBhr4Md6CLLs6atcxVrzRmQ06E7hSlm5bHHApPKR/byA==
+  version "2.9.11"
+  resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.9.11.tgz#53724708c8db5f97206517ecfe362dbe5181deea"
+  integrity sha512-Sg0xJUNDU1sJNGdfGWhVHX0kkZ+HWcvmVymJbj6NSgZZmW/8S9Y2HQ5euytnIgakgxN6papOAWiwDo1ctFDcoQ==
 
 binary-extensions@^2.0.0:
   version "2.3.0"
@@ -2279,9 +2279,9 @@ camelcase@^5.0.0:
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-lite@^1.0.30001759:
-  version "1.0.30001760"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001760.tgz#bdd1960fafedf8d5f04ff16e81460506ff9b798f"
-  integrity sha512-7AAMPcueWELt1p3mi13HR/LHH0TJLT11cnwDJEs3xA4+CK/PLKeO9Kl1oru24htkyUKtkGCvAx4ohB0Ttry8Dw==
+  version "1.0.30001761"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001761.tgz#4ca4c6e3792b24e8e2214baa568fc0e43de28191"
+  integrity sha512-JF9ptu1vP2coz98+5051jZ4PwQgd2ni8A+gYSN7EA7dPKIMf0pDlSUxhdmVOaV3/fYK5uWBkgSXJaRLr4+3A6g==
 
 chalk@^4.0.0:
   version "4.1.2"
@@ -3150,9 +3150,9 @@ fastest-levenshtein@^1.0.16:
   integrity sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==
 
 fastq@^1.6.0:
-  version "1.19.1"
-  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.19.1.tgz#d50eaba803c8846a883c16492821ebcd2cda55f5"
-  integrity sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==
+  version "1.20.1"
+  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.20.1.tgz#ca750a10dc925bc8b18839fd203e3ef4b3ced675"
+  integrity sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==
   dependencies:
     reusify "^1.0.4"
 
@@ -4962,9 +4962,9 @@ stylelint-order@^6.0.4:
     postcss-sorting "^8.0.2"
 
 stylelint-value-no-unknown-custom-properties@^6.0.0:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/stylelint-value-no-unknown-custom-properties/-/stylelint-value-no-unknown-custom-properties-6.0.1.tgz#526cc20344f4fc5e33231152767a432b6ed8f957"
-  integrity sha512-N60PTdaTknB35j6D4FhW0GL2LlBRV++bRpXMMldWMQZ240yFQaoltzlLY4lXXs7Z0J5mNUYZQ/gjyVtU2DhCMA==
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/stylelint-value-no-unknown-custom-properties/-/stylelint-value-no-unknown-custom-properties-6.1.0.tgz#bdc35b1e48778c49bd99bb287daa88a110451daf"
+  integrity sha512-fzc1ckeQZAlksMRzmWuyLywSRfaF9ys04qNg8+kTstUnZT0z8ajdMLjiPKtlcm4Nc5oDZE8tPVAcfFJB6E/1/A==
   dependencies:
     postcss-value-parser "^4.2.0"
     resolve "^1.22.8"

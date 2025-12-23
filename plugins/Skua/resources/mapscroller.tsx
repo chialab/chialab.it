@@ -68,6 +68,7 @@ export class SkuaMapScroller extends Component {
                         area={this.area}
                         data={this.data}
                         controls
+                        zoom={7}
                         minZoom={5}
                     />
                 </div>

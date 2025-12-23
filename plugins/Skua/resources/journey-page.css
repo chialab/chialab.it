@@ -64,18 +64,18 @@ skua-map-scroller dna-story-scroller {
 
 skua-map-scroller dna-story-scroller::-webkit-scrollbar {
     width: var(--scrollbar-width);
+    cursor: pointer;
 }
 
 skua-map-scroller dna-story-scroller::-webkit-scrollbar-thumb {
     --scrollbar-thumb-bg: black;
 
     background: repeating-linear-gradient(transparent, transparent 0 6px, var(--scrollbar-thumb-bg) 7px 10px);
+    cursor: pointer;
 }
 
 skua-map-scroller dna-story-scroller::-webkit-scrollbar-thumb:hover {
     --scrollbar-thumb-bg: var(--color-neutral);
-
-    cursor: pointer;
 }
 
 @supports not selector(.z-scrollbar::-webkit-scrollbar-track) {

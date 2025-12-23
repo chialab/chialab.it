@@ -46,28 +46,30 @@ export class SkuaTopbar extends Component {
                         <strong>SKUA</strong>
                         <span>1852</span>
                     </a>
-                    <div class="menu">
-                        <button
-                            class="trigger-btn"
-                            type="button"
-                            aria-label={this.expanded ? 'Chiudi menu' : 'Apri menu'}
-                            title={this.expanded ? 'Chiudi menu' : 'Apri menu'}
-                            aria-haspopup="menu">
-                            <dna-icon name="menu" />
-                        </button>
-                        <div
-                            class="menu-items"
-                            role="menu"
-                            inert={!this.expanded}
-                            aria-hidden={this.expanded ? 'false' : 'true'}>
-                            {this.items.map((node) => (
-                                <div
-                                    ref={node}
-                                    role="menuitem"
-                                />
-                            ))}
+                    {this.items.length > 0 && (
+                        <div class="menu">
+                            <button
+                                class="trigger-btn"
+                                type="button"
+                                aria-label={this.expanded ? 'Chiudi menu' : 'Apri menu'}
+                                title={this.expanded ? 'Chiudi menu' : 'Apri menu'}
+                                aria-haspopup="menu">
+                                <dna-icon name="menu" />
+                            </button>
+                            <div
+                                class="menu-items"
+                                role="menu"
+                                inert={!this.expanded}
+                                aria-hidden={this.expanded ? 'false' : 'true'}>
+                                {this.items.map((node) => (
+                                    <div
+                                        ref={node}
+                                        role="menuitem"
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </nav>
             </header>
         );
