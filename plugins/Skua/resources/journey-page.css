@@ -213,7 +213,7 @@ dna-map-scroller-step .item-content :is(.item-description, .item-body) blockquot
 
 skua-map-scroller .resize-handle {
     content: '';
-    position: fixed;
+    position: absolute;
     top: 230px;
     left: calc(var(--map-scroller-left-offset) + var(--steps-resized-width));
     z-index: 1;
