@@ -322,7 +322,7 @@ export class SkuaMapScroller extends Component {
      */
     private onResizeHandleMove = (event: MouseEvent) => {
         if (this.isMobile) {
-            this.style.setProperty('--steps-resized-height', `min(max(20vh, ${event.pageY}px), 100vh)`);
+            this.style.setProperty('--steps-resized-height', `min(max(20dvh, ${event.pageY}px), 100dvh)`);
             return;
         }
 
