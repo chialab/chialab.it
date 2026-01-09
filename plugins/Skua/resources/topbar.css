@@ -110,10 +110,6 @@ skua-topbar [role='menuitem'] {
     outline-offset: -1px;
 }
 
-skua-topbar [role='menuitem'].tracking {
-    color: var(--color-neutral);
-}
-
 skua-topbar [role='menuitem'][aria-current='page'] {
     color: var(--color-accent);
 }

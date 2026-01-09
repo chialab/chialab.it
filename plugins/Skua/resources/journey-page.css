@@ -49,6 +49,12 @@ skua-map-scroller .map-scroller__map dna-map [marker-symbol] text.marker-index {
     dominant-baseline: text-before-edge;
 }
 
+skua-map-scroller .map-scroller__map .chialab-it {
+    margin-right: 4px;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+}
+
 skua-map-scroller dna-story-scroller {
     position: relative;
     z-index: 1;

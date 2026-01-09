@@ -69,7 +69,7 @@ export class SkuaMapScroller extends Component {
                         data={this.data}
                         controls
                         zoom={7}
-                        minZoom={5}
+                        attribution={`<a class="chialab-it" href="https://chialab.it" target="_blank" aria-label="Chialab website">ß chialab</a>`}
                     />
                 </div>
                 <dna-story-scroller
