@@ -263,16 +263,19 @@ export class SkuaMapScroller extends Component {
         imgClone.src = mediaItem.dataset.originalUrl || imgClone.src;
 
         const slideshow = mediaItem.closest('dna-slideshow, dna-masonry, .gallery_grid') as Slideshow | null;
+        let clonedSlideshowTemplate: Template | null = null;
         let clonedSlideshow: Slideshow | null = null;
         if (slideshow) {
             const slideshowMedias = slideshow.querySelectorAll<HTMLImageElement | HTMLVideoElement>('img, video');
             const index = Array.from(slideshowMedias).indexOf(mediaItem);
-            clonedSlideshow = (
+            clonedSlideshow = new Slideshow();
+            clonedSlideshowTemplate = (
                 <dna-slideshow
                     carousel
                     controls
                     cover
                     current={index}
+                    ref={clonedSlideshow}
                     controlsList={[ControlsList.nodots, ControlsList.noplayback, ControlsList.nocounter]}>
                     {[...slideshowMedias].map((media) => {
                         const cloned = media.cloneNode(true) as HTMLImageElement | HTMLVideoElement;
@@ -281,11 +284,12 @@ export class SkuaMapScroller extends Component {
                     })}
                 </dna-slideshow>
             );
-            dialogContent = clonedSlideshow;
+            dialogContent = clonedSlideshowTemplate;
         }
 
         this.ownerDocument.body.appendChild(render(<app-dialog ref={dialog}>{dialogContent}</app-dialog>) as Node);
         dialog.show();
+        clonedSlideshow?.focus();
         dialog.addEventListener('close', () => {
             dialog.remove();
         });
@@ -322,7 +326,7 @@ export class SkuaMapScroller extends Component {
      */
     private onResizeHandleMove = (event: MouseEvent) => {
         if (this.isMobile) {
-            this.style.setProperty('--steps-resized-height', `min(max(20dvh, ${event.pageY}px), 100dvh)`);
+            this.style.setProperty('--steps-resized-height', `min(max(25dvh, ${event.pageY}px), 100dvh)`);
             return;
         }
 

@@ -6,7 +6,7 @@
     --color-accent: #ff0000;
     --color-neutral: #797676;
     --color-text-neutral: #666565;
-    --map-scroller-steps-width: 40vw;
+    --map-scroller-steps-width: 40dvw;
     --map-scroller-right-padding: 30px;
     --map-scroller-left-margin: 12px;
     --map-scroller-left-padding: 12px;
@@ -140,13 +140,19 @@ dna-slideshow button[data-action] dna-icon {
     height: 2rem !important;
 }
 
+dna-map .chialab-it {
+    margin-right: 4px;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+}
+
 .gallery_grid > * {
     border: none;
 }
 
 @media (width < 768px) {
     :root {
-        --map-scroller-steps-width: 100vw;
+        --map-scroller-steps-width: 100dvw;
         --scrollbar-width: 0;
         --map-scroller-left-margin: 0;
         --map-scroller-left-padding: 0;

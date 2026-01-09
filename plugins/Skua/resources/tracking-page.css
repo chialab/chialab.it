@@ -1,7 +1,7 @@
 @import '@chialab/dna-map/style';
 
 .tracking-page {
-    height: 100vh;
+    height: 100dvh;
     margin: 0;
 }
 

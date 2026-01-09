@@ -4,6 +4,7 @@
     {% elseif object.type == 'images' %}
         {{ Thumb.image(object, 'high', {
             class: 'clickable',
+            'draggable': 'false',
             'data-original-url': object.media_url,
         })|raw }}
     {% endif %}
