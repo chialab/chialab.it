@@ -32,41 +32,45 @@ class PagesController extends AppController
         $this->viewBuilder()->addHelpers(['Skua.Map']);
 
         // call live tracking
-        $response = (new Client())->get(
-            sprintf('%s?ship=%s', Configure::read('Skua.apiUrl'), Configure::read('Skua.shipId')),
-            [],
-            [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'Authorization' => sprintf('Basic %s', Configure::read('Skua.apiKey'))
-                ],
-            ],
-        );
-        $response = $response->getJson(); // ['latitude' => ..., 'longitude' => ...]
-        if (empty($response['latitude']) || empty($response['longitude'])) {
-            throw new NotFoundException('Unable to get live tracking data');
-        }
-
-        $center = sprintf('%.15f,%.15f', $response['latitude'], $response['longitude']);
-
-        $data = [
-            'type' => 'FeatureCollection',
-            'features' => [
+        try {
+            $response = (new Client())->get(
+                sprintf('%s?ship=%s', Configure::read('Skua.apiUrl'), Configure::read('Skua.shipId')),
+                [],
                 [
-                    'type' => 'Feature',
-                    'geometry' => [
-                        'type' => 'Point',
-                        'coordinates' => [$response['longitude'], $response['latitude']],
-                    ],
-                    'properties' => [
-                        'marker-symbol' => 'marker-skua',
-                        'marker-anchor' => 'bottom',
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        'Authorization' => sprintf('Basic %s', Configure::read('Skua.apiKey')),
                     ],
                 ],
-            ],
-        ];
+            );
+            $response = $response->getJson(); // ['latitude' => ..., 'longitude' => ...]
+            if (empty($response['latitude']) || empty($response['longitude'])) {
+                throw new NotFoundException('Unable to get live tracking data');
+            }
 
-        $this->set(compact('data', 'center'));
+            $center = sprintf('%.15f,%.15f', $response['latitude'], $response['longitude']);
+
+            $data = [
+                'type' => 'FeatureCollection',
+                'features' => [
+                    [
+                        'type' => 'Feature',
+                        'geometry' => [
+                            'type' => 'Point',
+                            'coordinates' => [$response['longitude'], $response['latitude']],
+                        ],
+                        'properties' => [
+                            'marker-symbol' => 'marker-skua',
+                            'marker-anchor' => 'bottom',
+                        ],
+                    ],
+                ],
+            ];
+
+            $this->set(compact('data', 'center'));
+        } catch (Exception $e) {
+            // Ignore errors in live tracking
+        }
     }
 
     /**
