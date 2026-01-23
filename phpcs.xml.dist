@@ -8,10 +8,6 @@
     <file>./plugins/Chialab/tests</file>
     <file>./plugins/Chialab/config</file>
     <file>./plugins/Chialab/webroot</file>
-    <file>./plugins/OpenSource/src</file>
-    <file>./plugins/OpenSource/tests</file>
-    <file>./plugins/OpenSource/config</file>
-    <file>./plugins/OpenSource/webroot</file>
 
     <arg name="colors"/>
     <arg value="p"/>

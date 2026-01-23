@@ -39,7 +39,7 @@ and make sure to update the `Datasource` section with your MySQL connection sett
 Then, ensure the following environment variables are set:
 
 - `FRONTEND_PLUGIN` - The frontend plugin to use (could be `BEdita/API` for API frontend or `Chialab` for websites frontends)
-- `THEME` - The theme to use (could be `Chialab` for chialab.it or `OpenSource` for chialab.io)
+- `THEME` - The theme to use (could be `Chialab` for chialab.it or `Illustratorium` for illustratorium.it)
 
 You can set the environment variables in your virtual host, configuration:
 

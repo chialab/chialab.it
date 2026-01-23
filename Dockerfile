@@ -12,7 +12,6 @@ WORKDIR /app/
 # Install dependencies
 COPY --chown=www-data:www-data ./composer.json ./composer.lock /app/
 COPY --chown=www-data:www-data ./plugins/Chialab/composer.json /app/plugins/Chialab/
-COPY --chown=www-data:www-data ./plugins/OpenSource/composer.json /app/plugins/OpenSource/
 RUN composer install --no-dev --prefer-dist --no-interaction
 
 # Add sources and dump Composer autoloader
@@ -44,7 +43,6 @@ COPY ./deploy/Caddyfile.d /etc/caddy/Caddyfile.d
 COPY --from=npm /app/webroot/ /app/webroot/
 COPY --from=npm /app/plugins/Chialab/webroot/ /app/webroot/chialab/
 COPY --from=npm /app/plugins/Illustratorium/webroot/ /app/webroot/illustratorium/
-COPY --from=npm /app/plugins/OpenSource/webroot/ /app/webroot/open_source/
 COPY --from=npm /app/plugins/Skua/webroot/ /app/webroot/skua/
 
 ###
@@ -73,9 +71,7 @@ COPY --chown=www-data:www-data ./deploy/app_local.php /app/config/app_local.php
 COPY --chown=www-data:www-data --from=composer /app/ /app/
 COPY --chown=www-data:www-data --from=npm /app/webroot/ /app/webroot/
 COPY --chown=www-data:www-data --from=npm /app/plugins/Chialab/webroot/ /app/webroot/chialab/
-COPY --chown=www-data:www-data --from=npm /app/plugins/OpenSource/webroot/ /app/webroot/open_source/
 COPY --from=npm /app/plugins/Chialab/webroot/build/entrypoints.json /app/plugins/Chialab/webroot/build/entrypoints.json
 COPY --from=npm /app/plugins/Illustratorium/webroot/build/entrypoints.json /app/plugins/Illustratorium/webroot/build/entrypoints.json
-COPY --from=npm /app/plugins/OpenSource/webroot/build/entrypoints.json /app/plugins/OpenSource/webroot/build/entrypoints.json
 COPY --from=npm /app/plugins/Skua/webroot/build/entrypoints.json /app/plugins/Skua/webroot/build/entrypoints.json
 RUN composer run post-install-cmd --no-interaction
