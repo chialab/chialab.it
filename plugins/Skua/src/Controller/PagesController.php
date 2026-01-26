@@ -26,51 +26,67 @@ class PagesController extends AppController
      *
      * @return void
      */
+    // public function home(): void
+    // {
+    //     $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
+    //     $this->viewBuilder()->addHelpers(['Skua.Map']);
+
+    //     // call live tracking
+    //     try {
+    //         $response = (new Client())->get(
+    //             sprintf('%s?ship=%s', Configure::read('Skua.apiUrl'), Configure::read('Skua.shipId')),
+    //             [],
+    //             [
+    //                 'headers' => [
+    //                     'Content-Type' => 'application/json',
+    //                     'Authorization' => sprintf('Basic %s', Configure::read('Skua.apiKey')),
+    //                 ],
+    //             ],
+    //         );
+    //         $response = $response->getJson(); // ['latitude' => ..., 'longitude' => ...]
+    //         if (empty($response['latitude']) || empty($response['longitude'])) {
+    //             throw new NotFoundException('Unable to get live tracking data');
+    //         }
+
+    //         $center = sprintf('%.15f,%.15f', $response['latitude'], $response['longitude']);
+
+    //         $data = [
+    //             'type' => 'FeatureCollection',
+    //             'features' => [
+    //                 [
+    //                     'type' => 'Feature',
+    //                     'geometry' => [
+    //                         'type' => 'Point',
+    //                         'coordinates' => [$response['longitude'], $response['latitude']],
+    //                     ],
+    //                     'properties' => [
+    //                         'marker-symbol' => 'marker-skua',
+    //                         'marker-anchor' => 'bottom',
+    //                     ],
+    //                 ],
+    //             ],
+    //         ];
+
+    //         $this->set(compact('data', 'center'));
+    //     } catch (Exception $e) {
+    //         // Ignore errors in live tracking
+    //     }
+    // }
+
+    /**
+     * Homepage redirecting to the latest journey.
+     *
+     * @return void
+     */
     public function home(): void
     {
-        $this->set('mapboxToken', Configure::read('Maps.mapbox.token'));
-        $this->viewBuilder()->addHelpers(['Skua.Map']);
-
-        // call live tracking
-        try {
-            $response = (new Client())->get(
-                sprintf('%s?ship=%s', Configure::read('Skua.apiUrl'), Configure::read('Skua.shipId')),
-                [],
-                [
-                    'headers' => [
-                        'Content-Type' => 'application/json',
-                        'Authorization' => sprintf('Basic %s', Configure::read('Skua.apiKey')),
-                    ],
-                ],
-            );
-            $response = $response->getJson(); // ['latitude' => ..., 'longitude' => ...]
-            if (empty($response['latitude']) || empty($response['longitude'])) {
-                throw new NotFoundException('Unable to get live tracking data');
-            }
-
-            $center = sprintf('%.15f,%.15f', $response['latitude'], $response['longitude']);
-
-            $data = [
-                'type' => 'FeatureCollection',
-                'features' => [
-                    [
-                        'type' => 'Feature',
-                        'geometry' => [
-                            'type' => 'Point',
-                            'coordinates' => [$response['longitude'], $response['latitude']],
-                        ],
-                        'properties' => [
-                            'marker-symbol' => 'marker-skua',
-                            'marker-anchor' => 'bottom',
-                        ],
-                    ],
-                ],
-            ];
-
-            $this->set(compact('data', 'center'));
-        } catch (Exception $e) {
-            // Ignore errors in live tracking
+        if (empty($this->journeys)) {
+            throw new Exception('No journeys found');
         }
+
+        // rimando all'ultimo viaggio dentro la root folder
+        $lastJourney = collection($this->journeys)->last();
+        $this->redirect(['_name' => 'pages:journey', 'uname' => $lastJourney->uname]);
     }
 
     /**
