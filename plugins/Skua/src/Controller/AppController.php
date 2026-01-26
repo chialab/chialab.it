@@ -57,7 +57,7 @@ class AppController extends BaseController
         ]);
         $loader = new ObjectsLoader();
         $root = $this->Publication->getPublication();
-        $this->journeys = $loader->loadObjects(['parent' => $root->uname, 'sort' => '-created'], 'folders')
+        $this->journeys = $loader->loadObjects(['parent' => $root->uname], 'folders')
             ->all()
             ->toList();
 
