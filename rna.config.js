@@ -22,13 +22,6 @@ const config = {
             entrypointsPath: 'plugins/Illustratorium/webroot/build/entrypoints.json',
         },
         {
-            input: ['./plugins/OpenSource/resources/index.ts', './plugins/OpenSource/resources/index.css'],
-            publicPath: '/open_source/build/',
-            output: 'plugins/OpenSource/webroot/build/',
-            manifestPath: 'plugins/OpenSource/webroot/build/manifest.json',
-            entrypointsPath: 'plugins/OpenSource/webroot/build/entrypoints.json',
-        },
-        {
             input: [
                 './plugins/Skua/resources/index.ts',
                 './plugins/Skua/resources/mapscroller.tsx',
