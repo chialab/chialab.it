@@ -7,7 +7,7 @@
 <div class="gallery_container w-full column gap-s">
     {% if gallery_contents|length > 0 %}
         {% if layout == 'slideshow' %}
-            <dna-slideshow class="w-full" controls carousel controlslist="noplayback nodots" autoplay="5000" {% if object.get('crop')|default(false) %}cover{% endif %}>
+            <dna-slideshow class="w-full" controls carousel controlslist="noplayback nodots nocounter" autoplay="5000" {% if object.get('crop')|default(false) %}cover{% endif %}>
                 {% for content in gallery_contents %}
                     <div class="w-full slideshow-item">
                         {% if Poster.exists(content) %}

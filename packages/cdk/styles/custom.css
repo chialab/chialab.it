@@ -21,10 +21,6 @@
     object-position: center;
 }
 
-.gallery_container .slideshow__controls {
-    display: none;
-}
-
 .media_body > embed,
 .media_body > iframe,
 .media_object {
