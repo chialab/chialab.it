@@ -865,6 +865,16 @@
     "@types/prismjs" "^1.26.1"
     prismjs "^1.22.0"
 
+"@chialab/dna-comparison@4.0.0-beta.14":
+  version "4.0.0-beta.14"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-comparison/-/dna-comparison-4.0.0-beta.14.tgz#3b796f09ab3421f316197c8945086567cb55c00c"
+  integrity sha512-Vy/seq9UtHCmYwfTIokJGHo6McUBwbmIu1Ic0OWKIhQng+MvsgxxLhze0jMyar8f2tbHkCtvx/geAHCl2Y+ZMQ==
+  dependencies:
+    "@chialab/dna" "^4.4.0"
+    "@chialab/dna-button" "^4.0.0-beta.22"
+    "@chialab/dna-i18n" "^4.0.0-beta.10"
+    "@chialab/dna-icons" "^4.0.0-beta.11"
+
 "@chialab/dna-dialog@^4.0.0-beta.0":
   version "4.0.0-beta.16"
   resolved "https://registry.yarnpkg.com/@chialab/dna-dialog/-/dna-dialog-4.0.0-beta.16.tgz#e18d9899fdcc0973cc04123d9ed22399d8d4bd71"
