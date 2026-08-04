@@ -82,6 +82,7 @@ article header {
     margin: var(--gap) 0;
     border: none;
     border-top: 1px solid currentcolor;
+    width: 100%;
 }
 
 .claim {
