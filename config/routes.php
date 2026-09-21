@@ -50,5 +50,12 @@ return static function (RouteBuilder $routes): void {
             'controller' => 'Staging',
             'action' => 'clearCache',
         ], ['_name' => 'staging:clearCache']);
+        // `LocaleUrlFilter` rewrites `_name` to `lang:staging:clearCache` when a locale is in context
+        // (e.g. after switching language), so that name must resolve too, even though the path itself
+        // doesn't need a `/lang/{locale}` prefix.
+        $builder->connect('/clear-cache', [
+            'controller' => 'Staging',
+            'action' => 'clearCache',
+        ], ['_name' => 'lang:staging:clearCache']);
     });
 };
