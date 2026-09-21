@@ -368,14 +368,16 @@ class ImportExhibitionsCommand extends Command
             }
         }
         if (empty($streams)) {
-            $this->io->warning(sprintf('No usable stream found for media "%s" (#%d), skipping', $row['uname'], $row['id']));
-
-            return false;
+            // Keep the media object even without its physical file: the file can be backfilled later,
+            // but the object (and its relations, categories, tags...) would otherwise be lost entirely.
+            $this->io->warning(sprintf('No usable stream found for media "%s" (#%d), importing without a file', $row['uname'], $row['id']));
         }
 
         /** @var \BEdita\Core\Model\Entity\Media $entity */
         $entity = $this->setBaseFields($table->newEntity(['uname' => $this->uniqueUname($row['uname'])]), $row);
-        $entity->streams = $streams;
+        if (!empty($streams)) {
+            $entity->streams = $streams;
+        }
         /** @var \BEdita\Core\Model\Entity\Media $entity */
         $entity = $table->saveOrFail($entity, ['atomic' => false]);
 
