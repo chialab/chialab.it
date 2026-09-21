@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Chialab\Controller;
 
+use BEdita\Core\Model\Entity\ObjectEntity;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
@@ -17,6 +18,7 @@ class PagesController extends AppController
     use GenericActionsTrait {
         fallback as private _fallback;
         object as private _object;
+        renderObject as private _renderObject;
     }
 
     /**
@@ -161,6 +163,44 @@ class PagesController extends AppController
     }
 
     /**
+     * @inheritDoc
+     */
+    protected function renderObject(ObjectEntity $entity): Response|null
+    {
+        if ($entity->type === 'exhibitions') {
+            return $this->renderExhibition($entity);
+        }
+
+        return $this->_renderObject($entity);
+    }
+
+    /**
+     * Render an exhibition, with its items paginated (and served as an ajax fragment on subsequent pages).
+     *
+     * @param \BEdita\Core\Model\Entity\ObjectEntity $entity Exhibition entity.
+     * @return \Cake\Http\Response
+     */
+    protected function renderExhibition(ObjectEntity $entity): Response
+    {
+        $items = $this->paginate(
+            $this->Objects->loadRelatedObjects($entity->uname, 'exhibitions', 'exhibition_items'),
+            ['limit' => 12],
+        );
+
+        if ($this->request->is('ajax')) {
+            $this->viewBuilder()->disableAutoLayout();
+            $this->set(compact('items'));
+
+            return $this->render('/element/exhibition-items');
+        }
+
+        $object = $this->Objects->loadObject($entity->uname, 'exhibitions', ['include' => 'poster|1']);
+        $this->set(compact('object', 'items'));
+
+        return $this->render('exhibitions');
+    }
+
+    /**
      * Generic object view.
      *
      * @param string $path Object path.
@@ -168,6 +208,19 @@ class PagesController extends AppController
      */
     public function fallback(string $path): Response
     {
+        $parts = array_filter(explode('/', $path));
+        $lastUname = end($parts);
+        if ($lastUname !== false) {
+            try {
+                $entity = $this->Objects->loadObject($lastUname);
+                if ($entity->type === 'exhibitions') {
+                    return $this->renderExhibition($entity);
+                }
+            } catch (RecordNotFoundException $e) {
+                // Fall through to the generic fallback below, which will produce the right 404.
+            }
+        }
+
         try {
             return $this->_fallback($path);
         } catch (RecordNotFoundException $e) {

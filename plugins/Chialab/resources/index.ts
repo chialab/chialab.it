@@ -1,5 +1,6 @@
 import { openModal } from '@chialab/cdk';
 import { delegateEventListener } from '@chialab/dna';
+import './exhibition-carousel';
 
 delegateEventListener(document.body, 'click', 'img[data-modal]', (event, target) => {
     const parent = (target as HTMLElement).parentElement as HTMLElement;

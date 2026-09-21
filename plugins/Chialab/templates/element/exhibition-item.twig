@@ -1,0 +1,16 @@
+{% if object.type is same as('images') or object.type is same as('videos') %}
+    <div class="exhibition-item exhibition-item--media">
+        {{ Thumb.image(object, 'high', { class: 'exhibition-item__image', alt: '' })|raw }}
+    </div>
+{% else %}
+    <a
+        class="exhibition-item exhibition-item--text column gap-xs"
+        title="{{ object.title|default('')|striptags|escape('html_attr') }}"
+        href="{{ Url.build({ _name: 'pages:objects', _entity: object }) }}"
+    >
+        <h3 class="m-0">{{ object.title|raw }}</h3>
+        {% if object.get('description') is not empty %}
+            <div>{{ object.description|striptags('<p><br>')|raw }}</div>
+        {% endif %}
+    </a>
+{% endif %}
