@@ -182,21 +182,20 @@ class PagesController extends AppController
      */
     protected function renderExhibition(ObjectEntity $entity): Response
     {
-        $object = $this->Objects->loadObject($entity->uname, 'exhibitions', ['include' => 'poster|1']);
         $items = $this->paginate(
             $this->Objects->loadRelatedObjects($entity->uname, 'exhibitions', 'exhibition_items'),
             ['limit' => 12],
         );
-        // Used by the carousel to fetch further pages: the current (already-resolved) request
-        // path, not the generic `pages:objects` URL, which would 302-redirect here and drop the
-        // `?page=` query string along the way (`object()` redirects `/objects/{uname}` to the
-        // object's path in the tree, e.g. via `fallback()`, without forwarding query params).
-        $ajaxUrl = $this->request->getPath();
-        $this->set(compact('object', 'items', 'ajaxUrl'));
 
         if ($this->request->is('ajax')) {
             $this->viewBuilder()->disableAutoLayout();
+            $this->set(compact('items'));
+
+            return $this->render('/element/exhibition-items');
         }
+
+        $object = $this->Objects->loadObject($entity->uname, 'exhibitions', ['include' => 'poster|1']);
+        $this->set(compact('object', 'items'));
 
         return $this->render('exhibitions');
     }

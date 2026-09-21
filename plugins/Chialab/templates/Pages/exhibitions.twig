@@ -1,23 +1,14 @@
-{% if _view.layout is same as('ajax') %}
-    {% for item in items %}
-        {% include 'exhibitions/exhibition-item' with { object: item } %}
-    {% endfor %}
-{% else %}
-    <section
-        is="dna-carousel"
-        class="w-full exhibition-detail"
-        data="{{ ajaxUrl }}"
-        page="{{ Paginator.current() }}"
-        pages="{{ Paginator.total() }}"
-    >
-        <div class="card exhibition-card">
-            <h1>{{ object.title|raw }}</h1>
-            {% if object.get('description') is not empty %}
-                <div class="card-description f-4">{{ object.description|raw }}</div>
-            {% endif %}
-        </div>
-        {% for item in items %}
-            {% include 'exhibitions/exhibition-item' with { object: item } %}
-        {% endfor %}
-    </section>
-{% endif %}
+<exhibition-carousel
+    class="w-full exhibition-carousel"
+    data-url="{{ Url.build({ _name: 'pages:objects', _entity: object }) }}"
+    data-page="{{ Paginator.current() }}"
+    data-pages="{{ Paginator.total() }}"
+>
+    <div class="exhibition-item exhibition-item--text exhibition-item--title column gap-xs">
+        <h1 class="m-0">{{ object.title|raw }}</h1>
+        {% if object.get('description') is not empty %}
+            <div>{{ object.description|striptags('<p><br>')|raw }}</div>
+        {% endif %}
+    </div>
+    {{ element('exhibition-items', { items: items })|raw }}
+</exhibition-carousel>
