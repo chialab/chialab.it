@@ -1,0 +1,33 @@
+{% set url = Url.build({ _name: 'pages:objects', _entity: attachParent is defined ? attachParent : object }) %}
+
+{% if object.type is same as('images') %}
+    {% include 'exhibitions/image-card' with { object: object, url: url, attachParent: attachParent ?? null } %}
+{% elseif object.type is same as('videos') %}
+    {% include 'exhibitions/video-card' with { object: object, url: url } %}
+{% elseif object.type is same as('links') %}
+    {% include 'exhibitions/link-card' with { object: object, url: url } %}
+{% elseif object.type is same as('profiles') %}
+    {% include 'exhibitions/profile-card' with { object: object, url: url } %}
+{% elseif object.get('description') is not empty or object.get('body') is not empty %}
+    <a
+        class="card"
+        title="{{ object.get('title')|default(object.get('description'))|striptags|escape('html_attr') }}"
+        href="{{ url }}"
+        data-type="{{ object.get('type') }}"
+    >
+        <h2 class="title">{{ object.get('title')|raw }}</h2>
+        <div class="card-description">
+            {{ object.get('description')|default('')|striptags|raw|truncate(170, '…') }}
+        </div>
+    </a>
+{% else %}
+    <div class="card">
+        <h2 class="title">{{ object.get('title')|raw }}</h2>
+    </div>
+{% endif %}
+
+{% if object.type is same as('profiles') and object.get('has_media') is not empty %}
+    {% for attachment in object.get('has_media') %}
+        {% include 'exhibitions/exhibition-item' with { object: attachment, attachParent: object } %}
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,19 @@
+<div class="card" data-type="{{ object.get('type') }}">
+    <div class="video-embed">
+        {% if object.get('provider_extra') and object.get('provider_extra')['html'] %}
+            {{ object.get('provider_extra')['html']|raw }}
+        {% else %}
+            <video
+                src="{{ object.get('media_url') }}"
+                controls
+                controlslist="nodownload noremoteplayback noplaybackrate"
+                disablepictureinpicture
+            ></video>
+        {% endif %}
+    </div>
+    {% if object.get('description') %}
+        <div class="card-description">
+            {{ object.get('description')|raw }}
+        </div>
+    {% endif %}
+</div>
