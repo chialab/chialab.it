@@ -1,0 +1,17 @@
+<a
+    class="card{{ attachParent ? ' attach' : '' }}"
+    title="{{ (attachParent.get('title')|default(object.get('title'))|default(object.get('description')))|striptags|escape('html_attr') }}"
+    href="{{ url }}"
+    data-type="{{ object.get('type') }}"
+>
+    {{ Thumb.image(object, 'high', { alt: '' })|raw }}
+    {% if attachParent %}
+        <div class="parent-title">{{ attachParent.get('title')|raw }}</div>
+    {% endif %}
+    {% if object.get('title') or object.get('description') %}
+        <div class="card-description">
+            <div class="title">{{ object.get('title')|raw }}</div>
+            {{ object.get('description')|raw }}
+        </div>
+    {% endif %}
+</a>

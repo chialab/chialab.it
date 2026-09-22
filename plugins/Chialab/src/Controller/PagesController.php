@@ -182,20 +182,16 @@ class PagesController extends AppController
      */
     protected function renderExhibition(ObjectEntity $entity): Response
     {
+        $object = $this->Objects->loadObject($entity->uname, 'exhibitions', ['include' => 'poster|1']);
         $items = $this->paginate(
             $this->Objects->loadRelatedObjects($entity->uname, 'exhibitions', 'exhibition_items'),
             ['limit' => 12],
         );
+        $this->set(compact('object', 'items'));
 
         if ($this->request->is('ajax')) {
             $this->viewBuilder()->disableAutoLayout();
-            $this->set(compact('items'));
-
-            return $this->render('/element/exhibition-items');
         }
-
-        $object = $this->Objects->loadObject($entity->uname, 'exhibitions', ['include' => 'poster|1']);
-        $this->set(compact('object', 'items'));
 
         return $this->render('exhibitions');
     }
