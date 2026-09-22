@@ -2,15 +2,13 @@
     <div class="video-embed">
         {% if object.get('provider_extra') and object.get('provider_extra')['html'] %}
             {{ object.get('provider_extra')['html']|raw }}
-        {% elseif Media.hasStream(object) %}
+        {% else %}
             <video
                 src="{{ object.get('media_url') }}"
                 controls
                 controlslist="nodownload noremoteplayback noplaybackrate"
                 disablepictureinpicture
             ></video>
-        {% else %}
-            <div class="media-placeholder"></div>
         {% endif %}
     </div>
     {% if object.get('description') %}

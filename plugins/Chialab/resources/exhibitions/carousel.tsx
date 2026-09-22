@@ -1,6 +1,4 @@
-import { Component, customElement, dispatchAsyncEvent, listen, observe, property, state, type Template } from '@chialab/dna';
-import { updateCaptionHeight } from './caption-height';
-import { markOverflowingCards } from './overflow';
+import { Component, customElement, dispatchAsyncEvent, listen, property, state, type Template } from '@chialab/dna';
 import { getState, setState, unsetState } from './state';
 
 /**
@@ -14,14 +12,11 @@ export class Carousel extends Component {
     @property({ type: Boolean, attribute: 'snap' })
     snap = false;
 
-    // Neither of these is a decorated `@property`: they're plain, read once from their HTML
-    // attribute in `connectedCallback`. `page`/`pages` used to be declared via `@property`, but
-    // that value kept resetting to its class field's default (1) rather than tracking updates —
-    // likely `experimentalDecorators` + class fields (`target: esnext`) shadowing the decorator's
-    // accessor with a plain own-property assignment. Reading them once as plain fields sidesteps
-    // that ambiguity entirely, since `pages` never needs to change after the initial page load.
-    private currentPage = 1;
-    private totalPages = 1;
+    @property({ type: Number, attribute: 'page' })
+    page = 1;
+
+    @property({ type: Number, attribute: 'pages' })
+    pages = 1;
 
     @state()
     loading = false;
@@ -34,6 +29,9 @@ export class Carousel extends Component {
 
     @state()
     canScrollRight = false;
+
+    @state()
+    content: Node[] = [];
 
     private scrolling = false;
     private scrollTimeout?: ReturnType<typeof setTimeout>;
@@ -53,16 +51,20 @@ export class Carousel extends Component {
                     data-action="pagination-backward"
                     disabled={!this.canScrollLeft}
                 />
-                <div class="carousel-scroller" ref={this.scroller}>
-                    <div class="carousel-container" ref={this.container}>
+                <div
+                    class="carousel-scroller"
+                    ref={this.scroller}>
+                    <div
+                        class="carousel-container"
+                        ref={this.container}>
                         <slot />
+                        {this.content}
                     </div>
                 </div>
                 <button
                     type="button"
                     class="carousel-button"
                     aria-hidden="true"
-                    aria-busy={this.loading}
                     data-action="pagination-forward"
                     disabled={!this.loading && !this.canScrollRight}
                 />
@@ -73,10 +75,6 @@ export class Carousel extends Component {
     async connectedCallback(): Promise<void> {
         super.connectedCallback();
 
-        this.currentPage = Number(this.getAttribute('page')) || 1;
-        this.totalPages = Number(this.getAttribute('pages')) || 1;
-
-        updateCaptionHeight(this);
         await this.restoreState();
         this.checkScrollArrows();
         this.saveState();
@@ -86,12 +84,7 @@ export class Carousel extends Component {
         this.scroller.addEventListener('scroll', this.onScroll);
 
         this.resizeObserver?.disconnect();
-        this.resizeObserver = new ResizeObserver(() => {
-            // A resize can change how captions wrap (and thus how tall they need to be), as well
-            // as whether there's room left to scroll.
-            updateCaptionHeight(this);
-            this.checkScrollArrows();
-        });
+        this.resizeObserver = new ResizeObserver(() => this.checkScrollArrows());
         this.resizeObserver.observe(this);
 
         this.onPageShow = async (event: PageTransitionEvent) => {
@@ -165,36 +158,20 @@ export class Carousel extends Component {
         this.canScrollLeft = scroller.scrollLeft > 0;
         this.canScrollRight = !(scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 50);
         if (scroller.scrollWidth <= scroller.clientWidth) {
-            // Not enough content to fill the view yet: `canScrollRight` may already be `false`
-            // (no-op assignment above, the observer below won't fire for it), so load more here too.
             void this.requestContent();
         }
     }
 
-    // Whenever there's no more room to scroll forward (because the visitor reached the end),
-    // try to load the next page of items.
-    @observe('canScrollRight')
-    private onCanScrollRightChange(): void {
-        if (this.canScrollRight) {
-            return;
-        }
-        void this.requestContent();
-    }
-
     private async requestContent(): Promise<void> {
-        if (this.loading || !this.totalPages || this.totalPages === this.currentPage) {
+        if (this.loading || !this.pages || this.pages === this.page) {
             return;
         }
 
         this.loading = true;
-        const nextPage = this.currentPage + 1;
-        const [response] = await dispatchAsyncEvent(this, 'fetch', nextPage);
-        for (const node of (response as Node[] | undefined) ?? []) {
-            this.container.appendChild(node);
-        }
-        markOverflowingCards(this.container);
-        updateCaptionHeight(this);
-        this.currentPage = nextPage;
+        const page = this.page;
+        const [response] = await dispatchAsyncEvent(this, 'fetch', page + 1);
+        this.content = [...this.content, ...((response as Node[] | undefined) ?? [])];
+        this.page = page + 1;
         this.loading = false;
         this.checkScrollArrows();
     }
@@ -216,18 +193,11 @@ export class Carousel extends Component {
         }
 
         this.restoring = true;
-        this.currentPage = savedState.page || this.currentPage;
+        this.page = savedState.page || this.page;
 
-        // Replace whatever's currently in the container (just the freshly server-rendered first
-        // page at this point) with the previously saved, possibly further-paginated, content.
-        this.container.innerHTML = '';
         const wrapper = document.createElement('div');
         wrapper.innerHTML = savedState.content;
-        while (wrapper.firstChild) {
-            this.container.appendChild(wrapper.firstChild);
-        }
-        markOverflowingCards(this.container);
-        updateCaptionHeight(this);
+        this.content = Array.from(wrapper.childNodes);
 
         await new Promise<void>((resolve) => {
             requestAnimationFrame(() => {
@@ -248,7 +218,7 @@ export class Carousel extends Component {
             return;
         }
         setState(this.id, {
-            page: this.currentPage,
+            page: this.page,
             content: this.container.innerHTML,
             scroll: this.scroller.scrollLeft,
         });

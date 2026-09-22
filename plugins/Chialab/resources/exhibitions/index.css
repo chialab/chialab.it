@@ -1,10 +1,5 @@
 /* dna-carousel: ported from BCBF galleries' carousel.css, adapted to this project's tokens. */
 [is='dna-carousel'] {
-    /* Every card (media or not) is exactly `--row-height` tall, so they all line up regardless
-       of whether they have a caption below or not; `--caption-height` is the extra room left
-       below that shared baseline for media captions to spill into without being clipped. */
-    --row-height: min(70vh, 46rem);
-    --caption-height: 5rem;
     position: relative;
     display: block;
     width: 100%;
@@ -28,7 +23,9 @@
     border-radius: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    transition: opacity 200ms, transform 200ms;
+    transition:
+        opacity 200ms,
+        transform 200ms;
     appearance: none;
 }
 
@@ -53,23 +50,30 @@
     right: var(--gutter);
 }
 
-[is='dna-carousel'] .carousel-button:last-child::before {
+[is='dna-carousel']:not([loading]) .carousel-button:last-child::before {
     transform: rotate(45deg) translate(-1px, -1px);
 }
 
-/*
- * While loading the next page: no arrow, just an orange button. Matches `aria-busy` whether it
- * was rendered as the ARIA-correct string `"true"` or (if treated as a presence-only boolean
- * attribute, like `disabled`) as an empty string — anything but an explicit `"false"`.
- */
-[is='dna-carousel'] .carousel-button:last-child[aria-busy]:not([aria-busy='false']) {
-    background: var(--color-accent);
+[is='dna-carousel'][loading] .carousel-button:last-child::before {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid transparent;
+    border-left-color: currentcolor;
+    border-radius: 50%;
+    transform: none;
+    animation: dna-carousel-spin 800ms infinite linear;
 }
 
 [is='dna-carousel'] .carousel-button[disabled] {
     transform: translateY(-50%) scale(0.001);
     opacity: 0;
     pointer-events: none;
+}
+
+@keyframes dna-carousel-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 [is='dna-carousel'] .carousel-scroller {
@@ -97,10 +101,9 @@
 [is='dna-carousel'] .carousel-container {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    /* Taller than the shared card row, so a media caption spilling below it (see `.card`'s
-       explicit height below) has somewhere to go without needing to overflow this container. */
-    height: calc(var(--row-height) + var(--caption-height));
+    align-items: stretch;
+    height: 70vh;
+    max-height: 46rem;
     margin-top: var(--gutter);
     padding: 0;
     gap: var(--gutter);
@@ -108,50 +111,11 @@
 
 [is='dna-carousel'] .carousel-container > * {
     flex: none;
+    height: 100%;
 }
 
 [is='dna-carousel'][snap] .carousel-container > * {
     scroll-snap-align: center;
-}
-
-/*
- * "Back to exhibition" link (see `element/exhibitions/back.twig`): same round dot + left chevron
- * as the carousel's prev button, drawn with two pseudo-elements (the dot as background on
- * `::before`, the chevron as a border on `::after` — a single pseudo can't cleanly be both a
- * filled circle and a border-drawn arrow at once).
- */
-.back {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding-left: 2.25rem;
-    margin-top: var(--gutter);
-    color: inherit;
-    text-decoration: none;
-}
-
-.back::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-    background: var(--color-primary);
-    border-radius: 50%;
-    transform: translateY(-50%);
-}
-
-.back::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0.55rem;
-    width: 0.4rem;
-    height: 0.4rem;
-    border-top: 2px solid var(--color-surface);
-    border-right: 2px solid var(--color-surface);
-    transform: translateY(-50%) rotate(-135deg) translate(-1px, -1px);
 }
 
 /* Cards, ported from BCBF galleries' exhibition.css. */
@@ -159,8 +123,8 @@
     display: flex;
     flex-direction: column;
     width: 20rem;
-    height: var(--row-height);
-    padding: calc(var(--gutter) / 2);
+    height: 100%;
+    padding: var(--gutter);
     overflow-y: auto;
     color: inherit;
     font-family: var(--font-sans);
@@ -169,15 +133,12 @@
     background: var(--color-grey-100);
 }
 
-.card > div:empty:not(.media-placeholder) {
+.card > div:empty {
     display: none;
 }
 
 .card > :is(h1, h2) {
     margin: 0;
-    font-family: var(--font-mono);
-    font-size: 1.75rem;
-    font-weight: var(--weight-light);
 }
 
 .card.exhibition-card {
@@ -187,11 +148,7 @@
 
 .card .card-description {
     margin-top: auto;
-}
-
-.card .card-description p {
-    margin: 0;
-    padding: 0;
+    padding-top: var(--gutter);
 }
 
 .card:not(.exhibition-card) .card-description .title,
@@ -200,7 +157,7 @@
     font-size: 1rem;
 }
 
-a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.clamp-5)::after {
+a.card:not([data-type='images'], [data-type='videos']) .card-description::after {
     content: '';
     display: block;
     width: 1.5rem;
@@ -211,34 +168,10 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
         linear-gradient(currentcolor, currentcolor) center / 2px 100% no-repeat;
 }
 
-/*
- * Same "+" as `.card-description::after` above, but as its own sibling element instead of a
- * pseudo-element on `.card-description`: when the description is clamped (`.clamp-*`, which sets
- * `overflow: hidden` on that very element) a pseudo-element living inside it gets clipped away
- * together with the truncated text, so it can't be used there.
- *
- * Always rendered (and thus always reserving its layout space, for consistent card alignment),
- * but the glyph itself is only shown once `.card-more--visible` is added — either server-side
- * (the item has a body) or at runtime by `exhibitions/overflow.ts`, which is the only reliable
- * way to know whether the clamped description was actually truncated.
- */
-.card-more {
-    display: block;
-    flex: none;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-top: var(--gutter);
-}
-
-.card-more--visible {
-    background:
-        linear-gradient(currentcolor, currentcolor) center / 100% 2px no-repeat,
-        linear-gradient(currentcolor, currentcolor) center / 2px 100% no-repeat;
-}
-
 .card[data-type='links'] .card-description::after {
     /* arrow-top-right, instead of the plus used for everything else */
-    background: linear-gradient(currentcolor, currentcolor) top right / 100% 2px no-repeat,
+    background:
+        linear-gradient(currentcolor, currentcolor) top right / 100% 2px no-repeat,
         linear-gradient(currentcolor, currentcolor) top right / 2px 100% no-repeat;
     transform: rotate(45deg);
     transform-origin: top right;
@@ -261,7 +194,6 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
  */
 .card[data-type='images'],
 .card[data-type='videos'] {
-    position: relative;
     display: block;
     width: auto;
     padding: 0;
@@ -273,9 +205,7 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
 .card[data-type='videos'] video {
     display: block;
     width: auto;
-    /* Fills the shared row height fully, same as every other card — the caption below (if any)
-       lives in the container's extra `--caption-height`, not carved out of this. */
-    height: var(--row-height);
+    height: 100%;
     object-fit: contain;
 }
 
@@ -286,17 +216,9 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
 
 .card[data-type='images'] .card-description,
 .card[data-type='videos'] .card-description {
-    /* Out of normal flow: a long caption must not affect the card's own `width: auto` (which
-       has to be driven by the media only — otherwise a wide, shrink-to-fit card ends up sized
-       to fit the caption's own preferred text width instead of the image/video it's showing). */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    /* The card's own width always matches the media's rendered width (never known ahead of
-       time, since only the height is fixed) — cap the caption at a plausible reading width so
-       it never has to stretch wider than that, without ever exceeding it either. */
-    max-width: min(100%, 600px);
-    color: inherit;
+    max-width: 100%;
+    margin-top: calc(var(--gutter) / 2);
+    padding-top: 0;
 }
 
 .card[data-type='videos'] .video-embed {
@@ -313,23 +235,4 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
     width: 100%;
     height: 12rem;
     object-fit: cover;
-}
-
-/*
- * Shown instead of the media when its physical file is missing (e.g. still to be backfilled).
- * Used both in the carousel (fixed height, matching the row) and on a media object's own detail
- * page (the `--large` modifier, sized as a standalone block instead).
- */
-.media-placeholder {
-    display: block;
-    width: 100%;
-    min-width: 20rem;
-    height: 100%;
-    background: var(--color-surface);
-    border: 1px solid var(--color-grey-200);
-}
-
-.media-placeholder--large {
-    height: auto;
-    aspect-ratio: 16 / 9;
 }
