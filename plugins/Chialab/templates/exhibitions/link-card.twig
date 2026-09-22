@@ -1,0 +1,19 @@
+<a
+    class="card"
+    href="{{ object.get('url') }}"
+    title="{{ object.get('title')|default('')|escape('html_attr') }}"
+    target="_blank"
+    data-type="{{ object.get('type') }}"
+>
+    {% if object.get('title') %}
+        <h2 class="title">{{ object.get('title')|raw }}</h2>
+    {% endif %}
+    {% if Poster.exists(object) %}
+        <img class="poster" src="{{ Poster.url(object, 'default') }}" alt="" />
+    {% endif %}
+    {% if object.get('description') %}
+        <div class="card-description">
+            {{ object.get('description')|striptags|raw|truncate(170, '…') }}
+        </div>
+    {% endif %}
+</a>

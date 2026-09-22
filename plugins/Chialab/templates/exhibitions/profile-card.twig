@@ -1,0 +1,18 @@
+<a
+    class="card"
+    title="{{ object.get('title')|default(object.get('description'))|striptags|escape('html_attr') }}"
+    href="{{ url }}"
+    data-type="{{ object.get('type') }}"
+>
+    <h2 class="title">
+        {{ object.get('title')|default([object.get('name'), object.get('surname')]|filter(n => n is not empty)|join(' '))|raw }}
+        <div class="card-location">
+            {{ [object.get('country'), object.get('city')]|filter(i => i is not empty)|join('/') }}
+        </div>
+    </h2>
+    {% if object.get('description') %}
+        <div class="card-description">
+            {{ object.get('description')|striptags|truncate(170, '…')|raw }}
+        </div>
+    {% endif %}
+</a>
