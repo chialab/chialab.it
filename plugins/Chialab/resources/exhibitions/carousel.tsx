@@ -1,4 +1,4 @@
-import { Component, customElement, dispatchAsyncEvent, listen, property, state, type Template } from '@chialab/dna';
+import { Component, customElement, dispatchAsyncEvent, listen, observe, property, state, type Template } from '@chialab/dna';
 import { getState, setState, unsetState } from './state';
 
 /**
@@ -12,11 +12,14 @@ export class Carousel extends Component {
     @property({ type: Boolean, attribute: 'snap' })
     snap = false;
 
-    @property({ type: Number, attribute: 'page' })
-    page = 1;
-
     @property({ type: Number, attribute: 'pages' })
     pages = 1;
+
+    // Not a decorated `@property`: this is a plain, purely-client-side counter (incremented as
+    // pages get fetched), read once from the `page` attribute in `connectedCallback`. Keeping it
+    // out of the attribute-reflection system avoids any ambiguity about whether an update to it
+    // round-trips through the attribute and back before the next read.
+    private currentPage = 1;
 
     @state()
     loading = false;
@@ -70,6 +73,8 @@ export class Carousel extends Component {
 
     async connectedCallback(): Promise<void> {
         super.connectedCallback();
+
+        this.currentPage = Number(this.getAttribute('page')) || 1;
 
         await this.restoreState();
         this.checkScrollArrows();
@@ -154,20 +159,32 @@ export class Carousel extends Component {
         this.canScrollLeft = scroller.scrollLeft > 0;
         this.canScrollRight = !(scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 50);
         if (scroller.scrollWidth <= scroller.clientWidth) {
+            // Not enough content to fill the view yet: `canScrollRight` may already be `false`
+            // (no-op assignment above, the observer below won't fire for it), so load more here too.
             void this.requestContent();
         }
     }
 
+    // Whenever there's no more room to scroll forward (because the visitor reached the end),
+    // try to load the next page of items.
+    @observe('canScrollRight')
+    private onCanScrollRightChange(): void {
+        if (this.canScrollRight) {
+            return;
+        }
+        void this.requestContent();
+    }
+
     private async requestContent(): Promise<void> {
-        if (this.loading || !this.pages || this.pages === this.page) {
+        if (this.loading || !this.pages || this.pages === this.currentPage) {
             return;
         }
 
         this.loading = true;
-        const page = this.page;
-        const [response] = await dispatchAsyncEvent(this, 'fetch', page + 1);
+        const nextPage = this.currentPage + 1;
+        const [response] = await dispatchAsyncEvent(this, 'fetch', nextPage);
         this.content = [...this.content, ...((response as Node[] | undefined) ?? [])];
-        this.page = page + 1;
+        this.currentPage = nextPage;
         this.loading = false;
         this.checkScrollArrows();
     }
@@ -189,7 +206,7 @@ export class Carousel extends Component {
         }
 
         this.restoring = true;
-        this.page = savedState.page || this.page;
+        this.currentPage = savedState.page || this.currentPage;
 
         const wrapper = document.createElement('div');
         wrapper.innerHTML = savedState.content;
@@ -214,7 +231,7 @@ export class Carousel extends Component {
             return;
         }
         setState(this.id, {
-            page: this.page,
+            page: this.currentPage,
             content: this.container.innerHTML,
             scroll: this.scroller.scrollLeft,
         });
