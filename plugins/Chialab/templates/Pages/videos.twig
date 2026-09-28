@@ -1,0 +1,26 @@
+<article class="column gap-2 w-full">
+    {{ element('exhibitions/back', { object: object }) }}
+
+    {% if object.get('provider_extra') and object.get('provider_extra')['html'] %}
+        {{ object.get('provider_extra')['html']|raw }}
+    {% elseif Media.hasStream(object) %}
+        <video
+            class="w-full"
+            src="{{ object.get('media_url') }}"
+            controls
+            controlslist="nodownload noremoteplayback noplaybackrate"
+            disablepictureinpicture
+        ></video>
+    {% else %}
+        <div class="media-placeholder media-placeholder--large"></div>
+    {% endif %}
+
+    {% if object.title or object.get('description') is not empty %}
+        <div class="column gap-xs">
+            {% if object.title %}<h1 class="m-0">{{ object.title|raw }}</h1>{% endif %}
+            {% if object.get('description') is not empty %}
+                <div>{{ object.description|raw }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
+</article>

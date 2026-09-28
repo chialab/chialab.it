@@ -1,4 +1,6 @@
 import { Component, customElement, dispatchAsyncEvent, listen, observe, property, state, type Template } from '@chialab/dna';
+import { updateCaptionHeight } from './caption-height';
+import { markOverflowingCards } from './overflow';
 import { getState, setState, unsetState } from './state';
 
 /**
@@ -12,14 +14,14 @@ export class Carousel extends Component {
     @property({ type: Boolean, attribute: 'snap' })
     snap = false;
 
-    @property({ type: Number, attribute: 'pages' })
-    pages = 1;
-
-    // Not a decorated `@property`: this is a plain, purely-client-side counter (incremented as
-    // pages get fetched), read once from the `page` attribute in `connectedCallback`. Keeping it
-    // out of the attribute-reflection system avoids any ambiguity about whether an update to it
-    // round-trips through the attribute and back before the next read.
+    // Neither of these is a decorated `@property`: they're plain, read once from their HTML
+    // attribute in `connectedCallback`. `page`/`pages` used to be declared via `@property`, but
+    // that value kept resetting to its class field's default (1) rather than tracking updates —
+    // likely `experimentalDecorators` + class fields (`target: esnext`) shadowing the decorator's
+    // accessor with a plain own-property assignment. Reading them once as plain fields sidesteps
+    // that ambiguity entirely, since `pages` never needs to change after the initial page load.
     private currentPage = 1;
+    private totalPages = 1;
 
     @state()
     loading = false;
@@ -32,9 +34,6 @@ export class Carousel extends Component {
 
     @state()
     canScrollRight = false;
-
-    @state()
-    content: Node[] = [];
 
     private scrolling = false;
     private scrollTimeout?: ReturnType<typeof setTimeout>;
@@ -57,13 +56,13 @@ export class Carousel extends Component {
                 <div class="carousel-scroller" ref={this.scroller}>
                     <div class="carousel-container" ref={this.container}>
                         <slot />
-                        {this.content}
                     </div>
                 </div>
                 <button
                     type="button"
                     class="carousel-button"
                     aria-hidden="true"
+                    aria-busy={this.loading}
                     data-action="pagination-forward"
                     disabled={!this.loading && !this.canScrollRight}
                 />
@@ -75,7 +74,9 @@ export class Carousel extends Component {
         super.connectedCallback();
 
         this.currentPage = Number(this.getAttribute('page')) || 1;
+        this.totalPages = Number(this.getAttribute('pages')) || 1;
 
+        updateCaptionHeight(this);
         await this.restoreState();
         this.checkScrollArrows();
         this.saveState();
@@ -85,7 +86,12 @@ export class Carousel extends Component {
         this.scroller.addEventListener('scroll', this.onScroll);
 
         this.resizeObserver?.disconnect();
-        this.resizeObserver = new ResizeObserver(() => this.checkScrollArrows());
+        this.resizeObserver = new ResizeObserver(() => {
+            // A resize can change how captions wrap (and thus how tall they need to be), as well
+            // as whether there's room left to scroll.
+            updateCaptionHeight(this);
+            this.checkScrollArrows();
+        });
         this.resizeObserver.observe(this);
 
         this.onPageShow = async (event: PageTransitionEvent) => {
@@ -176,14 +182,18 @@ export class Carousel extends Component {
     }
 
     private async requestContent(): Promise<void> {
-        if (this.loading || !this.pages || this.pages === this.currentPage) {
+        if (this.loading || !this.totalPages || this.totalPages === this.currentPage) {
             return;
         }
 
         this.loading = true;
         const nextPage = this.currentPage + 1;
         const [response] = await dispatchAsyncEvent(this, 'fetch', nextPage);
-        this.content = [...this.content, ...((response as Node[] | undefined) ?? [])];
+        for (const node of (response as Node[] | undefined) ?? []) {
+            this.container.appendChild(node);
+        }
+        markOverflowingCards(this.container);
+        updateCaptionHeight(this);
         this.currentPage = nextPage;
         this.loading = false;
         this.checkScrollArrows();
@@ -208,9 +218,16 @@ export class Carousel extends Component {
         this.restoring = true;
         this.currentPage = savedState.page || this.currentPage;
 
+        // Replace whatever's currently in the container (just the freshly server-rendered first
+        // page at this point) with the previously saved, possibly further-paginated, content.
+        this.container.innerHTML = '';
         const wrapper = document.createElement('div');
         wrapper.innerHTML = savedState.content;
-        this.content = Array.from(wrapper.childNodes);
+        while (wrapper.firstChild) {
+            this.container.appendChild(wrapper.firstChild);
+        }
+        markOverflowingCards(this.container);
+        updateCaptionHeight(this);
 
         await new Promise<void>((resolve) => {
             requestAnimationFrame(() => {
