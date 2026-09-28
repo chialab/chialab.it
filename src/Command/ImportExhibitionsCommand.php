@@ -60,6 +60,11 @@ class ImportExhibitionsCommand extends Command
     protected array $objectTypeIdCache = [];
 
     /**
+     * @var array<string, bool>
+     */
+    protected array $sourceHasLabelsCache = [];
+
+    /**
      * @inheritDoc
      */
     public function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
@@ -636,6 +641,10 @@ class ImportExhibitionsCommand extends Command
      */
     protected function uniqueUname(string $uname): string
     {
+        // Some source objects have purely numeric unames, which BEdita's validation rejects.
+        if (is_numeric($uname)) {
+            $uname = sprintf('%s-%s', static::IMPORT_SOURCE, $uname);
+        }
         $candidate = $uname;
         $i = 1;
         while ($this->Objects->exists(['uname' => $candidate])) {
@@ -743,13 +752,15 @@ class ImportExhibitionsCommand extends Command
      */
     protected function fetchSourceCategories(int $objectId): array
     {
-        return $this->sourceConnection->selectQuery()
-            ->select(['c.name', 'c.labels'])
+        $rows = $this->sourceConnection->selectQuery()
+            ->select(['c.name', $this->sourceLabelsField('categories', 'c')])
             ->from(['oc' => 'object_categories'])
             ->innerJoin(['c' => 'categories'], 'c.id = oc.category_id')
             ->where(['oc.object_id' => $objectId])
             ->execute()
             ->fetchAll('assoc') ?: [];
+
+        return array_map(fn (array $row): array => $this->normalizeSourceLabels($row), $rows);
     }
 
     /**
@@ -760,12 +771,50 @@ class ImportExhibitionsCommand extends Command
      */
     protected function fetchSourceTags(int $objectId): array
     {
-        return $this->sourceConnection->selectQuery()
-            ->select(['t.name', 't.labels'])
+        $rows = $this->sourceConnection->selectQuery()
+            ->select(['t.name', $this->sourceLabelsField('tags', 't')])
             ->from(['ot' => 'object_tags'])
             ->innerJoin(['t' => 'tags'], 't.id = ot.tag_id')
             ->where(['ot.object_id' => $objectId])
             ->execute()
             ->fetchAll('assoc') ?: [];
+
+        return array_map(fn (array $row): array => $this->normalizeSourceLabels($row), $rows);
+    }
+
+    /**
+     * Get the labels field to select from a source `categories`/`tags` table.
+     *
+     * Installations older than BEdita's `CategoriesLabels`/`TagsLabels` migrations still have a
+     * plain `label` string column instead of the `labels` JSON one: select it as `label`, so that
+     * {@see normalizeSourceLabels()} can convert it the same way those migrations do.
+     *
+     * @param string $table Source table name.
+     * @param string $alias Table alias used in the query.
+     * @return string
+     */
+    protected function sourceLabelsField(string $table, string $alias): string
+    {
+        $this->sourceHasLabelsCache[$table] ??= $this->sourceConnection->getSchemaCollection()
+            ->describe($table)
+            ->hasColumn('labels');
+
+        return sprintf('%s.%s', $alias, $this->sourceHasLabelsCache[$table] ? 'labels' : 'label');
+    }
+
+    /**
+     * Normalize a source category/tag row to always carry a `labels` key.
+     *
+     * @param array<string, mixed> $row Source row, with either `labels` (JSON) or legacy `label`.
+     * @return array<string, mixed>
+     */
+    protected function normalizeSourceLabels(array $row): array
+    {
+        if (array_key_exists('label', $row)) {
+            $row['labels'] = $row['label'] !== null ? ['default' => $row['label']] : null;
+            unset($row['label']);
+        }
+
+        return $row;
     }
 }
