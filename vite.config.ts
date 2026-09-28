@@ -40,6 +40,10 @@ export default defineConfig({
                         js: 'plugins/Chialab/resources/index.ts',
                         css: 'plugins/Chialab/resources/index.css',
                     },
+                    exhibitions: {
+                        js: 'plugins/Chialab/resources/exhibitions.ts',
+                        css: 'plugins/Chialab/resources/exhibitions.css',
+                    },
                 },
             },
             {
