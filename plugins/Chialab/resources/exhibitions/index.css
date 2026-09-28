@@ -122,7 +122,7 @@
     flex-direction: column;
     width: 20rem;
     height: 100%;
-    padding: var(--gutter);
+    padding: calc(var(--gutter) / 2);
     overflow-y: auto;
     color: inherit;
     font-family: var(--font-sans);
@@ -137,8 +137,9 @@
 
 .card > :is(h1, h2) {
     margin: 0;
-    font-size: 2.5rem;
-    font-weight: 100;
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: var(--weight-light);
 }
 
 .card.exhibition-card {
