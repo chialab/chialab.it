@@ -187,7 +187,12 @@ class PagesController extends AppController
             $this->Objects->loadRelatedObjects($entity->uname, 'exhibitions', 'exhibition_items'),
             ['limit' => 12],
         );
-        $this->set(compact('object', 'items'));
+        // Used by the carousel to fetch further pages: the current (already-resolved) request
+        // path, not the generic `pages:objects` URL, which would 302-redirect here and drop the
+        // `?page=` query string along the way (`object()` redirects `/objects/{uname}` to the
+        // object's path in the tree, e.g. via `fallback()`, without forwarding query params).
+        $ajaxUrl = $this->request->getPath();
+        $this->set(compact('object', 'items', 'ajaxUrl'));
 
         if ($this->request->is('ajax')) {
             $this->viewBuilder()->disableAutoLayout();

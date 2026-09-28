@@ -3,6 +3,9 @@
 {% endif %}
 
 <article class="column w-8 gap-2">
+
+{{ element('exhibitions/back', { object: object }) }}
+
     {{ element('Articles/header', {
         title: object.title,
         description: object.get('description'),

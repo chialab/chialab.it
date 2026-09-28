@@ -1,6 +1,15 @@
 import { openModal } from '@chialab/cdk';
 import { delegateEventListener, type AsyncEvent } from '@chialab/dna';
 import './exhibitions/carousel';
+import { markOverflowingCards } from './exhibitions/overflow';
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => markOverflowingCards());
+} else {
+    markOverflowingCards();
+}
+// Fonts/images settling can shift how the description text wraps, so check again once loaded.
+window.addEventListener('load', () => markOverflowingCards());
 
 delegateEventListener(document.body, 'click', 'img[data-modal]', (event, target) => {
     const parent = (target as HTMLElement).parentElement as HTMLElement;

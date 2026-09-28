@@ -1,0 +1,22 @@
+<div class="media_container w-full column gap-s">
+
+{{ element('exhibitions/back', { object: object }) }}
+
+    {% if Media.hasStream(object) %}
+        {{ Thumb.image(object, 'ultra', { class: 'w-full' })|raw }}
+    {% else %}
+        <div class="w-full h-4 b-1"></div>
+    {% endif %}
+
+    <div class="media_caption sans column gap-0">
+        {% if object.get('title') is not empty %}
+            <h1 class="m-0">{{ object.get('title')|raw }}</h1>
+        {% endif %}
+
+        {% if object.get('description') is not empty %}
+            <div class="m-0 f-2">{{ object.get('description')|raw }}</div>
+        {% endif %}
+    </div>
+
+</div>
+
