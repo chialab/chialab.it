@@ -6,16 +6,6 @@
 /tmp/*
 /vendor/*
 
-# BEdita specific files #
-#########################
-/webroot/_files/*
-
-# RNA specific files #
-######################
-/node_modules
-/webroot/build
-/plugins/*/webroot/build
-
 # OS generated files #
 ######################
 .DS_Store
@@ -56,3 +46,9 @@ nbproject/*
 # IDEs #
 ########
 /.idea
+
+.envrc
+.envrc.camp
+/node_modules
+/webroot/_files/*
+/webroot/dist
