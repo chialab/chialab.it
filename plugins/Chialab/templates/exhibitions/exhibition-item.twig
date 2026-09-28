@@ -9,16 +9,18 @@
 {% elseif object.type is same as('profiles') %}
     {% include 'exhibitions/profile-card' with { object: object, url: url } %}
 {% elseif object.get('description') is not empty or object.get('body') is not empty %}
+    {% set hasBody = object.get('body') is not empty %}
     <a
         class="card"
         title="{{ object.get('title')|default(object.get('description'))|striptags|escape('html_attr') }}"
         href="{{ url }}"
         data-type="{{ object.get('type') }}"
     >
-        <h2 class="title">{{ object.get('title')|raw }}</h2>
-        <div class="card-description">
-            {{ object.get('description')|default('')|striptags|raw|truncate(170, '…') }}
+        <h2 class="title f-4">{{ object.get('title')|raw }}</h2>
+        <div class="card-description clamp-5 f-4">
+            {{ object.get('description')|striptags|default('')|raw }}
         </div>
+        <span class="card-more{{ hasBody ? ' card-more--visible' : '' }}" aria-hidden="true"></span>
     </a>
 {% else %}
     <div class="card">
