@@ -1,4 +1,13 @@
-import { Component, customElement, dispatchAsyncEvent, listen, observe, property, state, type Template } from '@chialab/dna';
+import {
+    Component,
+    customElement,
+    dispatchAsyncEvent,
+    listen,
+    observe,
+    property,
+    state,
+    type Template,
+} from '@chialab/dna';
 import { updateCaptionHeight } from './caption-height';
 import { markOverflowingCards } from './overflow';
 import { getState, setState, unsetState } from './state';
