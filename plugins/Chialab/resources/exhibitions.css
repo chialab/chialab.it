@@ -111,46 +111,6 @@
     scroll-snap-align: center;
 }
 
-/*
- * "Back to exhibition" link (see `element/exhibitions/back.twig`): same round dot + left chevron
- * as the carousel's prev button, drawn with two pseudo-elements (the dot as background on
- * `::before`, the chevron as a border on `::after` — a single pseudo can't cleanly be both a
- * filled circle and a border-drawn arrow at once).
- */
-.back {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding-left: 2.25rem;
-    margin-top: var(--gutter);
-    color: inherit;
-    text-decoration: none;
-}
-
-.back::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-    background: var(--color-primary);
-    border-radius: 50%;
-    transform: translateY(-50%);
-}
-
-.back::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0.55rem;
-    width: 0.4rem;
-    height: 0.4rem;
-    border-top: 2px solid var(--color-surface);
-    border-right: 2px solid var(--color-surface);
-    transform: translateY(-50%) rotate(-135deg) translate(-1px, -1px);
-}
-
 /* Cards, ported from BCBF galleries' exhibition.css. */
 .card {
     display: flex;
@@ -310,23 +270,4 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
     width: 100%;
     height: 12rem;
     object-fit: cover;
-}
-
-/*
- * Shown instead of the media when its physical file is missing (e.g. still to be backfilled).
- * Used both in the carousel (fixed height, matching the row) and on a media object's own detail
- * page (the `--large` modifier, sized as a standalone block instead).
- */
-.media-placeholder {
-    display: block;
-    width: 100%;
-    min-width: 20rem;
-    height: 100%;
-    background: var(--color-surface);
-    border: 1px solid var(--color-grey-200);
-}
-
-.media-placeholder--large {
-    height: auto;
-    aspect-ratio: 16 / 9;
 }
