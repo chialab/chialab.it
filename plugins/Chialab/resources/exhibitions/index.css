@@ -1,10 +1,8 @@
 /* dna-carousel: ported from BCBF galleries' carousel.css, adapted to this project's tokens. */
 [is='dna-carousel'] {
-    /* Every card (media or not) is exactly `--row-height` tall, so they all line up regardless
-       of whether they have a caption below or not; `--caption-height` is the extra room left
-       below that shared baseline for media captions to spill into without being clipped. */
+    /* Every card's main area is exactly `--row-height` tall, so they all line up; media
+       captions extend below that baseline and the container grows to fit the tallest one. */
     --row-height: min(70vh, 46rem);
-    --caption-height: 5rem;
     position: relative;
     display: block;
     width: 100%;
@@ -100,9 +98,6 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    /* Taller than the shared card row, so a media caption spilling below it (see `.card`'s
-       explicit height below) has somewhere to go without needing to overflow this container. */
-    height: calc(var(--row-height) + var(--caption-height));
     margin-top: var(--gutter);
     padding: 0;
     gap: var(--gutter);
@@ -267,6 +262,7 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
     position: relative;
     display: block;
     width: auto;
+    height: auto;
     padding: 0;
     overflow: visible;
     background: none;
@@ -276,8 +272,8 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
 .card[data-type='videos'] video {
     display: block;
     width: auto;
-    /* Fills the shared row height fully, same as every other card — the caption below (if any)
-       lives in the container's extra `--caption-height`, not carved out of this. */
+    /* Fills the shared row height fully, same as every other card — the caption (if any) goes
+       below it, in addition to this height. */
     height: var(--row-height);
     object-fit: contain;
 }
@@ -289,12 +285,10 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
 
 .card[data-type='images'] .card-description,
 .card[data-type='videos'] .card-description {
-    /* Out of normal flow: a long caption must not affect the card's own `width: auto` (which
-       has to be driven by the media only — otherwise a wide, shrink-to-fit card ends up sized
-       to fit the caption's own preferred text width instead of the image/video it's showing). */
-    position: absolute;
-    top: 100%;
-    left: 0;
+    /* Zero intrinsic inline size: the card's `width: auto` has to be driven by the media only,
+       not by the caption's own preferred text width. The caption then stretches to the card's
+       width and wraps, and stays in flow so the container grows to fit it. */
+    contain: inline-size;
     /* The card's own width always matches the media's rendered width (never known ahead of
        time, since only the height is fixed) — cap the caption at a plausible reading width so
        it never has to stretch wider than that, without ever exceeding it either. */
