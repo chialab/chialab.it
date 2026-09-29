@@ -1,14 +1,6 @@
 import { type AsyncEvent } from '@chialab/dna';
 import './exhibitions/carousel';
-import { markOverflowingCards } from './exhibitions/overflow';
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => markOverflowingCards());
-} else {
-    markOverflowingCards();
-}
-// Fonts/images settling can shift how the description text wraps, so check again once loaded.
-window.addEventListener('load', () => markOverflowingCards());
+import './exhibitions/card-description';
 
 // Serves further pages of items requested by a `dna-carousel` (see `exhibitions/carousel.tsx`).
 window.addEventListener('fetch', (event) => {

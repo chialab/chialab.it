@@ -8,7 +8,6 @@ import {
     state,
     type Template,
 } from '@chialab/dna';
-import { markOverflowingCards } from './overflow';
 import { getState, setState, unsetState } from './state';
 
 /**
@@ -201,7 +200,6 @@ export class Carousel extends Component {
         for (const node of (response as Node[] | undefined) ?? []) {
             this.container.appendChild(node);
         }
-        markOverflowingCards(this.container);
         this.currentPage = nextPage;
         this.loading = false;
         this.checkScrollArrows();
@@ -234,7 +232,6 @@ export class Carousel extends Component {
         while (wrapper.firstChild) {
             this.container.appendChild(wrapper.firstChild);
         }
-        markOverflowingCards(this.container);
 
         await new Promise<void>((resolve) => {
             requestAnimationFrame(() => {
