@@ -16,6 +16,7 @@ declare(strict_types=1);
  */
 namespace App;
 
+use App\Command\ImportExhibitionsCommand;
 use App\Command\ImportOld;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Authorization\Middleware\AuthorizationMiddleware;
@@ -52,7 +53,8 @@ class Application extends BaseApplication
     public function console(CommandCollection $commands): CommandCollection
     {
         return parent::console($commands)
-            ->add('import:old', ImportOld::class);
+            ->add('import:old', ImportOld::class)
+            ->add('import_exhibitions', ImportExhibitionsCommand::class);
     }
 
     /**
@@ -88,7 +90,9 @@ class Application extends BaseApplication
         if (Configure::check('FrontendPlugin')) {
             $this->addPlugin(Configure::read('FrontendPlugin'));
         }
-        if (!empty(Configure::read('Theme'))) {
+        // The theme's own routes (e.g. `/objects/{uname}`) can shadow BEdita/API's routes and skip
+        // its authorization checks entirely, so never load it on an instance serving the API.
+        if (!empty(Configure::read('Theme')) && Configure::read('FrontendPlugin') !== 'BEdita/API') {
             $this->addPlugin(Configure::read('Theme'));
         }
     }
