@@ -1,4 +1,13 @@
-import { Component, customElement, dispatchAsyncEvent, listen, observe, property, state, type Template } from '@chialab/dna';
+import {
+    Component,
+    customElement,
+    dispatchAsyncEvent,
+    listen,
+    observe,
+    property,
+    state,
+    type Template,
+} from '@chialab/dna';
 import { updateCaptionHeight } from './caption-height';
 import { markOverflowingCards } from './overflow';
 import { getState, setState, unsetState } from './state';
@@ -53,8 +62,12 @@ export class Carousel extends Component {
                     data-action="pagination-backward"
                     disabled={!this.canScrollLeft}
                 />
-                <div class="carousel-scroller" ref={this.scroller}>
-                    <div class="carousel-container" ref={this.container}>
+                <div
+                    class="carousel-scroller"
+                    ref={this.scroller}>
+                    <div
+                        class="carousel-container"
+                        ref={this.container}>
                         <slot />
                     </div>
                 </div>

@@ -28,7 +28,9 @@
     border-radius: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    transition: opacity 200ms, transform 200ms;
+    transition:
+        opacity 200ms,
+        transform 200ms;
     appearance: none;
 }
 
@@ -238,7 +240,8 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
 
 .card[data-type='links'] .card-description::after {
     /* arrow-top-right, instead of the plus used for everything else */
-    background: linear-gradient(currentcolor, currentcolor) top right / 100% 2px no-repeat,
+    background:
+        linear-gradient(currentcolor, currentcolor) top right / 100% 2px no-repeat,
         linear-gradient(currentcolor, currentcolor) top right / 2px 100% no-repeat;
     transform: rotate(45deg);
     transform-origin: top right;
