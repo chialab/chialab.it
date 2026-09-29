@@ -146,6 +146,10 @@
     margin-top: auto;
 }
 
+dna-card-description {
+    display: block;
+}
+
 .card .card-description p {
     margin: 0;
     padding: 0;
@@ -157,7 +161,7 @@
     font-size: 1rem;
 }
 
-a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.clamp-5)::after {
+a.card:not([data-type='images'], [data-type='videos']) .card-description:not(dna-card-description)::after {
     content: '';
     display: block;
     width: 1.5rem;
@@ -176,7 +180,7 @@ a.card:not([data-type='images'], [data-type='videos']) .card-description:not(.cl
  *
  * Always rendered (and thus always reserving its layout space, for consistent card alignment),
  * but the glyph itself is only shown once `.card-more--visible` is added — either server-side
- * (the item has a body) or at runtime by `exhibitions/overflow.ts`, which is the only reliable
+ * (the item has a body) or at runtime by `dna-card-description`, which is the only reliable
  * way to know whether the clamped description was actually truncated.
  */
 .card-more {
