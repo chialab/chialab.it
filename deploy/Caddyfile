@@ -22,7 +22,7 @@
 	encode gzip
 	push
 
-	header /build/* ?Cache-Control "public, max-age=604800, immutable"
+	header /dist/* ?Cache-Control "public, max-age=604800, immutable"
 	import security-headers
 
 	file_server {
