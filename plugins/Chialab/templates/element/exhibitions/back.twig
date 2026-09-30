@@ -1,0 +1,20 @@
+{% if object.in_exhibition|length > 0 %}
+    {% set exhibition = object.in_exhibition|first %}
+    <div class="row align-center gap-s">
+        <a
+            is="dna-button-link"
+            variant="action:primary"
+            icon="chevron-left"
+            class="back f-xs"
+            title="{{ __('Back to') }}: {{ exhibition.get('title')|raw }}"
+            href="{{ Url.build({ _name: 'pages:objects', _entity: exhibition }) }}"
+            aria-label="{{ __('Back to') }}: {{ exhibition.get('title')|raw }}"
+        ></a>
+        <a
+            title="{{ __('Back to') }}: {{ exhibition.get('title')|raw }}"
+            href="{{ Url.build({ _name: 'pages:objects', _entity: exhibition }) }}"
+            class="back sans"
+            tabindex="-1"
+        >{{ exhibition.get('title')|raw }}</a>
+    </div>
+{% endif %}

@@ -170,6 +170,11 @@ article header {
     font-weight: normal;
 }
 
+.body h5 {
+    font-size: var(--font-size-4);
+    font-weight: normal;
+}
+
 .upper {
     text-transform: uppercase;
 }

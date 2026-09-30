@@ -1,0 +1,228 @@
+/* exhibition-carousel: ported from BCBF galleries' carousel.css, adapted to this project's tokens. */
+exhibition-carousel {
+    /* Every card's main area is exactly `--row-height` tall, so they all line up; media
+       captions extend below that baseline and the container grows to fit the tallest one. */
+    --row-height: min(70vh, 46rem);
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+exhibition-carousel .carousel-button {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+
+exhibition-carousel .carousel-button:first-child {
+    left: var(--gutter);
+}
+
+exhibition-carousel .carousel-button:last-child {
+    right: var(--gutter);
+}
+
+exhibition-carousel .carousel-scroller {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+exhibition-carousel .carousel-scroller::-webkit-scrollbar {
+    display: none;
+}
+
+exhibition-carousel:not([restoring]) .carousel-scroller {
+    scroll-behavior: smooth;
+}
+
+exhibition-carousel[snap] .carousel-scroller {
+    scroll-snap-type: x proximity;
+}
+
+exhibition-carousel .carousel-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: var(--gutter);
+    padding: 0;
+    gap: var(--gutter);
+}
+
+exhibition-carousel .carousel-container > * {
+    flex: none;
+}
+
+exhibition-carousel[snap] .carousel-container > * {
+    scroll-snap-align: center;
+}
+
+/* Cards, ported from BCBF galleries' exhibition.css. */
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    height: var(--row-height);
+    padding: calc(var(--gutter) / 2);
+    overflow-y: auto;
+    color: inherit;
+    font-family: var(--font-sans);
+    text-decoration: none;
+    word-wrap: break-word;
+    background: var(--color-grey-100);
+}
+
+.card > div:empty:not(.media-placeholder) {
+    display: none;
+}
+
+.card > :is(h1, h2) {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: var(--weight-light);
+}
+
+.card.exhibition-card {
+    color: var(--color-surface);
+    background: var(--color-accent);
+}
+
+.card .card-description {
+    margin-top: auto;
+}
+
+dna-card-description {
+    display: block;
+}
+
+.card .card-description p {
+    margin: 0;
+    padding: 0;
+}
+
+.card:not(.exhibition-card) .card-description .title,
+.card:not(.exhibition-card) .card-description h2 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+a.card:not([data-type='images'], [data-type='videos']) .card-description:not(dna-card-description)::after {
+    content: '';
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: var(--gutter);
+    background:
+        linear-gradient(currentcolor, currentcolor) center / 100% 2px no-repeat,
+        linear-gradient(currentcolor, currentcolor) center / 2px 100% no-repeat;
+}
+
+/*
+ * Same "+" as `.card-description::after` above, but as its own sibling element instead of a
+ * pseudo-element on `.card-description`: when the description is clamped (`.clamp-*`, which sets
+ * `overflow: hidden` on that very element) a pseudo-element living inside it gets clipped away
+ * together with the truncated text, so it can't be used there.
+ *
+ * Always rendered (and thus always reserving its layout space, for consistent card alignment),
+ * but the glyph itself is only shown once `.card-more--visible` is added — either server-side
+ * (the item has a body) or at runtime by `dna-card-description`, which is the only reliable
+ * way to know whether the clamped description was actually truncated.
+ */
+.card-more {
+    display: block;
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: var(--gutter);
+}
+
+.card-more--visible {
+    background:
+        linear-gradient(currentcolor, currentcolor) center / 100% 2px no-repeat,
+        linear-gradient(currentcolor, currentcolor) center / 2px 100% no-repeat;
+}
+
+.card[data-type='links'] .card-description::after {
+    /* arrow-top-right, instead of the plus used for everything else */
+    background:
+        linear-gradient(currentcolor, currentcolor) top right / 100% 2px no-repeat,
+        linear-gradient(currentcolor, currentcolor) top right / 2px 100% no-repeat;
+    transform: rotate(45deg);
+    transform-origin: top right;
+}
+
+.card[data-type='profiles'] .title {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.25rem;
+}
+
+.card[data-type='profiles'] .card-location {
+    font-weight: 400;
+}
+
+/*
+ * Media items (images/videos): the media itself is always the full, constant card height
+ * (only its width varies, to match its own aspect ratio); the caption is not part of that
+ * height budget, it just flows below and is allowed to overflow the card's nominal box.
+ */
+.card[data-type='images'],
+.card[data-type='videos'] {
+    position: relative;
+    display: block;
+    width: auto;
+    height: auto;
+    padding: 0;
+    overflow: visible;
+    background: none;
+}
+
+.card[data-type='images'] img,
+.card[data-type='videos'] video {
+    display: block;
+    width: auto;
+    /* Fills the shared row height fully, same as every other card — the caption (if any) goes
+       below it, in addition to this height. */
+    height: var(--row-height);
+    object-fit: contain;
+}
+
+.card[data-type='images'] .parent-title {
+    margin-top: calc(var(--gutter) / 2);
+    font-family: var(--font-serif);
+}
+
+.card[data-type='images'] .card-description,
+.card[data-type='videos'] .card-description {
+    /* Zero intrinsic inline size: the card's `width: auto` has to be driven by the media only,
+       not by the caption's own preferred text width. The caption then stretches to the card's
+       width and wraps, and stays in flow so the container grows to fit it. */
+    contain: inline-size;
+    /* The card's own width always matches the media's rendered width (never known ahead of
+       time, since only the height is fixed) — cap the caption at a plausible reading width so
+       it never has to stretch wider than that, without ever exceeding it either. */
+    max-width: min(100%, 600px);
+    color: inherit;
+}
+
+.card[data-type='videos'] .video-embed {
+    height: 100%;
+    background: var(--color-grey-100);
+}
+
+.card[data-type='videos'] .video-embed :is(video, iframe) {
+    width: 100%;
+    height: 100%;
+}
+
+.card[data-type='links'] .poster {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}

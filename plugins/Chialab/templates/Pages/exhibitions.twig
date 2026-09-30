@@ -1,0 +1,26 @@
+{% if _view.layout is same as('ajax') %}
+    {% for item in exhibition_items %}
+        {% include 'exhibitions/exhibition-item' with { object: item } %}
+    {% endfor %}
+{% else %}
+    {{ Vite.css("#{_view.theme}.exhibitions", { block: true })|raw }}
+    {{ Vite.js("#{_view.theme}.exhibitions", { block: true })|raw }}
+
+    <exhibition-carousel
+        role="group"
+        class="w-full exhibition-detail"
+        data="{{ ajaxUrl }}"
+        page="{{ Paginator.current() }}"
+        pages="{{ Paginator.total() }}"
+    >
+        <div class="card exhibition-card">
+            <h1>{{ object.title|raw }}</h1>
+            {% if object.get('description') is not empty %}
+                <div class="card-description f-4">{{ object.description|raw }}</div>
+            {% endif %}
+        </div>
+        {% for item in exhibition_items %}
+            {% include 'exhibitions/exhibition-item' with { object: item } %}
+        {% endfor %}
+    </exhibition-carousel>
+{% endif %}

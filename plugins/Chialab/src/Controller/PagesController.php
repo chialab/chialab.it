@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Chialab\Controller;
 
+use BEdita\Core\Model\Entity\ObjectEntity;
 use Cake\Datasource\Exception\RecordNotFoundException;
+use Cake\Event\EventInterface;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
@@ -158,6 +160,41 @@ class PagesController extends AppController
         }
 
         return $this->_object($uname);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function implementedEvents(): array
+    {
+        return parent::implementedEvents() + [
+            'Controller.afterObjectLoad' => 'afterObjectLoad',
+        ];
+    }
+
+    /**
+     * Paginate exhibition items, served as an ajax fragment on subsequent pages.
+     *
+     * @param \Cake\Event\EventInterface $event Event.
+     * @param \BEdita\Core\Model\Entity\ObjectEntity $object Loaded object.
+     * @return void
+     */
+    public function afterObjectLoad(EventInterface $event, ObjectEntity $object): void
+    {
+        if ($object->type !== 'exhibitions') {
+            return;
+        }
+
+        $exhibitionItems = $this->paginate(
+            $this->Objects->loadRelatedObjects($object->uname, 'exhibitions', 'exhibition_items'),
+            ['limit' => 12],
+        );
+        $this->set('exhibition_items', $exhibitionItems);
+        $this->set('ajaxUrl', $this->request->getPath());
+
+        if ($this->request->is('ajax')) {
+            $this->viewBuilder()->disableAutoLayout();
+        }
     }
 
     /**
