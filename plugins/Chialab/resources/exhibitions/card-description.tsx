@@ -1,4 +1,4 @@
-import { Component, customElement, state, type Template } from '@chialab/dna';
+import { Component, customElement, property, state, type Template } from '@chialab/dna';
 
 /**
  * Description of an exhibition card, clamped to a few lines, followed by a "+" that is only
@@ -8,6 +8,9 @@ import { Component, customElement, state, type Template } from '@chialab/dna';
  */
 @customElement('dna-card-description')
 export class CardDescription extends Component {
+    @property({ type: Boolean, attribute: 'more' })
+    more = false;
+
     @state()
     truncated = false;
 
@@ -23,7 +26,7 @@ export class CardDescription extends Component {
                     <slot />
                 </div>
                 <span
-                    class={this.truncated ? 'card-more card-more--visible' : 'card-more'}
+                    class={this.truncated || this.more ? 'card-more card-more--visible' : 'card-more'}
                     aria-hidden="true"
                 />
             </>
