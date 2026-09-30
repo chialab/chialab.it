@@ -6,34 +6,34 @@ export class Topbar extends Component {
     @property({
         type: String,
     })
-    url: string = '/';
+    url = '/';
 
     @property({
         type: String,
     })
-    tooltip: string = 'Back to home';
+    tooltip = 'Back to home';
 
     @property({
         type: String,
     })
-    openTooltip: string = 'Open menu';
+    openTooltip = 'Open menu';
 
     @property({
         type: String,
     })
-    closeTooltip: string = 'Close menu';
+    closeTooltip = 'Close menu';
 
     @state({
         type: Boolean,
         attribute: ':open',
     })
-    open: boolean = false;
+    open = false;
 
     @state({
         type: Boolean,
         attribute: ':fixed',
     })
-    fixed: boolean = false;
+    fixed = false;
 
     /**
      * @inheritdoc
@@ -85,12 +85,15 @@ export class Topbar extends Component {
                 </div>
                 <button
                     is="dna-button"
+                    type="button"
                     variant={ButtonVariant.action}
                     class="topbar__toggle"
                     role="switch"
                     aria-checked={this.open ? 'true' : 'false'}
                     aria-label={this.open ? this.closeTooltip : this.openTooltip}>
-                    <svg viewBox="0 0 256 256">
+                    <svg
+                        viewBox="0 0 256 256"
+                        aria-hidden="true">
                         <rect
                             y="47.5"
                             width="256"

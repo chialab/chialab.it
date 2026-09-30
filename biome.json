@@ -1,0 +1,157 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!vendor/**/*",
+      "!node_modules/**/*",
+      "!webroot/**/*",
+      "!plugins/*/webroot/**/*",
+      "!deploy/**/*",
+      "!manager/**/*",
+      "!composer.lock",
+      "!.vite/**/*",
+      "!tmp/**/*",
+      "!logs/**/*",
+      "!templates/**/*",
+      "!composer.json"
+    ],
+    "maxSize": 2097152
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "formatter": {
+    "attributePosition": "multiline",
+    "lineWidth": 120,
+    "useEditorconfig": true
+  },
+  "linter": {
+    "domains": {
+      "project": "recommended"
+    },
+    "rules": {
+      "preset": "recommended",
+      "a11y": {
+        "noNoninteractiveElementInteractions": "warn",
+        "noRedundantAlt": "warn",
+        "useButtonType": "warn",
+        "useSemanticElements": "off",
+        "noSvgWithoutTitle": "warn",
+        "useFocusableInteractive": "warn"
+      },
+      "complexity": {
+        "noThisInStatic": "off",
+        "noDivRegex": "warn",
+        "noExcessiveNestedTestSuites": "warn",
+        "noRedundantDefaultExport": "warn",
+        "noUselessCatchBinding": "warn",
+        "noUselessReturn": "warn",
+        "noUselessStringConcat": "warn",
+        "noUselessSwitchCase": "warn",
+        "noUselessThisAlias": "warn",
+        "noUselessUndefined": "warn",
+        "useArrowFunction": "warn",
+        "useFlatMap": "warn",
+        "useOptionalChain": "warn",
+        "useWhile": "warn"
+      },
+      "correctness": {
+        "useJsxKeyInIterable": "off",
+        "noUnusedFunctionParameters": "off",
+        "noUnusedPrivateClassMembers": "off",
+        "noGlobalDirnameFilename": "warn",
+        "useSingleJsDocAsterisk": "warn",
+        "noUndeclaredDependencies": "off",
+        "noUndeclaredVariables": "error",
+        "noUnusedInstantiation": "error"
+      },
+      "performance": {
+        "noAccumulatingSpread": "warn",
+        "noDelete": "warn"
+      },
+      "style": {
+        "noExportedImports": "off",
+        "noInferrableTypes": "warn",
+        "noParameterAssign": "warn",
+        "noUselessElse": "warn",
+        "noYodaExpression": "warn",
+        "useConsistentArrayType": "warn",
+        "useConsistentBuiltinInstantiation": "warn",
+        "useConsistentCurlyBraces": "warn",
+        "useConsistentObjectDefinitions": "warn",
+        "useConst": "warn",
+        "useErrorCause": "warn",
+        "useExponentiationOperator": "warn",
+        "useForOf": "warn",
+        "useGroupedAccessorPairs": "warn",
+        "useImportType": "warn",
+        "useObjectSpread": "warn",
+        "useSelfClosingElements": "warn",
+        "useSingleVarDeclarator": "warn",
+        "useSpreadOverApply": "warn",
+        "useTemplate": "warn",
+        "useThrowNewError": "warn",
+        "useTrimStartEnd": "warn",
+        "useUnifiedTypeSignatures": "warn",
+        "noCommonJs": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useNumberNamespace": "error",
+        "useThrowOnlyError": "error"
+      },
+      "suspicious": {
+        "noAssignInExpressions": "warn",
+        "noConfusingLabels": "warn",
+        "noDuplicateDependencies": "warn",
+        "noEmptyBlockStatements": "warn",
+        "noEmptySource": "warn",
+        "noEvolvingTypes": "warn",
+        "noExplicitAny": "warn",
+        "noMisplacedAssertion": "warn",
+        "noUnassignedVariables": "warn",
+        "noUnusedExpressions": "warn",
+        "useDeprecatedDate": "warn",
+        "useErrorMessage": "warn",
+        "useNumberToFixedDigitsArgument": "warn",
+        "noConstantBinaryExpressions": "error",
+        "noReturnAssign": "error",
+        "noVar": "error",
+        "noConsole": {
+          "level": "warn",
+          "options": {
+            "allow": ["error", "warn"]
+          }
+        },
+        "noDoubleEquals": "warn"
+      }
+    }
+  },
+  "css": {
+    "linter": {
+      "enabled": true
+    },
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "always",
+      "attributePosition": "multiline",
+      "bracketSameLine": true,
+      "bracketSpacing": true,
+      "jsxQuoteStyle": "double",
+      "quoteStyle": "single",
+      "quoteProperties": "preserve",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
+  }
+}

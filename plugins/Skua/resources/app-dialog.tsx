@@ -19,6 +19,7 @@ export class AppDialog extends Component {
         return (
             <dna-dialog ref={this.dialog}>
                 <button
+                    type="button"
                     class="close-btn"
                     aria-label="chiudi pannello">
                     <dna-icon name="close-large" />

@@ -1,8 +1,8 @@
 import { Component, customElement, listen, observe, property, render, state, type Template } from '@chialab/dna';
-import { Map as MapElement, type Area } from '@chialab/dna-map';
+import { type Area, Map as MapElement } from '@chialab/dna-map';
 import type { MapScrollerStep } from '@chialab/dna-map-scroller';
 import { ControlsList, Slideshow } from '@chialab/dna-slideshow';
-import { StoryScroller, type ChangeEvent } from '@chialab/dna-story-scroller';
+import { type ChangeEvent, StoryScroller } from '@chialab/dna-story-scroller';
 import type { AppDialog } from './app-dialog';
 
 @customElement('skua-map-scroller')
@@ -78,15 +78,18 @@ export class SkuaMapScroller extends Component {
                     <slot />
                 </dna-story-scroller>
                 <button
+                    type="button"
                     class="resize-handle"
                     aria-label="Clicca e trascina per ridimensionare il pannello di testo"
                     ref={this.resizeHandle}>
                     <dna-icon
                         name="arrow-previous-full"
-                        class="resize-handle__bar"></dna-icon>
+                        class="resize-handle__bar"
+                    />
                     <dna-icon
                         name="arrow-next-full"
-                        class="resize-handle__bar"></dna-icon>
+                        class="resize-handle__bar"
+                    />
                 </button>
             </>
         );
@@ -216,8 +219,10 @@ export class SkuaMapScroller extends Component {
             }
 
             this.data.features.forEach((feature) => {
-                feature.properties!['marker-class'] =
-                    feature.properties?.uname == this.currentStep?.dataset.uname ? 'current' : '';
+                if (feature.properties) {
+                    feature.properties['marker-class'] =
+                        feature.properties?.uname === this.currentStep?.dataset.uname ? 'current' : '';
+                }
             });
             this.data = { ...this.data };
         }
@@ -311,7 +316,7 @@ export class SkuaMapScroller extends Component {
         event.preventDefault();
         event.stopPropagation();
         // consento il ridimensionamento solo con il tasto principale (sinistro) del mouse
-        if (event.button != 0) {
+        if (event.button !== 0) {
             return;
         }
 

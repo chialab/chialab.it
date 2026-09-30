@@ -11,7 +11,9 @@
     --map-scroller-left-padding: 12px;
     --scrollbar-width: 24px;
     --map-scroller-left-offset: calc(
-        var(--scrollbar-width) + var(--map-scroller-left-padding) + var(--map-scroller-left-margin)
+        var(--scrollbar-width) +
+        var(--map-scroller-left-padding) +
+        var(--map-scroller-left-margin)
     );
 }
 

@@ -8,7 +8,7 @@ export class CardDetails extends Component {
         type: Boolean,
         attribute: ':expanded',
     })
-    expanded: boolean = false;
+    expanded = false;
 
     get cardDescriptionElement() {
         const details = this.realm.childNodes.find(
@@ -20,10 +20,10 @@ export class CardDetails extends Component {
     render() {
         return (
             <>
-                <slot name="cover"></slot>
+                <slot name="cover" />
                 <div class="column w-full p-2">
-                    <slot name="details"></slot>
-                    {this.expanded && <slot name="extra"></slot>}
+                    <slot name="details" />
+                    {this.expanded && <slot name="extra" />}
                     <div class="row w-full no-wrap justify align-end">
                         <div class="pb-1">
                             <slot name="footer" />
@@ -32,6 +32,7 @@ export class CardDetails extends Component {
                             <div class="card-details__commands">
                                 <button
                                     is="dna-button"
+                                    type="button"
                                     class="card-details__toggle"
                                     variant={ButtonVariant.action}
                                     icon={this.expanded ? 'close' : 'plus'}
