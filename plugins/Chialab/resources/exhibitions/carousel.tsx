@@ -61,7 +61,6 @@ export class Carousel extends Component {
                     variant="action:primary"
                     class="carousel-button"
                     icon="chevron-left"
-                    aria-hidden="true"
                     data-action="pagination-backward"
                     disabled={!this.canScrollLeft}
                 />
@@ -79,7 +78,6 @@ export class Carousel extends Component {
                     type="button"
                     variant="action:primary"
                     class="carousel-button"
-                    aria-hidden="true"
                     aria-busy={this.loading}
                     data-action="pagination-forward"
                     disabled={!this.loading && !this.canScrollRight}>
