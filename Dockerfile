@@ -30,6 +30,7 @@ COPY ./packages/cdk/package.json /app/packages/cdk/package.json
 RUN --mount=type=secret,id=npm,required=true,target=.npmrc yarn install
 
 # Build JS app
+COPY --from=composer /app/vendor/chialab/vite-cakephp/ /app/vendor/chialab/vite-cakephp/
 COPY ./ /app/
 RUN yarn build
 
@@ -71,7 +72,4 @@ COPY --chown=www-data:www-data ./deploy/app_local.php /app/config/app_local.php
 COPY --chown=www-data:www-data --from=composer /app/ /app/
 COPY --chown=www-data:www-data --from=npm /app/webroot/ /app/webroot/
 COPY --chown=www-data:www-data --from=npm /app/plugins/Chialab/webroot/ /app/webroot/chialab/
-COPY --from=npm /app/plugins/Chialab/webroot/build/entrypoints.json /app/plugins/Chialab/webroot/build/entrypoints.json
-COPY --from=npm /app/plugins/Illustratorium/webroot/build/entrypoints.json /app/plugins/Illustratorium/webroot/build/entrypoints.json
-COPY --from=npm /app/plugins/Skua/webroot/build/entrypoints.json /app/plugins/Skua/webroot/build/entrypoints.json
 RUN composer run post-install-cmd --no-interaction

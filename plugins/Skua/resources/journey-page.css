@@ -1,8 +1,3 @@
-@import '@chialab/dna-map-scroller/style';
-@import '@chialab/dna-map/style';
-@import '@chialab/dna-story-scroller/style';
-@import '@chialab/dna-zoom-panel/style';
-
 .journey-page {
     margin-top: 0;
 }

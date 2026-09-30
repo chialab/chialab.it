@@ -19,9 +19,8 @@
             'link': "#{_view.theme}.apple-touch-icon.png"
         })|raw }}
 
-        {{ Rna.devServer(_view.theme)|raw }}
-        {{ Rna.css("#{_view.theme}.index", { block: true })|raw }}
-        {{ Rna.script("#{_view.theme}.index", { block: true })|raw }}
+        {{ Vite.css("#{_view.theme}.index", { block: true })|raw }}
+        {{ Vite.js("#{_view.theme}.index", { block: true })|raw }}
 
         {{ fetch('meta')|raw }}
         {{ Metadata.metaDc()|raw }}

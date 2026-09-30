@@ -47,6 +47,7 @@ class AppView extends BaseAppView
         $this->helpers()->unload('Thumb');
         $this->loadHelper('Thumb');
         $this->loadHelper('VCard');
+        $this->loadHelper('Chialab/Vite.Vite');
 
         /**
          * @var \Cake\View\Helper\PaginatorHelper $paginator
