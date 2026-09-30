@@ -16,7 +16,6 @@ declare(strict_types=1);
  */
 namespace App;
 
-use App\Command\ImportExhibitionsCommand;
 use App\Command\ImportOld;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Authorization\Middleware\AuthorizationMiddleware;
@@ -53,8 +52,7 @@ class Application extends BaseApplication
     public function console(CommandCollection $commands): CommandCollection
     {
         return parent::console($commands)
-            ->add('import:old', ImportOld::class)
-            ->add('import_exhibitions', ImportExhibitionsCommand::class);
+            ->add('import:old', ImportOld::class);
     }
 
     /**
