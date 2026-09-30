@@ -71,6 +71,7 @@ class ApplicationTest extends TestCase
             'BEdita/DevTools',
             'BEdita/I18n',
             'BEdita/Placeholders',
+            'Chialab/Vite',
             'Chialab/FrontendKit',
             'DebugKit',
             'Migrations',
@@ -109,6 +110,7 @@ class ApplicationTest extends TestCase
             'BEdita/Core',
             'BEdita/I18n',
             'BEdita/Placeholders',
+            'Chialab/Vite',
             'Chialab/FrontendKit',
             'Migrations',
         ];

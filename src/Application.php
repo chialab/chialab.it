@@ -83,6 +83,7 @@ class Application extends BaseApplication
         $this->addPlugin('BEdita/AWS');
         $this->addPlugin('BEdita/Placeholders');
         $this->addPlugin('BEdita/I18n');
+        $this->addPlugin('Chialab/Vite');
         $this->addPlugin('Chialab/FrontendKit');
 
         if (Configure::check('FrontendPlugin')) {
