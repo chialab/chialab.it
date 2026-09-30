@@ -6,8 +6,8 @@
     {{ Vite.css("#{_view.theme}.exhibitions", { block: true })|raw }}
     {{ Vite.js("#{_view.theme}.exhibitions", { block: true })|raw }}
 
-    <section
-        is="dna-carousel"
+    <exhibition-carousel
+        role="group"
         class="w-full exhibition-detail"
         data="{{ ajaxUrl }}"
         page="{{ Paginator.current() }}"
@@ -22,5 +22,5 @@
         {% for item in items %}
             {% include 'exhibitions/exhibition-item' with { object: item } %}
         {% endfor %}
-    </section>
+    </exhibition-carousel>
 {% endif %}

@@ -1,5 +1,5 @@
-/* dna-carousel: ported from BCBF galleries' carousel.css, adapted to this project's tokens. */
-[is='dna-carousel'] {
+/* exhibition-carousel: ported from BCBF galleries' carousel.css, adapted to this project's tokens. */
+exhibition-carousel {
     /* Every card's main area is exactly `--row-height` tall, so they all line up; media
        captions extend below that baseline and the container grows to fit the tallest one. */
     --row-height: min(70vh, 46rem);
@@ -9,70 +9,21 @@
     min-width: 0;
 }
 
-[is='dna-carousel'] .carousel-button {
+exhibition-carousel .carousel-button {
     position: absolute;
     top: 50%;
     z-index: 1;
-    display: flex;
-    flex: none;
-    justify-content: center;
-    align-items: center;
-    width: 3rem;
-    height: 3rem;
-    padding: 0;
-    color: var(--color-surface);
-    background: var(--color-primary);
-    border: 0;
-    border-radius: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    transition:
-        opacity 200ms,
-        transform 200ms;
-    appearance: none;
 }
 
-[is='dna-carousel'] .carousel-button::before {
-    content: '';
-    display: block;
-    width: 0.6rem;
-    height: 0.6rem;
-    border-top: 2px solid currentcolor;
-    border-right: 2px solid currentcolor;
-}
-
-[is='dna-carousel'] .carousel-button:first-child {
+exhibition-carousel .carousel-button:first-child {
     left: var(--gutter);
 }
 
-[is='dna-carousel'] .carousel-button:first-child::before {
-    transform: rotate(-135deg) translate(-1px, -1px);
-}
-
-[is='dna-carousel'] .carousel-button:last-child {
+exhibition-carousel .carousel-button:last-child {
     right: var(--gutter);
 }
 
-[is='dna-carousel'] .carousel-button:last-child::before {
-    transform: rotate(45deg) translate(-1px, -1px);
-}
-
-/*
- * While loading the next page: no arrow, just an orange button. Matches `aria-busy` whether it
- * was rendered as the ARIA-correct string `"true"` or (if treated as a presence-only boolean
- * attribute, like `disabled`) as an empty string — anything but an explicit `"false"`.
- */
-[is='dna-carousel'] .carousel-button:last-child[aria-busy]:not([aria-busy='false']) {
-    background: var(--color-accent);
-}
-
-[is='dna-carousel'] .carousel-button[disabled] {
-    transform: translateY(-50%) scale(0.001);
-    opacity: 0;
-    pointer-events: none;
-}
-
-[is='dna-carousel'] .carousel-scroller {
+exhibition-carousel .carousel-scroller {
     width: 100%;
     min-width: 0;
     overflow-x: auto;
@@ -82,19 +33,19 @@
     -webkit-overflow-scrolling: touch;
 }
 
-[is='dna-carousel'] .carousel-scroller::-webkit-scrollbar {
+exhibition-carousel .carousel-scroller::-webkit-scrollbar {
     display: none;
 }
 
-[is='dna-carousel']:not([restoring]) .carousel-scroller {
+exhibition-carousel:not([restoring]) .carousel-scroller {
     scroll-behavior: smooth;
 }
 
-[is='dna-carousel'][snap] .carousel-scroller {
+exhibition-carousel[snap] .carousel-scroller {
     scroll-snap-type: x proximity;
 }
 
-[is='dna-carousel'] .carousel-container {
+exhibition-carousel .carousel-container {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -103,11 +54,11 @@
     gap: var(--gutter);
 }
 
-[is='dna-carousel'] .carousel-container > * {
+exhibition-carousel .carousel-container > * {
     flex: none;
 }
 
-[is='dna-carousel'][snap] .carousel-container > * {
+exhibition-carousel[snap] .carousel-container > * {
     scroll-snap-align: center;
 }
 

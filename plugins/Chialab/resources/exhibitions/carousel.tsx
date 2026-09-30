@@ -8,6 +8,8 @@ import {
     state,
     type Template,
 } from '@chialab/dna';
+import '@chialab/dna-button';
+import '@chialab/dna-spinner';
 import { getState, setState, unsetState } from './state';
 
 /**
@@ -16,7 +18,7 @@ import { getState, setState, unsetState } from './state';
  * visitor reaches the end (some exhibitions have a lot of items). Ported from BCBF galleries'
  * own `dna-carousel` (`carousel.js`), adapted to this project's current DNA API.
  */
-@customElement('dna-carousel', { extends: 'section' })
+@customElement('exhibition-carousel')
 export class Carousel extends Component {
     @property({ type: Boolean, attribute: 'snap' })
     snap = false;
@@ -54,8 +56,11 @@ export class Carousel extends Component {
         return (
             <>
                 <button
+                    is="dna-button"
                     type="button"
+                    variant="action:primary"
                     class="carousel-button"
+                    icon="chevron-left"
                     aria-hidden="true"
                     data-action="pagination-backward"
                     disabled={!this.canScrollLeft}
@@ -70,13 +75,23 @@ export class Carousel extends Component {
                     </div>
                 </div>
                 <button
+                    is="dna-button"
                     type="button"
+                    variant="action:primary"
                     class="carousel-button"
                     aria-hidden="true"
                     aria-busy={this.loading}
                     data-action="pagination-forward"
-                    disabled={!this.loading && !this.canScrollRight}
-                />
+                    disabled={!this.loading && !this.canScrollRight}>
+                    {this.loading ? (
+                        <dna-spinner slot="icon" />
+                    ) : (
+                        <dna-icon
+                            slot="icon"
+                            name="chevron-right"
+                        />
+                    )}
+                </button>
             </>
         );
     }

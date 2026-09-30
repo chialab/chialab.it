@@ -211,6 +211,13 @@
     "@chialab/dna-gallery" "^4.1.0"
     "@chialab/dna-slides" "^4.1.0"
 
+"@chialab/dna-spinner@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.npmjs.org/@chialab/dna-spinner/-/dna-spinner-4.1.0.tgz#65861cc2a718cce3b39ed4bc1eaf0678100e1474"
+  integrity sha512-LmiNqpojepZOgPwNNOtX8jwqtBMSvgGzs0NCTbj+4IzdL2TBXXsK07oxqMvkALs3hziy01/bj92acbQm6DcGOw==
+  dependencies:
+    "@chialab/dna" "^4.4.0"
+
 "@chialab/dna-story-scroller@^4.0.0-beta.0", "@chialab/dna-story-scroller@^4.1.1":
   version "4.1.1"
   resolved "https://registry.npmjs.org/@chialab/dna-story-scroller/-/dna-story-scroller-4.1.1.tgz#e492b878da121f0f1881d31f50c6094b650bbd54"
