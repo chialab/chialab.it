@@ -10,7 +10,7 @@ export interface CarouselState {
 
 export function getState(id: string): CarouselState | null {
     const state = history.state as Record<string, CarouselState> | null;
-    if (!state || !state[id]) {
+    if (!state?.[id]) {
         return null;
     }
 
@@ -25,7 +25,7 @@ export function setState(id: string, data: CarouselState): void {
 
 export function unsetState(id: string): boolean {
     const state = history.state as Record<string, CarouselState> | null;
-    if (!state || !state[id]) {
+    if (!state?.[id]) {
         return false;
     }
 

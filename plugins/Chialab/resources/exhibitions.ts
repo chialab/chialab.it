@@ -1,14 +1,6 @@
-import { type AsyncEvent } from '@chialab/dna';
-import '@chialab/dna-button';
-import { globalIconset, IconChevronLeft, IconChevronRight, IconCircleDash } from '@chialab/dna-icons';
+import { type AsyncEvent, delegateEventListener } from '@chialab/dna';
 import './exhibitions/carousel';
 import './exhibitions/card-description';
-
-globalIconset.registerIcons({
-    'chevron-left': IconChevronLeft,
-    'chevron-right': IconChevronRight,
-    'spinner': IconCircleDash,
-});
 
 // Serves further pages of items requested by a `exhibition-carousel` (see `exhibitions/carousel.tsx`).
 window.addEventListener('fetch', (event) => {
@@ -38,4 +30,11 @@ window.addEventListener('fetch', (event) => {
 
         return Array.from(wrapper.children);
     });
+});
+
+delegateEventListener(document.body, 'click', '.back', (event) => {
+    if (history.length) {
+        event.preventDefault();
+        history.back();
+    }
 });
