@@ -46,6 +46,19 @@
     },
     {
       "is_abstract": false,
+      "singular": "exhibition",
+      "name": "exhibitions",
+      "description": "Exhibitions",
+      "associations": ["Categories", "Tags"],
+      "hidden": null,
+      "enabled": true,
+      "translation_rules": null,
+      "is_translatable": true,
+      "table": "BEdita/Core.Objects",
+      "parent_name": "objects"
+    },
+    {
+      "is_abstract": false,
       "singular": "file",
       "name": "files",
       "description": "Files media model",
@@ -215,6 +228,15 @@
     }
   ],
   "relations": [
+    {
+      "name": "exhibition_items",
+      "label": "Exhibition items",
+      "inverse_name": "in_exhibition",
+      "inverse_label": "Is in exhibition",
+      "description": "Relation between an exhibition and its items",
+      "left": ["exhibitions"],
+      "right": ["media", "galleries", "documents", "profiles", "links"]
+    },
     {
       "name": "has_authors",
       "label": "Has authors",
@@ -487,6 +509,7 @@
         "profiles": { "filter": ["status", "parent"] },
         "users": { "filter": ["status", "parent", "roles"] },
         "galleries": { "filter": ["status", "parent"] },
+        "exhibitions": { "filter": ["status", "parent"] },
         "links": { "filter": ["status", "parent"] },
         "objects": { "filter": ["status", "parent"] }
       }
