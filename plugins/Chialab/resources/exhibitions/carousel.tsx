@@ -1,6 +1,13 @@
-import { Component, customElement, dispatchAsyncEvent, listen, observe, property, state, type Template } from '@chialab/dna';
-import { updateCaptionHeight } from './caption-height';
-import { markOverflowingCards } from './overflow';
+import {
+    Component,
+    customElement,
+    dispatchAsyncEvent,
+    listen,
+    observe,
+    property,
+    state,
+    type Template,
+} from '@chialab/dna';
 import { getState, setState, unsetState } from './state';
 
 /**
@@ -53,8 +60,12 @@ export class Carousel extends Component {
                     data-action="pagination-backward"
                     disabled={!this.canScrollLeft}
                 />
-                <div class="carousel-scroller" ref={this.scroller}>
-                    <div class="carousel-container" ref={this.container}>
+                <div
+                    class="carousel-scroller"
+                    ref={this.scroller}>
+                    <div
+                        class="carousel-container"
+                        ref={this.container}>
                         <slot />
                     </div>
                 </div>
@@ -76,7 +87,6 @@ export class Carousel extends Component {
         this.currentPage = Number(this.getAttribute('page')) || 1;
         this.totalPages = Number(this.getAttribute('pages')) || 1;
 
-        updateCaptionHeight(this);
         await this.restoreState();
         this.checkScrollArrows();
         this.saveState();
@@ -87,9 +97,7 @@ export class Carousel extends Component {
 
         this.resizeObserver?.disconnect();
         this.resizeObserver = new ResizeObserver(() => {
-            // A resize can change how captions wrap (and thus how tall they need to be), as well
-            // as whether there's room left to scroll.
-            updateCaptionHeight(this);
+            // A resize can change whether there's room left to scroll.
             this.checkScrollArrows();
         });
         this.resizeObserver.observe(this);
@@ -192,8 +200,6 @@ export class Carousel extends Component {
         for (const node of (response as Node[] | undefined) ?? []) {
             this.container.appendChild(node);
         }
-        markOverflowingCards(this.container);
-        updateCaptionHeight(this);
         this.currentPage = nextPage;
         this.loading = false;
         this.checkScrollArrows();
@@ -226,8 +232,6 @@ export class Carousel extends Component {
         while (wrapper.firstChild) {
             this.container.appendChild(wrapper.firstChild);
         }
-        markOverflowingCards(this.container);
-        updateCaptionHeight(this);
 
         await new Promise<void>((resolve) => {
             requestAnimationFrame(() => {

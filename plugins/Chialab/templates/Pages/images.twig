@@ -1,6 +1,5 @@
 <div class="media_container w-full column gap-s">
-
-{{ element('exhibitions/back', { object: object }) }}
+    {{ element('exhibitions/back', { object: object }) }}
 
     {% if Media.hasStream(object) %}
         {{ Thumb.image(object, 'ultra', { class: 'w-full' })|raw }}
