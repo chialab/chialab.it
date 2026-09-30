@@ -1,0 +1,4 @@
+{% if object.in_exhibition|length > 0 %}
+    {% set exhibition = object.in_exhibition|first %}
+    <a title="{{ __('Back to') }}: {{ exhibition.get('title')|raw }}" href="{{ Url.build({ _name: 'pages:objects', _entity: exhibition }) }}" class="back sans">{{ exhibition.get('title')|raw }}</a>
+{% endif %}

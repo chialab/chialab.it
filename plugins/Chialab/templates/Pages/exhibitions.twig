@@ -1,21 +1,26 @@
-{% if Poster.exists(object) %}
-    {{ element('Articles/cover') }}
+{% if _view.layout is same as('ajax') %}
+    {% for item in items %}
+        {% include 'exhibitions/exhibition-item' with { object: item } %}
+    {% endfor %}
+{% else %}
+    {{ Rna.css("#{_view.theme}.exhibitions", { block: true })|raw }}
+    {{ Rna.script("#{_view.theme}.exhibitions", { block: true })|raw }}
+
+    <section
+        is="dna-carousel"
+        class="w-full exhibition-detail"
+        data="{{ ajaxUrl }}"
+        page="{{ Paginator.current() }}"
+        pages="{{ Paginator.total() }}"
+    >
+        <div class="card exhibition-card">
+            <h1>{{ object.title|raw }}</h1>
+            {% if object.get('description') is not empty %}
+                <div class="card-description f-4">{{ object.description|raw }}</div>
+            {% endif %}
+        </div>
+        {% for item in items %}
+            {% include 'exhibitions/exhibition-item' with { object: item } %}
+        {% endfor %}
+    </section>
 {% endif %}
-
-<article class="column w-8 gap-2">
-    {{ element('Articles/header', {
-        title: object.title,
-        description: object.get('description'),
-    }) }}
-
-    {% if object.get('body') is not empty %}
-        {{ element('Articles/body') }}
-    {% endif %}
-
-    {% if object.get('exhibition_items') is not empty %}
-        {{ element('folder-grid', { children: object.get('exhibition_items') }) }}
-    {% endif %}
-</article>
-<aside class="column w-4 aside f-s">
-    {{ element('Articles/aside') }}
-</aside>

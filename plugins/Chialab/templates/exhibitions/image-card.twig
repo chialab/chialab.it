@@ -1,0 +1,25 @@
+<a
+    class="card{{ attachParent ? ' attach' : '' }}"
+    title="{{ (attachParent.get('title')|default(object.get('title'))|default(object.get('description')))|striptags|escape('html_attr') }}"
+    href="{{ url }}"
+    data-type="{{ object.get('type') }}"
+>
+    {% if Media.hasStream(object) %}
+        {{ Thumb.image(object, 'high', { alt: '' })|raw }}
+    {% else %}
+        <div class="w-full media-placeholder"></div>
+    {% endif %}
+    {% if attachParent %}
+        <div class="parent-title">{{ attachParent.get('title')|raw }}</div>
+    {% endif %}
+    {% if object.get('title') or object.get('description') %}
+        <div class="w-full card-description">
+            {% if object.get('title') %}
+                <div class="f-3">{{ object.get('title')|raw }}</div>
+            {% endif %}
+            {% if object.get('description') %}
+                <div class="f-2">{{ object.get('description')|raw }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
+</a>

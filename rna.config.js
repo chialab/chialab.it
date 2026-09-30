@@ -8,7 +8,12 @@ const isProduction = process.env.NODE_ENV === 'production';
 const config = {
     entrypoints: [
         {
-            input: ['./plugins/Chialab/resources/index.ts', './plugins/Chialab/resources/index.css'],
+            input: [
+                './plugins/Chialab/resources/index.ts',
+                './plugins/Chialab/resources/exhibitions.ts',
+                './plugins/Chialab/resources/index.css',
+                './plugins/Chialab/resources/exhibitions.css',
+            ],
             publicPath: '/chialab/build/',
             output: 'plugins/Chialab/webroot/build/',
             manifestPath: 'plugins/Chialab/webroot/build/manifest.json',
