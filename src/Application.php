@@ -88,7 +88,9 @@ class Application extends BaseApplication
         if (Configure::check('FrontendPlugin')) {
             $this->addPlugin(Configure::read('FrontendPlugin'));
         }
-        if (!empty(Configure::read('Theme'))) {
+        // The theme's own routes (e.g. `/objects/{uname}`) can shadow BEdita/API's routes and skip
+        // its authorization checks entirely, so never load it on an instance serving the API.
+        if (!empty(Configure::read('Theme')) && Configure::read('FrontendPlugin') !== 'BEdita/API') {
             $this->addPlugin(Configure::read('Theme'));
         }
     }
