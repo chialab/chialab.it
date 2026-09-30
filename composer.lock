@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fc038ebf46ccc3d4b1c15a4d38170a1",
+    "content-hash": "3c8580da8993bef905c004d10d94ad98",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -159,7 +159,7 @@
         },
         {
             "name": "bedita/api",
-            "version": "v5.48.3",
+            "version": "v5.48.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bedita/api.git",
@@ -274,16 +274,16 @@
         },
         {
             "name": "bedita/core",
-            "version": "v5.48.3",
+            "version": "v5.48.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bedita/core.git",
-                "reference": "3ac8cce6770ab87459144ac9704d193d42a144dd"
+                "reference": "ed629a22e795312b645c10159a4093ebec5af872"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bedita/core/zipball/3ac8cce6770ab87459144ac9704d193d42a144dd",
-                "reference": "3ac8cce6770ab87459144ac9704d193d42a144dd",
+                "url": "https://api.github.com/repos/bedita/core/zipball/ed629a22e795312b645c10159a4093ebec5af872",
+                "reference": "ed629a22e795312b645c10159a4093ebec5af872",
                 "shasum": ""
             },
             "require": {
@@ -339,7 +339,7 @@
                 "issues": "https://github.com/bedita/bedita/issues",
                 "source": "https://github.com/bedita/bedita"
             },
-            "time": "2026-09-29T14:27:54+00:00"
+            "time": "2026-09-30T13:55:18+00:00"
         },
         {
             "name": "bedita/i18n",
@@ -1231,26 +1231,26 @@
         },
         {
             "name": "chialab/vite-cakephp",
-            "version": "v0.2.1",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chialab/vite-cakephp.git",
-                "reference": "25e4c327fd437cdc640a6cbb8cdd9acf25024350"
+                "reference": "9d5e1146087e5f427873112296bfc44716084ff1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chialab/vite-cakephp/zipball/25e4c327fd437cdc640a6cbb8cdd9acf25024350",
-                "reference": "25e4c327fd437cdc640a6cbb8cdd9acf25024350",
+                "url": "https://api.github.com/repos/chialab/vite-cakephp/zipball/9d5e1146087e5f427873112296bfc44716084ff1",
+                "reference": "9d5e1146087e5f427873112296bfc44716084ff1",
                 "shasum": ""
             },
             "require": {
-                "cakephp/cakephp": "^4.5 || ^5.0",
+                "cakephp/cakephp": "^4.5",
                 "ext-json": "*",
                 "php": ">=8.3"
             },
             "require-dev": {
                 "cakephp/cakephp-codesniffer": "^4.7",
-                "phpunit/phpunit": "^10.5.5 || ^11.1.3 || ^12.1"
+                "phpunit/phpunit": "^9.6"
             },
             "type": "cakephp-plugin",
             "autoload": {
@@ -1273,9 +1273,9 @@
             "homepage": "https://github.com/chialab/vite-cakephp",
             "support": {
                 "issues": "https://github.com/chialab/vite-cakephp/issues",
-                "source": "https://github.com/chialab/vite-cakephp/tree/v0.2.1"
+                "source": "https://github.com/chialab/vite-cakephp/tree/v0.1.3"
             },
-            "time": "2026-09-25T14:34:40+00:00"
+            "time": "2026-09-30T14:45:49+00:00"
         },
         {
             "name": "composer/ca-bundle",
