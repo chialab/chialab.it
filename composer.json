@@ -58,7 +58,6 @@
     "post-install-cmd": "App\\Console\\Installer::postInstall",
     "post-create-project-cmd": "App\\Console\\Installer::postInstall",
     "migrate": [
-      "bin/cake project_model",
       "bin/cake migrations migrate -p BEdita/Core",
       "bin/cake migrations migrate -p BEdita/Placeholders",
       "bin/cake migrations migrate",
