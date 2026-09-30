@@ -5,6 +5,17 @@ import { vitePhp } from './vendor/chialab/vite-cakephp/vite-plugin-php.js';
 export default defineConfig({
     build: {
         outDir: './webroot/dist',
+        minify: true,
+        rolldownOptions: {
+            output: {
+                minify: true,
+                comments: {
+                    legal: true,
+                    annotation: false,
+                    jsdoc: false,
+                },
+            },
+        },
     },
     server: {
         origin: 'http://localhost:5173',
