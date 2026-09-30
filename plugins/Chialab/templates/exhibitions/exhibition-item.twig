@@ -16,7 +16,7 @@
         data-type="{{ object.get('type') }}"
     >
         <h2 class="title f-4">{{ object.get('title')|raw }}</h2>
-        <dna-card-description class="card-description">
+        <dna-card-description class="card-description f-3"{{ object.get('body') is not empty ? ' more' : '' }}>
             {{- object.get('description')|striptags|default('')|raw -}}
         </dna-card-description>
     </a>
