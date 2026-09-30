@@ -5,6 +5,7 @@ namespace Chialab\Controller;
 
 use BEdita\Core\Model\Entity\ObjectEntity;
 use Cake\Datasource\Exception\RecordNotFoundException;
+use Cake\Event\EventInterface;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Chialab\FrontendKit\Model\ObjectsLoader;
@@ -18,7 +19,6 @@ class PagesController extends AppController
     use GenericActionsTrait {
         fallback as private _fallback;
         object as private _object;
-        renderObject as private _renderObject;
     }
 
     /**
@@ -165,40 +165,36 @@ class PagesController extends AppController
     /**
      * @inheritDoc
      */
-    protected function renderObject(ObjectEntity $entity): Response|null
+    public function implementedEvents(): array
     {
-        if ($entity->type === 'exhibitions') {
-            return $this->renderExhibition($entity);
-        }
-
-        return $this->_renderObject($entity);
+        return parent::implementedEvents() + [
+            'Controller.afterObjectLoad' => 'afterObjectLoad',
+        ];
     }
 
     /**
-     * Render an exhibition, with its items paginated (and served as an ajax fragment on subsequent pages).
+     * Paginate exhibition items, served as an ajax fragment on subsequent pages.
      *
-     * @param \BEdita\Core\Model\Entity\ObjectEntity $entity Exhibition entity.
-     * @return \Cake\Http\Response
+     * @param \Cake\Event\EventInterface $event Event.
+     * @param \BEdita\Core\Model\Entity\ObjectEntity $object Loaded object.
+     * @return void
      */
-    protected function renderExhibition(ObjectEntity $entity): Response
+    public function afterObjectLoad(EventInterface $event, ObjectEntity $object): void
     {
-        $object = $this->Objects->loadObject($entity->uname, 'exhibitions', ['include' => 'poster|1']);
-        $items = $this->paginate(
-            $this->Objects->loadRelatedObjects($entity->uname, 'exhibitions', 'exhibition_items'),
+        if ($object->type !== 'exhibitions') {
+            return;
+        }
+
+        $exhibitionItems = $this->paginate(
+            $this->Objects->loadRelatedObjects($object->uname, 'exhibitions', 'exhibition_items'),
             ['limit' => 12],
         );
-        // Used by the carousel to fetch further pages: the current (already-resolved) request
-        // path, not the generic `pages:objects` URL, which would 302-redirect here and drop the
-        // `?page=` query string along the way (`object()` redirects `/objects/{uname}` to the
-        // object's path in the tree, e.g. via `fallback()`, without forwarding query params).
-        $ajaxUrl = $this->request->getPath();
-        $this->set(compact('object', 'items', 'ajaxUrl'));
+        $this->set('exhibition_items', $exhibitionItems);
+        $this->set('ajaxUrl', $this->request->getPath());
 
         if ($this->request->is('ajax')) {
             $this->viewBuilder()->disableAutoLayout();
         }
-
-        return $this->render('exhibitions');
     }
 
     /**
@@ -209,19 +205,6 @@ class PagesController extends AppController
      */
     public function fallback(string $path): Response
     {
-        $parts = array_filter(explode('/', $path));
-        $lastUname = end($parts);
-        if ($lastUname !== false) {
-            try {
-                $entity = $this->Objects->loadObject($lastUname);
-                if ($entity->type === 'exhibitions') {
-                    return $this->renderExhibition($entity);
-                }
-            } catch (RecordNotFoundException $e) {
-                // Fall through to the generic fallback below, which will produce the right 404.
-            }
-        }
-
         try {
             return $this->_fallback($path);
         } catch (RecordNotFoundException $e) {
