@@ -44,13 +44,13 @@ return static function (RouteBuilder $routes): void {
                 );
 
                 $routes->connect(
-                    '/works/*',
+                    '/works/**',
                     ['controller' => 'Pages', 'action' => 'works'],
                     ['_name' => 'pages:works'],
                 );
 
                 $routes->connect(
-                    '/tatzebao/*',
+                    '/tatzebao/**',
                     ['controller' => 'Pages', 'action' => 'tatzebao'],
                     ['_name' => 'pages:tatzebao'],
                 );
