@@ -21,7 +21,7 @@ export class CardDescription extends Component {
         return (
             <>
                 <div
-                    class="card-text clamp-5 f-4"
+                    class="card-text clamp-6 f-4"
                     ref={this.text}>
                     <slot />
                 </div>

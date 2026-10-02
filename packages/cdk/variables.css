@@ -29,3 +29,7 @@
 
     --weight-bold: 600;
 }
+
+.clamp-6 {
+    --line-clamp: 6;
+}
