@@ -23,7 +23,7 @@ export default defineConfig({
             allow: ['.'],
         },
         cors: {
-            origin: [/\.localhost\.bedita\.cloud$/],
+            origin: [/\.localhost\.bedita\.cloud$/, /chialab\.local\:\d+$/],
         },
     },
     plugins: [
