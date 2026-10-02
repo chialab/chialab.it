@@ -16,4 +16,17 @@
             {% endif %}
         </div>
     {% endif %}
+
+
+    {% if object.get('body') is not empty %}
+    <div class="row mt-4 bt-1 pt-4 gap-1">
+        <div class="w-8 column serif f-3 body">
+            {{ Text.renderBody(object, field|default('body'))|raw }}
+        </div>
+        <aside class="column w-4 aside f-s">
+            {{ element('Articles/aside') }}
+        </aside>
+    </div>
+    {% endif %}
+
 </main>
