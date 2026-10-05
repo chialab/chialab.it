@@ -31,7 +31,6 @@
 
 	log {
 		output stderr
-		format json
 		level INFO
 		format filter {
 			wrap json
