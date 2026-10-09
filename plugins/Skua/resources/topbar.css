@@ -132,9 +132,9 @@ skua-topbar [role='menuitem'][aria-current='page'] {
     }
 }
 
-@media (width >= 768px) and (width < 1024px) {
+@media (width >= 768px) {
     skua-topbar {
-        padding-right: calc(var(--padding) * 2);
+        padding-right: max(var(--map-scroller-right-padding), calc(var(--padding) * 2));
     }
 }
 

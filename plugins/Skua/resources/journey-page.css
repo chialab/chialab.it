@@ -26,6 +26,7 @@ skua-map-scroller .map-scroller__map {
 skua-map-scroller .map-scroller__map dna-map {
     width: 100%;
     height: 100%;
+    background: #e5e5e5;
 }
 
 skua-map-scroller .map-scroller__map dna-map [marker-symbol] {
@@ -45,6 +46,9 @@ skua-map-scroller .map-scroller__map dna-map [marker-symbol] text.marker-index {
 }
 
 skua-map-scroller dna-story-scroller {
+    --story-scroller-contents-width: var(--steps-resized-width, var(--map-scroller-steps-width));
+    --story-scroller-contents-max-percentage: 100%;
+
     position: relative;
     z-index: 1;
     width: fit-content;
@@ -85,7 +89,6 @@ skua-map-scroller .story-scroller__contents {
 }
 
 .story-scroller__contents dna-map-scroller-step {
-    width: var(--steps-resized-width, var(--map-scroller-steps-width));
     min-width: var(--map-scroller-steps-width);
     max-width: var(--steps-max-width);
     margin-bottom: 15vh;
@@ -117,6 +120,11 @@ dna-map-scroller-step .item-content {
     --padding-right: calc(var(--padding) * 4);
 
     padding: var(--block-padding) var(--padding-right) var(--block-padding) var(--padding-left);
+}
+
+dna-map-scroller-step .item-content .post-link {
+    display: block;
+    width: fit-content;
 }
 
 dna-map-scroller-step .item-content .post-link:hover {

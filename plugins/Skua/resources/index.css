@@ -96,6 +96,15 @@ app-dialog dna-dialog .dialog__content .close-btn {
     cursor: pointer;
 }
 
+app-dialog dna-dialog dna-icon {
+    filter: drop-shadow(0 0 3px black);
+}
+
+dna-slideshow button[data-action] dna-icon {
+    width: 2rem !important;
+    height: 2rem !important;
+}
+
 app-dialog dna-dialog .dialog__content .close-btn dna-icon {
     width: 2rem;
     height: 2rem;
@@ -103,10 +112,6 @@ app-dialog dna-dialog .dialog__content .close-btn dna-icon {
 
 app-dialog dna-dialog .dialog__content .close-btn dna-icon svg {
     fill: var(--color-surface);
-}
-
-app-dialog dna-dialog dna-icon {
-    filter: drop-shadow(0 0 3px black);
 }
 
 app-dialog dna-dialog dna-slideshow {
@@ -134,11 +139,6 @@ dna-slideshow button[data-action] {
 
 dna-slideshow button[data-action]:hover svg path {
     stroke: var(--color-neutral);
-}
-
-dna-slideshow button[data-action] dna-icon {
-    width: 2rem !important;
-    height: 2rem !important;
 }
 
 dna-map .chialab-it {
