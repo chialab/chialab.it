@@ -5,7 +5,7 @@
     data-type="{{ object.get('type') }}"
 >
     {% if Media.hasStream(object) %}
-        {{ Thumb.image(object, 'high', { alt: '' })|raw }}
+        {{ Thumb.image(object, 'highlong', { alt: '' })|raw }}
     {% else %}
         <div class="w-full media-placeholder"></div>
     {% endif %}

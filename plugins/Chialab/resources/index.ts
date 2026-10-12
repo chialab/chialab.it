@@ -10,3 +10,11 @@ delegateEventListener(document.body, 'click', 'img[data-modal]', (event, target)
 
     openModal(sources, (target as HTMLImageElement).src);
 });
+
+delegateEventListener(document.body, 'click', 'a.back', (event) => {
+    if (history.length) {
+        event.preventDefault();
+        history.back();
+    }
+});
+

@@ -500,6 +500,13 @@ return [
     'Thumbnails' => [
         'allowAny' => filter_var(env('THUMBNAILS_ALLOW_ANY', true), FILTER_VALIDATE_BOOLEAN),
         'presets' => [
+            'highlong' => [
+                //'generator' => 'async',
+                'h' => 640,
+                'fm' => 'webp',
+                'q' => 100,
+                'fit' => 'max',
+            ],
             'ultra' => [
                 // 'generator' => 'async',
                 'w' => 1344,
