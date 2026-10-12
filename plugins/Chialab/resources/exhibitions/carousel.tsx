@@ -167,6 +167,13 @@ export class Carousel extends Component {
         this.checkScrollArrows();
     };
 
+    /**
+     * Scroll the carousel back to its first item.
+     */
+    scrollToStart(): void {
+        this.scroller.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+
     private scrollBackward(): void {
         if (this.scrolling) {
             return;

@@ -33,3 +33,11 @@
 .clamp-6 {
     --line-clamp: 6;
 }
+
+.clamp-8 {
+    --line-clamp: 8;
+}
+
+.clamp-10 {
+    --line-clamp: 10;
+}

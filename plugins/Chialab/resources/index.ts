@@ -17,4 +17,3 @@ delegateEventListener(document.body, 'click', 'a.back', (event) => {
         history.back();
     }
 });
-

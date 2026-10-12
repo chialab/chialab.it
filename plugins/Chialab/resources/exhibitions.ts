@@ -1,5 +1,5 @@
 import { type AsyncEvent, delegateEventListener } from '@chialab/dna';
-import './exhibitions/carousel';
+import { Carousel } from './exhibitions/carousel';
 import './exhibitions/card-description';
 
 // Serves further pages of items requested by a `exhibition-carousel` (see `exhibitions/carousel.tsx`).
@@ -36,5 +36,14 @@ delegateEventListener(document.body, 'click', '.back', (event) => {
     if (history.length) {
         event.preventDefault();
         history.back();
+    }
+});
+
+// Brings the exhibition carousel back to its first item, without reloading the page.
+delegateEventListener(document.body, 'click', 'a.start', (event) => {
+    const carousel = document.querySelector('exhibition-carousel');
+    if (carousel instanceof Carousel) {
+        event.preventDefault();
+        carousel.scrollToStart();
     }
 });
