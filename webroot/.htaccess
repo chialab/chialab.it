@@ -1,3 +1,6 @@
+# Passa l'header Authorization a PHP-FPM (necessario con Apache + php-fpm, es. Kettle)
+CGIPassAuth On
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
