@@ -199,6 +199,13 @@ export class Carousel extends Component {
         }
     }
 
+    // Exposed as an attribute so the page can style things around the carousel (e.g. the
+    // "back to start" link, only shown once the visitor has scrolled away from the start).
+    @observe('canScrollLeft')
+    private onCanScrollLeftChange(): void {
+        this.toggleAttribute('scrolled', this.canScrollLeft);
+    }
+
     // Whenever there's no more room to scroll forward (because the visitor reached the end),
     // try to load the next page of items.
     @observe('canScrollRight')

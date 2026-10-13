@@ -22,7 +22,16 @@
             {% include 'exhibitions/exhibition-item' with { object: item } %}
         {% endfor %}
     </exhibition-carousel>
-    <div class="w-10 mono f-xs light f-1 text-accent">
-        <a class="start link--underline" title="{{ __('Back to start') }}" href="#">{{ object.get('title')|raw }}</a>
+    <div class="exhibition-start w-10 row align-center gap-s mono f-xs light f-1 text-accent">
+        <a
+            is="dna-button-link"
+            variant="action:primary"
+            icon="chevron-double-left"
+            class="start f-xs"
+            title="{{ __('Back to start') }}"
+            href="#"
+            aria-label="{{ __('Back to start') }}"
+        ></a>
+        <a class="start link--underline" title="{{ __('Back to start') }}" href="#" tabindex="-1">{{ object.get('title')|raw }}</a>
     </div>
 {% endif %}

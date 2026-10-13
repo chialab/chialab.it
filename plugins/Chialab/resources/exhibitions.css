@@ -23,6 +23,18 @@ exhibition-carousel .carousel-button:last-child {
     right: var(--gutter);
 }
 
+/* "Back to start" link: only shown once scrolled away from the start. */
+exhibition-carousel + .exhibition-start {
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s;
+}
+
+exhibition-carousel:not([scrolled]) + .exhibition-start {
+    visibility: hidden;
+    opacity: 0;
+}
+
 exhibition-carousel .carousel-scroller {
     width: 100%;
     min-width: 0;
