@@ -100,15 +100,15 @@
     "@types/prismjs" "^1.26.1"
     prismjs "^1.22.0"
 
-"@chialab/dna-comparison@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/@chialab/dna-comparison/-/dna-comparison-4.0.0.tgz#d227205ed8bc2ce885a304708329a7051c117239"
-  integrity sha512-RV/28WwfTYZZ+eBXi2JeNKnDvDu4fKOlrLxJzFwMPOU2IqEP6r81sY72eo+dWMU0/lkywnSzXuofAhOAE2nnjg==
+"@chialab/dna-comparison@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@chialab/dna-comparison/-/dna-comparison-4.1.1.tgz#5d4662f2b2aa84a34d146a1cb5b67684433c9ac0"
+  integrity sha512-8nuUBTbUg+RdUq0eCONEFg1HxFLSXFfq4+YvqkQwnG77C+BOiUI3G60QgrjozKwaL8YLOs0oJxawgK/CRGzFYg==
   dependencies:
     "@chialab/dna" "^4.4.0"
-    "@chialab/dna-button" "^4.0.0"
-    "@chialab/dna-i18n" "^4.0.0"
-    "@chialab/dna-icons" "^4.0.0"
+    "@chialab/dna-button" "^4.1.0"
+    "@chialab/dna-i18n" "^4.1.0"
+    "@chialab/dna-icons" "^4.1.0"
 
 "@chialab/dna-dialog@^4.0.0":
   version "4.1.2"
