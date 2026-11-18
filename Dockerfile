@@ -24,6 +24,8 @@ RUN composer dump-autoload --optimize --no-cache
 FROM --platform=$BUILDPLATFORM node:${NODE_VERSION} AS npm
 WORKDIR /app/
 
+RUN npm install --global yarn@1.22.22
+
 # Install dependencies
 COPY ./package.json ./yarn.lock /app/
 COPY ./packages/cdk/package.json /app/packages/cdk/package.json
