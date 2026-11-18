@@ -588,5 +588,6 @@ return [
         'apiUrl' => env('SKUA_API_URL', 'https://skua.le0m.net/'),
         'apiKey' => env('SKUA_API_KEY'),
         'shipId' => env('SKUA_SHIP_ID', '8178410'),
+        'trackingUrl' => env('SKUA_TRACKING_URL', 'https://cdn.predictwind.com/tracking/data/SV-SKUA.json'),
     ],
 ];

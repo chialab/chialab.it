@@ -120,7 +120,7 @@ class CanonicalUrlComponent extends Component
              */
             ->limit(2);
 
-        /** @var array{frontend_url: string, canonical: bool}[]|false $results */
+        /** @var array<array{frontend_url: string, canonical: bool}>|false $results */
         $results = Cache::remember(
             $object->uname,
             fn (): array|bool => $query->execute()->fetchAll(StatementInterface::FETCH_TYPE_ASSOC),

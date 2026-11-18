@@ -17,6 +17,15 @@ export default defineConfig({
             },
         },
     },
+    optimizeDeps: {
+        exclude: ['@chialab/dna-map'],
+        include: [
+            '@chialab/dna/jsx-runtime',
+            '@chialab/dna-map-scroller > @chialab/dna-map > @chialab/dna-button',
+            '@chialab/dna-map-scroller > @chialab/dna-map > @chialab/dna-i18n',
+            '@chialab/dna-map-scroller > @chialab/dna-map > mapbox-gl',
+        ],
+    },
     server: {
         origin: 'http://localhost:5173',
         fs: {
