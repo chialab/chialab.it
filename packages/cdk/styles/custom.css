@@ -21,6 +21,24 @@
     object-position: center;
 }
 
+.gallery_container dna-slideshow .slideshow-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.gallery_container dna-slideshow .slideshow-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery_container dna-slideshow .slideshow-item.portrait img {
+    object-fit: contain;
+}
+
 .media_body > embed,
 .media_body > iframe,
 .media_object {

@@ -9,7 +9,7 @@
         {% if layout == 'slideshow' %}
             <dna-slideshow class="w-full" controls carousel controlslist="noplayback nodots nocounter" autoplay="5000" {% if object.get('crop')|default(false) %}cover{% endif %}>
                 {% for content in gallery_contents %}
-                    <div class="w-full slideshow-item">
+                    <div class="w-full slideshow-item {{ Poster.orientation(content) }}">
                         {% if Poster.exists(content) %}
                             <img class="w-full h-4 poster {{ Poster.position(content) }}" alt="{{ content.title|striptags|raw|escape('html_attr') }}"
                                 src="{{ Poster.url(content) }}"/>
