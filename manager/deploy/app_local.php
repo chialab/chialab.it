@@ -186,4 +186,23 @@ return [
         'style_formats_merge' => true,
         'max_height' => 1500
     ],
+
+    /**
+     * Available placeholder parameters, per type.
+     * Overrides BEdita Manager defaults, which are kept here for the other types.
+     */
+    'Placeholders' => [
+        'audio' => ['controls' => 'boolean', 'autoplay' => 'boolean'],
+        'files' => ['download' => 'boolean'],
+        'images' => [
+            'width' => 'integer',
+            'height' => 'integer',
+            'bearing' => 'integer',
+            'pitch' => 'integer',
+            'zoom' => 'integer',
+            'href' => 'string',
+            'target' => ['_self', '_blank'],
+        ],
+        'videos' => ['controls' => 'boolean', 'autoplay' => 'boolean'],
+    ],
 ];

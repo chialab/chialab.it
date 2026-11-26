@@ -5,12 +5,21 @@
 {% set title = _showTitle ? object.get('title')|default(null) : null %}
 {% set description = _showDescription ? object.get('description')|default(null) : null %}
 {% set _caption = caption is defined ? caption : true %}
+{% set _params = params is defined ? Placeholders.params(params) : {} %}
+{% set href = _params.href is defined and _params.href is not empty ? _params.href : null %}
+{% set target = _params.target is defined and _params.target is not empty ? _params.target : null %}
 
 <div class="media_container column gap-s">
     {% if object.get('type') == 'images' %}
+        {% if href is not null %}
+            <a class="media_link w-full" href="{{ href|escape('html_attr') }}"{% if target is not null %} target="{{ target|escape('html_attr') }}"{% if target == '_blank' %} rel="noopener"{% endif %}{% endif %}>
+        {% endif %}
         {{ Thumb.image(object, 'default', {
             class: 'w-full',
         })|raw }}
+        {% if href is not null %}
+            </a>
+        {% endif %}
     {% elseif object.has('body') %}
         <div class="media_body w-full">
             {{ object.get('body')|raw }}
