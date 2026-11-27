@@ -2,6 +2,7 @@
 
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
+use Chialab\Middleware\RedirectUnknownLocaleMiddleware;
 use Chialab\FrontendKit\Routing\LocaleUrlFilter;
 use Chialab\FrontendKit\Routing\Route\ObjectRoute;
 
@@ -74,7 +75,11 @@ return static function (RouteBuilder $routes): void {
                 );
             };
 
-            $routes->scope('/lang/{locale}', ['_namePrefix' => 'lang:'], $routeBuilder);
+            $routes->scope('/lang/{locale}', ['_namePrefix' => 'lang:'], function (RouteBuilder $routes) use ($routeBuilder): void {
+                $routes->registerMiddleware('redirectUnknownLocale', new RedirectUnknownLocaleMiddleware());
+                $routes->applyMiddleware('redirectUnknownLocale');
+                $routeBuilder($routes);
+            });
             $routeBuilder($routes);
         },
     );
