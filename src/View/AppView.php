@@ -46,8 +46,6 @@ class AppView extends BaseAppView
         /** @todo Remove this line when `ThumbHelper` supports GIF images. */
         $this->helpers()->unload('Thumb');
         $this->loadHelper('Thumb');
-        $this->helpers()->unload('Placeholders');
-        $this->loadHelper('Placeholders');
         $this->loadHelper('VCard');
         $this->loadHelper('Chialab/Vite.Vite');
 
