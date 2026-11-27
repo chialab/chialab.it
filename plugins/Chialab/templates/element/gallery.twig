@@ -9,10 +9,13 @@
         {% if layout == 'slideshow' %}
             <dna-slideshow class="w-full" controls carousel controlslist="noplayback nodots nocounter" autoplay="5000" {% if object.get('crop')|default(false) %}cover{% endif %}>
                 {% for content in gallery_contents %}
+                    {% set content_href = content.relation.params.href|default(null) %}
                     <div class="w-full slideshow-item">
                         {% if Poster.exists(content) %}
+                            {% if content_href is not empty %}<a class="block w-full" href="{{ content_href|escape('html_attr') }}">{% endif %}
                             <img class="w-full h-4 poster {{ Poster.position(content) }}" alt="{{ content.title|striptags|raw|escape('html_attr') }}"
                                 src="{{ Poster.url(content) }}"/>
+                            {% if content_href is not empty %}</a>{% endif %}
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -23,6 +26,7 @@
                     {{ element('Placeholders/media', {
                         object: content,
                         caption: false,
+                        href: content.relation.params.href|default(null),
                     }) }}
                 {% endfor %}
             </dna-masonry>
@@ -41,6 +45,7 @@
                     {{ element('Placeholders/media', {
                         object: content,
                         caption: false,
+                        href: content.relation.params.href|default(null),
                     }) }}
                 {% endfor %}
             </div>

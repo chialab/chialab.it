@@ -5,10 +5,10 @@
 {% set title = _showTitle ? object.get('title')|default(null) : null %}
 {% set description = _showDescription ? object.get('description')|default(null) : null %}
 {% set _caption = caption is defined ? caption : true %}
-{# Placeholder params are a JSON string: extract `href` and `target` values. #}
+{# `href` and `target` can be passed explicitly (e.g. by galleries), otherwise they're extracted from placeholder params (a JSON string). #}
 {% set _params = params is defined ? params : null %}
-{% set href = _params|preg_get('/[{,]\\s*"href"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"/', 1)|replace({'\\/': '/', '\\"': '"', '\\\\': '\\'}) %}
-{% set target = _params|preg_get('/[{,]\\s*"target"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"/', 1) %}
+{% set href = href|default(_params|preg_get('/[{,]\\s*"href"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"/', 1)|replace({'\\/': '/', '\\"': '"', '\\\\': '\\'})) %}
+{% set target = target|default(_params|preg_get('/[{,]\\s*"target"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"/', 1)) %}
 
 <div class="media_container column gap-s">
     {% if object.get('type') == 'images' %}
