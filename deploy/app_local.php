@@ -112,14 +112,6 @@ return [
             'url' => env('CACHE_CAKEROUTES_URL', null),
         ],
 
-        '_twig_views_' => [
-            'className' => FileEngine::class,
-            'prefix' => 'twig_views_',
-            'path' => CACHE . 'twigView/',
-            'serialize' => true,
-            'duration' => '+1 year',
-        ],
-
         '_clear_cache_' => [
             'className' => RedisEngine::class,
             'host' => env('CACHE_REDIS_HOST', null),

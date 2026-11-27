@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -30,6 +31,8 @@ class StagingController extends AppController
 
         $this->request->allowMethod(['post']);
         Cache::clear('_clear_cache_');
+        Cache::clear('_twig_views_');
+        Cache::clear('default');
 
         return $this->redirect($this->referer('/'));
     }

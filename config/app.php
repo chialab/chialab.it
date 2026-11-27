@@ -178,6 +178,7 @@ return [
 
         '_twig_views_' => [
             'className' => FileEngine::class,
+            'prefix' => '',
             'path' => CACHE . 'twig_view/',
             'serialize' => true,
             'duration' => '+1 year',
