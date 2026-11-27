@@ -12,6 +12,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class RedirectUnknownLocaleMiddleware implements MiddlewareInterface
 {
+    /**
+     * @inheritDoc
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $locale = $request->getAttribute('params')['locale'];
@@ -22,7 +25,7 @@ class RedirectUnknownLocaleMiddleware implements MiddlewareInterface
         $uri = $request->getUri();
         // The scope consumes the first two path segments: /lang/{locale}.
         $segments = explode('/', ltrim($uri->getPath(), '/'), 3);
-        $target = $request->getAttribute('base') . '/' . ltrim($segments[2] ?? '', "/\\");
+        $target = $request->getAttribute('base') . '/' . ltrim($segments[2] ?? '', '/\\');
         if ($uri->getQuery() !== '') {
             $target .= '?' . $uri->getQuery();
         }

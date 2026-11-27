@@ -2,9 +2,9 @@
 
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
-use Chialab\Middleware\RedirectUnknownLocaleMiddleware;
 use Chialab\FrontendKit\Routing\LocaleUrlFilter;
 use Chialab\FrontendKit\Routing\Route\ObjectRoute;
+use Chialab\Middleware\RedirectUnknownLocaleMiddleware;
 
 return static function (RouteBuilder $routes): void {
     Router::addUrlFilter(new LocaleUrlFilter());
