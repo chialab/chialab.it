@@ -5,12 +5,22 @@
 {% set title = _showTitle ? object.get('title')|default(null) : null %}
 {% set description = _showDescription ? object.get('description')|default(null) : null %}
 {% set _caption = caption is defined ? caption : true %}
+{# Placeholder params are a JSON string: extract `href` and `target` values. #}
+{% set _params = params is defined ? params : null %}
+{% set href = _params|preg_get('/[{,]\\s*"href"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"/', 1)|replace({'\\/': '/', '\\"': '"', '\\\\': '\\'}) %}
+{% set target = _params|preg_get('/[{,]\\s*"target"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"/', 1) %}
 
 <div class="media_container column gap-s">
     {% if object.get('type') == 'images' %}
+        {% if href is not empty %}
+            <a class="media_link w-full" href="{{ href|escape('html_attr') }}"{% if target is not empty %} target="{{ target|escape('html_attr') }}"{% if target == '_blank' %} rel="noopener"{% endif %}{% endif %}>
+        {% endif %}
         {{ Thumb.image(object, 'default', {
             class: 'w-full',
         })|raw }}
+        {% if href is not empty %}
+            </a>
+        {% endif %}
     {% elseif object.has('body') %}
         <div class="media_body w-full">
             {{ object.get('body')|raw }}
